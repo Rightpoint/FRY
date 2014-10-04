@@ -15,7 +15,21 @@
 		AB25C05119DF95AA00038E75 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C05019DF95AA00038E75 /* UIKit.framework */; };
 		AB25C05419DF95AA00038E75 /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03C19DF95AA00038E75 /* libFRY.a */; };
 		AB25C05A19DF95AA00038E75 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB25C05819DF95AA00038E75 /* InfoPlist.strings */; };
-		AB25C05C19DF95AA00038E75 /* FRYTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB25C05B19DF95AA00038E75 /* FRYTests.m */; };
+		AB25C05C19DF95AA00038E75 /* FRYTouchSynthesisOperationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB25C05B19DF95AA00038E75 /* FRYTouchSynthesisOperationTests.m */; };
+		AB25C08219DF95ED00038E75 /* UIAccessibilityElement+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB25C06719DF95ED00038E75 /* UIAccessibilityElement+FRY.m */; };
+		AB25C08319DF95ED00038E75 /* UIView+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB25C06919DF95ED00038E75 /* UIView+FRY.m */; };
+		AB25C08919DF95ED00038E75 /* FRYAccessibilityLookupStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = AB25C07819DF95ED00038E75 /* FRYAccessibilityLookupStrategy.m */; };
+		AB25C08A19DF95ED00038E75 /* FRYViewLookupStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = AB25C07A19DF95ED00038E75 /* FRYViewLookupStrategy.m */; };
+		AB25C08C19DF95ED00038E75 /* FRYAccessibilityLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = AB25C07E19DF95ED00038E75 /* FRYAccessibilityLookup.m */; };
+		AB25C08D19DF95ED00038E75 /* FRYKVTreeLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = AB25C08019DF95ED00038E75 /* FRYKVTreeLookup.m */; };
+		AB35FCDC19DFA30B00228531 /* UIApplication+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCDB19DFA30B00228531 /* UIApplication+FRY.m */; };
+		AB35FCE119DFA6F200228531 /* FRYEventProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCDF19DFA6F200228531 /* FRYEventProxy.m */; };
+		AB35FCE419DFAEB900228531 /* UITouch+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCE319DFAEB900228531 /* UITouch+FRY.m */; };
+		AB35FCEE19DFB49100228531 /* FRYPointInTime.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCE719DFB49100228531 /* FRYPointInTime.m */; };
+		AB35FCEF19DFB49100228531 /* FRYToucher.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCE919DFB49100228531 /* FRYToucher.m */; };
+		AB35FCF019DFB49100228531 /* FRYTouchInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCEB19DFB49100228531 /* FRYTouchInteraction.m */; };
+		AB35FCF119DFB49100228531 /* FRYTouchSynthesisOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCED19DFB49100228531 /* FRYTouchSynthesisOperation.m */; };
+		B9215C4142D84548893B9BCA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89238CE01CB344F78A59E9AE /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +56,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		44E5641396444807AA772D3D /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		89238CE01CB344F78A59E9AE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB25C03C19DF95AA00038E75 /* libFRY.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFRY.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB25C03F19DF95AA00038E75 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AB25C04319DF95AA00038E75 /* FRY-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FRY-Prefix.pch"; sourceTree = "<group>"; };
@@ -52,7 +68,35 @@
 		AB25C05019DF95AA00038E75 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		AB25C05719DF95AA00038E75 /* FRYTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FRYTests-Info.plist"; sourceTree = "<group>"; };
 		AB25C05919DF95AA00038E75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AB25C05B19DF95AA00038E75 /* FRYTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRYTests.m; sourceTree = "<group>"; };
+		AB25C05B19DF95AA00038E75 /* FRYTouchSynthesisOperationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRYTouchSynthesisOperationTests.m; sourceTree = "<group>"; };
+		AB25C06619DF95ED00038E75 /* UIAccessibilityElement+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAccessibilityElement+FRY.h"; sourceTree = "<group>"; };
+		AB25C06719DF95ED00038E75 /* UIAccessibilityElement+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAccessibilityElement+FRY.m"; sourceTree = "<group>"; };
+		AB25C06819DF95ED00038E75 /* UIView+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FRY.h"; sourceTree = "<group>"; };
+		AB25C06919DF95ED00038E75 /* UIView+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FRY.m"; sourceTree = "<group>"; };
+		AB25C07719DF95ED00038E75 /* FRYAccessibilityLookupStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYAccessibilityLookupStrategy.h; sourceTree = "<group>"; };
+		AB25C07819DF95ED00038E75 /* FRYAccessibilityLookupStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYAccessibilityLookupStrategy.m; sourceTree = "<group>"; };
+		AB25C07919DF95ED00038E75 /* FRYViewLookupStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYViewLookupStrategy.h; sourceTree = "<group>"; };
+		AB25C07A19DF95ED00038E75 /* FRYViewLookupStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYViewLookupStrategy.m; sourceTree = "<group>"; };
+		AB25C07D19DF95ED00038E75 /* FRYAccessibilityLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYAccessibilityLookup.h; sourceTree = "<group>"; };
+		AB25C07E19DF95ED00038E75 /* FRYAccessibilityLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYAccessibilityLookup.m; sourceTree = "<group>"; };
+		AB25C07F19DF95ED00038E75 /* FRYKVTreeLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYKVTreeLookup.h; sourceTree = "<group>"; };
+		AB25C08019DF95ED00038E75 /* FRYKVTreeLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYKVTreeLookup.m; sourceTree = "<group>"; };
+		AB25C08119DF95ED00038E75 /* FRYLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYLookup.h; sourceTree = "<group>"; };
+		AB35FCDA19DFA30B00228531 /* UIApplication+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+FRY.h"; sourceTree = "<group>"; };
+		AB35FCDB19DFA30B00228531 /* UIApplication+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+FRY.m"; sourceTree = "<group>"; };
+		AB35FCDE19DFA6F200228531 /* FRYEventProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYEventProxy.h; sourceTree = "<group>"; };
+		AB35FCDF19DFA6F200228531 /* FRYEventProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYEventProxy.m; sourceTree = "<group>"; };
+		AB35FCE019DFA6F200228531 /* UIKit+FRYExposePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIKit+FRYExposePrivate.h"; sourceTree = "<group>"; };
+		AB35FCE219DFAEB900228531 /* UITouch+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITouch+FRY.h"; sourceTree = "<group>"; };
+		AB35FCE319DFAEB900228531 /* UITouch+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITouch+FRY.m"; sourceTree = "<group>"; };
+		AB35FCE619DFB49100228531 /* FRYPointInTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYPointInTime.h; sourceTree = "<group>"; };
+		AB35FCE719DFB49100228531 /* FRYPointInTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYPointInTime.m; sourceTree = "<group>"; };
+		AB35FCE819DFB49100228531 /* FRYToucher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYToucher.h; sourceTree = "<group>"; };
+		AB35FCE919DFB49100228531 /* FRYToucher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYToucher.m; sourceTree = "<group>"; };
+		AB35FCEA19DFB49100228531 /* FRYTouchInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYTouchInteraction.h; sourceTree = "<group>"; };
+		AB35FCEB19DFB49100228531 /* FRYTouchInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYTouchInteraction.m; sourceTree = "<group>"; };
+		AB35FCEC19DFB49100228531 /* FRYTouchSynthesisOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYTouchSynthesisOperation.h; sourceTree = "<group>"; };
+		AB35FCED19DFB49100228531 /* FRYTouchSynthesisOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYTouchSynthesisOperation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +105,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB25C04019DF95AA00038E75 /* Foundation.framework in Frameworks */,
+				B9215C4142D84548893B9BCA /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +130,7 @@
 				AB25C05519DF95AA00038E75 /* FRYTests */,
 				AB25C03E19DF95AA00038E75 /* Frameworks */,
 				AB25C03D19DF95AA00038E75 /* Products */,
+				44E5641396444807AA772D3D /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,6 +149,7 @@
 				AB25C03F19DF95AA00038E75 /* Foundation.framework */,
 				AB25C04D19DF95AA00038E75 /* XCTest.framework */,
 				AB25C05019DF95AA00038E75 /* UIKit.framework */,
+				89238CE01CB344F78A59E9AE /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -110,6 +157,10 @@
 		AB25C04119DF95AA00038E75 /* FRY */ = {
 			isa = PBXGroup;
 			children = (
+				AB35FCE519DFB49100228531 /* Touch */,
+				AB35FCDD19DFA6F200228531 /* Private */,
+				AB25C06519DF95ED00038E75 /* Categories */,
+				AB25C07519DF95ED00038E75 /* Lookup */,
 				AB25C04419DF95AA00038E75 /* FRY.h */,
 				AB25C04619DF95AA00038E75 /* FRY.m */,
 				AB25C04219DF95AA00038E75 /* Supporting Files */,
@@ -128,7 +179,7 @@
 		AB25C05519DF95AA00038E75 /* FRYTests */ = {
 			isa = PBXGroup;
 			children = (
-				AB25C05B19DF95AA00038E75 /* FRYTests.m */,
+				AB25C05B19DF95AA00038E75 /* FRYTouchSynthesisOperationTests.m */,
 				AB25C05619DF95AA00038E75 /* Supporting Files */,
 			);
 			path = FRYTests;
@@ -143,6 +194,70 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		AB25C06519DF95ED00038E75 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				AB35FCDA19DFA30B00228531 /* UIApplication+FRY.h */,
+				AB35FCDB19DFA30B00228531 /* UIApplication+FRY.m */,
+				AB25C06619DF95ED00038E75 /* UIAccessibilityElement+FRY.h */,
+				AB25C06719DF95ED00038E75 /* UIAccessibilityElement+FRY.m */,
+				AB25C06819DF95ED00038E75 /* UIView+FRY.h */,
+				AB25C06919DF95ED00038E75 /* UIView+FRY.m */,
+				AB35FCE219DFAEB900228531 /* UITouch+FRY.h */,
+				AB35FCE319DFAEB900228531 /* UITouch+FRY.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		AB25C07519DF95ED00038E75 /* Lookup */ = {
+			isa = PBXGroup;
+			children = (
+				AB25C07619DF95ED00038E75 /* Accessibility */,
+				AB25C07D19DF95ED00038E75 /* FRYAccessibilityLookup.h */,
+				AB25C07E19DF95ED00038E75 /* FRYAccessibilityLookup.m */,
+				AB25C07F19DF95ED00038E75 /* FRYKVTreeLookup.h */,
+				AB25C08019DF95ED00038E75 /* FRYKVTreeLookup.m */,
+				AB25C08119DF95ED00038E75 /* FRYLookup.h */,
+			);
+			path = Lookup;
+			sourceTree = "<group>";
+		};
+		AB25C07619DF95ED00038E75 /* Accessibility */ = {
+			isa = PBXGroup;
+			children = (
+				AB25C07719DF95ED00038E75 /* FRYAccessibilityLookupStrategy.h */,
+				AB25C07819DF95ED00038E75 /* FRYAccessibilityLookupStrategy.m */,
+				AB25C07919DF95ED00038E75 /* FRYViewLookupStrategy.h */,
+				AB25C07A19DF95ED00038E75 /* FRYViewLookupStrategy.m */,
+			);
+			path = Accessibility;
+			sourceTree = "<group>";
+		};
+		AB35FCDD19DFA6F200228531 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				AB35FCDE19DFA6F200228531 /* FRYEventProxy.h */,
+				AB35FCDF19DFA6F200228531 /* FRYEventProxy.m */,
+				AB35FCE019DFA6F200228531 /* UIKit+FRYExposePrivate.h */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		AB35FCE519DFB49100228531 /* Touch */ = {
+			isa = PBXGroup;
+			children = (
+				AB35FCE619DFB49100228531 /* FRYPointInTime.h */,
+				AB35FCE719DFB49100228531 /* FRYPointInTime.m */,
+				AB35FCE819DFB49100228531 /* FRYToucher.h */,
+				AB35FCE919DFB49100228531 /* FRYToucher.m */,
+				AB35FCEA19DFB49100228531 /* FRYTouchInteraction.h */,
+				AB35FCEB19DFB49100228531 /* FRYTouchInteraction.m */,
+				AB35FCEC19DFB49100228531 /* FRYTouchSynthesisOperation.h */,
+				AB35FCED19DFB49100228531 /* FRYTouchSynthesisOperation.m */,
+			);
+			path = Touch;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -150,9 +265,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB25C05F19DF95AA00038E75 /* Build configuration list for PBXNativeTarget "FRY" */;
 			buildPhases = (
+				1F21E3A86F4F48ABB1634D12 /* Check Pods Manifest.lock */,
 				AB25C03819DF95AA00038E75 /* Sources */,
 				AB25C03919DF95AA00038E75 /* Frameworks */,
 				AB25C03A19DF95AA00038E75 /* CopyFiles */,
+				3F28592FAB694A4BB967246E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -219,12 +336,58 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1F21E3A86F4F48ABB1634D12 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3F28592FAB694A4BB967246E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AB25C03819DF95AA00038E75 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB35FCEE19DFB49100228531 /* FRYPointInTime.m in Sources */,
+				AB25C08A19DF95ED00038E75 /* FRYViewLookupStrategy.m in Sources */,
+				AB35FCF119DFB49100228531 /* FRYTouchSynthesisOperation.m in Sources */,
+				AB25C08319DF95ED00038E75 /* UIView+FRY.m in Sources */,
+				AB35FCDC19DFA30B00228531 /* UIApplication+FRY.m in Sources */,
+				AB25C08C19DF95ED00038E75 /* FRYAccessibilityLookup.m in Sources */,
+				AB25C08219DF95ED00038E75 /* UIAccessibilityElement+FRY.m in Sources */,
+				AB35FCEF19DFB49100228531 /* FRYToucher.m in Sources */,
+				AB35FCE119DFA6F200228531 /* FRYEventProxy.m in Sources */,
+				AB25C08919DF95ED00038E75 /* FRYAccessibilityLookupStrategy.m in Sources */,
+				AB35FCF019DFB49100228531 /* FRYTouchInteraction.m in Sources */,
 				AB25C04719DF95AA00038E75 /* FRY.m in Sources */,
+				AB35FCE419DFAEB900228531 /* UITouch+FRY.m in Sources */,
+				AB25C08D19DF95ED00038E75 /* FRYKVTreeLookup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +395,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB25C05C19DF95AA00038E75 /* FRYTests.m in Sources */,
+				AB25C05C19DF95AA00038E75 /* FRYTouchSynthesisOperationTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +491,7 @@
 		};
 		AB25C06019DF95AA00038E75 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44E5641396444807AA772D3D /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/FRY.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -340,6 +504,7 @@
 		};
 		AB25C06119DF95AA00038E75 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44E5641396444807AA772D3D /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/FRY.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -405,6 +570,7 @@
 				AB25C06119DF95AA00038E75 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AB25C06219DF95AA00038E75 /* Build configuration list for PBXNativeTarget "FRYTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +579,7 @@
 				AB25C06419DF95AA00038E75 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

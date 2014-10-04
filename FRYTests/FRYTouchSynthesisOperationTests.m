@@ -7,12 +7,15 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "FRYTouchSynthesisOperation.h"
 
-@interface FRYTests : XCTestCase
+@interface FRYTouchSynthesisOperationTests : XCTestCase
+
+@property (strong, nonatomic) FRYTouchSynthesisOperation *touchOperation;
 
 @end
 
-@implementation FRYTests
+@implementation FRYTouchSynthesisOperationTests
 
 - (void)setUp
 {
