@@ -1,0 +1,420 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AB25C04019DF95AA00038E75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03F19DF95AA00038E75 /* Foundation.framework */; };
+		AB25C04519DF95AA00038E75 /* FRY.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = AB25C04419DF95AA00038E75 /* FRY.h */; };
+		AB25C04719DF95AA00038E75 /* FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB25C04619DF95AA00038E75 /* FRY.m */; };
+		AB25C04E19DF95AA00038E75 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C04D19DF95AA00038E75 /* XCTest.framework */; };
+		AB25C04F19DF95AA00038E75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03F19DF95AA00038E75 /* Foundation.framework */; };
+		AB25C05119DF95AA00038E75 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C05019DF95AA00038E75 /* UIKit.framework */; };
+		AB25C05419DF95AA00038E75 /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03C19DF95AA00038E75 /* libFRY.a */; };
+		AB25C05A19DF95AA00038E75 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB25C05819DF95AA00038E75 /* InfoPlist.strings */; };
+		AB25C05C19DF95AA00038E75 /* FRYTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB25C05B19DF95AA00038E75 /* FRYTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AB25C05219DF95AA00038E75 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB25C03419DF95AA00038E75 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AB25C03B19DF95AA00038E75;
+			remoteInfo = FRY;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AB25C03A19DF95AA00038E75 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				AB25C04519DF95AA00038E75 /* FRY.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		AB25C03C19DF95AA00038E75 /* libFRY.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFRY.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB25C03F19DF95AA00038E75 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AB25C04319DF95AA00038E75 /* FRY-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FRY-Prefix.pch"; sourceTree = "<group>"; };
+		AB25C04419DF95AA00038E75 /* FRY.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRY.h; sourceTree = "<group>"; };
+		AB25C04619DF95AA00038E75 /* FRY.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRY.m; sourceTree = "<group>"; };
+		AB25C04C19DF95AA00038E75 /* FRYTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FRYTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB25C04D19DF95AA00038E75 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		AB25C05019DF95AA00038E75 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		AB25C05719DF95AA00038E75 /* FRYTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FRYTests-Info.plist"; sourceTree = "<group>"; };
+		AB25C05919DF95AA00038E75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AB25C05B19DF95AA00038E75 /* FRYTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRYTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AB25C03919DF95AA00038E75 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB25C04019DF95AA00038E75 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB25C04919DF95AA00038E75 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB25C04E19DF95AA00038E75 /* XCTest.framework in Frameworks */,
+				AB25C05119DF95AA00038E75 /* UIKit.framework in Frameworks */,
+				AB25C04F19DF95AA00038E75 /* Foundation.framework in Frameworks */,
+				AB25C05419DF95AA00038E75 /* libFRY.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AB25C03319DF95AA00038E75 = {
+			isa = PBXGroup;
+			children = (
+				AB25C04119DF95AA00038E75 /* FRY */,
+				AB25C05519DF95AA00038E75 /* FRYTests */,
+				AB25C03E19DF95AA00038E75 /* Frameworks */,
+				AB25C03D19DF95AA00038E75 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AB25C03D19DF95AA00038E75 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AB25C03C19DF95AA00038E75 /* libFRY.a */,
+				AB25C04C19DF95AA00038E75 /* FRYTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AB25C03E19DF95AA00038E75 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AB25C03F19DF95AA00038E75 /* Foundation.framework */,
+				AB25C04D19DF95AA00038E75 /* XCTest.framework */,
+				AB25C05019DF95AA00038E75 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AB25C04119DF95AA00038E75 /* FRY */ = {
+			isa = PBXGroup;
+			children = (
+				AB25C04419DF95AA00038E75 /* FRY.h */,
+				AB25C04619DF95AA00038E75 /* FRY.m */,
+				AB25C04219DF95AA00038E75 /* Supporting Files */,
+			);
+			path = FRY;
+			sourceTree = "<group>";
+		};
+		AB25C04219DF95AA00038E75 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AB25C04319DF95AA00038E75 /* FRY-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AB25C05519DF95AA00038E75 /* FRYTests */ = {
+			isa = PBXGroup;
+			children = (
+				AB25C05B19DF95AA00038E75 /* FRYTests.m */,
+				AB25C05619DF95AA00038E75 /* Supporting Files */,
+			);
+			path = FRYTests;
+			sourceTree = "<group>";
+		};
+		AB25C05619DF95AA00038E75 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AB25C05719DF95AA00038E75 /* FRYTests-Info.plist */,
+				AB25C05819DF95AA00038E75 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AB25C03B19DF95AA00038E75 /* FRY */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB25C05F19DF95AA00038E75 /* Build configuration list for PBXNativeTarget "FRY" */;
+			buildPhases = (
+				AB25C03819DF95AA00038E75 /* Sources */,
+				AB25C03919DF95AA00038E75 /* Frameworks */,
+				AB25C03A19DF95AA00038E75 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FRY;
+			productName = FRY;
+			productReference = AB25C03C19DF95AA00038E75 /* libFRY.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		AB25C04B19DF95AA00038E75 /* FRYTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB25C06219DF95AA00038E75 /* Build configuration list for PBXNativeTarget "FRYTests" */;
+			buildPhases = (
+				AB25C04819DF95AA00038E75 /* Sources */,
+				AB25C04919DF95AA00038E75 /* Frameworks */,
+				AB25C04A19DF95AA00038E75 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AB25C05319DF95AA00038E75 /* PBXTargetDependency */,
+			);
+			name = FRYTests;
+			productName = FRYTests;
+			productReference = AB25C04C19DF95AA00038E75 /* FRYTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AB25C03419DF95AA00038E75 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = Raizlabs;
+			};
+			buildConfigurationList = AB25C03719DF95AA00038E75 /* Build configuration list for PBXProject "FRY" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AB25C03319DF95AA00038E75;
+			productRefGroup = AB25C03D19DF95AA00038E75 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AB25C03B19DF95AA00038E75 /* FRY */,
+				AB25C04B19DF95AA00038E75 /* FRYTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AB25C04A19DF95AA00038E75 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB25C05A19DF95AA00038E75 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AB25C03819DF95AA00038E75 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB25C04719DF95AA00038E75 /* FRY.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB25C04819DF95AA00038E75 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB25C05C19DF95AA00038E75 /* FRYTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AB25C05319DF95AA00038E75 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AB25C03B19DF95AA00038E75 /* FRY */;
+			targetProxy = AB25C05219DF95AA00038E75 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AB25C05819DF95AA00038E75 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB25C05919DF95AA00038E75 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AB25C05D19DF95AA00038E75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		AB25C05E19DF95AA00038E75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AB25C06019DF95AA00038E75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/FRY.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FRY/FRY-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		AB25C06119DF95AA00038E75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/FRY.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FRY/FRY-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		AB25C06319DF95AA00038E75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FRY/FRY-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "FRYTests/FRYTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		AB25C06419DF95AA00038E75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FRY/FRY-Prefix.pch";
+				INFOPLIST_FILE = "FRYTests/FRYTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AB25C03719DF95AA00038E75 /* Build configuration list for PBXProject "FRY" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB25C05D19DF95AA00038E75 /* Debug */,
+				AB25C05E19DF95AA00038E75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB25C05F19DF95AA00038E75 /* Build configuration list for PBXNativeTarget "FRY" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB25C06019DF95AA00038E75 /* Debug */,
+				AB25C06119DF95AA00038E75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		AB25C06219DF95AA00038E75 /* Build configuration list for PBXNativeTarget "FRYTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB25C06319DF95AA00038E75 /* Debug */,
+				AB25C06419DF95AA00038E75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AB25C03419DF95AA00038E75 /* Project object */;
+}
