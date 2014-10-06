@@ -60,7 +60,7 @@ static CGFloat FRYDistanceBetweenPoints(CGPoint p1, CGPoint p2) {
     }
     else {
         [self.currentTouch setLocationInWindow:windowPoint];
-        if ( relativeTime < [self.touchDefinition endingTimeOffset] ) {
+        if ( relativeTime < [self.touchDefinition duration] ) {
             if ( FRYDistanceBetweenPoints(windowPoint, self.lastPointInWindow) > 1.0f ) {
                 if ( CGRectContainsPoint(self.view.window.frame, windowPoint) ) {
                     [self.currentTouch setPhaseAndUpdateTimestamp:UITouchPhaseMoved];

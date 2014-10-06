@@ -44,7 +44,7 @@
     return self;
 }
 
-- (NSTimeInterval)endingTimeOffset
+- (NSTimeInterval)duration
 {
     FRYPointInTime *pointInTime = [self.pointsInTime lastObject];
     return pointInTime.offset;

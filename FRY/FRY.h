@@ -16,28 +16,30 @@
 + (FRY *)shared;
 
 /**
- * Simulate a touch with a series of points in time in the view.
- * This method can be called on any thread.
+ * Simulate a touch with a series of points in time in the view.   This does not
+ * cause any touch events to occur, those will occur when sendNextEvent is called.
+ *
+ * This can be called on any thread.
  */
-- (void)simulateTouchDefinition:(FRYTouchDefinition *)touchDefinition inView:(UIView *)view;
+- (void)addTouchWithDefinition:(FRYTouchDefinition *)touchDefinition inView:(UIView *)view;
 
 /**
  * Conviencence function for simulating multi-touch events returned from FRYTouchDefinition construnctors
  */
-- (void)simulateTouchDefinitions:(NSArray *)touchDefinitions inView:(UIView *)view;
+- (void)addTouchWithDefinitions:(NSArray *)touchDefinitions inView:(UIView *)view;
 
 /**
- * Specify a lookup to perform.
+ * Specify a lookup to perform.  This can be called from any thread
  */
 - (void)addLookup:(FRYLookup *)lookup;
 
 /**
- * Checks to see if there are any active touches
+ * Check to see if there are any active touches
  */
 - (BOOL)hasActiveTouches;
 
 /**
- * Checks to see if there are any active lookups
+ * Check to see if there are any active lookups
  */
 - (BOOL)hasActiveLookups;
 
@@ -53,5 +55,9 @@
 @interface FRY(Dispatch)
 
 - (void)setMainThreadDispatchEnabled:(BOOL)enabled;
+
+- (void)performAllLookups;
+
+- (void)sendNextEvent;
 
 @end

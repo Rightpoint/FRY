@@ -29,6 +29,16 @@ static NSTimeInterval const kFRYEventDispatchInterval = 0.1;
 
 @implementation FRY
 
++ (FRY *)shared
+{
+    static FRY *shared = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        shared = [[FRY alloc] init];
+    });
+    return shared;
+}
+
 - (id)init
 {
     self = [super init];
@@ -45,7 +55,7 @@ static NSTimeInterval const kFRYEventDispatchInterval = 0.1;
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
 }
 
-- (void)simulateTouchDefinition:(FRYTouchDefinition *)touchDefinition inView:(UIView *)view
+- (void)addTouchWithDefinition:(FRYTouchDefinition *)touchDefinition inView:(UIView *)view
 {
     NSTimeInterval startTime = [NSDate timeIntervalSinceReferenceDate];
     FRYTouchInteraction *touchInteraction = [[FRYTouchInteraction alloc] initWithTouchDefinition:touchDefinition inView:view startTime:startTime];
@@ -55,10 +65,10 @@ static NSTimeInterval const kFRYEventDispatchInterval = 0.1;
     }
 }
 
-- (void)simulateTouchDefinitions:(NSArray *)touchDefinitions inView:(UIView *)view
+- (void)addTouchWithDefinitions:(NSArray *)touchDefinitions inView:(UIView *)view
 {
     for ( FRYTouchDefinition *definition in touchDefinitions ) {
-        [self simulateTouchDefinition:definition inView:view];
+        [self addTouchWithDefinition:definition inView:view];
     }
 }
 
@@ -75,19 +85,23 @@ static NSTimeInterval const kFRYEventDispatchInterval = 0.1;
 
 - (BOOL)hasActiveTouches
 {
-    return self.activeTouchInteractions.count > 0;
+    @synchronized(self.activeTouchInteractions) {
+        return self.activeTouchInteractions.count > 0;
+    }
 }
 
 - (void)addLookup:(FRYLookup *)lookup
 {
-    @synchronized(self) {
+    @synchronized(self.activeLookups) {
         [self.activeLookups addObject:lookup];
     }
 }
 
 - (BOOL)hasActiveLookups
 {
-    return self.activeLookups.count > 0;
+    @synchronized(self.activeLookups) {
+        return self.activeLookups.count > 0;
+    }
 }
 
 - (void)clearLookupsAndTouches

@@ -31,9 +31,19 @@
 + (FRYTouchDefinition *)touchAlongPath:(UIBezierPath *)path forDuration:(NSTimeInterval)duration;
 + (FRYTouchDefinition *)touchAlongPath:(UIBezierPath *)path forDuration:(NSTimeInterval)duration withOffset:(CGPoint)offset;
 
+/**
+ * Delay all touches in this definition by the startingOffset.   Defaults to zero
+ */
 @property (assign, nonatomic) NSTimeInterval startingOffset;
 
-- (NSTimeInterval)endingTimeOffset;
+/**
+ * The touch duration.
+ */
+- (NSTimeInterval)duration;
+
+/**
+ * Interpolate the touch position between the two closest specified points in time
+ */
 - (CGPoint)pointAtRelativeTime:(NSTimeInterval)relativeTime;
 
 @end
