@@ -11,6 +11,8 @@
 #import <UIKit/UIAccessibility.h>
 #import "FRYQuery.h"
 
+typedef void(^FRYLookupComplete)(void);
+
 typedef NS_ENUM(NSInteger, FRYTargetWindow) {
     FRYTargetWindowKey = 0,
     FRYTargetWindowAll,
@@ -28,12 +30,15 @@ typedef NS_ENUM(NSInteger, FRYTargetWindow) {
                     accessibilityTraits:(UIAccessibilityTraits)accessibilityTraits
                               whenFound:(FRYSingularQueryResult)found;
 
-+ (FRYLookup *)targetWithViewsMatchingPredicate:(NSPredicate *)predicate whenFound:(FRYQueryResult)found;
++ (FRYLookup *)lookupViewsMatchingPredicate:(NSPredicate *)predicate whenFound:(FRYQueryResult)found;
 
 @property (assign, nonatomic) FRYTargetWindow targetWindow;
 @property (strong, nonatomic, readonly) id<FRYQuery> query;
 @property (copy, nonatomic) FRYQueryResult whenFound;
 
-- (BOOL)executeLookup;
+/**
+ * Return a block enclosing the results of a successful lookup, or nil if the lookup failed.
+ */
+- (FRYLookupComplete)foundBlockIfLookupIsFound;
 
 @end
