@@ -92,6 +92,7 @@ static NSTimeInterval const kFRYEventDispatchInterval = 0.1;
 
 - (void)addLookup:(FRYLookup *)lookup
 {
+    [lookup setValue:self.application forKey:NSStringFromSelector(@selector(application))];
     @synchronized(self.activeLookups) {
         [self.activeLookups addObject:lookup];
     }

@@ -7,7 +7,6 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "FRYTouchSynthesisOperation.h"
 
 @interface FRYTouchSynthesisOperationTests : XCTestCase
 

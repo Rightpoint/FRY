@@ -20,6 +20,7 @@
  * cause any touch events to occur, those will occur when sendNextEvent is called.
  *
  * This can be called on any thread.
+ * FIXME: This has a view object, so can only really be called on main thread.   Should really expose FRYTargetWindow
  */
 - (void)addTouchWithDefinition:(FRYTouchDefinition *)touchDefinition inView:(UIView *)view;
 
