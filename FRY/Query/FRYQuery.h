@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol FRYLookup <NSObject>
+typedef void(^FRYQueryResult)(NSArray *results);
+typedef void(^FRYSingularQueryResult)(id view);
+
+
+@protocol FRYQuery <NSObject>
 
 - (NSArray *)lookForMatchingObjectsStartingFrom:(NSObject *)object;
 

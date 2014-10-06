@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FRYLookup.h"
+#import "FRYQuery.h"
 
-@interface FRYKVTreeLookup : NSObject <FRYLookup>
+@interface FRYKeyValueTreeQuery : NSObject <FRYQuery>
 
 - (id)initWithChildKeyPaths:(NSArray *)childKeyPaths predicate:(NSPredicate *)predicate;
 

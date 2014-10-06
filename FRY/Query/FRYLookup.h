@@ -7,10 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FRYLookup.h"
-
 // Oh evil NSObject category, how I love you.
 #import <UIKit/UIAccessibility.h>
+#import "FRYQuery.h"
 
 typedef NS_ENUM(NSInteger, FRYTargetWindow) {
     FRYTargetWindowKey = 0,
@@ -22,15 +21,19 @@ typedef NS_ENUM(NSInteger, FRYTargetWindow) {
  * is designed to not know about UIKit objects to ensure that it can
  * be safely used off of the main thread.
  */
-@interface FRYTarget : NSObject
+@interface FRYLookup : NSObject
 
-+ (FRYTarget *)targetAccessibilityLabel:(NSString *)accessibilityLabel
++ (FRYLookup *)lookupAccessibilityLabel:(NSString *)accessibilityLabel
                      accessibilityValue:(NSString *)accessibilityValue
-                    accessibilityTraits:(UIAccessibilityTraits)accessibilityTraits;
+                    accessibilityTraits:(UIAccessibilityTraits)accessibilityTraits
+                              whenFound:(FRYSingularQueryResult)found;
 
-+ (FRYTarget *)targetWithViewsMatchingPredicate:(NSPredicate *)predicate;
++ (FRYLookup *)targetWithViewsMatchingPredicate:(NSPredicate *)predicate whenFound:(FRYQueryResult)found;
 
 @property (assign, nonatomic) FRYTargetWindow targetWindow;
-@property (strong, nonatomic) id<FRYLookup> lookup;
+@property (strong, nonatomic, readonly) id<FRYQuery> query;
+@property (copy, nonatomic) FRYQueryResult whenFound;
+
+- (BOOL)executeLookup;
 
 @end

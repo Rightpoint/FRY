@@ -8,7 +8,7 @@
 
 #import <UIKit/UIAccessibility.h>
 
-@interface FRYAccessibilityLookupStrategy : NSObject
+@interface FRYAccessibilityQueryStrategy : NSObject
 
 - (NSObject *)queryObject:(NSObject *)object
     forAccessibilityLabel:(NSString *)accessibilityLabel
@@ -30,8 +30,8 @@
 
 @end
 
-@interface NSObject(IDLookStrategy)
+@interface NSObject(FRYQueryStrategy)
 
-+ (FRYAccessibilityLookupStrategy *)lookupStrategy;
++ (FRYAccessibilityQueryStrategy *)queryStrategy;
 
 @end

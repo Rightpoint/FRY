@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "FRYKVTreeLookup.h"
-@interface FRYKVTreeLookup()
+#import "FRYKeyValueTreeQuery.h"
+@interface FRYKeyValueTreeQuery()
 
 @property (nonatomic, strong, readonly) NSArray *childKeyPaths;
 
@@ -15,7 +15,7 @@
 
 @end
 
-@implementation FRYKVTreeLookup
+@implementation FRYKeyValueTreeQuery
 
 - (id)initWithChildKeyPaths:(NSArray *)childKeyPaths predicate:(NSPredicate *)predicate;
 {

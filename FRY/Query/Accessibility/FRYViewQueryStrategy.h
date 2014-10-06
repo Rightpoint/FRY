@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "FRYAccessibilityLookupStrategy.h"
+#import "FRYAccessibilityQueryStrategy.h"
 
-@interface FRYViewLookupStrategy : FRYAccessibilityLookupStrategy
+@interface FRYViewQueryStrategy : FRYAccessibilityQueryStrategy
 
 @end

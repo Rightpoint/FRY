@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "FRYAccessibilityLookupStrategy.h"
+#import "FRYAccessibilityQueryStrategy.h"
 
-@implementation FRYAccessibilityLookupStrategy
+@implementation FRYAccessibilityQueryStrategy
 
 - (NSObject *)queryObject:(NSObject *)object
     forAccessibilityLabel:(NSString *)accessibilityLabel
@@ -58,7 +58,7 @@
         // Does this happen?
         if (subelement == nil) { continue; }
         
-        FRYAccessibilityLookupStrategy *strategy = [subelement.class lookupStrategy];
+        FRYAccessibilityQueryStrategy *strategy = [subelement.class queryStrategy];
         result = [strategy queryObject:subelement
                  forAccessibilityLabel:accessibilityLabel
                     accessibilityValue:accessibilityValue
@@ -73,14 +73,14 @@
 
 @end
 
-@implementation NSObject(FRYLookStrategy)
+@implementation NSObject(FRYQueryStrategy)
 
-+ (FRYAccessibilityLookupStrategy *)lookupStrategy
++ (FRYAccessibilityQueryStrategy *)queryStrategy
 {
-    static FRYAccessibilityLookupStrategy *strategy = nil;
+    static FRYAccessibilityQueryStrategy *strategy = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        strategy = [[FRYAccessibilityLookupStrategy alloc] init];
+        strategy = [[FRYAccessibilityQueryStrategy alloc] init];
     });
     return strategy;
 }

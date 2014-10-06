@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "FRYLookup.h"
+#import "FRYQuery.h"
 #import <UIKit/UIKit.h>
 
-@interface FRYAccessibilityLookup : NSObject <FRYLookup>
+@interface FRYAccessibilityQuery : NSObject <FRYQuery>
 
 - (id)initWithAccessibilityLabel:(NSString *)label
               accessibilityValue:(NSString *)accessibilityValue

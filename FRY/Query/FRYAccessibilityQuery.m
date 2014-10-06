@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "FRYAccessibilityLookup.h"
+#import "FRYAccessibilityQuery.h"
 
-#import "FRYViewLookupStrategy.h"
+#import "FRYViewQueryStrategy.h"
 
-@interface FRYAccessibilityLookup()
+@interface FRYAccessibilityQuery()
 
 @property (nonatomic, copy) NSString *accessibilityLabel;
 @property (nonatomic, copy) NSString *accessibilityValue;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation FRYAccessibilityLookup
+@implementation FRYAccessibilityQuery
 
 - (id)initWithAccessibilityLabel:(NSString *)accessibilityLabel accessibilityValue:(NSString *)accessibilityValue accessibilityTraits:(UIAccessibilityTraits)accessibilityTraits
 {
@@ -33,7 +33,7 @@
 
 - (NSArray *)lookForMatchingObjectsStartingFrom:(NSObject *)object
 {
-    FRYAccessibilityLookupStrategy *strategy = object.class.lookupStrategy;
+    FRYAccessibilityQueryStrategy *strategy = object.class.queryStrategy;
     return @[[strategy queryObject:object
              forAccessibilityLabel:_accessibilityLabel
                 accessibilityValue:_accessibilityValue

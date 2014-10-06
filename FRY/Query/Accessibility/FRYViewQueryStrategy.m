@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "FRYViewLookupStrategy.h"
+#import "FRYViewQueryStrategy.h"
 
-@implementation FRYViewLookupStrategy
+@implementation FRYViewQueryStrategy
 
 - (NSObject *)checkObject:(UIView *)view
     forAccessibilityLabel:(NSString *)accessibilityLabel
@@ -37,7 +37,7 @@
     
     // Lookup via subviews before accessibility
     for (UIView *subview in [view.subviews reverseObjectEnumerator]) {
-        FRYAccessibilityLookupStrategy *subviewStrategy = [subview.class lookupStrategy];
+        FRYAccessibilityQueryStrategy *subviewStrategy = [subview.class queryStrategy];
         
         result = [subviewStrategy queryObject:subview
                         forAccessibilityLabel:accessibilityLabel
@@ -62,17 +62,17 @@
 @end
 
 
-@interface UIView(IDLookStrategy)
+@interface UIView(FRYQueryStrategy)
 @end
 
-@implementation UIView(IDLookStrategy)
+@implementation UIView(FRYQueryStrategy)
 
-+ (FRYAccessibilityLookupStrategy *)lookupStrategy
++ (FRYAccessibilityQueryStrategy *)queryStrategy
 {
-    static FRYAccessibilityLookupStrategy *strategy = nil;
+    static FRYAccessibilityQueryStrategy *strategy = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        strategy = [[FRYViewLookupStrategy alloc] init];
+        strategy = [[FRYViewQueryStrategy alloc] init];
     });
     return strategy;
 }
