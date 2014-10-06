@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class FRYTouchDefinition;
 
 @interface FRYToucher : NSObject
 
@@ -16,7 +17,7 @@
  * Simulate a touch with a series of points in time in the view.
  * This method can be called on any thread
  */
-- (void)simulateTouches:(NSArray *)pointsInTime inView:(UIView *)view;
+- (void)simulateTouchDefinition:(FRYTouchDefinition *)touchDefinition inView:(UIView *)view;
 
 /**
  * This method generates a UIEvent for the current state of the toucher.

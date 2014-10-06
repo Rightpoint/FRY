@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class MultiTouchDefinition;
+@class FRYTouchDefinition;
 
 @interface FRYTouchInteraction : NSObject
 
-- (id)initWithPointsInTime:(NSArray *)pointsInTime inView:(UIView *)view startTime:(NSTimeInterval)startTime;
+- (id)initWithTouchDefinition:(FRYTouchDefinition *)touch inView:(UIView *)view startTime:(NSTimeInterval)startTime;
 
 @property (assign, nonatomic, readonly) NSTimeInterval startTime;
 @property (strong, nonatomic, readonly) NSArray *pointsInTime;

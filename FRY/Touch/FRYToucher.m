@@ -12,7 +12,7 @@
 
 @interface FRYToucher()
 
-@property (copy, nonatomic) NSMutableArray *touchInteractions;
+@property (copy, nonatomic) NSMutableArray *activeTouchInteractions;
 @property (strong, nonatomic) UIApplication *application;
 
 @end
@@ -24,27 +24,27 @@
     self = [super init];
     if ( self ) {
         self.application = [UIApplication sharedApplication];
-        self.touchInteractions = [NSMutableArray array];
+        self.activeTouchInteractions = [NSMutableArray array];
     }
     return self;
 }
 
-- (void)simulateTouches:(NSArray *)pointsInTime inView:(UIView *)view
+- (void)simulateTouchDefinition:(FRYTouchDefinition *)touchDefinition inView:(UIView *)view
 {
     NSTimeInterval startTime = [NSDate timeIntervalSinceReferenceDate];
-    FRYTouchInteraction *touchInteraction = [[FRYTouchInteraction alloc] initWithPointsInTime:pointsInTime inView:view startTime:startTime];
+    FRYTouchInteraction *touchInteraction = [[FRYTouchInteraction alloc] initWithTouchDefinition:touchDefinition inView:view startTime:startTime];
 
     @synchronized(self) {
-        [self.touchInteractions addObject:touchInteraction];
+        [self.activeTouchInteractions addObject:touchInteraction];
     }
 }
 
 - (void)pruneCompletedTouchInteractions
 {
     @synchronized(self) {
-        for ( FRYTouchInteraction *interaction in [self.touchInteractions copy] ) {
+        for ( FRYTouchInteraction *interaction in [self.activeTouchInteractions copy] ) {
             if ( interaction.currentTouchPhase == UITouchPhaseEnded || interaction.currentTouchPhase == UITouchPhaseCancelled ) {
-                [self.touchInteractions removeObject:interaction];
+                [self.activeTouchInteractions removeObject:interaction];
             }
         }
     }
@@ -56,7 +56,7 @@
     NSMutableArray *touches = [NSMutableArray array];
 
     @synchronized(self) {
-        for ( FRYTouchInteraction *interaction in self.touchInteractions ) {
+        for ( FRYTouchInteraction *interaction in self.activeTouchInteractions ) {
             [touches addObject:[interaction touchAtTime:currentTime]];
         }
         [self pruneCompletedTouchInteractions];

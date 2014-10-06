@@ -8,6 +8,7 @@
 
 #import "FRYTouchInteraction.h"
 #import "FRYPointInTime.h"
+#import "FRYTouchDefinition.h"
 #import "UITouch+FRY.h"
 
 static CGFloat FRYDistanceBetweenPoints(CGPoint p1, CGPoint p2) {
@@ -19,9 +20,10 @@ static CGFloat FRYDistanceBetweenPoints(CGPoint p1, CGPoint p2) {
 
 @interface FRYTouchInteraction()
 
-@property (assign, nonatomic) NSTimeInterval startTime;
-@property (strong, nonatomic) NSArray *pointsInTime;
+@property (strong, nonatomic) FRYTouchDefinition *touchDefinition;
 @property (strong, nonatomic) UIView *view;
+@property (assign, nonatomic) NSTimeInterval startTime;
+
 @property (assign, nonatomic) CGPoint lastPointInWindow;
 @property (strong, nonatomic) UITouch *currentTouch;
 
@@ -29,11 +31,11 @@ static CGFloat FRYDistanceBetweenPoints(CGPoint p1, CGPoint p2) {
 
 @implementation FRYTouchInteraction
 
-- (id)initWithPointsInTime:(NSArray *)pointsInTime inView:(UIView *)view startTime:(NSTimeInterval)startTime
+- (id)initWithTouchDefinition:(FRYTouchDefinition *)touch inView:(UIView *)view startTime:(NSTimeInterval)startTime;
 {
     self = [super init];
     if ( self ) {
-        _pointsInTime = pointsInTime;
+        _touchDefinition = touch;
         _view = view;
         _startTime = startTime;
     }
@@ -46,40 +48,19 @@ static CGFloat FRYDistanceBetweenPoints(CGPoint p1, CGPoint p2) {
     return self.currentTouch.phase;
 }
 
-- (NSTimeInterval)endingTimeOffset
-{
-    FRYPointInTime *pointInTime = [self.pointsInTime lastObject];
-    return pointInTime.offset;
-}
-
-- (CGPoint)pointAtRelativeTime:(NSTimeInterval)relativeTime
-{
-    __block FRYPointInTime *lastPit = nil;
-    __block CGPoint result = CGPointZero;
-    [self.pointsInTime enumerateObjectsUsingBlock:^(FRYPointInTime *pit, NSUInteger idx, BOOL *stop) {
-        if ( pit.offset < relativeTime ) {
-//            NSTimeInterval gapTime = lastPit.offset - pit.offset;
-//            NSTimeInterval interPointInterval = relativeTime - lastPit.offset;
-
-        }
-        lastPit = pit;
-    }];
-    return result;
-}
 
 - (UITouch *)touchAtTime:(NSTimeInterval)currentTime
 {
     NSTimeInterval relativeTime = currentTime - self.startTime;
-    CGPoint point = [self pointAtRelativeTime:relativeTime];
+    CGPoint point = [self.touchDefinition pointAtRelativeTime:relativeTime];
     CGPoint windowPoint = [self.view.window convertPoint:point fromView:self.view];
-
 
     if ( self.currentTouch == nil ) {
         self.currentTouch = [[UITouch alloc] initAtPoint:windowPoint inWindow:self.view.window];
     }
     else {
         [self.currentTouch setLocationInWindow:windowPoint];
-        if ( relativeTime < [self endingTimeOffset] ) {
+        if ( relativeTime < [self.touchDefinition endingTimeOffset] ) {
             if ( FRYDistanceBetweenPoints(windowPoint, self.lastPointInWindow) > 1.0f ) {
                 if ( CGRectContainsPoint(self.view.window.frame, windowPoint) ) {
                     [self.currentTouch setPhaseAndUpdateTimestamp:UITouchPhaseMoved];
