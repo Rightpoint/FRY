@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 // Oh evil NSObject category, how I love you.
 #import <UIKit/UIAccessibility.h>
-#import "FRYQuery.h"
 
 typedef void(^FRYLookupComplete)(void);
+typedef void(^FRYQueryResult)(NSArray *results);
+typedef void(^FRYSingularQueryResult)(id view);
 
 typedef NS_ENUM(NSInteger, FRYTargetWindow) {
     FRYTargetWindowKey = 0,
@@ -33,8 +34,6 @@ typedef NS_ENUM(NSInteger, FRYTargetWindow) {
 + (FRYLookup *)lookupViewsMatchingPredicate:(NSPredicate *)predicate whenFound:(FRYQueryResult)found;
 
 @property (assign, nonatomic) FRYTargetWindow targetWindow;
-@property (strong, nonatomic, readonly) id<FRYQuery> query;
-@property (copy, nonatomic) FRYQueryResult whenFound;
 
 /**
  * Return a block enclosing the results of a successful lookup, or nil if the lookup failed.

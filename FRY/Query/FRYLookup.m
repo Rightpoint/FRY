@@ -9,11 +9,13 @@
 #import "FRYLookup.h"
 #import "FRYAccessibilityQuery.h"
 #import "FRYKeyValueTreeQuery.h"
+#import "FRYQuery.h"
 
 @interface FRYLookup()
 
 @property (strong, nonatomic) UIApplication *application;
 @property (strong, nonatomic) id<FRYQuery> query;
+@property (copy, nonatomic) FRYQueryResult whenFound;
 
 @end
 
@@ -28,7 +30,10 @@
     lookup.query = [[FRYAccessibilityQuery alloc] initWithAccessibilityLabel:accessibilityLabel
                                                             accessibilityValue:accessibilityValue
                                                            accessibilityTraits:accessibilityTraits];
-    lookup.whenFound = found;
+    lookup.whenFound = ^(NSArray *results) {
+        NSParameterAssert(results.count == 1);
+        found(results.firstObject);
+    };
     return lookup;
 }
 

@@ -8,10 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^FRYQueryResult)(NSArray *results);
-typedef void(^FRYSingularQueryResult)(id view);
-
-
 @protocol FRYQuery <NSObject>
 
 - (NSArray *)lookForMatchingObjectsStartingFrom:(NSObject *)object;
