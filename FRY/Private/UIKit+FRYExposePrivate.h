@@ -22,9 +22,29 @@ typedef struct __GSEvent * GSEventRef;
 - (UIEvent *)_touchesEvent;
 @end
 
-
 @interface NSObject (FRYExposePrivate)
 
 - (void)tapInteractionWithLocation:(CGPoint)point;
 
 @end
+
+@interface FRYKBKey : NSObject
+
+- (NSString *)representedString;
+- (CGRect)frame;
+
+@end
+
+@interface FRYKBKeyplane : NSObject // UIKBKeyplane
+
+- (BOOL)isShiftKeyplane;
+
+- (NSArray *)keys;
+
+@end
+
+@interface FRYKBKeyplaneView : UIView // UIKBKeyplaneView
+
+- (FRYKBKeyplane *)keyplane;
+@end
+

@@ -10,6 +10,7 @@
 
 @implementation FRYAccessibilityQueryStrategy
 
+
 - (NSObject *)queryObject:(NSObject *)object
     forAccessibilityLabel:(NSString *)accessibilityLabel
        accessibilityValue:(NSString *)accessibilityValue

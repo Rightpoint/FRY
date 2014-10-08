@@ -10,9 +10,6 @@
 
 @interface UIAccessibilityElement (FRY)
 
-- (NSString *)fry_accessibilityLabel;
-- (NSString *)id_accessibilityValue;
-
 - (UIView *)id_containingView;
 
 @end
