@@ -17,8 +17,3 @@ OBJC_EXTERN NSString* const kFRYLookupAccessibilityTrait;
 @interface NSObject(FRYLookupSupport) <FRYLookupSupport>
 
 @end
-
-@interface UIAccessibilityElement(FRYLookupSupport) <FRYLookupSupport>
-
-@end
-

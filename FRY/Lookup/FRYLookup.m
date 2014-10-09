@@ -32,11 +32,12 @@
         FRYLookupResult *match = self.matchTransform(object);
         [results addObject:match];
     }
+    
     for ( NSString *childKeyPath in self.childKeyPaths ) {
         NSArray *children = [object valueForKeyPath:childKeyPath];
         for ( NSObject *child in children) {
             if ( [self.descendPredicate evaluateWithObject:child  substitutionVariables:variables] ) {
-                id<FRYLookup> lookup = [child.class fry_query];
+                id<FRYLookup> lookup = [child.class fry_lookup];
                 NSArray *subResults = [lookup lookupChildrenOfObject:object matchingVariables:variables];
                 [results addObjectsFromArray:subResults];
             }

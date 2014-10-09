@@ -17,7 +17,7 @@ NSString* const kFRYLookupAccessibilityTrait = @"accessibilityTrait";
 
 @implementation NSObject(FRYLookupSupport)
 
-+ (id<FRYLookup>)fry_query
++ (id<FRYLookup>)fry_lookup
 {
     // A lookup can not work, since the NSObject extension does not allow us to obtain
     // the containing UIView.  Since NSObject is the only shared heritage between UIView and UIAccessibilityElement
@@ -43,7 +43,7 @@ NSString* const kFRYLookupAccessibilityTrait = @"accessibilityTrait";
 
 @implementation UIAccessibilityElement(FRYLookupSupport)
 
-+ (id<FRYLookup>)fry_query
++ (id<FRYLookup>)fry_lookup
 {
     FRYLookup *fryQuery = [[FRYLookup alloc] init];
     fryQuery.childKeyPaths = @[NSStringFromSelector(@selector(fry_accessibilityElements))];
@@ -61,7 +61,7 @@ NSString* const kFRYLookupAccessibilityTrait = @"accessibilityTrait";
 
 @implementation UIView(FRYLookupSupport)
 
-+ (id<FRYLookup>)fry_query
++ (id<FRYLookup>)fry_lookup
 {
     FRYLookup *fryQuery = [[FRYLookup alloc] init];
     fryQuery.childKeyPaths = @[NSStringFromSelector(@selector(subviews)), NSStringFromSelector(@selector(fry_accessibilityElements))];
@@ -89,9 +89,9 @@ NSString* const kFRYLookupAccessibilityTrait = @"accessibilityTrait";
 
 @implementation UIDatePicker(FRYLookupSupport)
 
-+ (id<FRYLookup>)fry_query
++ (id<FRYLookup>)fry_lookup
 {
-    FRYLookup *fryQuery = (FRYLookup *)[super fry_query];
+    FRYLookup *fryQuery = (FRYLookup *)[super fry_lookup];
     // UIDatePicker has tons of children, none of which we care about.
     fryQuery.descendPredicate = [NSPredicate predicateWithValue:NO];
     return fryQuery;

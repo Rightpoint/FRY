@@ -11,6 +11,6 @@
 
 @protocol FRYLookupSupport <NSObject>
 
-+ (id<FRYLookup>)fry_query;
++ (id<FRYLookup>)fry_lookup;
 
 @end
