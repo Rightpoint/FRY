@@ -25,7 +25,6 @@
 + (void)load
 {
     [[self sharedEventMonitor] enable];
-
 }
 
 

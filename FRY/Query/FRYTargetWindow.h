@@ -10,7 +10,7 @@
 
 typedef NS_ENUM(NSInteger, FRYTargetWindow) {
     FRYTargetWindowKey = 0,
-    FRYTargetWindowKeyboard = 0,
+    FRYTargetWindowKeyboard,
     FRYTargetWindowAll,
 };
 
