@@ -10,4 +10,9 @@
 
 @implementation FRYPointInTime
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@:%p location=%@, offset=%f", self.class, self, NSStringFromCGPoint(self.location), self.offset];
+}
+
 @end

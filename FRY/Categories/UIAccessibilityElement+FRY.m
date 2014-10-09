@@ -10,7 +10,7 @@
 
 @implementation UIAccessibilityElement (FRY)
 
-- (UIView *)id_containingView
+- (UIView *)fry_containingView
 {
     UIAccessibilityElement *element = self;
     while ( element && ![element isKindOfClass:[UIView class]] ) {

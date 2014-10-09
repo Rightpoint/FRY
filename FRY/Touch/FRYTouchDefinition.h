@@ -46,4 +46,6 @@
  */
 - (CGPoint)pointAtRelativeTime:(NSTimeInterval)relativeTime;
 
+- (void)addLocation:(CGPoint)point atRelativeTime:(NSTimeInterval)time;
+
 @end

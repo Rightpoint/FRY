@@ -12,19 +12,27 @@ typedef struct __GSEvent * GSEventRef;
 
 @interface UIEvent (FRYExposePrivate)
 
+- (id)_initWithEvent:(GSEventRef)event touches:(id)touches;
 - (void)_addTouch:(id)arg1 forDelayedDelivery:(BOOL)arg2;
 - (void)_clearTouches;
 - (void)_setGSEvent:(GSEventRef)event;
+- (GSEventRef)_gsEvent;
 
 @end
 
 @interface UIApplication (FRYExposePrivate)
+-(BOOL)handleEvent:(GSEventRef)event withNewEvent:(id)newEvent;
+
 - (UIEvent *)_touchesEvent;
 @end
 
 @interface NSObject (FRYExposePrivate)
 
 - (void)tapInteractionWithLocation:(CGPoint)point;
+
+@end
+
+@interface UITextEffectsWindow : UIWindow
 
 @end
 

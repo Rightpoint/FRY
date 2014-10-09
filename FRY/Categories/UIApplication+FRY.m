@@ -41,5 +41,17 @@
     return event;
 }
 
+- (FRYTargetWindow)fry_targetWindowForView:(UIView *)view
+{
+    UIWindow *window = view.window;
+    if ( [window isKindOfClass:[UITextEffectsWindow class]] ) {
+        return FRYTargetWindowKeyboard;
+    }
+    else {
+        return FRYTargetWindowKey;
+    }
+}
+
+
 
 @end

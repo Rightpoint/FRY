@@ -9,15 +9,11 @@
 #import <Foundation/Foundation.h>
 // Oh evil NSObject category, how I love you.
 #import <UIKit/UIAccessibility.h>
+#import "FRYTargetWindow.h"
 
 typedef void(^FRYLookupComplete)(void);
 typedef void(^FRYQueryResult)(NSArray *results);
 typedef void(^FRYSingularQueryResult)(id view);
-
-typedef NS_ENUM(NSInteger, FRYTargetWindow) {
-    FRYTargetWindowKey = 0,
-    FRYTargetWindowAll,
-};
 
 /**
  * This object specifies a target to interact with.   This object

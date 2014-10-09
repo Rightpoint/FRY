@@ -15,7 +15,6 @@
 - (id)initWithTouchDefinition:(FRYTouchDefinition *)touch inView:(UIView *)view startTime:(NSTimeInterval)startTime;
 
 @property (assign, nonatomic, readonly) NSTimeInterval startTime;
-@property (strong, nonatomic, readonly) NSArray *pointsInTime;
 @property (strong, nonatomic, readonly) UIView *view;
 @property (assign, nonatomic, readonly) UITouchPhase currentTouchPhase;
 

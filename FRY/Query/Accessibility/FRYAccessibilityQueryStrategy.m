@@ -35,7 +35,6 @@
        accessibilityValue:(NSString *)accessibilityValue
       accessibilityTraits:(UIAccessibilityTraits)accessibilityTraits
 {
-
     if ( (accessibilityLabel == nil || [[object accessibilityLabel] isEqualToString:accessibilityLabel]) &&
          (accessibilityValue == nil || [[object accessibilityValue] isEqualToString:accessibilityValue]) &&
          ([object accessibilityTraits] & accessibilityTraits) == accessibilityTraits ) {

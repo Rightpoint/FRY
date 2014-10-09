@@ -10,6 +10,6 @@
 
 @interface UIAccessibilityElement (FRY)
 
-- (UIView *)id_containingView;
+- (UIView *)fry_containingView;
 
 @end

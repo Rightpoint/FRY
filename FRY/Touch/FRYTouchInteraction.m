@@ -82,4 +82,9 @@ static CGFloat FRYDistanceBetweenPoints(CGPoint p1, CGPoint p2) {
     return self.currentTouch;
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@:%p touchDefinition=%@, startTime=%f view=%@ currentTouch=%@", self.class, self, self.touchDefinition, self.startTime, self.view, self.currentTouch];
+}
+
 @end

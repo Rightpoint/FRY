@@ -65,4 +65,17 @@
     return result;
 }
 
+- (void)addLocation:(CGPoint)point atRelativeTime:(NSTimeInterval)time
+{
+    FRYPointInTime *pointInTime = [[FRYPointInTime alloc] init];
+    pointInTime.location = point;
+    pointInTime.offset = time - self.startingOffset;
+    [self.pointsInTime addObject:pointInTime];
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@:%p pointsInTime=%@, startingOffset=%f", self.class, self, self.pointsInTime, self.startingOffset];
+}
+
 @end
