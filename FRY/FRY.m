@@ -140,18 +140,18 @@ static NSTimeInterval const kFRYEventDispatchInterval = 0.1;
     NSAssert([NSThread currentThread] == [NSThread mainThread], @"");
     NSMutableArray *lookupCompletionBlocks = [NSMutableArray array];
     
-    @synchronized(self.activeLookups) {
-        for ( FRYLookup *lookup in [self.activeLookups copy] ) {
-            FRYLookupComplete completion = [lookup foundBlockIfLookupIsFound];
-            if ( completion ) {
-                [self.activeLookups removeObject:lookup];
-                [lookupCompletionBlocks addObject:completion];
-            }
-        }
-    }
-    for ( FRYLookupComplete completionBlock in lookupCompletionBlocks ) {
-        completionBlock();
-    }
+//    @synchronized(self.activeLookups) {
+//        for ( FRYLookup *lookup in [self.activeLookups copy] ) {
+//            FRYLookupComplete completion = [lookup foundBlockIfLookupIsFound];
+//            if ( completion ) {
+//                [self.activeLookups removeObject:lookup];
+//                [lookupCompletionBlocks addObject:completion];
+//            }
+//        }
+//    }
+//    for ( FRYLookupComplete completionBlock in lookupCompletionBlocks ) {
+//        completionBlock();
+//    }
 }
 
 - (void)sendNextEvent
