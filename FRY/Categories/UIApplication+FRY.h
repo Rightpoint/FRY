@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FRYTargetWindow.h"
+#import "FRYDefines.h"
 
 @interface UIApplication(FRY)
 
 - (UIEvent *)fry_eventWithTouches:(NSArray *)touches;
 
 - (FRYTargetWindow)fry_targetWindowForView:(UIView *)view;
+
+- (NSArray *)fry_targetWindowsOfType:(FRYTargetWindow)targetWindow;
 
 @end

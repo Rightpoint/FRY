@@ -6,32 +6,32 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "FRYTouchDefinition.h"
+#import "FRYSimulatedTouch.h"
 #import "FRYPointInTime.h"
 
-@interface FRYTouchDefinition()
+@interface FRYSimulatedTouch()
 
 @property (strong, nonatomic, readonly) NSMutableArray *pointsInTime;
 
 @end
 
-@implementation FRYTouchDefinition
+@implementation FRYSimulatedTouch
 
-+ (FRYTouchDefinition *)touchFromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint forDuration:(NSTimeInterval)duration
++ (FRYSimulatedTouch *)touchFromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint forDuration:(NSTimeInterval)duration
 {
-    FRYTouchDefinition *definition = [[FRYTouchDefinition alloc] init];
+    FRYSimulatedTouch *definition = [[FRYSimulatedTouch alloc] init];
     return definition;
 }
 
-+ (FRYTouchDefinition *)touchAlongPath:(UIBezierPath *)path forDuration:(NSTimeInterval)duration
++ (FRYSimulatedTouch *)touchAlongPath:(UIBezierPath *)path forDuration:(NSTimeInterval)duration
 {
-    FRYTouchDefinition *definition = [[FRYTouchDefinition alloc] init];
+    FRYSimulatedTouch *definition = [[FRYSimulatedTouch alloc] init];
     return definition;
 }
 
-+ (FRYTouchDefinition *)touchAlongPath:(UIBezierPath *)path forDuration:(NSTimeInterval)duration withOffset:(CGPoint)offset
++ (FRYSimulatedTouch *)touchAlongPath:(UIBezierPath *)path forDuration:(NSTimeInterval)duration withOffset:(CGPoint)offset
 {
-    FRYTouchDefinition *definition = [[FRYTouchDefinition alloc] init];
+    FRYSimulatedTouch *definition = [[FRYSimulatedTouch alloc] init];
     return definition;
 }
 

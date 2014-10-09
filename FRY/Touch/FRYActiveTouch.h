@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class FRYTouchDefinition;
+@class FRYSimulatedTouch;
 
-@interface FRYTouchInteraction : NSObject
+@interface FRYActiveTouch : NSObject
 
-- (id)initWithTouchDefinition:(FRYTouchDefinition *)touch inView:(UIView *)view startTime:(NSTimeInterval)startTime;
+- (id)initWithSimulatedTouch:(FRYSimulatedTouch *)touch inView:(UIView *)view startTime:(NSTimeInterval)startTime;
 
 @property (assign, nonatomic, readonly) NSTimeInterval startTime;
 @property (strong, nonatomic, readonly) UIView *view;

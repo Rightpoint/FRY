@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-#import "FRYTouchDefinition.h"
+#import "FRYDefines.h"
+#import "FRYSimulatedTouch.h"
 #import "FRYLookup.h"
+
 
 @interface FRY : NSObject
 
@@ -20,19 +22,14 @@
  * cause any touch events to occur, those will occur when sendNextEvent is called.
  *
  * This can be called on any thread.
- * FIXME: This has a view object, so can only really be called on main thread.   Should really expose FRYTargetWindow
  */
-- (void)addTouchWithDefinition:(FRYTouchDefinition *)touchDefinition inView:(UIView *)view;
+- (void)simulateTouch:(FRYSimulatedTouch *)touch matchingView:(NSDictionary *)lookupVariables;
+- (void)simulateTouch:(FRYSimulatedTouch *)touch matchingView:(NSDictionary *)lookupVariables inTargetWindow:(FRYTargetWindow)targetWindow;
+- (void)simulateTouches:(NSArray *)touches matchingView:(NSDictionary *)lookupVariables;
+- (void)simulateTouches:(NSArray *)touches matchingView:(NSDictionary *)lookupVariables inTargetWindow:(FRYTargetWindow)targetWindow;
 
-/**
- * Conviencence function for simulating multi-touch events returned from FRYTouchDefinition construnctors
- */
-- (void)addTouchWithDefinitions:(NSArray *)touchDefinitions inView:(UIView *)view;
-
-/**
- * Specify a lookup to perform.  This can be called from any thread
- */
-- (void)addLookup:(FRYLookup *)lookup;
+- (void)findMatchingView:(NSDictionary *)lookupVariables whenFound:(FRYInteractionBlock)foundBlock;
+- (void)findMatchingView:(NSDictionary *)lookupVariables inTargetWindow:(FRYTargetWindow)targetWindow whenFound:(FRYInteractionBlock)foundBlock;
 
 /**
  * Check to see if there are any active touches
@@ -40,15 +37,15 @@
 - (BOOL)hasActiveTouches;
 
 /**
- * Check to see if there are any active lookups
+ * Check to see if there are any active interactions
  */
-- (BOOL)hasActiveLookups;
+- (BOOL)hasActiveInteractions;
 
 /**
  * Clear out any touches and lookups.  This will send cancel events for any active touches to ensure that
  * the application state doesn't get munged.
  */
-- (void)clearLookupsAndTouches;
+- (void)clearInteractionsAndTouches;
 
 @end
 

@@ -52,6 +52,32 @@
     }
 }
 
+- (UIWindow *)fry_keyboardWindow
+{
+    for ( UIWindow *window in self.windows ) {
+        if ( [window isKindOfClass:[UITextEffectsWindow class]] ) {
+            return window;
+        }
+    }
+    return nil;
+}
+
+- (NSArray *)fry_targetWindowsOfType:(FRYTargetWindow)targetWindow;
+{
+    NSArray *result = nil;
+    switch ( targetWindow ) {
+        case FRYTargetWindowKey:
+            result = @[self.keyWindow];
+            break;
+        case FRYTargetWindowAll:
+            result = self.windows;
+            break;
+        case FRYTargetWindowKeyboard:
+            result = @[[self fry_keyboardWindow]];
+            break;
+    }
+    return result;
+}
 
 
 @end

@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "FRYTouchInteraction.h"
+#import "FRYActiveTouch.h"
 #import "FRYPointInTime.h"
-#import "FRYTouchDefinition.h"
+#import "FRYSimulatedTouch.h"
 #import "UITouch+FRY.h"
 
 static CGFloat FRYDistanceBetweenPoints(CGPoint p1, CGPoint p2) {
@@ -18,9 +18,9 @@ static CGFloat FRYDistanceBetweenPoints(CGPoint p1, CGPoint p2) {
     return distance;
 }
 
-@interface FRYTouchInteraction()
+@interface FRYActiveTouch()
 
-@property (strong, nonatomic) FRYTouchDefinition *touchDefinition;
+@property (strong, nonatomic) FRYSimulatedTouch *touchDefinition;
 @property (strong, nonatomic) UIView *view;
 @property (assign, nonatomic) NSTimeInterval startTime;
 
@@ -29,9 +29,9 @@ static CGFloat FRYDistanceBetweenPoints(CGPoint p1, CGPoint p2) {
 
 @end
 
-@implementation FRYTouchInteraction
+@implementation FRYActiveTouch
 
-- (id)initWithTouchDefinition:(FRYTouchDefinition *)touch inView:(UIView *)view startTime:(NSTimeInterval)startTime;
+- (id)initWithSimulatedTouch:(FRYSimulatedTouch *)touch inView:(UIView *)view startTime:(NSTimeInterval)startTime;
 {
     self = [super init];
     if ( self ) {

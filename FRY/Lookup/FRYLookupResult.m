@@ -10,4 +10,8 @@
 
 @implementation FRYLookupResult
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@:%p view=%@, frame=%@", self.class, self, self.view, NSStringFromCGRect(self.frame)];
+}
 @end

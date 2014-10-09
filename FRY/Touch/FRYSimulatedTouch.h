@@ -8,7 +8,7 @@
 
 @import UIKit;
 
-@interface FRYTouchDefinition : NSObject
+@interface FRYSimulatedTouch : NSObject
 
 /**
  * Create two touch definitions at the specified point.
@@ -26,10 +26,10 @@
  */
 + (NSArray *)pinchOutFromCenterToPoint:(CGPoint)finger1 point:(CGPoint)finger2;
 
-+ (FRYTouchDefinition *)tapAtPoint:(CGPoint)point;
-+ (FRYTouchDefinition *)touchFromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint forDuration:(NSTimeInterval)duration;
-+ (FRYTouchDefinition *)touchAlongPath:(UIBezierPath *)path forDuration:(NSTimeInterval)duration;
-+ (FRYTouchDefinition *)touchAlongPath:(UIBezierPath *)path forDuration:(NSTimeInterval)duration withOffset:(CGPoint)offset;
++ (FRYSimulatedTouch *)tapAtPoint:(CGPoint)point;
++ (FRYSimulatedTouch *)dragFromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint forDuration:(NSTimeInterval)duration;
+//+ (FRYSimulatedTouch *)touchAlongPath:(UIBezierPath *)path forDuration:(NSTimeInterval)duration;
+//+ (FRYSimulatedTouch *)touchAlongPath:(UIBezierPath *)path forDuration:(NSTimeInterval)duration withOffset:(CGPoint)offset;
 
 /**
  * Delay all touches in this definition by the startingOffset.   Defaults to zero
