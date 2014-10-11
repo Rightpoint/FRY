@@ -10,4 +10,6 @@
 
 @interface UIView (FRY)
 
+- (BOOL)fry_hasAnimationToWaitFor;
+
 @end

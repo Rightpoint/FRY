@@ -51,36 +51,30 @@
                    matchingView:@{kFRYLookupAccessibilityLabel : @"UIAlertView"}];
     
     // Wait For Animations
-    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
+    [[NSRunLoop currentRunLoop] fry_runUntilEventsLookupsAndAnimationsAreComplete];
     
     [[FRY shared] simulateTouch:[FRYSyntheticTouch tap]
                    matchingView:@{kFRYLookupAccessibilityLabel : @"Cancel"}];
 
     // Wait For Animations
-    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
+    [[NSRunLoop currentRunLoop] fry_runUntilEventsLookupsAndAnimationsAreComplete];
 
     [[FRY shared] simulateTouch:[FRYSyntheticTouch tap]
                    matchingView:@{kFRYLookupAccessibilityLabel : @"Tapping"}];
 
-    [[NSRunLoop currentRunLoop] fry_runUntilEventsAndLookupsComplete];
-
-    // Wait For Animations
-    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
+    [[NSRunLoop currentRunLoop] fry_runUntilEventsLookupsAndAnimationsAreComplete];
     
     [[FRY shared] simulateTouch:[FRYSyntheticTouch tap]
                    matchingView:@{kFRYLookupAccessibilityLabel : @"Test Suite"}];
 
-    [[NSRunLoop currentRunLoop] fry_runUntilEventsAndLookupsComplete];
+    [[NSRunLoop currentRunLoop] fry_runUntilEventsLookupsAndAnimationsAreComplete];
     
     // Wait For Animations
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
 
     [[FRY shared] findViewsMatching:@{kFRYLookupAccessibilityLabel : @"Tapping"}
                           whenFound:^(NSArray *lookupResults) {}];
-    [[NSRunLoop currentRunLoop] fry_runUntilEventsAndLookupsComplete];
-
-
-
+    [[NSRunLoop currentRunLoop] fry_runUntilEventsLookupsAndAnimationsAreComplete];
 }
 
 @end

@@ -13,6 +13,7 @@
 #import "FRYLookup.h"
 #import "FRYLookupSupport.h"
 #import "FRYLookupResult.h"
+#import "UIView+FRY.h"
 
 @interface FRY()
 
@@ -136,6 +137,30 @@
         return self.activeInteractions.count > 0;
     }
 }
+
+- (BOOL)hasAnimationToWaitFor
+{
+    return [self hasAnimationToWaitForInTargetWindow:FRYTargetWindowKey];
+}
+
+- (BOOL)hasAnimationToWaitForInTargetWindow:(FRYTargetWindow)targetWindow
+{
+    __block BOOL animation = NO;
+    if ( [NSThread isMainThread] ) {
+        for ( UIWindow *window in [self.application fry_targetWindowsOfType:targetWindow] ) {
+            if ( [window fry_hasAnimationToWaitFor] ) {
+                animation = YES;
+            }
+        }
+    }
+    else {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            animation = [self hasAnimationToWaitForInTargetWindow:targetWindow];
+        });
+    }
+    return animation;
+}
+
 
 - (void)clearInteractionsAndTouches
 {

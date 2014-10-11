@@ -42,6 +42,12 @@
 - (BOOL)hasActiveInteractions;
 
 /**
+ * Check to see if there are any animations to wait for.
+ */
+- (BOOL)hasAnimationToWaitFor;
+- (BOOL)hasAnimationToWaitForInTargetWindow:(FRYTargetWindow)targetWindow;
+
+/**
  * Clear out any touches and lookups.  This will send cancel events for any active touches to ensure that
  * the application state doesn't get munged.
  */

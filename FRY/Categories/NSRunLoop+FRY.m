@@ -11,10 +11,16 @@
 
 @implementation NSRunLoop(FRY)
 
-- (void)fry_runUntilEventsAndLookupsComplete
+- (void)fry_runUntilEventsLookupsAndAnimationsAreComplete
+{
+    [self fry_runUntilEventsLookupsAndAnimationsAreCompleteWithTimeout:5];
+}
+
+- (void)fry_runUntilEventsLookupsAndAnimationsAreCompleteWithTimeout:(NSTimeInterval)timeout
 {
     while ( [[FRY shared] hasActiveTouches] ||
-              [[FRY shared] hasActiveInteractions] )
+            [[FRY shared] hasActiveInteractions] ||
+            [[FRY shared] hasAnimationToWaitForInTargetWindow:FRYTargetWindowAll] )
     {
         [[FRY shared] performAllLookups];
         [[FRY shared] sendNextEvent];

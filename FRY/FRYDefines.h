@@ -18,3 +18,6 @@ typedef NS_ENUM(NSInteger, FRYTargetWindow) {
     FRYTargetWindowAll,
 };
 
+
+
+OBJC_EXTERN NSString *FRYMD5String(NSString *input);
