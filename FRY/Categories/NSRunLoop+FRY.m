@@ -9,22 +9,29 @@
 #import "NSRunloop+FRY.h"
 #import "FRY.h"
 
+static NSTimeInterval const kFRYRunLoopDefaultTimeout = 5.0;
 @implementation NSRunLoop(FRY)
 
 - (void)fry_runUntilEventsLookupsAndAnimationsAreComplete
 {
-    [self fry_runUntilEventsLookupsAndAnimationsAreCompleteWithTimeout:5];
+    [self fry_runUntilEventsLookupsAndAnimationsAreCompleteWithTimeout:kFRYRunLoopDefaultTimeout];
 }
 
 - (void)fry_runUntilEventsLookupsAndAnimationsAreCompleteWithTimeout:(NSTimeInterval)timeout
 {
-    while ( [[FRY shared] hasActiveTouches] ||
-            [[FRY shared] hasActiveInteractions] ||
-            [[FRY shared] hasAnimationToWaitForInTargetWindow:FRYTargetWindowAll] )
+    NSTimeInterval start = [NSDate timeIntervalSinceReferenceDate];
+    while ( ([[FRY shared] hasActiveTouches] ||
+             [[FRY shared] hasActiveInteractions] ||
+             [[FRY shared] hasAnimationToWaitForInTargetWindow:FRYTargetWindowAll]) &&
+           start + timeout > [NSDate timeIntervalSinceReferenceDate] )
     {
         [[FRY shared] performAllLookups];
         [[FRY shared] sendNextEvent];
         [self runUntilDate:[NSDate dateWithTimeIntervalSinceNow:kFRYEventDispatchInterval]];
+    }
+    
+    if ( [NSDate timeIntervalSinceReferenceDate] > start + timeout ) {
+        NSLog(@"Spinning the run loop for more than %f seconds!", timeout);
     }
 }
 @end

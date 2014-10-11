@@ -19,6 +19,9 @@
 
 + (NSArray *)removeAncestorsFromLookupResults:(NSArray *)results
 {
+    // Remove duplicates
+    results = [[NSOrderedSet orderedSetWithArray:results] array];
+    
     NSMutableArray *reducedResults = [results mutableCopy];
     NSArray *resultViews = [reducedResults valueForKey:NSStringFromSelector(@selector(view))];
     for ( FRYLookupResult *result in results ) {
@@ -44,6 +47,21 @@
         _frame = frame;
     }
     return self;
+}
+
+- (NSUInteger)hash
+{
+    return [self.view hash] ^ [[NSValue valueWithCGRect:self.frame] hash];
+}
+
+- (BOOL)isEqual:(FRYLookupResult *)otherResult
+{
+    if ( [otherResult isKindOfClass:[FRYLookupResult class]] == NO ) {
+        return NO;
+    }
+    BOOL equal = ([self.view isEqual:otherResult.view] &&
+                  CGRectEqualToRect(self.frame, otherResult.frame));
+    return equal;
 }
 
 - (NSString *)description

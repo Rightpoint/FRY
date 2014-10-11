@@ -80,7 +80,7 @@
         NSParameterAssert(results.count == 1);
         FRYLookupResult *result = [results lastObject];
         UIView *lookupView = result.view;
-        CGRect touchFrameInWindow = [lookupView.window convertRect:result.frame fromView:lookupView.superview];
+        CGRect touchFrameInWindow = [lookupView.window convertRect:result.frame fromView:lookupView];
         for ( __strong FRYSimulatedTouch *touch in touches ) {
             if ( [touch isKindOfClass:[FRYSyntheticTouch class]] ) {
                 touch = [(FRYSyntheticTouch *)touch touchInFrame:touchFrameInWindow];

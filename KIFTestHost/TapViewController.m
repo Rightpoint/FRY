@@ -51,6 +51,13 @@
     sender.accessibilityValue = [NSString stringWithFormat:@"%d", (int)roundf(sender.value)];
 }
 
+- (IBAction)incrementOtherTextField:(id)sender
+{
+    NSInteger value = [self.otherTextField.text integerValue];
+    value += 1;
+    self.otherTextField.text = [NSString stringWithFormat:@"%d", (int)value];
+}
+
 - (IBAction)pickPhoto:(id)sender
 {
     UIImagePickerController *controller = [[UIImagePickerController alloc] init];
