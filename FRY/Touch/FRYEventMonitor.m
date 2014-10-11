@@ -9,7 +9,7 @@
 #import "FRYEventMonitor.h"
 #import "FRYMethodSwizzling.h"
 #import "UIKit+FRYExposePrivate.h"
-#import "FRYSimulatedTouch.h"
+#import "FRYRecordedTouch.h"
 
 @interface FRYEventMonitor()
 
@@ -75,9 +75,9 @@
 {
     for ( UITouch *touch in [event allTouches] ) {
         NSTimeInterval relativeTouchTime = [self relativeTime:touch.timestamp];
-        FRYMutableSimulatedTouch *definition = nil;
+        FRYRecordedTouch *definition = nil;
         if ( touch.phase == UITouchPhaseBegan ) {
-            definition = [[FRYMutableSimulatedTouch alloc] init];
+            definition = [[FRYRecordedTouch alloc] init];
             definition.startingOffset = relativeTouchTime;
             [self.activeTouches setObject:definition forKey:touch];
         }

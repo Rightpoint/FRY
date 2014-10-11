@@ -14,8 +14,6 @@
 #import "FRYLookupSupport.h"
 #import "FRYLookupResult.h"
 
-static NSTimeInterval const kFRYEventDispatchInterval = 0.1;
-
 @interface FRY()
 
 /**
@@ -50,6 +48,7 @@ static NSTimeInterval const kFRYEventDispatchInterval = 0.1;
         self.application = [UIApplication sharedApplication];
         self.activeTouches = [NSMutableArray array];
         self.activeInteractions = [NSMutableArray array];
+        [self setMainThreadDispatchEnabled:YES];
     }
     return self;
 }
@@ -76,11 +75,17 @@ static NSTimeInterval const kFRYEventDispatchInterval = 0.1;
 - (void)simulateTouches:(NSArray *)touches matchingView:(NSDictionary *)lookupVariables inTargetWindow:(FRYTargetWindow)targetWindow
 {
     [self findViewsMatching:lookupVariables inTargetWindow:targetWindow whenFound:^(NSArray *results) {
+#warning multiple views returned for matching accessibilityLabels.
+//        results = [FRYLookupResult removeAncestorsFromLookupResults:results];
         NSParameterAssert(results.count == 1);
         FRYLookupResult *result = [results lastObject];
         UIView *lookupView = result.view;
+        CGRect touchFrameInWindow = [lookupView.window convertRect:result.frame fromView:lookupView];
         // Translate touches into the view / frame
-        for ( FRYSimulatedTouch *touch in touches ) {
+        for ( __strong FRYSimulatedTouch *touch in touches ) {
+            if ( [touch isKindOfClass:[FRYSyntheticTouch class]] ) {
+                touch = [(FRYSyntheticTouch *)touch touchInFrame:touchFrameInWindow];
+            }
             [self addTouch:touch inView:result.view];
         }
     }];
@@ -102,10 +107,6 @@ static NSTimeInterval const kFRYEventDispatchInterval = 0.1;
 - (void)addTouch:(FRYSimulatedTouch *)touch inView:(UIView *)view
 {
     NSTimeInterval startTime = [NSDate timeIntervalSinceReferenceDate];
-    if ( [view isUserInteractionEnabled] == NO ) {
-        [NSException raise:NSInvalidArgumentException format:@""];
-    }
-    
     FRYActiveTouch *touchInteraction = [[FRYActiveTouch alloc] initWithSimulatedTouch:touch inView:view startTime:startTime];
 
     @synchronized(self.activeTouches) {
@@ -193,9 +194,10 @@ static NSTimeInterval const kFRYEventDispatchInterval = 0.1;
             NSArray *matchingInWindow = [lookup lookupChildrenOfObject:window matchingVariables:interaction.lookupVariables];
             matching = [matching arrayByAddingObjectsFromArray:matchingInWindow];
         }
-        NSAssert(matching.count <= 1, @"Found more matching views than I can handle!");
-        interaction.foundBlock(matching);
-        [completedInteractions addObject:interaction];
+        if ( matching.count > 0 ) {
+            interaction.foundBlock(matching);
+            [completedInteractions addObject:interaction];
+        }
     }
 
     @synchronized(self.activeInteractions) {
@@ -222,23 +224,23 @@ static NSTimeInterval const kFRYEventDispatchInterval = 0.1;
 
 - (void)setMainThreadDispatchEnabled:(BOOL)enabled
 {
+    NSAssert([NSThread currentThread] == [NSThread mainThread], @"");
     if ( _mainThreadDispatchEnabled != enabled ) {
         _mainThreadDispatchEnabled = enabled;
         
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            if ( _mainThreadDispatchEnabled == YES ) {
-                [self performSelector:@selector(sendNextEventAndPerformLookupsOnTimer) withObject:nil afterDelay:0.0];
-            }
-            else {
-                [NSObject cancelPreviousPerformRequestsWithTarget:self];
-            }
-        });
+        if ( _mainThreadDispatchEnabled == YES ) {
+            [self performSelector:@selector(sendNextEventAndPerformLookupsOnTimer) withObject:nil afterDelay:0.0];
+        }
+        else {
+            [NSObject cancelPreviousPerformRequestsWithTarget:self];
+        }
     }
 }
 
 - (void)sendNextEventAndPerformLookupsOnTimer
 {
     NSAssert([NSThread currentThread] == [NSThread mainThread], @"");
+    [self performAllLookups];
     [self sendNextEvent];
     if ( self.mainThreadDispatchEnabled ) {
         [self performSelector:@selector(sendNextEventAndPerformLookupsOnTimer) withObject:nil afterDelay:kFRYEventDispatchInterval];

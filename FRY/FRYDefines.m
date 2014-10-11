@@ -8,3 +8,4 @@
 
 #import "FRYDefines.h"
 
+NSTimeInterval const kFRYEventDispatchInterval = 0.1;

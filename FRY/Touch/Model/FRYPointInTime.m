@@ -10,6 +10,16 @@
 
 @implementation FRYPointInTime
 
+- (id)initWithLocation:(CGPoint)location offset:(NSTimeInterval)offset
+{
+    self = [super init];
+    if ( self ) {
+        _location = location;
+        _offset = offset;
+    }
+    return self;
+}
+
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"<%@:%p location=%@, offset=%f", self.class, self, NSStringFromCGPoint(self.location), self.offset];

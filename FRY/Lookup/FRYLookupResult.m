@@ -17,6 +17,25 @@
 
 @implementation FRYLookupResult
 
++ (NSArray *)removeAncestorsFromLookupResults:(NSArray *)results
+{
+    NSMutableArray *reducedResults = [results mutableCopy];
+    NSArray *resultViews = [reducedResults valueForKey:NSStringFromSelector(@selector(view))];
+    for ( FRYLookupResult *result in results ) {
+        UIView *superview = result.view.superview;
+        while ( superview ) {
+            NSUInteger index = [resultViews indexOfObject:superview];
+            if ( index != NSNotFound ) {
+                [reducedResults removeObjectAtIndex:index];
+                resultViews = [reducedResults valueForKey:NSStringFromSelector(@selector(view))];
+            }
+            superview = superview.superview;
+        }
+        
+    }
+    return reducedResults;
+}
+
 - (instancetype)initWithView:(UIView *)view frame:(CGRect)frame
 {
     self = [super init];

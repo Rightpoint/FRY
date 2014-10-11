@@ -10,6 +10,8 @@
 
 @interface FRYPointInTime : NSObject
 
+- (id)initWithLocation:(CGPoint)location offset:(NSTimeInterval)offset;
+
 @property (assign, nonatomic) CGPoint location;
 @property (assign, nonatomic) NSTimeInterval offset;
 

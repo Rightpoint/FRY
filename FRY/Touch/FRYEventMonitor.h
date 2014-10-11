@@ -15,7 +15,4 @@
 - (void)enable;
 - (void)disable;
 
-- (NSArray *)recordedTouchDefinitions;
-
-
 @end

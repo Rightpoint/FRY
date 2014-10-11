@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "FRY.h"
+#import "FRYLookupResult.h"
+#import "NSRunLoop+FRY.h"
 
 @interface Test_HostTests : XCTestCase
 
@@ -22,24 +24,45 @@
 }
 
 - (void)tearDown {
+    XCTAssertFalse([[FRY shared] hasActiveInteractions]);
+    XCTAssertFalse([[FRY shared] hasActiveTouches]);
     [[FRY shared] clearInteractionsAndTouches];
     [super tearDown];
 }
 
-- (void)testExample {
+- (void)testAccessibilityLabelLookup {
+    XCTestExpectation *lookupDone = [self expectationWithDescription:@"Lookup Complete"];
+    __block UIView *foundView;
     [[FRY shared] findViewsMatching:@{kFRYLookupAccessibilityLabel : @"Tapping"}
                           whenFound:^(NSArray *lookupResults) {
-                              NSLog(@"Found %@", lookupResults);
+                              FRYLookupResult *result = [lookupResults lastObject];
+                              foundView = result.view;
+                              [lookupDone fulfill];
                           }];
-    [[FRY shared] performAllLookups];
-    XCTAssert(YES, @"Pass");
+    [self waitForExpectationsWithTimeout:0.5 handler:^(NSError *error) {
+        XCTAssertNil(error);
+    }];
+    XCTAssertNotNil(foundView);
+    XCTAssertEqualObjects(@"Tapping", [foundView accessibilityLabel]);
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testTap {
+    [[FRY shared] simulateTouch:[FRYSyntheticTouch tap]
+                   matchingView:@{kFRYLookupAccessibilityLabel : @"Tapping"}];
+
+    [[NSRunLoop currentRunLoop] fry_runUntilEventsAndLookupsComplete];
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
+    [[FRY shared] simulateTouch:[FRYSyntheticTouch tap]
+                   matchingView:@{kFRYLookupAccessibilityLabel : @"Test Suite"}];
+
+    [[NSRunLoop currentRunLoop] fry_runUntilEventsAndLookupsComplete];
+
+    [[FRY shared] findViewsMatching:@{kFRYLookupAccessibilityLabel : @"Tapping"}
+                          whenFound:^(NSArray *lookupResults) {}];
+    [[NSRunLoop currentRunLoop] fry_runUntilEventsAndLookupsComplete];
+
+
+    
 }
 
 @end

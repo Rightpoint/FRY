@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "FRYDefines.h"
-#import "FRYSimulatedTouch.h"
+#import "FRYSyntheticTouch.h"
 #import "NSObject+FRYLookupSupport.h"
 
 

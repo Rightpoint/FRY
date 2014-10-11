@@ -10,6 +10,8 @@
 
 typedef void(^FRYInteractionBlock)(NSArray *lookupResults);
 
+OBJC_EXTERN NSTimeInterval const kFRYEventDispatchInterval;
+
 typedef NS_ENUM(NSInteger, FRYTargetWindow) {
     FRYTargetWindowKey = 0,
     FRYTargetWindowKeyboard,

@@ -10,6 +10,8 @@
 
 @interface FRYLookupResult : NSObject
 
++ (NSArray *)removeAncestorsFromLookupResults:(NSArray *)results;
+
 - (instancetype)initWithView:(UIView *)view frame:(CGRect)frame;
 
 @property (strong, nonatomic, readonly) UIView *view;
