@@ -80,7 +80,6 @@
         FRYLookupResult *result = [results lastObject];
         UIView *lookupView = result.view;
         CGRect touchFrameInWindow = [lookupView.window convertRect:result.frame fromView:lookupView.superview];
-        // Translate touches into the view / frame
         for ( __strong FRYSimulatedTouch *touch in touches ) {
             if ( [touch isKindOfClass:[FRYSyntheticTouch class]] ) {
                 touch = [(FRYSyntheticTouch *)touch touchInFrame:touchFrameInWindow];

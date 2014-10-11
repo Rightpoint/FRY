@@ -10,6 +10,7 @@
 #import "FRYSimulatedTouch+Private.h"
 
 #define FRYSyntheticTouchPointSpaceAssert(point) NSAssert(point.x >= 0 && point.x <= 1 && point.y >= 0 && point.y <= 1, @"Must specify point between 0 and 1")
+#warning It is probably ok to allow points outside of 0-1, for touches that move beyond the edges of the touched view.  Be defensive for now.
 
 @implementation FRYSyntheticTouch
 

@@ -36,26 +36,25 @@ typedef struct {
 - (id)initAtPoint:(CGPoint)point inWindow:(UIWindow *)window;
 {
     self = [super init];
-    if (self == nil) {
-        return nil;
-    }
+    if ( self ) {
+        // Wipes out some values.  Needs to be first.
+        [self setWindow:window];
+        
+#warning tapCount, firstTouchForView, and isTap may not be correctly set in all scenarios.  This doesn't seem to bother KIF though.
+        [self setTapCount:1];
+        [self _setLocationInWindow:point resetPrevious:YES];
+        
+        UIView *hitTestView = [window hitTest:point withEvent:nil];
     
-    // Create a fake tap touch
-    [self setWindow:window]; // Wipes out some values.  Needs to be first.
-    
-    [self setTapCount:1];
-    [self _setLocationInWindow:point resetPrevious:YES];
-    
-    UIView *hitTestView = [window hitTest:point withEvent:nil];
-    
-    [self setView:hitTestView];
-    [self setPhase:UITouchPhaseBegan];
-    [self _setIsFirstTouchForView:YES];
-    [self setIsTap:YES];
-    [self setTimestamp:[[NSProcessInfo processInfo] systemUptime]];
-    
-    if ([self respondsToSelector:@selector(setGestureView:)]) {
-        [self setGestureView:hitTestView];
+        [self setView:hitTestView];
+        [self setPhase:UITouchPhaseBegan];
+        [self _setIsFirstTouchForView:YES];
+        [self setIsTap:YES];
+        [self setTimestamp:[[NSProcessInfo processInfo] systemUptime]];
+        
+        if ([self respondsToSelector:@selector(setGestureView:)]) {
+            [self setGestureView:hitTestView];
+        }
     }
     
     return self;

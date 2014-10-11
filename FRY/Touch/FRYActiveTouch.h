@@ -10,6 +10,9 @@
 
 @class FRYSimulatedTouch;
 
+/**
+ * This represents an active touch, and manages the state of the FRYSimulatedTouch and generates UITouch objects.
+ */
 @interface FRYActiveTouch : NSObject
 
 - (id)initWithSimulatedTouch:(FRYSimulatedTouch *)touch inView:(UIView *)view startTime:(NSTimeInterval)startTime;

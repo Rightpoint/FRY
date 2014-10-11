@@ -39,4 +39,10 @@
  */
 - (FRYSimulatedTouch *)touchInFrame:(CGRect)frame;
 
+/**
+ * Create a new touch that is delayed by some time offset.
+ */
+- (FRYSyntheticTouch *)touchDelayedByOffset:(NSTimeInterval)offset;
+
+
 @end

@@ -36,6 +36,9 @@
 
 - (CGPoint)pointAtRelativeTime:(NSTimeInterval)relativeTime
 {
+    // don't over-translate, max out the relative time to the duration.
+    relativeTime = MIN(relativeTime, self.duration);
+    
     __block FRYPointInTime *lastPit = nil;
     __block CGPoint result = CGPointZero;
     [self.pointsInTime enumerateObjectsUsingBlock:^(FRYPointInTime *pit, NSUInteger idx, BOOL *stop) {

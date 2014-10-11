@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ * This will support touch recording and some newer, cooler features.
+ */
 @interface FRYEventMonitor : NSObject
 
 + (FRYEventMonitor *)sharedEventMonitor;

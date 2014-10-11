@@ -8,6 +8,9 @@
 
 @import UIKit;
 
+/**
+ * Simple model object associating a point in time.
+ */
 @interface FRYPointInTime : NSObject
 
 - (id)initWithLocation:(CGPoint)location offset:(NSTimeInterval)offset;

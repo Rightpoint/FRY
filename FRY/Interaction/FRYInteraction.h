@@ -12,7 +12,9 @@
 @class FRYLookup;
 @class FRYSimulatedTouch;
 
-
+/**
+ * An interaction is a response to a lookup finding matching objects.
+ */
 @interface FRYInteraction : NSObject
 
 + (FRYInteraction *)interactionWithTargetWindow:(FRYTargetWindow)targetWindow
@@ -22,6 +24,5 @@
 @property (assign, nonatomic, readonly) FRYTargetWindow targetWindow;
 @property (strong, nonatomic, readonly) NSDictionary *lookupVariables;
 @property (copy, nonatomic, readonly) FRYInteractionBlock foundBlock;
-//@property (strong, nonatomic) FRYInteraction *dependentInteraction;
 
 @end
