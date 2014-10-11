@@ -8,6 +8,14 @@
 
 #import "FRYInteraction.h"
 
+@interface FRYInteraction()
+
+@property (assign, nonatomic) FRYTargetWindow targetWindow;
+@property (strong, nonatomic) NSDictionary *lookupVariables;
+@property (copy, nonatomic) FRYInteractionBlock foundBlock;
+
+@end
+
 @implementation FRYInteraction
 
 + (FRYInteraction *)interactionWithTargetWindow:(FRYTargetWindow)targetWindow

@@ -7,16 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB184AD019E85C5E007CC9DA /* FRYEventMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD6419E4ECF200228531 /* FRYEventMonitor.m */; };
+		AB184AD119E85CE8007CC9DA /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03C19DF95AA00038E75 /* libFRY.a */; };
+		AB184AD419E85F49007CC9DA /* UIApplication+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCDB19DFA30B00228531 /* UIApplication+FRY.m */; };
 		AB25C04019DF95AA00038E75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03F19DF95AA00038E75 /* Foundation.framework */; };
 		AB25C04E19DF95AA00038E75 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C04D19DF95AA00038E75 /* XCTest.framework */; };
 		AB25C04F19DF95AA00038E75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03F19DF95AA00038E75 /* Foundation.framework */; };
 		AB25C05119DF95AA00038E75 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C05019DF95AA00038E75 /* UIKit.framework */; };
 		AB25C05419DF95AA00038E75 /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03C19DF95AA00038E75 /* libFRY.a */; };
 		AB25C05A19DF95AA00038E75 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB25C05819DF95AA00038E75 /* InfoPlist.strings */; };
-		AB25C05C19DF95AA00038E75 /* FRYTouchSynthesisOperationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB25C05B19DF95AA00038E75 /* FRYTouchSynthesisOperationTests.m */; };
 		AB25C08219DF95ED00038E75 /* UIAccessibilityElement+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB25C06719DF95ED00038E75 /* UIAccessibilityElement+FRY.m */; };
 		AB25C08319DF95ED00038E75 /* UIView+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB25C06919DF95ED00038E75 /* UIView+FRY.m */; };
-		AB35FCDC19DFA30B00228531 /* UIApplication+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCDB19DFA30B00228531 /* UIApplication+FRY.m */; };
 		AB35FCE119DFA6F200228531 /* FRYEventProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCDF19DFA6F200228531 /* FRYEventProxy.m */; };
 		AB35FCE419DFAEB900228531 /* UITouch+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCE319DFAEB900228531 /* UITouch+FRY.m */; };
 		AB35FCF019DFB49100228531 /* FRYActiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCEB19DFB49100228531 /* FRYActiveTouch.m */; };
@@ -43,7 +44,6 @@
 		AB35FD7B19E58B5C00228531 /* FRYPointInTime.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCE719DFB49100228531 /* FRYPointInTime.m */; };
 		AB35FD7C19E58B5C00228531 /* FRYSimulatedTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCF619E2F21100228531 /* FRYSimulatedTouch.m */; };
 		AB35FD7F19E58B6B00228531 /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03C19DF95AA00038E75 /* libFRY.a */; };
-		AB35FD8019E58BA200228531 /* FRYEventMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD6419E4ECF200228531 /* FRYEventMonitor.m */; };
 		ABA5781919E64AE600D77CDA /* FRYLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781119E64AE600D77CDA /* FRYLookup.m */; };
 		ABA5781A19E64AE600D77CDA /* FRYLookupResult.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781319E64AE600D77CDA /* FRYLookupResult.m */; };
 		ABA5781C19E64AE600D77CDA /* NSObject+FRYLookupSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781819E64AE600D77CDA /* NSObject+FRYLookupSupport.m */; };
@@ -187,6 +187,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB184AD119E85CE8007CC9DA /* libFRY.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,11 +571,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB184AD019E85C5E007CC9DA /* FRYEventMonitor.m in Sources */,
+				AB184AD419E85F49007CC9DA /* UIApplication+FRY.m in Sources */,
 				ABA5782C19E65D1100D77CDA /* FRYDefines.m in Sources */,
 				AB35FD0C19E320E500228531 /* FRY.m in Sources */,
 				AB25C08319DF95ED00038E75 /* UIView+FRY.m in Sources */,
 				AB35FD0F19E4DE3500228531 /* UIAccessibility+FRY.m in Sources */,
-				AB35FCDC19DFA30B00228531 /* UIApplication+FRY.m in Sources */,
 				ABA5781A19E64AE600D77CDA /* FRYLookupResult.m in Sources */,
 				AB25C08219DF95ED00038E75 /* UIAccessibilityElement+FRY.m in Sources */,
 				ABA5781C19E64AE600D77CDA /* NSObject+FRYLookupSupport.m in Sources */,
@@ -593,7 +595,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB25C05C19DF95AA00038E75 /* FRYTouchSynthesisOperationTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,7 +605,6 @@
 				AB35FD5819E4E4E900228531 /* GestureViewController.m in Sources */,
 				AB35FD5219E4E4E900228531 /* CollectionViewController.m in Sources */,
 				AB35FD5919E4E4E900228531 /* main.m in Sources */,
-				AB35FD8019E58BA200228531 /* FRYEventMonitor.m in Sources */,
 				AB35FD5B19E4E4E900228531 /* ScrollViewController.m in Sources */,
 				AB35FD5119E4E4E900228531 /* AppDelegate.m in Sources */,
 				AB35FD5A19E4E4E900228531 /* PickerController.m in Sources */,
@@ -812,6 +812,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -829,6 +830,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

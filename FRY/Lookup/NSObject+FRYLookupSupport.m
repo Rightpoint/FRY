@@ -49,10 +49,7 @@ NSString* const kFRYLookupAccessibilityTrait = @"accessibilityTrait";
     fryQuery.childKeyPaths = @[NSStringFromSelector(@selector(fry_accessibilityElements))];
     fryQuery.matchPredicate = [self fry_accessibilityPredicate];
     fryQuery.matchTransform = ^FRYLookupResult *(UIAccessibilityElement *obj) {
-        FRYLookupResult *result = [[FRYLookupResult alloc] init];
-        result.view = [obj fry_containingView];
-        result.frame = [obj accessibilityFrame];
-        return result;
+        return [[FRYLookupResult alloc] initWithView:[obj fry_containingView] frame:[obj accessibilityFrame]];
     };
     return fryQuery;
 }
@@ -69,17 +66,14 @@ NSString* const kFRYLookupAccessibilityTrait = @"accessibilityTrait";
     fryQuery.descendPredicate = [NSPredicate predicateWithBlock:^BOOL(NSObject *object, NSDictionary *bindings) {
         if ( [object isKindOfClass:[UIView class]] ) {
             UIView *view = (UIView *)object;
-            return view.hidden == NO;
+            return (view.hidden || view.alpha <= 0.01f) == NO;
         }
         else {
             return YES;
         }
     }];
     fryQuery.matchTransform = ^FRYLookupResult *(UIView *view) {
-        FRYLookupResult *result = [[FRYLookupResult alloc] init];
-        result.view = view;
-        result.frame = view.bounds;
-        return result;
+        return [[FRYLookupResult alloc] initWithView:view frame:view.bounds];
     };
     return fryQuery;
 }

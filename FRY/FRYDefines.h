@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^FRYInteractionBlock)(UIView *view);
-
+typedef void(^FRYInteractionBlock)(NSArray *lookupResults);
 
 typedef NS_ENUM(NSInteger, FRYTargetWindow) {
     FRYTargetWindowKey = 0,

@@ -10,7 +10,7 @@
 
 #import "FRYDefines.h"
 #import "FRYSimulatedTouch.h"
-#import "FRYLookup.h"
+#import "NSObject+FRYLookupSupport.h"
 
 
 @interface FRY : NSObject
@@ -28,8 +28,8 @@
 - (void)simulateTouches:(NSArray *)touches matchingView:(NSDictionary *)lookupVariables;
 - (void)simulateTouches:(NSArray *)touches matchingView:(NSDictionary *)lookupVariables inTargetWindow:(FRYTargetWindow)targetWindow;
 
-- (void)findMatchingView:(NSDictionary *)lookupVariables whenFound:(FRYInteractionBlock)foundBlock;
-- (void)findMatchingView:(NSDictionary *)lookupVariables inTargetWindow:(FRYTargetWindow)targetWindow whenFound:(FRYInteractionBlock)foundBlock;
+- (void)findViewsMatching:(NSDictionary *)lookupVariables whenFound:(FRYInteractionBlock)foundBlock;
+- (void)findViewsMatching:(NSDictionary *)lookupVariables inTargetWindow:(FRYTargetWindow)targetWindow whenFound:(FRYInteractionBlock)foundBlock;
 
 /**
  * Check to see if there are any active touches

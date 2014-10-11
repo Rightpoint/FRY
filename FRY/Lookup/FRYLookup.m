@@ -38,7 +38,7 @@
         for ( NSObject *child in children) {
             if ( [self.descendPredicate evaluateWithObject:child  substitutionVariables:variables] ) {
                 id<FRYLookup> lookup = [child.class fry_lookup];
-                NSArray *subResults = [lookup lookupChildrenOfObject:object matchingVariables:variables];
+                NSArray *subResults = [lookup lookupChildrenOfObject:child matchingVariables:variables];
                 [results addObjectsFromArray:subResults];
             }
         }

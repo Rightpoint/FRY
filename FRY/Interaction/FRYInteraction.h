@@ -19,9 +19,9 @@
                                 lookupVariables:(NSDictionary *)lookupVariables
                                      foundBlock:(FRYInteractionBlock)foundBlock;
 
-@property (assign, nonatomic) FRYTargetWindow targetWindow;
-@property (strong, nonatomic) NSDictionary *lookupVariables;
-@property (copy, nonatomic) FRYInteractionBlock foundBlock;
-@property (strong, nonatomic) FRYInteraction *dependentInteraction;
+@property (assign, nonatomic, readonly) FRYTargetWindow targetWindow;
+@property (strong, nonatomic, readonly) NSDictionary *lookupVariables;
+@property (copy, nonatomic, readonly) FRYInteractionBlock foundBlock;
+//@property (strong, nonatomic) FRYInteraction *dependentInteraction;
 
 @end

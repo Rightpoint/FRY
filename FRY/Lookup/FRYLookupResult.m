@@ -8,7 +8,24 @@
 
 #import "FRYLookupResult.h"
 
+@interface FRYLookupResult()
+
+@property (strong, nonatomic) UIView *view;
+@property (assign, nonatomic) CGRect frame;
+
+@end
+
 @implementation FRYLookupResult
+
+- (instancetype)initWithView:(UIView *)view frame:(CGRect)frame
+{
+    self = [super init];
+    if ( self ) {
+        _view = view;
+        _frame = frame;
+    }
+    return self;
+}
 
 - (NSString *)description
 {

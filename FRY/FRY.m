@@ -12,6 +12,7 @@
 #import "FRYInteraction.h"
 #import "FRYLookup.h"
 #import "FRYLookupSupport.h"
+#import "FRYLookupResult.h"
 
 static NSTimeInterval const kFRYEventDispatchInterval = 0.1;
 
@@ -23,8 +24,8 @@ static NSTimeInterval const kFRYEventDispatchInterval = 0.1;
  */
 @property (strong, nonatomic) UIApplication *application;
 
-@property (copy, nonatomic) NSMutableArray *activeTouches;
-@property (copy, nonatomic) NSMutableArray *activeInteractions;
+@property (strong, nonatomic) NSMutableArray *activeTouches;
+@property (strong, nonatomic) NSMutableArray *activeInteractions;
 
 @property (assign, nonatomic) BOOL mainThreadDispatchEnabled;
 
@@ -74,19 +75,23 @@ static NSTimeInterval const kFRYEventDispatchInterval = 0.1;
 
 - (void)simulateTouches:(NSArray *)touches matchingView:(NSDictionary *)lookupVariables inTargetWindow:(FRYTargetWindow)targetWindow
 {
-    [self findMatchingView:lookupVariables inTargetWindow:targetWindow whenFound:^(UIView *view) {
+    [self findViewsMatching:lookupVariables inTargetWindow:targetWindow whenFound:^(NSArray *results) {
+        NSParameterAssert(results.count == 1);
+        FRYLookupResult *result = [results lastObject];
+        UIView *lookupView = result.view;
+        // Translate touches into the view / frame
         for ( FRYSimulatedTouch *touch in touches ) {
-            [self addTouch:touch inView:view];
+            [self addTouch:touch inView:result.view];
         }
     }];
 }
 
-- (void)findMatchingView:(NSDictionary *)lookupVariables whenFound:(FRYInteractionBlock)foundBlock
+- (void)findViewsMatching:(NSDictionary *)lookupVariables whenFound:(FRYInteractionBlock)foundBlock
 {
-    [self findMatchingView:lookupVariables inTargetWindow:FRYTargetWindowKey whenFound:foundBlock];
+    [self findViewsMatching:lookupVariables inTargetWindow:FRYTargetWindowKey whenFound:foundBlock];
 }
 
-- (void)findMatchingView:(NSDictionary *)lookupVariables inTargetWindow:(FRYTargetWindow)targetWindow whenFound:(FRYInteractionBlock)foundBlock
+- (void)findViewsMatching:(NSDictionary *)lookupVariables inTargetWindow:(FRYTargetWindow)targetWindow whenFound:(FRYInteractionBlock)foundBlock
 {
     FRYInteraction *interaction = [FRYInteraction interactionWithTargetWindow:targetWindow lookupVariables:lookupVariables foundBlock:foundBlock];
     @synchronized(self.activeInteractions) {
@@ -97,6 +102,10 @@ static NSTimeInterval const kFRYEventDispatchInterval = 0.1;
 - (void)addTouch:(FRYSimulatedTouch *)touch inView:(UIView *)view
 {
     NSTimeInterval startTime = [NSDate timeIntervalSinceReferenceDate];
+    if ( [view isUserInteractionEnabled] == NO ) {
+        [NSException raise:NSInvalidArgumentException format:@""];
+    }
+    
     FRYActiveTouch *touchInteraction = [[FRYActiveTouch alloc] initWithSimulatedTouch:touch inView:view startTime:startTime];
 
     @synchronized(self.activeTouches) {
@@ -131,12 +140,16 @@ static NSTimeInterval const kFRYEventDispatchInterval = 0.1;
 
 - (void)clearInteractionsAndTouches
 {
-    [self.activeInteractions removeAllObjects];
+    @synchronized(self.activeInteractions) {
+        [self.activeInteractions removeAllObjects];
+    }
 
-    // Generate an event for the distantFuture which will generate a 'last' event for all touches
+    // Generate an event for the distantFuture which will generate a 'last' event for all touches, and then prune all touches
     NSDate *distantFuture = [NSDate distantFuture];
     UIEvent *nextEvent = [self eventForCurrentTouchesAtTime:[distantFuture timeIntervalSinceReferenceDate]];
-    [self.application sendEvent:nextEvent];
+    if ( nextEvent ) {
+        [self.application sendEvent:nextEvent];
+    }
 }
 
 #pragma mark - Private
@@ -145,14 +158,19 @@ static NSTimeInterval const kFRYEventDispatchInterval = 0.1;
 {
     NSAssert([NSThread currentThread] == [NSThread mainThread], @"");
     NSMutableArray *touches = [NSMutableArray array];
-    
+
     @synchronized(self.activeTouches) {
         for ( FRYActiveTouch *interaction in self.activeTouches ) {
             [touches addObject:[interaction touchAtTime:time]];
         }
         [self pruneCompletedTouchInteractions];
     }
-    return [self.application fry_eventWithTouches:touches];
+    if ( touches.count > 0 ) {
+        return [self.application fry_eventWithTouches:touches];
+    }
+    else {
+        return nil;
+    }
 }
 
 @end
@@ -168,15 +186,15 @@ static NSTimeInterval const kFRYEventDispatchInterval = 0.1;
         activeInteractions = [self.activeInteractions copy];
     }
     NSMutableArray *completedInteractions = [NSMutableArray array];
-    for ( FRYInteraction *interaction in [self.activeInteractions copy] ) {
+    for ( FRYInteraction *interaction in activeInteractions ) {
         NSArray *matching = @[];
         for ( UIWindow *window in [self.application fry_targetWindowsOfType:interaction.targetWindow] ) {
             id<FRYLookup> lookup = [window.class fry_lookup];
             NSArray *matchingInWindow = [lookup lookupChildrenOfObject:window matchingVariables:interaction.lookupVariables];
             matching = [matching arrayByAddingObjectsFromArray:matchingInWindow];
         }
-        NSAssert(matching.count == 1, @"Found more matching views than I can handle!");
-        interaction.foundBlock(matching.lastObject);
+        NSAssert(matching.count <= 1, @"Found more matching views than I can handle!");
+        interaction.foundBlock(matching);
         [completedInteractions addObject:interaction];
     }
 
@@ -191,11 +209,13 @@ static NSTimeInterval const kFRYEventDispatchInterval = 0.1;
     NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
     UIEvent *nextEvent = [self eventForCurrentTouchesAtTime:currentTime];
 
-    [self.application sendEvent:nextEvent];
-    
-    for ( UITouch *touch in nextEvent.allTouches ) {
-        if ( touch.phase == UITouchPhaseEnded && [touch.view canBecomeFirstResponder] ) {
-            [touch.view becomeFirstResponder];
+    if ( nextEvent ) {
+        [self.application sendEvent:nextEvent];
+        
+        for ( UITouch *touch in nextEvent.allTouches ) {
+            if ( touch.phase == UITouchPhaseEnded && [touch.view canBecomeFirstResponder] ) {
+                [touch.view becomeFirstResponder];
+            }
         }
     }
 }

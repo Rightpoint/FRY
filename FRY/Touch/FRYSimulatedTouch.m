@@ -44,6 +44,22 @@
     return self;
 }
 
+- (id)copyWithZone:(NSZone *)zone
+{
+    FRYSimulatedTouch *copy  = [[self class] allocWithZone:zone];
+    copy->_pointsInTime = [self.pointsInTime copyWithZone:zone];
+    copy->_startingOffset = self.startingOffset;
+    return copy;
+}
+
+- (FRYSimulatedTouch *)touchDelayedByOffset:(NSTimeInterval)offset
+{
+    FRYSimulatedTouch *touch = [self copy];
+    touch->_startingOffset = offset;
+    return touch;
+}
+
+
 - (NSTimeInterval)duration
 {
     FRYPointInTime *pointInTime = [self.pointsInTime lastObject];
@@ -65,17 +81,21 @@
     return result;
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@:%p pointsInTime=%@, startingOffset=%f", self.class, self, self.pointsInTime, self.startingOffset];
+}
+
+@end
+
+@implementation FRYMutableSimulatedTouch
+
 - (void)addLocation:(CGPoint)point atRelativeTime:(NSTimeInterval)time
 {
     FRYPointInTime *pointInTime = [[FRYPointInTime alloc] init];
     pointInTime.location = point;
-    pointInTime.offset = time - self.startingOffset;
+    pointInTime.offset = time;
     [self.pointsInTime addObject:pointInTime];
-}
-
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"<%@:%p pointsInTime=%@, startingOffset=%f", self.class, self, self.pointsInTime, self.startingOffset];
 }
 
 @end

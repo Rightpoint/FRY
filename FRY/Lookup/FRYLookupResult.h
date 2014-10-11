@@ -10,8 +10,10 @@
 
 @interface FRYLookupResult : NSObject
 
-@property (strong, nonatomic) UIView *view;
-@property (assign, nonatomic) CGRect frame;
+- (instancetype)initWithView:(UIView *)view frame:(CGRect)frame;
+
+@property (strong, nonatomic, readonly) UIView *view;
+@property (assign, nonatomic, readonly) CGRect frame;
 
 // The thought here is to have lookup's generate actions that can cause visibility.   TBD.
 //@property (copy, nonatomic) NSArray *actions;

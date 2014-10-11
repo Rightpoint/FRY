@@ -75,9 +75,9 @@
 {
     for ( UITouch *touch in [event allTouches] ) {
         NSTimeInterval relativeTouchTime = [self relativeTime:touch.timestamp];
-        FRYSimulatedTouch *definition = nil;
+        FRYMutableSimulatedTouch *definition = nil;
         if ( touch.phase == UITouchPhaseBegan ) {
-            definition = [[FRYSimulatedTouch alloc] init];
+            definition = [[FRYMutableSimulatedTouch alloc] init];
             definition.startingOffset = relativeTouchTime;
             [self.activeTouches setObject:definition forKey:touch];
         }
