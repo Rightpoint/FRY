@@ -75,12 +75,11 @@
 - (void)simulateTouches:(NSArray *)touches matchingView:(NSDictionary *)lookupVariables inTargetWindow:(FRYTargetWindow)targetWindow
 {
     [self findViewsMatching:lookupVariables inTargetWindow:targetWindow whenFound:^(NSArray *results) {
-#warning multiple views returned for matching accessibilityLabels.
-//        results = [FRYLookupResult removeAncestorsFromLookupResults:results];
+        results = [FRYLookupResult removeAncestorsFromLookupResults:results];
         NSParameterAssert(results.count == 1);
         FRYLookupResult *result = [results lastObject];
         UIView *lookupView = result.view;
-        CGRect touchFrameInWindow = [lookupView.window convertRect:result.frame fromView:lookupView];
+        CGRect touchFrameInWindow = [lookupView.window convertRect:result.frame fromView:lookupView.superview];
         // Translate touches into the view / frame
         for ( __strong FRYSimulatedTouch *touch in touches ) {
             if ( [touch isKindOfClass:[FRYSyntheticTouch class]] ) {

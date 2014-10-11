@@ -52,8 +52,7 @@ static CGFloat FRYDistanceBetweenPoints(CGPoint p1, CGPoint p2) {
 - (UITouch *)touchAtTime:(NSTimeInterval)currentTime
 {
     NSTimeInterval relativeTime = currentTime - self.startTime;
-    CGPoint point = [self.touchDefinition pointAtRelativeTime:relativeTime];
-    CGPoint windowPoint = [self.view.window convertPoint:point fromView:self.view];
+    CGPoint windowPoint = [self.touchDefinition pointAtRelativeTime:relativeTime];
 
     if ( self.currentTouch == nil ) {
         self.currentTouch = [[UITouch alloc] initAtPoint:windowPoint inWindow:self.view.window];
