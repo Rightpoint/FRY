@@ -77,4 +77,11 @@ typedef struct {
     [self setPhase:phase];
 }
 
+- (CGPoint)fry_locationRelativeToView
+{
+    NSParameterAssert(self.view);
+    CGPoint location = [self locationInView:self.view];
+    return CGPointMake(location.x / self.view.frame.size.width, location.y / self.view.frame.size.height);
+}
+
 @end

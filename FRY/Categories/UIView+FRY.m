@@ -7,6 +7,7 @@
 //
 
 #import "UIView+FRY.h"
+#import "NSObject+FRYLookupSupport.h"
 
 @implementation UIView (FRY)
 
@@ -21,6 +22,24 @@
         }
     }
     return NO;
+}
+
+- (NSDictionary *)fry_matchingLookupVariables
+{
+    NSMutableDictionary *variables = [NSMutableDictionary dictionary];
+    if ( self.accessibilityLabel ) {
+        variables[kFRYLookupAccessibilityLabel] = self.accessibilityLabel;
+    }
+    if ( self.accessibilityValue ) {
+        variables[kFRYLookupAccessibilityValue] = self.accessibilityValue;
+    }
+
+    if ( variables.count > 0 ) {
+        return [variables copy];
+    }
+    else {
+        return nil;
+    }
 }
 
 @end

@@ -10,13 +10,16 @@
 #import "FRYMethodSwizzling.h"
 #import "UIKit+FRYExposePrivate.h"
 #import "FRYRecordedTouch.h"
+#import "FRYTouchEventLog.h"
+#import "UIView+FRY.h"
+#import "UITouch+FRY.h"
 
 @interface FRYEventMonitor()
 
 @property (assign, nonatomic) NSTimeInterval startTime;
 @property (strong, nonatomic) NSMutableArray *touchDefinitions;
 
-@property (strong, nonatomic) NSMapTable *activeTouches;
+@property (strong, nonatomic) NSMapTable *activeTouchLog;
 
 @end
 
@@ -45,13 +48,19 @@
                                method:@selector(fry_sendEvent:)];
     self.startTime = [[NSProcessInfo processInfo] systemUptime];
     self.touchDefinitions = [NSMutableArray array];
-    self.activeTouches = [NSMapTable weakToStrongObjectsMapTable];
+    self.activeTouchLog = [NSMapTable weakToStrongObjectsMapTable];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(printTouchLogOnResign)
+                                                 name:UIApplicationWillResignActiveNotification
+                                               object:nil];
+                                                                
 }
 
 - (void)disable
 {
     self.touchDefinitions = nil;
-    self.activeTouches = nil;
+    self.activeTouchLog = nil;
     self.startTime = MAXFLOAT;
     // This is wishful, and does not work.   I am wishful and would like it to, so ima gonna leave it here.
     [FRYMethodSwizzling exchangeClass:[self class]
@@ -66,31 +75,38 @@
     [[FRYEventMonitor sharedEventMonitor] monitorEvent:event];
 }
 
-- (NSTimeInterval)relativeTime:(NSTimeInterval)time
-{
-    return time - self.startTime;
-}
-
 - (void)monitorEvent:(UIEvent *)event
 {
     for ( UITouch *touch in [event allTouches] ) {
-        NSTimeInterval relativeTouchTime = [self relativeTime:touch.timestamp];
-        FRYRecordedTouch *definition = nil;
+        NSTimeInterval relativeTouchTime = touch.timestamp - self.startTime;
+        FRYTouchEventLog *log = nil;
+
         if ( touch.phase == UITouchPhaseBegan ) {
-            definition = [[FRYRecordedTouch alloc] init];
-            definition.startingOffset = relativeTouchTime;
-            [self.activeTouches setObject:definition forKey:touch];
+            log = [[FRYTouchEventLog alloc] init];
+            log.startingOffset = relativeTouchTime;
+            [self.activeTouchLog setObject:log forKey:touch];
         }
         else {
-            definition = [self.activeTouches objectForKey:touch];
+            log = [self.activeTouchLog objectForKey:touch];
         }
-        CGPoint location = [touch locationInView:touch.view];
-        [definition addLocation:location atRelativeTime:relativeTouchTime];
+        CGPoint location = [touch locationInView:nil];
+        [log addLocation:location atRelativeTime:relativeTouchTime];
         
         if ( touch.phase == UITouchPhaseEnded || touch.phase == UITouchPhaseCancelled ) {
-            [self.touchDefinitions addObject:[self.activeTouches objectForKey:touch]];
-            [self.activeTouches removeObjectForKey:touch];
+            if ( touch.view ) {
+                log.viewLookupVariables = [touch.view fry_matchingLookupVariables];
+                [log translateTouchesIntoViewCoordinates:touch.view];
+            }
+            [self.touchDefinitions addObject:[self.activeTouchLog objectForKey:touch]];
+            [self.activeTouchLog removeObjectForKey:touch];
         }
+    }
+}
+
+- (void)printTouchLogOnResign
+{
+    for ( FRYTouchEventLog *log in self.touchDefinitions ) {
+        NSLog(@"%@", [log recreationCode]);
     }
 }
 

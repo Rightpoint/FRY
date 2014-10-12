@@ -16,4 +16,6 @@
 - (void)setLocationInWindow:(CGPoint)location;
 - (void)setPhaseAndUpdateTimestamp:(UITouchPhase)phase;
 
+- (CGPoint)fry_locationRelativeToView;
+
 @end

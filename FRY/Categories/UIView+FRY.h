@@ -12,4 +12,6 @@
 
 - (BOOL)fry_hasAnimationToWaitFor;
 
+- (NSDictionary *)fry_matchingLookupVariables;
+
 @end
