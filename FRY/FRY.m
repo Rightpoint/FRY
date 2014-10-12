@@ -87,7 +87,8 @@
         NSArray *windows = [self.application fry_targetWindowsOfType:targetWindow];
         NSAssert(windows.count == 1, @"Must specify a matching view or a singular target window");
         UIWindow *window = [windows firstObject];
-        [self simulateTouches:touches inView:window frame:window.bounds];
+        UIView *view = [window.subviews lastObject];
+        [self simulateTouches:touches inView:view frame:view.bounds];
     }
 }
 
