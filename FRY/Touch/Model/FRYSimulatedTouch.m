@@ -11,6 +11,23 @@
 
 @implementation FRYSimulatedTouch
 
++ (FRYSimulatedTouch *)touchStarting:(NSTimeInterval)startingOffset points:(NSUInteger)points xyoffsets:(double)xYorOffset, ...
+{
+    FRYSimulatedTouch *touch = [[self alloc] init];
+    touch.startingOffset = startingOffset;
+    va_list args;
+    va_start(args, xYorOffset);
+    for ( NSUInteger i = 0; i < points; i++ ) {
+        CGFloat x = i == 0 ? xYorOffset : va_arg(args, double);
+        CGFloat y = va_arg(args, double);
+        NSTimeInterval offset = va_arg(args, double);
+        
+        [touch.pointsInTime addObject:[[FRYPointInTime alloc] initWithLocation:CGPointMake(x, y) offset:offset]];
+    }
+    
+    return touch;
+}
+
 - (id)init
 {
     self = [super init];

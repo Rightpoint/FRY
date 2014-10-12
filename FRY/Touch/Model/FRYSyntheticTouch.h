@@ -34,6 +34,7 @@
  */
 + (NSArray *)pinchOutFromCenterToPoint:(CGPoint)finger1 point:(CGPoint)finger2 withDuration:(NSTimeInterval)duration;
 
+
 /**
  * Return a touch in a real coordinate space.
  */

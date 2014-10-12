@@ -12,6 +12,7 @@
 @interface FRYTouchEventLog()
 
 @property (strong, nonatomic) NSArray *pointsInTime;
+@property (assign, nonatomic) BOOL translatedIntoView;
 
 @end
 
@@ -40,53 +41,32 @@
 - (void)translateTouchesIntoViewCoordinates:(UIView *)view
 {
     for ( FRYPointInTime *pointInTime in self.pointsInTime ) {
-        pointInTime.location = [view.window convertPoint:pointInTime.location toView:view];
+        CGPoint convertedLocation = [view.window convertPoint:pointInTime.location toView:view];
+        pointInTime.location = CGPointMake(convertedLocation.x / view.frame.size.width, convertedLocation.y / view.frame.size.height);
     }
+    self.translatedIntoView = YES;
 }
 
 - (NSString *)recreationCode
 {
     return [NSString stringWithFormat:@"\
-            [[FRY shared] simulateTouch:[FRYSyntheticTouch touchStarting:%f\n\
-                                                              X:%@\n\
-                                                              Y:%@\n\
-                                                              offsets:%@]\n\
-                                                              matchingView:%@]\n",
+            [[FRY shared] simulateTouch:[%@ touchStarting:%f\n\
+                                                   points:%zd\n\
+                                                xyoffsets:%@]\n\
+                           matchingView:%@];\n",
+            self.translatedIntoView ? @"FRYSyntheticTouch" : @"FRYRecordedTouch",
             self.startingOffset,
-            [self recreationCodePointsXArgument],
-            [self recreationCodePointsYArgument],
-            [self recreationCodeOffsetsArgument],
+            self.pointsInTime.count,
+            [self recreationCodeXyoffsetsArgument],
             [self recreationCodeViewLookupVariables]];
 }
 
-- (NSString *)recreationCodePointsXArgument
+- (NSString *)recreationCodeXyoffsetsArgument
 {
     NSMutableArray *xPoints = [NSMutableArray arrayWithCapacity:self.pointsInTime.count];
     [self.pointsInTime enumerateObjectsUsingBlock:^(FRYPointInTime *pointInTime, NSUInteger idx, BOOL *stop) {
-        [xPoints addObject:@(pointInTime.location.x)];
+        [xPoints addObject:[NSString stringWithFormat:@"%.3f,%.3f,%.3f", pointInTime.location.x, pointInTime.location.y, pointInTime.offset - self.startingOffset]];
     }];
-    [xPoints addObject:@"nil"];
-    return [xPoints componentsJoinedByString:@", "];
-}
-
-- (NSString *)recreationCodePointsYArgument
-{
-    NSMutableArray *xPoints = [NSMutableArray arrayWithCapacity:self.pointsInTime.count];
-    [self.pointsInTime enumerateObjectsUsingBlock:^(FRYPointInTime *pointInTime, NSUInteger idx, BOOL *stop) {
-        [xPoints addObject:@(pointInTime.location.y)];
-    }];
-    [xPoints addObject:@"nil"];
-    return [xPoints componentsJoinedByString:@", "];
-}
-
-
-- (NSString *)recreationCodeOffsetsArgument
-{
-    NSMutableArray *xPoints = [NSMutableArray arrayWithCapacity:self.pointsInTime.count];
-    [self.pointsInTime enumerateObjectsUsingBlock:^(FRYPointInTime *pointInTime, NSUInteger idx, BOOL *stop) {
-        [xPoints addObject:@(pointInTime.offset)];
-    }];
-    [xPoints addObject:@"nil"];
     return [xPoints componentsJoinedByString:@", "];
 }
 

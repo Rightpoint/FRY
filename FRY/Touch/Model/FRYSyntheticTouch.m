@@ -69,6 +69,7 @@
 - (FRYSimulatedTouch *)touchInFrame:(CGRect)frame
 {
     FRYSimulatedTouch *touch = [[FRYSimulatedTouch alloc] init];
+    touch.startingOffset = self.startingOffset;
     for ( FRYPointInTime *pit in self.pointsInTime ) {
         CGPoint location = CGPointMake(pit.location.x * frame.size.width + frame.origin.x,
                                        pit.location.y * frame.size.height + frame.origin.y);

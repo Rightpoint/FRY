@@ -84,6 +84,7 @@
         if ( touch.phase == UITouchPhaseBegan ) {
             log = [[FRYTouchEventLog alloc] init];
             log.startingOffset = relativeTouchTime;
+            log.viewLookupVariables = [touch.view fry_matchingLookupVariables];
             [self.activeTouchLog setObject:log forKey:touch];
         }
         else {
@@ -93,8 +94,11 @@
         [log addLocation:location atRelativeTime:relativeTouchTime];
         
         if ( touch.phase == UITouchPhaseEnded || touch.phase == UITouchPhaseCancelled ) {
-            if ( touch.view ) {
-                log.viewLookupVariables = [touch.view fry_matchingLookupVariables];
+            if ( touch.view == nil ) {
+                // Discard the lookup variables if the touch left the view.
+                log.viewLookupVariables = nil;
+            }
+            if ( touch.view && log.viewLookupVariables ) {
                 [log translateTouchesIntoViewCoordinates:touch.view];
             }
             [self.touchDefinitions addObject:[self.activeTouchLog objectForKey:touch]];
@@ -106,7 +110,7 @@
 - (void)printTouchLogOnResign
 {
     for ( FRYTouchEventLog *log in self.touchDefinitions ) {
-        NSLog(@"%@", [log recreationCode]);
+        printf("%s\n", [[log recreationCode] UTF8String]);
     }
 }
 

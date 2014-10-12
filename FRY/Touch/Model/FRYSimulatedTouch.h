@@ -17,6 +17,10 @@
  */
 @interface FRYSimulatedTouch : NSObject <NSCopying>
 
++ (FRYSimulatedTouch *)touchStarting:(NSTimeInterval)startingOffset points:(NSUInteger)points xyoffsets:(double)xYorOffset, ...;
+
+@property (assign, nonatomic, readonly) NSTimeInterval startingOffset;
+
 /**
  * The touch duration.
  */

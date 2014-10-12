@@ -11,6 +11,8 @@
 #import "FRY.h"
 #import "FRYLookupResult.h"
 #import "NSRunLoop+FRY.h"
+#import "FRYSimulatedTouch.h"
+#import "FRYRecordedTouch.h"
 
 @interface Test_HostTests : XCTestCase
 
@@ -118,4 +120,24 @@
     [[NSRunLoop currentRunLoop] fry_runUntilEventsLookupsAndAnimationsAreComplete];
 
 }
+
+
+- (void)testRecording
+{
+    [[FRY shared] simulateTouch:[FRYSyntheticTouch touchStarting:0
+                                                          points:2
+                                                       xyoffsets:0.344,0.701,0.000, 0.344,0.701,0.104]
+                   matchingView:@{@"accessibilityLabel" : @"Tapping"}];
+    
+    [[NSRunLoop currentRunLoop] fry_runUntilEventsLookupsAndAnimationsAreComplete];
+
+    [[FRY shared] simulateTouch:[FRYRecordedTouch touchStarting:1.5
+                                                         points:2
+                                                      xyoffsets:62.500,48.000,0.000, 62.500,48.000,0.080]
+                   matchingView:nil];
+    
+    [[NSRunLoop currentRunLoop] fry_runUntilEventsLookupsAndAnimationsAreComplete];
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:5]];
+}
+
 @end

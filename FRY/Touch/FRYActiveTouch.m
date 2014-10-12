@@ -17,6 +17,7 @@ static CGFloat FRYDistanceBetweenPoints(CGPoint p1, CGPoint p2) {
     CGFloat distance = sqrt((xDist * xDist) + (yDist * yDist));
     return distance;
 }
+static NSUInteger const kFRYTouchPhaseUndefined = -1;
 
 @interface FRYActiveTouch()
 
@@ -44,13 +45,15 @@ static CGFloat FRYDistanceBetweenPoints(CGPoint p1, CGPoint p2) {
 
 - (UITouchPhase)currentTouchPhase
 {
-    NSParameterAssert(self.currentTouch);
-    return self.currentTouch.phase;
+    return self.currentTouch ? self.currentTouch.phase : kFRYTouchPhaseUndefined;
 }
 
 
 - (UITouch *)touchAtTime:(NSTimeInterval)currentTime
 {
+    if ( currentTime - self.startTime < self.touchDefinition.startingOffset ) {
+        return nil;
+    }
     NSTimeInterval relativeTime = currentTime - self.startTime;
     CGPoint windowPoint = [self.touchDefinition pointAtRelativeTime:relativeTime];
 
