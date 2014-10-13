@@ -61,11 +61,10 @@
     self.touchDefinitions = nil;
     self.activeTouchLog = nil;
     self.startTime = MAXFLOAT;
-    // This is wishful, and does not work.   I am wishful and would like it to, so ima gonna leave it here.
-    [FRYMethodSwizzling exchangeClass:[self class]
-                               method:@selector(fry_sendEvent:)
-                            withClass:[UIApplication class]
-                               method:@selector(sendEvent:)];
+    [FRYMethodSwizzling exchangeClass:[UIApplication class]
+                               method:@selector(sendEvent:)
+                            withClass:[self class]
+                               method:@selector(fry_sendEvent:)];
 }
 
 - (void)fry_sendEvent:(UIEvent *)event
