@@ -53,24 +53,29 @@
 
 - (CGPoint)pointAtRelativeTime:(NSTimeInterval)relativeTime
 {
+    relativeTime -= self.startingOffset;
     // don't over-translate, max out the relative time to the duration.
     relativeTime = MIN(relativeTime, self.duration);
     
-    __block FRYPointInTime *lastPit = nil;
-    __block CGPoint result = CGPointZero;
+    __block FRYPointInTime *beforePit = [self.pointsInTime objectAtIndex:0];
+    __block FRYPointInTime *afterPit  = [self.pointsInTime lastObject];
+
     [self.pointsInTime enumerateObjectsUsingBlock:^(FRYPointInTime *pit, NSUInteger idx, BOOL *stop) {
-        if ( pit.offset <= relativeTime ) {
-            NSTimeInterval gapInterval = pit.offset;
-            NSTimeInterval interPointInterval = relativeTime;
-            if ( lastPit ) {
-                gapInterval -= lastPit.offset;
-                interPointInterval -= lastPit.offset;
-            }
-            CGFloat timeTranslate = gapInterval == 0 ? 1 : interPointInterval / gapInterval;
-            result = CGPointMake(pit.location.x * timeTranslate, pit.location.y * timeTranslate);
+        if ( beforePit.offset <= relativeTime &&  pit.offset > relativeTime ) {
+            afterPit = pit;
+            *stop = YES;
         }
-        lastPit = pit;
+        else {
+            beforePit = pit;
+        }
     }];
+    NSTimeInterval gapInterval = afterPit.offset - beforePit.offset;
+    NSTimeInterval interPointInterval = relativeTime - beforePit.offset;
+    CGSize pointDifference = CGSizeMake(afterPit.location.x - beforePit.location.x, afterPit.location.y - beforePit.location.y);
+    CGFloat timeTranslate = interPointInterval / gapInterval;
+    
+    CGPoint result = CGPointMake(afterPit.location.x + (pointDifference.width * timeTranslate),
+                                 afterPit.location.y + (pointDifference.height * timeTranslate));
     return result;
 }
 

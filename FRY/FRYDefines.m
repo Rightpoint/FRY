@@ -9,7 +9,7 @@
 #import "FRYDefines.h"
 #import <CommonCrypto/CommonCrypto.h>
 
-NSTimeInterval const kFRYEventDispatchInterval = 0.1;
+NSTimeInterval const kFRYEventDispatchInterval = 0.01;
 
 NSString *FRYMD5String(NSString *input)
 {
