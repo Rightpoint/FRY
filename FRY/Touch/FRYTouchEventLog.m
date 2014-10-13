@@ -50,10 +50,10 @@
 - (NSString *)recreationCode
 {
     return [NSString stringWithFormat:@"\
-            [[FRY shared] simulateTouch:[%@ touchStarting:%.3f\n\
-                                                                   points:%zd\n\
-                                                                xyoffsets:%@]\n\
-                           matchingView:%@];\n",
+[[FRY shared] simulateTouch:[%@ touchStarting:%.3f\n\
+                                                      points:%zd\n\
+                                                   xyoffsets:%@]\n\
+               matchingView:%@];\n",
             self.translatedIntoView ? @"FRYSyntheticTouch" : @"FRYRecordedTouch",
             self.startingOffset,
             self.pointsInTime.count,
