@@ -12,7 +12,7 @@
  * A synthetic touch is a touch to be created programatically.  It is oblivious to absolute coordinate space.
  *
  * The coordinate system for a synthetic touch is x(0-1), y(0-1).   This defines
- * a relative touch which is then extrapolated into a frame with 'touchInFrame:' before use.
+ * a relative touch which is then interpolated into a frame with 'touchInFrame:' before use.
  */
 @interface FRYSyntheticTouch : FRYSimulatedTouch
 

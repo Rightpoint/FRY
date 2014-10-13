@@ -9,7 +9,6 @@
 #import "FRYEventMonitor.h"
 #import "FRYMethodSwizzling.h"
 #import "UIKit+FRYExposePrivate.h"
-#import "FRYRecordedTouch.h"
 #import "FRYTouchEventLog.h"
 #import "UIView+FRY.h"
 #import "UITouch+FRY.h"

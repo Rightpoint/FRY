@@ -50,9 +50,9 @@
 - (NSString *)recreationCode
 {
     return [NSString stringWithFormat:@"\
-            [[FRY shared] simulateTouch:[%@ touchStarting:%f\n\
-                                                   points:%zd\n\
-                                                xyoffsets:%@]\n\
+            [[FRY shared] simulateTouch:[%@ touchStarting:%.3f\n\
+                                                                   points:%zd\n\
+                                                                xyoffsets:%@]\n\
                            matchingView:%@];\n",
             self.translatedIntoView ? @"FRYSyntheticTouch" : @"FRYRecordedTouch",
             self.startingOffset,
@@ -65,7 +65,7 @@
 {
     NSMutableArray *xPoints = [NSMutableArray arrayWithCapacity:self.pointsInTime.count];
     [self.pointsInTime enumerateObjectsUsingBlock:^(FRYPointInTime *pointInTime, NSUInteger idx, BOOL *stop) {
-        [xPoints addObject:[NSString stringWithFormat:@"%.3f,%.3f,%.3f", pointInTime.location.x, pointInTime.location.y, pointInTime.offset - self.startingOffset]];
+        [xPoints addObject:[NSString stringWithFormat:@"%.3ff,%.3ff,%.3f", pointInTime.location.x, pointInTime.location.y, pointInTime.offset - self.startingOffset]];
     }];
     return [xPoints componentsJoinedByString:@", "];
 }
