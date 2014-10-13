@@ -51,10 +51,12 @@ static NSUInteger const kFRYTouchPhaseUndefined = -1;
 
 - (UITouch *)touchAtTime:(NSTimeInterval)currentTime
 {
-    if ( currentTime - self.startTime < self.touchDefinition.startingOffset ) {
+
+    NSTimeInterval relativeTime = currentTime - self.startTime;
+
+    if ( relativeTime < self.touchDefinition.startingOffset ) {
         return nil;
     }
-    NSTimeInterval relativeTime = currentTime - self.startTime;
     CGPoint windowPoint = [self.touchDefinition pointAtRelativeTime:relativeTime];
 
     if ( self.currentTouch == nil ) {
@@ -62,7 +64,7 @@ static NSUInteger const kFRYTouchPhaseUndefined = -1;
     }
     else {
         [self.currentTouch setLocationInWindow:windowPoint];
-        if ( relativeTime < [self.touchDefinition duration] ) {
+        if ( relativeTime < [self.touchDefinition duration] + self.touchDefinition.startingOffset) {
             if ( FRYDistanceBetweenPoints(windowPoint, self.lastPointInWindow) > 1.0f ) {
                 if ( CGRectContainsPoint(self.view.window.frame, windowPoint) ) {
                     [self.currentTouch setPhaseAndUpdateTimestamp:UITouchPhaseMoved];

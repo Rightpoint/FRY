@@ -57,8 +57,9 @@
     // don't over-translate, max out the relative time to the duration.
     relativeTime = MIN(relativeTime, self.duration);
     
+            FRYPointInTime *lastPit   = [self.pointsInTime lastObject];
     __block FRYPointInTime *beforePit = [self.pointsInTime objectAtIndex:0];
-    __block FRYPointInTime *afterPit  = [self.pointsInTime lastObject];
+    __block FRYPointInTime *afterPit  = lastPit;
 
     [self.pointsInTime enumerateObjectsUsingBlock:^(FRYPointInTime *pit, NSUInteger idx, BOOL *stop) {
         if ( beforePit.offset <= relativeTime &&  pit.offset > relativeTime ) {
@@ -76,6 +77,9 @@
     
     CGPoint result = CGPointMake(afterPit.location.x + (pointDifference.width * timeTranslate),
                                  afterPit.location.y + (pointDifference.height * timeTranslate));
+    if (isnan(result.x) || isnan(result.y)) {
+        result = lastPit.location;
+    }
     return result;
 }
 
