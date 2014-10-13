@@ -59,6 +59,13 @@ To playback the recorded touches, create a new test in your unit test framework,
 
 **NOTE:** I'm still looking for ideas of how to better integrate this.
 
+# Installation
+
+Add FRY to your Podfile to install.   If you want to use touch recording, add FRY to your application target, otherwise add FRY to your test target.
+
+```
+   pod 'FRY', :git => 'git@github.com:Raizlabs/FRY.git'
+```
 
 # Design Goals
 
