@@ -11,9 +11,10 @@
 #import "UIAccessibility+FRY.h"
 #import "UIAccessibilityElement+FRY.h"
 
-NSString* const kFRYLookupAccessibilityValue = @"accessibilityValue";
-NSString* const kFRYLookupAccessibilityLabel = @"accessibilityLabel";
-NSString* const kFRYLookupAccessibilityTrait = @"accessibilityTrait";
+NSString* const kFRYLookupAccessibilityIdentifier = @"accessibilityIdentifier";
+NSString* const kFRYLookupAccessibilityValue      = @"accessibilityValue";
+NSString* const kFRYLookupAccessibilityLabel      = @"accessibilityLabel";
+NSString* const kFRYLookupAccessibilityTrait      = @"accessibilityTrait";
 
 @implementation NSObject(FRYLookupSupport)
 
@@ -28,12 +29,14 @@ NSString* const kFRYLookupAccessibilityTrait = @"accessibilityTrait";
 
 + (NSPredicate *)fry_accessibilityPredicate
 {
-    return [NSPredicate predicateWithBlock:^BOOL(NSObject *object, NSDictionary *bindings) {
-        NSString *accessibilityLabel = bindings[kFRYLookupAccessibilityLabel];
-        NSString *accessibilityValue = bindings[kFRYLookupAccessibilityValue];
+    return [NSPredicate predicateWithBlock:^BOOL(NSObject<UIAccessibilityIdentification> *object, NSDictionary *bindings) {
+        NSString *accessibilityIdentifier         =  bindings[kFRYLookupAccessibilityIdentifier];
+        NSString *accessibilityLabel              =  bindings[kFRYLookupAccessibilityLabel];
+        NSString *accessibilityValue              =  bindings[kFRYLookupAccessibilityValue];
         UIAccessibilityTraits accessibilityTraits = [bindings[kFRYLookupAccessibilityTrait] integerValue];
-        return ((accessibilityLabel == nil || [[object fry_accessibilityLabel] isEqualToString:accessibilityLabel]) &&
-                (accessibilityValue == nil || [[object fry_accessibilityValue] isEqualToString:accessibilityValue]) &&
+        return ((accessibilityIdentifier == nil || [[object accessibilityIdentifier] isEqualToString:accessibilityLabel]) &&
+                (accessibilityLabel      == nil || [[object fry_accessibilityLabel] isEqualToString:accessibilityLabel]) &&
+                (accessibilityValue      == nil || [[object fry_accessibilityValue] isEqualToString:accessibilityValue]) &&
                 ([object accessibilityTraits] & accessibilityTraits) == accessibilityTraits );
     }];
 }

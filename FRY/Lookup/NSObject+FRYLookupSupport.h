@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FRYLookupSupport.h"
 
-
+OBJC_EXTERN NSString* const kFRYLookupAccessibilityIdentifier;
 OBJC_EXTERN NSString* const kFRYLookupAccessibilityLabel;
 OBJC_EXTERN NSString* const kFRYLookupAccessibilityValue;
 OBJC_EXTERN NSString* const kFRYLookupAccessibilityTrait;
