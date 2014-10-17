@@ -72,13 +72,12 @@
 
 - (NSString *)recreationCodeViewLookupVariables
 {
-    NSMutableString *result = [NSMutableString stringWithString:@"@{"];
+    NSMutableArray *keyPairs = [NSMutableArray array];
     [self.viewLookupVariables enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
-        [result appendFormat:@"@\"%@\" : @\"%@\"", key, obj];
+        [keyPairs addObject:[NSString stringWithFormat:@"@\"%@\" : @\"%@\"", key, obj]];
     }];
-    [result appendString:@"}"];
     if ( self.viewLookupVariables ) {
-        return [result copy];
+        return [NSString stringWithFormat:@"@{%@}", [keyPairs componentsJoinedByString:@", "]];
     }
     else {
         return @"nil";
