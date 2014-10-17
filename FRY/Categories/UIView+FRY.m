@@ -42,6 +42,11 @@
     }
 }
 
+- (UIView *)fry_lookupMatchingViewAtPoint:(CGPoint)point
+{
+    return [self hitTest:point withEvent:nil];
+}
+
 @end
 
 @implementation UIActivityIndicatorView(FRY)
@@ -49,6 +54,24 @@
 - (BOOL)fry_hasAnimationToWaitFor
 {
     return NO;
+}
+
+@end
+
+@implementation UINavigationBar(FRY)
+
+- (UIView *)fry_lookupMatchingViewAtPoint:(CGPoint)point
+{
+    if ([self pointInside:point withEvent:nil]) {
+        for (UIView *subview in [self.subviews reverseObjectEnumerator]) {
+            CGPoint convertedPoint = [subview convertPoint:point fromView:self];
+            if ( [subview pointInside:convertedPoint withEvent:nil] ) {
+                return subview;
+            }
+        }
+        return self;
+    }
+    return nil;
 }
 
 @end

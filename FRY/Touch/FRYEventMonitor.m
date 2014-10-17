@@ -82,7 +82,9 @@
         if ( touch.phase == UITouchPhaseBegan ) {
             log = [[FRYTouchEventLog alloc] init];
             log.startingOffset = relativeTouchTime;
-            log.viewLookupVariables = [touch.view fry_matchingLookupVariables];
+            CGPoint locationInView = [touch locationInView:touch.view];
+            UIView *matchingView = [touch.view fry_lookupMatchingViewAtPoint:locationInView];
+            log.viewLookupVariables = [matchingView fry_matchingLookupVariables];
             [self.activeTouchLog setObject:log forKey:touch];
         }
         else {
