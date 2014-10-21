@@ -47,7 +47,7 @@
 		AB35FD6019E4E4E900228531 /* TestSuiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD5019E4E4E900228531 /* TestSuiteViewController.m */; };
 		AB35FD6219E4E54F00228531 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB35FD6119E4E54F00228531 /* UIKit.framework */; };
 		AB35FD7A19E58B5C00228531 /* FRYMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD6819E4ED6100228531 /* FRYMethodSwizzling.m */; };
-		AB35FD7F19E58B6B00228531 /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03C19DF95AA00038E75 /* libFRY.a */; };
+		AB4936F319F69AEE00A6F297 /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03C19DF95AA00038E75 /* libFRY.a */; };
 		ABA5781919E64AE600D77CDA /* FRYLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781119E64AE600D77CDA /* FRYLookup.m */; };
 		ABA5781A19E64AE600D77CDA /* FRYLookupResult.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781319E64AE600D77CDA /* FRYLookupResult.m */; };
 		ABA5781C19E64AE600D77CDA /* NSObject+FRYLookupSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781819E64AE600D77CDA /* NSObject+FRYLookupSupport.m */; };
@@ -191,7 +191,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB35FD7F19E58B6B00228531 /* libFRY.a in Frameworks */,
+				AB4936F319F69AEE00A6F297 /* libFRY.a in Frameworks */,
 				AB35FD6219E4E54F00228531 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

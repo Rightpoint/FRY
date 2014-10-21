@@ -118,6 +118,17 @@
     }
 }
 
+- (void)replaceTextWithString:(NSString *)string intoView:(UIView *)view
+{
+    NSAssert([view conformsToProtocol:@protocol(UITextInput)], @"%@ does not conform to UITextInput", view);
+    UIView<UITextInput> *inputView = (id)view;
+    
+    UITextPosition *begin = inputView.beginningOfDocument;
+    UITextPosition *end   = inputView.endOfDocument;
+    UITextRange *allText  = [inputView textRangeFromPosition:begin toPosition:end];
+    [inputView replaceRange:allText withText:string];
+}
+
 - (void)addTouch:(FRYSimulatedTouch *)touch inView:(UIView *)view
 {
     NSTimeInterval startTime = [NSDate timeIntervalSinceReferenceDate];

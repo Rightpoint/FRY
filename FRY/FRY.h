@@ -31,6 +31,8 @@
 - (void)findViewsMatching:(NSDictionary *)lookupVariables whenFound:(FRYInteractionBlock)foundBlock;
 - (void)findViewsMatching:(NSDictionary *)lookupVariables inTargetWindow:(FRYTargetWindow)targetWindow whenFound:(FRYInteractionBlock)foundBlock;
 
+- (void)replaceTextWithString:(NSString *)string intoView:(UIView /*<UITextInput>*/ *)view;
+
 /**
  * Check to see if there are any active touches
  */
