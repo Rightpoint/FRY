@@ -11,7 +11,7 @@
 
 @implementation UIView (FRY)
 
-- (BOOL)fry_hasAnimationToWaitFor
+- (UIView *)fry_animatingViewToWaitFor
 {
     NSTimeInterval uptime = [[NSProcessInfo processInfo] systemUptime];
     BOOL isAnimating = NO;
@@ -21,23 +21,22 @@
         NSTimeInterval animationEnd = animation.beginTime + animation.duration + animation.timeOffset;
 
         if ( [animation.fillMode isEqualToString:kCAFillModeRemoved] ) {
-            NSLog(@"Animating = %@ (To be removed)", animation);
             isAnimating = YES;
         }
         else if ( animationEnd > uptime ) {
-            NSLog(@"Animating = %@ (Will End)", animation);
             isAnimating = YES;
         }
     }
     if ( isAnimating ) {
-        return YES;
+        return self;
     }
     for ( UIView *subview in self.subviews ) {
-        if ( [subview fry_hasAnimationToWaitFor] ) {
-            return YES;
+        UIView *animatingSubview = [subview fry_animatingViewToWaitFor];
+        if ( animatingSubview ) {
+            return animatingSubview;
         }
     }
-    return NO;
+    return nil;
 }
 
 - (NSDictionary *)fry_matchingLookupVariables
@@ -71,9 +70,9 @@
 
 @implementation UIActivityIndicatorView(FRY)
 
-- (BOOL)fry_hasAnimationToWaitFor
+- (UIView *)fry_animatingViewToWaitFor
 {
-    return NO;
+    return nil;
 }
 
 @end

@@ -165,27 +165,29 @@
     }
 }
 
-- (BOOL)hasAnimationToWaitFor
+- (UIView *)animatingViewToWaitFor
 {
-    return [self hasAnimationToWaitForInTargetWindow:FRYTargetWindowKey];
+    return [self animatingViewToWaitForInTargetWindow:FRYTargetWindowKey];
 }
 
-- (BOOL)hasAnimationToWaitForInTargetWindow:(FRYTargetWindow)targetWindow
+- (UIView *)animatingViewToWaitForInTargetWindow:(FRYTargetWindow)targetWindow
 {
-    __block BOOL animation = NO;
+    __block UIView *animatingView = nil;
     if ( [NSThread isMainThread] ) {
         for ( UIWindow *window in [self.application fry_targetWindowsOfType:targetWindow] ) {
-            if ( [window fry_hasAnimationToWaitFor] ) {
-                animation = YES;
+            UIView *animatingViewInWindow = [window fry_animatingViewToWaitFor];
+            if ( animatingViewInWindow ) {
+                animatingView = animatingViewInWindow;
+                break;
             }
         }
     }
     else {
         dispatch_sync(dispatch_get_main_queue(), ^{
-            animation = [self hasAnimationToWaitForInTargetWindow:targetWindow];
+            animatingView = [self animatingViewToWaitForInTargetWindow:targetWindow];
         });
     }
-    return animation;
+    return animatingView;
 }
 
 
@@ -230,7 +232,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@:%p touches=%@, lookups=%@, animating=%@", self.class, self, self.activeTouches, self.activeInteractions, self.hasAnimationToWaitFor ? @"Waiting" : @"Ready"];
+    return [NSString stringWithFormat:@"<%@:%p touches=%@, lookups=%@, animating=%@", self.class, self, self.activeTouches, self.activeInteractions, self.animatingViewToWaitFor ? @"Waiting" : @"Ready"];
 }
 
 @end
@@ -247,7 +249,7 @@
     }
     NSMutableArray *completedInteractions = [NSMutableArray array];
     for ( FRYInteraction *interaction in activeInteractions ) {
-        if ( [self hasAnimationToWaitForInTargetWindow:interaction.targetWindow] ) {
+        if ( [self animatingViewToWaitForInTargetWindow:interaction.targetWindow] ) {
             continue;
         }
                 

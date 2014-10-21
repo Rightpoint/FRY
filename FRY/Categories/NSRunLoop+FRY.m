@@ -22,7 +22,7 @@ static NSTimeInterval const kFRYRunLoopDefaultTimeout = 5.0;
     NSTimeInterval start = [NSDate timeIntervalSinceReferenceDate];
     while ( ([[FRY shared] hasActiveTouches] ||
              [[FRY shared] hasActiveInteractions] ||
-             [[FRY shared] hasAnimationToWaitForInTargetWindow:FRYTargetWindowAll]) &&
+             [[FRY shared] animatingViewToWaitForInTargetWindow:FRYTargetWindowAll]) &&
            start + timeout > [NSDate timeIntervalSinceReferenceDate] )
     {
         [[FRY shared] performAllLookups];

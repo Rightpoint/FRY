@@ -10,7 +10,7 @@
 
 @interface UIView (FRY)
 
-- (BOOL)fry_hasAnimationToWaitFor;
+- (UIView *)fry_animatingViewToWaitFor;
 
 - (NSDictionary *)fry_matchingLookupVariables;
 
