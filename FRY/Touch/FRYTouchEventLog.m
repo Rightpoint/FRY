@@ -55,7 +55,7 @@
                                                    xyoffsets:%@]\n\
                matchingView:%@];\n",
             self.translatedIntoView ? @"FRYSyntheticTouch" : @"FRYRecordedTouch",
-            self.startingOffset,
+            0.0,
             self.pointsInTime.count,
             [self recreationCodeXyoffsetsArgument],
             [self recreationCodeViewLookupVariables]];

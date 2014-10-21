@@ -217,6 +217,11 @@
     }
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@:%p touches=%@, lookups=%@, animating=%@", self.class, self, self.activeTouches, self.activeInteractions, self.hasAnimationToWaitFor ? @"Waiting" : @"Ready"];
+}
+
 @end
 
 @implementation FRY(Dispatch)

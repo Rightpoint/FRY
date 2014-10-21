@@ -111,6 +111,7 @@
 {
     for ( FRYTouchEventLog *log in self.touchDefinitions ) {
         printf("%s\n", [[log recreationCode] UTF8String]);
+        printf("[[NSRunLoop currentRunLoop] fry_runUntilEventsLookupsAndAnimationsAreComplete];\n");
     }
 }
 

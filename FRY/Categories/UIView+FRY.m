@@ -13,7 +13,23 @@
 
 - (BOOL)fry_hasAnimationToWaitFor
 {
-    if ( self.layer.animationKeys != nil && self.subviews.count > 0) {
+    NSTimeInterval uptime = [[NSProcessInfo processInfo] systemUptime];
+    BOOL isAnimating = NO;
+    
+    for (NSString *animationKey in self.layer.animationKeys ) {
+        CAAnimation *animation = [self.layer animationForKey:animationKey];
+        NSTimeInterval animationEnd = animation.beginTime + animation.duration + animation.timeOffset;
+
+        if ( [animation.fillMode isEqualToString:kCAFillModeRemoved] ) {
+            NSLog(@"Animating = %@ (To be removed)", animation);
+            isAnimating = YES;
+        }
+        else if ( animationEnd > uptime ) {
+            NSLog(@"Animating = %@ (Will End)", animation);
+            isAnimating = YES;
+        }
+    }
+    if ( isAnimating ) {
         return YES;
     }
     for ( UIView *subview in self.subviews ) {
@@ -26,12 +42,16 @@
 
 - (NSDictionary *)fry_matchingLookupVariables
 {
-    NSMutableDictionary *variables = [NSMutableDictionary dictionary];
-    if ( self.accessibilityLabel ) {
-        variables[kFRYLookupAccessibilityLabel] = self.accessibilityLabel;
+    UIView *view = self;
+    while ( view && view.accessibilityLabel == nil ) {
+        view = view.superview;
     }
-    if ( self.accessibilityValue ) {
-        variables[kFRYLookupAccessibilityValue] = self.accessibilityValue;
+    NSMutableDictionary *variables = [NSMutableDictionary dictionary];
+    if ( view.accessibilityLabel ) {
+        variables[kFRYLookupAccessibilityLabel] = view.accessibilityLabel;
+    }
+    if ( view.accessibilityValue ) {
+        variables[kFRYLookupAccessibilityValue] = view.accessibilityValue;
     }
 
     if ( variables.count > 0 ) {
