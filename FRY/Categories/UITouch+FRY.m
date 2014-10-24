@@ -8,6 +8,8 @@
 
 #import "UITouch+FRY.h"
 
+@import ObjectiveC.runtime;
+
 typedef struct {
     unsigned int _firstTouchForView:1;
     unsigned int _isTap:1;
@@ -15,6 +17,9 @@ typedef struct {
     unsigned int _sentTouchesEnded:1;
     unsigned int _abandonForwardingRecord:1;
 } UITouchFlags;
+
+static const void *FRYUITouchViewWhereTouchBegan = &FRYUITouchViewWhereTouchBegan;
+
 
 @interface UITouch ()
 
@@ -35,6 +40,7 @@ typedef struct {
 
 - (id)initAtPoint:(CGPoint)point inWindow:(UIWindow *)window;
 {
+    NSParameterAssert(window);
     self = [super init];
     if ( self ) {
         // Wipes out some values.  Needs to be first.
@@ -44,16 +50,16 @@ typedef struct {
         [self setTapCount:1];
         [self _setLocationInWindow:point resetPrevious:YES];
         
-        UIView *hitTestView = [window hitTest:point withEvent:nil];
-    
-        [self setView:hitTestView];
+        UIView *viewWhereTouchBegan = [window hitTest:point withEvent:nil];
+        self.fry_viewWhereTouchBegan = viewWhereTouchBegan;
+        [self setView:viewWhereTouchBegan];
         [self setPhase:UITouchPhaseBegan];
         [self _setIsFirstTouchForView:YES];
         [self setIsTap:YES];
         [self setTimestamp:[[NSProcessInfo processInfo] systemUptime]];
         
         if ([self respondsToSelector:@selector(setGestureView:)]) {
-            [self setGestureView:hitTestView];
+            [self setGestureView:viewWhereTouchBegan];
         }
     }
     
@@ -82,6 +88,16 @@ typedef struct {
     NSParameterAssert(self.view);
     CGPoint location = [self locationInView:self.view];
     return CGPointMake(location.x / self.view.frame.size.width, location.y / self.view.frame.size.height);
+}
+
+- (UIView *)fry_viewWhereTouchBegan
+{
+    return objc_getAssociatedObject(self, &FRYUITouchViewWhereTouchBegan);
+}
+
+- (void)setFry_viewWhereTouchBegan:(UIView *)fry_viewWhereTouchBegan
+{
+    objc_setAssociatedObject(self, &FRYUITouchViewWhereTouchBegan, fry_viewWhereTouchBegan, OBJC_ASSOCIATION_RETAIN);
 }
 
 @end

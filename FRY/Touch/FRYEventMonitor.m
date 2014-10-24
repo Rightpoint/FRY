@@ -19,6 +19,7 @@
 @property (strong, nonatomic) NSMutableArray *touchDefinitions;
 
 @property (strong, nonatomic) NSMapTable *activeTouchLog;
+@property (strong, nonatomic) NSMapTable *touchBeganOnViews;
 
 @end
 
@@ -48,6 +49,7 @@
     self.startTime = [[NSProcessInfo processInfo] systemUptime];
     self.touchDefinitions = [NSMutableArray array];
     self.activeTouchLog = [NSMapTable weakToStrongObjectsMapTable];
+    self.touchBeganOnViews = [NSMapTable weakToStrongObjectsMapTable];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(printTouchLogOnResign)
@@ -86,6 +88,7 @@
             UIView *matchingView = [touch.view fry_lookupMatchingViewAtPoint:locationInView];
             log.viewLookupVariables = [matchingView fry_matchingLookupVariables];
             [self.activeTouchLog setObject:log forKey:touch];
+            [self.touchBeganOnViews setObject:touch.view forKey:touch];
         }
         else {
             log = [self.activeTouchLog objectForKey:touch];
@@ -94,8 +97,10 @@
         [log addLocation:location atRelativeTime:relativeTouchTime];
         
         if ( touch.phase == UITouchPhaseEnded || touch.phase == UITouchPhaseCancelled ) {
-            if ( touch.view == nil ) {
-                // Discard the lookup variables if the touch left the view.
+            UIView *touchedView = [self.touchBeganOnViews objectForKey:touch];
+            // Discard the lookup variables if the touch left the view and the view wasn't made first responder.
+            // the first responder check was added because touching a UITextField caused the touches view to disappear.
+            if ( touch.view == nil && [touchedView isFirstResponder] == NO ) {
                 log.viewLookupVariables = nil;
             }
             if ( touch.view && log.viewLookupVariables ) {
@@ -103,6 +108,7 @@
             }
             [self.touchDefinitions addObject:[self.activeTouchLog objectForKey:touch]];
             [self.activeTouchLog removeObjectForKey:touch];
+            [self.touchBeganOnViews removeObjectForKey:touch];
         }
     }
 }

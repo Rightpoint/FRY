@@ -18,4 +18,9 @@
 
 - (CGPoint)fry_locationRelativeToView;
 
+/**
+ * The view where the touch began can be nil'd out.   Hold on to the view.
+ */
+@property(strong, nonatomic) UIView *fry_viewWhereTouchBegan;
+
 @end

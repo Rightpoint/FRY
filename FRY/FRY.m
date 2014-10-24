@@ -14,6 +14,7 @@
 #import "FRYLookupSupport.h"
 #import "FRYLookupResult.h"
 #import "UIView+FRY.h"
+#import "UITouch+FRY.h"
 
 @interface FRY()
 
@@ -120,7 +121,10 @@
 
 - (void)replaceTextWithString:(NSString *)string intoView:(UIView *)view
 {
-    NSAssert([view conformsToProtocol:@protocol(UITextInput)], @"%@ does not conform to UITextInput", view);
+    while ( view && [view conformsToProtocol:@protocol(UITextInput)] == NO ) {
+        view = view.superview;
+    }
+    NSAssert(view, @"Could not find view conforming to UITextInput");
     UIView<UITextInput> *inputView = (id)view;
     
     UITextPosition *begin = inputView.beginningOfDocument;
@@ -282,8 +286,8 @@
         [self.application sendEvent:nextEvent];
         
         for ( UITouch *touch in nextEvent.allTouches ) {
-            if ( touch.phase == UITouchPhaseEnded && [touch.view canBecomeFirstResponder] ) {
-                [touch.view becomeFirstResponder];
+            if ( touch.phase == UITouchPhaseEnded && [touch.fry_viewWhereTouchBegan canBecomeFirstResponder] ) {
+                [touch.fry_viewWhereTouchBegan becomeFirstResponder];
             }
         }
     }

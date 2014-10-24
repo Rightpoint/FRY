@@ -12,6 +12,9 @@
 #import "FRYSyntheticTouch.h"
 #import "NSObject+FRYLookupSupport.h"
 
+#import "FRYRecordedTouch.h"
+#import "NSRunLoop+FRY.h"
+
 
 @interface FRY : NSObject
 
