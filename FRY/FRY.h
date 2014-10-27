@@ -11,7 +11,7 @@
 #import "FRYDefines.h"
 #import "FRYSyntheticTouch.h"
 #import "NSObject+FRYLookupSupport.h"
-
+#import "FRYLookupResult.h"
 #import "FRYRecordedTouch.h"
 #import "NSRunLoop+FRY.h"
 
@@ -34,6 +34,12 @@
 - (void)findViewsMatching:(NSDictionary *)lookupVariables whenFound:(FRYInteractionBlock)foundBlock;
 - (void)findViewsMatching:(NSDictionary *)lookupVariables inTargetWindow:(FRYTargetWindow)targetWindow whenFound:(FRYInteractionBlock)foundBlock;
 
+/**
+ * This is a placeholder API for typing until proper keyboard touching can be implemented.
+ * The delegate is probably going to be driven differently than usual until real typing is
+ * in place.  The shouldChangeTextInRange will be called once with the entire contents of the
+ * string.
+ */
 - (void)replaceTextWithString:(NSString *)string intoView:(UIView /*<UITextInput>*/ *)view;
 
 /**

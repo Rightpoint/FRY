@@ -51,7 +51,6 @@ static const void *FRYUITouchViewWhereTouchBegan = &FRYUITouchViewWhereTouchBega
         [self _setLocationInWindow:point resetPrevious:YES];
         
         UIView *viewWhereTouchBegan = [window hitTest:point withEvent:nil];
-        self.fry_viewWhereTouchBegan = viewWhereTouchBegan;
         [self setView:viewWhereTouchBegan];
         [self setPhase:UITouchPhaseBegan];
         [self _setIsFirstTouchForView:YES];
@@ -88,16 +87,6 @@ static const void *FRYUITouchViewWhereTouchBegan = &FRYUITouchViewWhereTouchBega
     NSParameterAssert(self.view);
     CGPoint location = [self locationInView:self.view];
     return CGPointMake(location.x / self.view.frame.size.width, location.y / self.view.frame.size.height);
-}
-
-- (UIView *)fry_viewWhereTouchBegan
-{
-    return objc_getAssociatedObject(self, &FRYUITouchViewWhereTouchBegan);
-}
-
-- (void)setFry_viewWhereTouchBegan:(UIView *)fry_viewWhereTouchBegan
-{
-    objc_setAssociatedObject(self, &FRYUITouchViewWhereTouchBegan, fry_viewWhereTouchBegan, OBJC_ASSOCIATION_RETAIN);
 }
 
 @end

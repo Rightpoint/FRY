@@ -130,7 +130,25 @@
     UITextPosition *begin = inputView.beginningOfDocument;
     UITextPosition *end   = inputView.endOfDocument;
     UITextRange *allText  = [inputView textRangeFromPosition:begin toPosition:end];
-    [inputView replaceRange:allText withText:string];
+    NSString *currentText = [inputView textInRange:allText];
+    NSRange range = NSMakeRange(0, [currentText length]);
+    if ( [inputView isKindOfClass:[UITextField class]] ) {
+        UITextField *textField = (id)inputView;
+        if ( [textField.delegate respondsToSelector:@selector(textField:shouldChangeCharactersInRange:replacementString:)] &&
+             [textField.delegate textField:textField shouldChangeCharactersInRange:range replacementString:string] ) {
+            [inputView replaceRange:allText withText:string];
+        }
+    }
+    else if ( [inputView isKindOfClass:[UITextView class]] ) {
+        UITextView *textView = (id)inputView;
+        if ( [textView respondsToSelector:@selector(textView:shouldChangeTextInRange:replacementText:)] &&
+             [textView.delegate textView:textView shouldChangeTextInRange:range replacementText:string] ) {
+            [inputView replaceRange:allText withText:string];
+        }
+    }
+    else {
+        [inputView replaceRange:allText withText:string];
+    }
 }
 
 - (void)addTouch:(FRYSimulatedTouch *)touch inView:(UIView *)view
@@ -284,12 +302,6 @@
 
     if ( nextEvent ) {
         [self.application sendEvent:nextEvent];
-        
-        for ( UITouch *touch in nextEvent.allTouches ) {
-            if ( touch.phase == UITouchPhaseEnded && [touch.fry_viewWhereTouchBegan canBecomeFirstResponder] ) {
-                [touch.fry_viewWhereTouchBegan becomeFirstResponder];
-            }
-        }
     }
 }
 
