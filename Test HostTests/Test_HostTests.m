@@ -24,8 +24,11 @@
 
 - (void)tearDown
 {
-    XCTAssertFalse([[FRYTouchDispatch shared] hasActiveTouches]);
-    [[FRYTouchDispatch shared] clearInteractionsAndTouches];
+    if ([[FRYTouchDispatch shared] hasActiveTouches]) {
+        [[FRYTouchDispatch shared] clearInteractionsAndTouches];
+        XCTAssertFalse(YES);
+    }
+    
     [super tearDown];
 }
 
@@ -72,6 +75,10 @@
                                           [(UITextField *)textField fry_replaceTextWithString:@"Ohhi!"];
                                           [[NSRunLoop currentRunLoop] fry_waitForIdle];
                                       }];
+    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+             onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"Test Suite"}];
+    
+    [[NSRunLoop currentRunLoop] fry_waitForIdle];
 }
 
 - (void)testTapping

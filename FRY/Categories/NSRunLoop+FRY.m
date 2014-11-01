@@ -22,7 +22,8 @@ static NSTimeInterval const kFRYRunLoopDefaultTimeout = 5.0;
 {
     [self fry_waitWithTimeout:timeout forCheck:^BOOL{
         return ([[FRYTouchDispatch shared] hasActiveTouches] == NO &&
-                [[UIApplication sharedApplication] fry_animatingViewToWaitFor] == nil);
+                [[UIApplication sharedApplication] fry_animatingViewToWaitFor] == nil &&
+                [[UIApplication sharedApplication] isIgnoringInteractionEvents] == NO);
     }];
 }
 

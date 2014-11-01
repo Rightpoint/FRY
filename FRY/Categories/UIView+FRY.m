@@ -95,6 +95,7 @@
 - (void)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSDictionary *)variables
 {
     [self fry_enumerateDepthFirstViewMatching:variables usingBlock:^(UIView *view, CGRect frameInView) {
+        NSAssert(view != nil, @"Unable to find view matching %@", variables);
         [view fry_simulateTouches:touches insideRect:frameInView];
     }];
 }
