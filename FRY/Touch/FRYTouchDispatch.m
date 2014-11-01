@@ -8,10 +8,8 @@
 
 #import "FRYTouchDispatch.h"
 #import "FRYActiveTouch.h"
+#import "FRYSyntheticTouch.h"
 #import "UIApplication+FRY.h"
-#import "FRYLookup.h"
-#import "FRYLookupSupport.h"
-#import "FRYLookupResult.h"
 #import "UIView+FRY.h"
 #import "UITouch+FRY.h"
 

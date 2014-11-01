@@ -8,6 +8,7 @@
 
 #import "NSRunloop+FRY.h"
 #import "FRYTouchDispatch.h"
+#import "UIApplication+FRY.h"
 
 static NSTimeInterval const kFRYRunLoopDefaultTimeout = 5.0;
 

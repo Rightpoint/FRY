@@ -9,16 +9,6 @@
 #import <UIKit/UIKit.h>
 
 #import "FRYDefines.h"
-#import "FRYSyntheticTouch.h"
-#import "NSObject+FRYLookupSupport.h"
-#import "FRYLookupResult.h"
-#import "FRYRecordedTouch.h"
-#import "NSRunLoop+FRY.h"
-#import "UIView+FRY.h"
-#import "UIApplication+FRY.h"
-#import "FRYSimulatedTouch.h"
-#import "FRYRecordedTouch.h"
-#import "UITextInput+FRY.h"
 
 @interface FRYTouchDispatch : NSObject
 
