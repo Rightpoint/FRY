@@ -18,7 +18,6 @@
 @interface FRY()
 
 @property (strong, nonatomic) NSMutableArray *activeTouches;
-@property (strong, nonatomic) NSMutableArray *activeChecks;
 
 @property (assign, nonatomic) BOOL mainThreadDispatchEnabled;
 
@@ -41,7 +40,6 @@
     self = [super init];
     if ( self ) {
         self.activeTouches = [NSMutableArray array];
-        self.activeChecks = [NSMutableArray array];
         [self setMainThreadDispatchEnabled:YES];
     }
     return self;
@@ -50,11 +48,6 @@
 - (void)dealloc
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
-}
-
-- (void)addLookupCheck:(FRYCheckBlock)check
-{
-    [self.activeChecks addObject:[check copy]];
 }
 
 - (void)simulateTouches:(NSArray *)touches inView:(UIView *)view frame:(CGRect)frame
@@ -88,15 +81,8 @@
     return self.activeTouches.count > 0;
 }
 
-- (BOOL)hasActiveInteractions
-{
-    return self.activeChecks.count > 0;
-}
-
 - (void)clearInteractionsAndTouches
 {
-    [self.activeChecks removeAllObjects];
-
     // Generate an event for the distantFuture which will generate a 'last' event for all touches, and then prune all touches
     NSDate *distantFuture = [NSDate distantFuture];
     UIEvent *nextEvent = [self eventForCurrentTouchesAtTime:[distantFuture timeIntervalSinceReferenceDate]];
@@ -131,18 +117,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@:%p touches=%@, lookups=%@", self.class, self, self.activeTouches, self.activeChecks];
-}
-
-- (void)performAllLookups
-{
-    NSAssert([NSThread currentThread] == [NSThread mainThread], @"");
-
-    for ( FRYCheckBlock checkBlock in [self.activeChecks copy] ) {
-        if ( checkBlock() ) {
-            [self.activeChecks removeObject:checkBlock];
-        }
-    }
+    return [NSString stringWithFormat:@"<%@:%p touches=%@>", self.class, self, self.activeTouches];
 }
 
 - (void)sendNextEvent
@@ -163,7 +138,7 @@
         _mainThreadDispatchEnabled = enabled;
         
         if ( _mainThreadDispatchEnabled == YES ) {
-            [self performSelector:@selector(sendNextEventAndPerformLookupsOnTimer) withObject:nil afterDelay:0.0];
+            [self performSelector:@selector(sendNextEventOnTimer) withObject:nil afterDelay:0.0];
         }
         else {
             [NSObject cancelPreviousPerformRequestsWithTarget:self];
@@ -171,13 +146,12 @@
     }
 }
 
-- (void)sendNextEventAndPerformLookupsOnTimer
+- (void)sendNextEventOnTimer
 {
     NSAssert([NSThread currentThread] == [NSThread mainThread], @"");
-    [self performAllLookups];
     [self sendNextEvent];
     if ( self.mainThreadDispatchEnabled ) {
-        [self performSelector:@selector(sendNextEventAndPerformLookupsOnTimer) withObject:nil afterDelay:kFRYEventDispatchInterval];
+        [self performSelector:@selector(sendNextEventOnTimer) withObject:nil afterDelay:kFRYEventDispatchInterval];
     }
 }
 

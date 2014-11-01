@@ -7,10 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FRYDefines.h"
 
 @interface NSRunLoop(FRY)
 
 - (void)fry_waitForIdle;
 - (void)fry_waitForIdleWithTimeout:(NSTimeInterval)timeout;
+
+- (void)fry_waitForCheck:(FRYCheckBlock)checkBlock;
+- (void)fry_waitWithTimeout:(NSTimeInterval)timeout forCheck:(FRYCheckBlock)checkBlock;
 
 @end

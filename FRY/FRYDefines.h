@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^FRYVoidBlock)(void);
-
-typedef void(^FRYInteractionBlock)(NSArray *lookupResults);
 typedef void(^FRYFirstMatchBlock)(UIView *view, CGRect frameInView);
 
 typedef BOOL(^FRYCheckBlock)();

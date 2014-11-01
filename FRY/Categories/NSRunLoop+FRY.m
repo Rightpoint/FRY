@@ -9,7 +9,6 @@
 #import "NSRunloop+FRY.h"
 #import "FRY.h"
 
-
 static NSTimeInterval const kFRYRunLoopDefaultTimeout = 5.0;
 
 @implementation NSRunLoop(FRY)
@@ -21,14 +20,24 @@ static NSTimeInterval const kFRYRunLoopDefaultTimeout = 5.0;
 
 - (void)fry_waitForIdleWithTimeout:(NSTimeInterval)timeout;
 {
+    [self fry_waitWithTimeout:timeout forCheck:^BOOL{
+        return ([[FRY shared] hasActiveTouches] == NO &&
+                [[UIApplication sharedApplication] fry_animatingViewToWaitFor] == nil);
+    }];
+}
+
+- (void)fry_waitForCheck:(FRYCheckBlock)checkBlock;
+{
+    [self fry_waitWithTimeout:kFRYRunLoopDefaultTimeout forCheck:checkBlock];
+}
+
+- (void)fry_waitWithTimeout:(NSTimeInterval)timeout forCheck:(FRYCheckBlock)checkBlock
+{
     NSTimeInterval start = [NSDate timeIntervalSinceReferenceDate];
-    while ( ([[FRY shared] hasActiveTouches] ||
-             [[FRY shared] hasActiveInteractions] ||
-             [[UIApplication sharedApplication] fry_animatingViewToWaitFor]) &&
-           start + timeout > [NSDate timeIntervalSinceReferenceDate] )
+    while ( checkBlock() == NO &&
+            start + timeout > [NSDate timeIntervalSinceReferenceDate] )
     {
-        [[FRY shared] performAllLookups];
-        [[FRY shared] sendNextEvent];
+
         [self runUntilDate:[NSDate dateWithTimeIntervalSinceNow:kFRYEventDispatchInterval]];
     }
     
@@ -36,4 +45,5 @@ static NSTimeInterval const kFRYRunLoopDefaultTimeout = 5.0;
         NSLog(@"Spinning the run loop for more than %f seconds!", timeout);
     }
 }
+
 @end

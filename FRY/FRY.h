@@ -16,27 +16,20 @@
 #import "NSRunLoop+FRY.h"
 #import "UIView+FRY.h"
 #import "UIApplication+FRY.h"
-
+#import "FRYSimulatedTouch.h"
+#import "FRYRecordedTouch.h"
+#import "UITextInput+FRY.h"
 
 @interface FRY : NSObject
 
 + (FRY *)shared;
 
-
-- (void)addLookupCheck:(FRYCheckBlock)check;
-
 - (void)simulateTouches:(NSArray *)touches inView:(UIView *)view frame:(CGRect)frame;
-
 
 /**
  * Check to see if there are any active touches
  */
 - (BOOL)hasActiveTouches;
-
-/**
- * Check to see if there are any active interactions
- */
-- (BOOL)hasActiveInteractions;
 
 /**
  * Clear out any touches and lookups.  This will send cancel events for any active touches to ensure that
@@ -45,8 +38,6 @@
 - (void)clearInteractionsAndTouches;
 
 - (void)setMainThreadDispatchEnabled:(BOOL)enabled;
-
-- (void)performAllLookups;
 
 - (void)sendNextEvent;
 

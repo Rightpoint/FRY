@@ -77,15 +77,28 @@
     [[FRY shared] simulateTouches:touches inView:self frame:self.bounds];
 }
 
-- (void)fry_simulateTouch:(SKSSimulatedTouch *)touch insideRect:(CGRect)frameInView
+- (void)fry_simulateTouch:(FRYSimulatedTouch *)touch insideRect:(CGRect)frameInView
 {
     [self fry_simulateTouches:@[touch] insideRect:frameInView];
 }
 
-- (void)fry_simulateTouch:(SKSSimulatedTouch *)touch
+- (void)fry_simulateTouch:(FRYSimulatedTouch *)touch
 {
     [self fry_simulateTouches:@[touch]];
 }
+
+- (void)fry_simulateTouch:(FRYSimulatedTouch *)touch onSubviewMatching:(NSDictionary *)variables
+{
+    
+}
+
+- (void)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSDictionary *)variables
+{
+    [self fry_enumerateDepthFirstViewMatching:variables usingBlock:^(UIView *view, CGRect frameInView) {
+        [view fry_simulateTouches:touches insideRect:frameInView];
+    }];
+}
+
 
 @end
 

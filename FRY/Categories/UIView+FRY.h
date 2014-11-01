@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class SKSSimulatedTouch;
+#import "FRYSimulatedTouch.h"
 
 @interface UIView (FRY)
 
@@ -29,7 +29,10 @@
 
 - (void)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView;
 - (void)fry_simulateTouches:(NSArray *)touches;
-- (void)fry_simulateTouch:(SKSSimulatedTouch *)touch insideRect:(CGRect)frameInView;
-- (void)fry_simulateTouch:(SKSSimulatedTouch *)touch;
+- (void)fry_simulateTouch:(FRYSimulatedTouch *)touch insideRect:(CGRect)frameInView;
+- (void)fry_simulateTouch:(FRYSimulatedTouch *)touch;
+
+- (void)fry_simulateTouch:(FRYSimulatedTouch *)touch onSubviewMatching:(NSDictionary *)variables;
+- (void)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSDictionary *)variables;
 
 @end
