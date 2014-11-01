@@ -9,31 +9,39 @@
 #import "NSRunloop+FRY.h"
 #import "FRYTouchDispatch.h"
 #import "UIApplication+FRY.h"
+#import "FRYDefines.h"
 
 static NSTimeInterval const kFRYRunLoopDefaultTimeout = 5.0;
 
 @implementation NSRunLoop(FRY)
 
-- (void)fry_waitForIdle;
+- (void)fry_waitForIdle
 {
     [self fry_waitForIdleWithTimeout:kFRYRunLoopDefaultTimeout];
 }
 
-- (void)fry_waitForIdleWithTimeout:(NSTimeInterval)timeout;
+- (void)fry_waitForIdleWithTimeout:(NSTimeInterval)timeout
 {
     [self fry_waitWithTimeout:timeout forCheck:^BOOL{
         return ([[FRYTouchDispatch shared] hasActiveTouches] == NO &&
-                [[UIApplication sharedApplication] fry_animatingViewToWaitFor] == nil &&
-                [[UIApplication sharedApplication] isIgnoringInteractionEvents] == NO);
+                [[UIApplication sharedApplication] isIgnoringInteractionEvents] == NO &&
+                [[UIApplication sharedApplication] fry_animatingViewToWaitFor] == nil
+                );
+    } withFailureExplaination:^NSString *{
+        UIView *animatingView = [[UIApplication sharedApplication] fry_animatingViewToWaitFor];
+        return [NSString stringWithFormat:@"%@%@%@",
+                [[FRYTouchDispatch shared] hasActiveTouches] ? @"Still have active touches\n" : @"",
+                [[UIApplication sharedApplication] isIgnoringInteractionEvents] ? @"UIApplication is ignoring interaction events\n" : @"",
+                animatingView != nil ? [NSString stringWithFormat:@"%@ is still animating", animatingView] : @""];
     }];
 }
 
-- (void)fry_waitForCheck:(FRYCheckBlock)checkBlock;
+- (void)fry_waitForCheck:(FRYCheckBlock)checkBlock withFailureExplaination:(FRYCheckFailureExplaination)failureExplaination
 {
-    [self fry_waitWithTimeout:kFRYRunLoopDefaultTimeout forCheck:checkBlock];
+    [self fry_waitWithTimeout:kFRYRunLoopDefaultTimeout forCheck:checkBlock withFailureExplaination:nil];
 }
 
-- (void)fry_waitWithTimeout:(NSTimeInterval)timeout forCheck:(FRYCheckBlock)checkBlock
+- (void)fry_waitWithTimeout:(NSTimeInterval)timeout forCheck:(FRYCheckBlock)checkBlock withFailureExplaination:(FRYCheckFailureExplaination)failureExplaination
 {
     NSTimeInterval start = [NSDate timeIntervalSinceReferenceDate];
     while ( checkBlock() == NO &&
@@ -44,7 +52,7 @@ static NSTimeInterval const kFRYRunLoopDefaultTimeout = 5.0;
     }
     
     if ( [NSDate timeIntervalSinceReferenceDate] > start + timeout ) {
-        NSLog(@"Spinning the run loop for more than %f seconds!", timeout);
+        [NSException raise:kFRYCheckFailedExcetion format:@"Check Failed: %@", failureExplaination()];
     }
 }
 

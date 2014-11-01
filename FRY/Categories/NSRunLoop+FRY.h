@@ -14,7 +14,7 @@
 - (void)fry_waitForIdle;
 - (void)fry_waitForIdleWithTimeout:(NSTimeInterval)timeout;
 
-- (void)fry_waitForCheck:(FRYCheckBlock)checkBlock;
-- (void)fry_waitWithTimeout:(NSTimeInterval)timeout forCheck:(FRYCheckBlock)checkBlock;
+- (void)fry_waitForCheck:(FRYCheckBlock)checkBlock withFailureExplaination:(FRYCheckFailureExplaination)failureExplaination;
+- (void)fry_waitWithTimeout:(NSTimeInterval)timeout forCheck:(FRYCheckBlock)checkBlock withFailureExplaination:(FRYCheckFailureExplaination)failureExplaination;
 
 @end
