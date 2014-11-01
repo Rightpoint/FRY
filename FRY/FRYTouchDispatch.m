@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "FRY.h"
+#import "FRYTouchDispatch.h"
 #import "FRYActiveTouch.h"
 #import "UIApplication+FRY.h"
 #import "FRYLookup.h"
@@ -15,7 +15,7 @@
 #import "UIView+FRY.h"
 #import "UITouch+FRY.h"
 
-@interface FRY()
+@interface FRYTouchDispatch()
 
 @property (strong, nonatomic) NSMutableArray *activeTouches;
 
@@ -23,14 +23,14 @@
 
 @end
 
-@implementation FRY
+@implementation FRYTouchDispatch
 
-+ (FRY *)shared
++ (FRYTouchDispatch *)shared
 {
-    static FRY *shared = nil;
+    static FRYTouchDispatch *shared = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        shared = [[FRY alloc] init];
+        shared = [[FRYTouchDispatch alloc] init];
     });
     return shared;
 }

@@ -7,7 +7,7 @@
 //
 
 #import "NSRunloop+FRY.h"
-#import "FRY.h"
+#import "FRYTouchDispatch.h"
 
 static NSTimeInterval const kFRYRunLoopDefaultTimeout = 5.0;
 
@@ -21,7 +21,7 @@ static NSTimeInterval const kFRYRunLoopDefaultTimeout = 5.0;
 - (void)fry_waitForIdleWithTimeout:(NSTimeInterval)timeout;
 {
     [self fry_waitWithTimeout:timeout forCheck:^BOOL{
-        return ([[FRY shared] hasActiveTouches] == NO &&
+        return ([[FRYTouchDispatch shared] hasActiveTouches] == NO &&
                 [[UIApplication sharedApplication] fry_animatingViewToWaitFor] == nil);
     }];
 }

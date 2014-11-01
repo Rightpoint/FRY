@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "FRY.h"
+#import "FRYTouchDispatch.h"
 
 @interface Test_HostTests : XCTestCase
 
@@ -24,8 +24,8 @@
 
 - (void)tearDown
 {
-    XCTAssertFalse([[FRY shared] hasActiveTouches]);
-    [[FRY shared] clearInteractionsAndTouches];
+    XCTAssertFalse([[FRYTouchDispatch shared] hasActiveTouches]);
+    [[FRYTouchDispatch shared] clearInteractionsAndTouches];
     [super tearDown];
 }
 
@@ -47,27 +47,22 @@
 
 - (void)testAlertViews
 {
-    [FRY_KEY fry_enumerateDepthFirstViewMatching:@{kFRYLookupAccessibilityLabel : @"UIAlertView"}
-                                      usingBlock:^(UIView *view, CGRect frameInView) {
-                                          [view fry_simulateTouch:[FRYSyntheticTouch tap] insideRect:frameInView];
-                                      }];
+    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+             onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"UIAlertView"}];
 
     [[NSRunLoop currentRunLoop] fry_waitForIdle];
     
-    [FRY_KEY fry_enumerateDepthFirstViewMatching:@{kFRYLookupAccessibilityLabel : @"Cancel"}
-                                      usingBlock:^(UIView *view, CGRect frameInView) {
-                                          [view fry_simulateTouch:[FRYSyntheticTouch tap] insideRect:frameInView];
-                                      }];
+    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+             onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"Cancel"}];
 
     [[NSRunLoop currentRunLoop] fry_waitForIdle];
 }
 
 - (void)testTyping
 {
-    [FRY_KEY fry_enumerateDepthFirstViewMatching:@{kFRYLookupAccessibilityLabel : @"Tapping"}
-                                      usingBlock:^(UIView *view, CGRect frameInView) {
-                                          [view fry_simulateTouch:[FRYSyntheticTouch tap] insideRect:frameInView];
-                                      }];
+    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+             onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"Tapping"}];
+    
     [[NSRunLoop currentRunLoop] fry_waitForIdle];
 
     [FRY_KEY fry_enumerateDepthFirstViewMatching:@{kFRYLookupAccessibilityLabel : @"Greeting"}
@@ -81,58 +76,59 @@
 
 - (void)testTapping
 {
-//    [[FRY shared] simulateTouch:[FRYSyntheticTouch tap]
-//                   matchingView:@{kFRYLookupAccessibilityLabel : @"Tapping"}];
-//    [[NSRunLoop currentRunLoop] fry_waitForIdle];
-//    
-//    [[FRY shared] simulateTouch:[FRYSyntheticTouch tap]
-//                   matchingView:@{kFRYLookupAccessibilityLabel : @"First"}];
-//    [[NSRunLoop currentRunLoop] fry_waitForIdle];
-//
-//    [[FRY shared] simulateTouch:[FRYSyntheticTouch tap]
-//                   matchingView:@{kFRYLookupAccessibilityLabel : @"Second"}];
-//    [[NSRunLoop currentRunLoop] fry_waitForIdle];
-//
-//    [[FRY shared] simulateTouch:[FRYSyntheticTouch tap]
-//                   matchingView:@{kFRYLookupAccessibilityLabel : @"First"}];
-//    [[NSRunLoop currentRunLoop] fry_waitForIdle];
-//    
-//    [[FRY shared] simulateTouch:[FRYSyntheticTouch tap]
-//                   matchingView:@{kFRYLookupAccessibilityLabel : @"Happy"}];
-//    [[NSRunLoop currentRunLoop] fry_waitForIdle];
-//
-//    [[FRY shared] simulateTouch:[FRYSyntheticTouch tap]
-//                   matchingView:@{kFRYLookupAccessibilityLabel : @"X"}];
-//    [[NSRunLoop currentRunLoop] fry_waitForIdle];
-//
-//    [[FRY shared] simulateTouch:[FRYSyntheticTouch tap]
-//                   matchingView:@{kFRYLookupAccessibilityLabel : @"Slightly Offscreen Button"}];
-//    [[NSRunLoop currentRunLoop] fry_waitForIdle];
-//
-//    __block BOOL found = NO;
-//    [[FRY shared] findViewsMatching:@{kFRYLookupAccessibilityLabel : @"1"} whenFound:^(NSArray *lookupResults) {
-//        found = YES;
-//    }];
-//    [[NSRunLoop currentRunLoop] fry_waitForIdle];
-//    XCTAssertTrue(found);
-//    
-//    [[FRY shared] simulateTouch:[FRYSyntheticTouch tap]
-//                   matchingView:@{kFRYLookupAccessibilityLabel : @"Label with Tap Gesture Recognizer"}];
-//    [[NSRunLoop currentRunLoop] fry_waitForIdle];
-//    
-//    found = NO;
-//    [[FRY shared] findViewsMatching:@{kFRYLookupAccessibilityLabel : @"2"} whenFound:^(NSArray *lookupResults) {
-//        found = YES;
-//    }];
-//    [[NSRunLoop currentRunLoop] fry_runUntilEventsLookupsAndAnimationsAreComplete];
-//    XCTAssertTrue(found);
-//
-//
-//    [[FRY shared] simulateTouch:[FRYSyntheticTouch tap]
-//                   matchingView:@{kFRYLookupAccessibilityLabel : @"Test Suite"}];
-//    
-//    [[NSRunLoop currentRunLoop] fry_runUntilEventsLookupsAndAnimationsAreComplete];
+    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+             onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"Tapping"}];
+    [[NSRunLoop currentRunLoop] fry_waitForIdle];
 
+    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+             onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"First"}];
+    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+    
+    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+             onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"Second"}];
+    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+
+    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+             onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"First"}];
+    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+
+    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+             onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"Happy"}];
+    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+    
+    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+             onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"X"}];
+    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+    
+    // Ensure the view is not found
+    [FRY_KEY fry_enumerateDepthFirstViewMatching:@{kFRYLookupAccessibilityLabel : @"1"}
+                                      usingBlock:^(UIView *view, CGRect frameInView) {
+                                          XCTAssertNil(view);
+                                      }];
+
+    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+             onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"Slightly Offscreen Button"}];
+    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+
+    [FRY_KEY fry_enumerateDepthFirstViewMatching:@{kFRYLookupAccessibilityLabel : @"1"}
+                                      usingBlock:^(UIView *view, CGRect frameInView) {
+                                          XCTAssertNotNil(view);
+                                      }];
+
+    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+             onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"Label with Tap Gesture Recognizer"}];
+    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+
+    [FRY_KEY fry_enumerateDepthFirstViewMatching:@{kFRYLookupAccessibilityLabel : @"2"}
+                                      usingBlock:^(UIView *view, CGRect frameInView) {
+                                          XCTAssertNotNil(view);
+                                      }];
+
+
+    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+             onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"Test Suite"}];
+  
+    [[NSRunLoop currentRunLoop] fry_waitForIdle];
 }
 
 

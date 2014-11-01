@@ -8,7 +8,7 @@
 
 #import "UIView+FRY.h"
 #import "NSObject+FRYLookupSupport.h"
-#import "FRY.h"
+#import "FRYTouchDispatch.h"
 
 @implementation UIView (FRY)
 
@@ -69,12 +69,12 @@
 
 - (void)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView
 {
-    [[FRY shared] simulateTouches:touches inView:self frame:frameInView];
+    [[FRYTouchDispatch shared] simulateTouches:touches inView:self frame:frameInView];
 }
 
 - (void)fry_simulateTouches:(NSArray *)touches
 {
-    [[FRY shared] simulateTouches:touches inView:self frame:self.bounds];
+    [[FRYTouchDispatch shared] simulateTouches:touches inView:self frame:self.bounds];
 }
 
 - (void)fry_simulateTouch:(FRYSimulatedTouch *)touch insideRect:(CGRect)frameInView
@@ -89,7 +89,7 @@
 
 - (void)fry_simulateTouch:(FRYSimulatedTouch *)touch onSubviewMatching:(NSDictionary *)variables
 {
-    
+    [self fry_simulateTouches:@[touch] onSubviewMatching:variables];
 }
 
 - (void)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSDictionary *)variables

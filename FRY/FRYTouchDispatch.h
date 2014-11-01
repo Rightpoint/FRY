@@ -20,9 +20,9 @@
 #import "FRYRecordedTouch.h"
 #import "UITextInput+FRY.h"
 
-@interface FRY : NSObject
+@interface FRYTouchDispatch : NSObject
 
-+ (FRY *)shared;
++ (FRYTouchDispatch *)shared;
 
 - (void)simulateTouches:(NSArray *)touches inView:(UIView *)view frame:(CGRect)frame;
 
