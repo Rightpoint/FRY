@@ -10,6 +10,7 @@
 #import "FRYLookupResult.h"
 #import "UIAccessibility+FRY.h"
 #import "UIAccessibilityElement+FRY.h"
+#import "FRYDefines.h"
 
 NSString* const kFRYLookupAccessibilityIdentifier = @"accessibilityIdentifier";
 NSString* const kFRYLookupAccessibilityValue      = @"accessibilityValue";
@@ -25,6 +26,23 @@ NSString* const kFRYLookupAccessibilityTrait      = @"accessibilityTrait";
     // support NSObject for the compilers sake, even though we can't do much here.
     NSAssert(NO, @"Can not create results from NSObject!");
     return nil;
+}
+
+- (void)fry_enumerateDepthFirstViewMatching:(NSDictionary *)variables usingBlock:(FRYFirstMatchBlock)block;
+{
+    NSParameterAssert(block);
+    id<FRYLookup> lookup = [self.class fry_lookup];
+    FRYLookupResult *match = (id)[lookup depthFirstChildOfObject:self matchingVariables:variables];
+    block(match.view, match.frame);
+}
+- (void)fry_enumerateAllViewsMatching:(NSDictionary *)variables usingBlock:(FRYFirstMatchBlock)block
+{
+    NSParameterAssert(block);
+    id<FRYLookup> lookup = [self.class fry_lookup];
+    NSArray *matches = [lookup lookupChildrenOfObject:self matchingVariables:variables];
+    for ( FRYLookupResult *result in matches ) {
+        block(result.view, result.frame);
+    }
 }
 
 + (NSPredicate *)fry_accessibilityPredicate
@@ -43,6 +61,20 @@ NSString* const kFRYLookupAccessibilityTrait      = @"accessibilityTrait";
 
 @end
 
+@implementation UIApplication(FRYLookupSupport)
+
++ (id<FRYLookup>)fry_lookup
+{
+    FRYLookup *fryQuery = [[FRYLookup alloc] init];
+    fryQuery.childKeyPaths = @[NSStringFromSelector(@selector(windows))];
+    fryQuery.matchPredicate = [NSPredicate predicateWithValue:NO];
+    fryQuery.matchTransform = ^FRYLookupResult *(UIAccessibilityElement *obj) {
+        return [[FRYLookupResult alloc] initWithView:[obj fry_containingView] frame:[obj accessibilityFrame]];
+    };
+    return fryQuery;
+}
+
+@end
 
 @implementation UIAccessibilityElement(FRYLookupSupport)
 

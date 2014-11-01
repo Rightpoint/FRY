@@ -36,17 +36,16 @@
 
 - (void)testAccessibilityLabelLookup
 {
-    XCTestExpectation *lookupDone = [self expectationWithDescription:@"Lookup Complete"];
     __block UIView *foundView;
-    [[FRY shared] findViewsMatching:@{kFRYLookupAccessibilityLabel : @"Tapping"}
-                          whenFound:^(NSArray *lookupResults) {
-                              FRYLookupResult *result = [lookupResults lastObject];
-                              foundView = result.view;
-                              [lookupDone fulfill];
-                          }];
-    [self waitForExpectationsWithTimeout:0.5 handler:^(NSError *error) {
-        XCTAssertNil(error);
-    }];
+
+    [FRY_APP fry_enumerateDepthFirstViewMatching:@{kFRYLookupAccessibilityLabel : @"Tapping"}
+                                      usingBlock:^(UIView *view, CGRect frameInView) {
+                                          foundView = view;
+                                      }];
+
+
+    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+    
     XCTAssertNotNil(foundView);
     XCTAssertEqualObjects(@"Tapping", [foundView accessibilityLabel]);
 }

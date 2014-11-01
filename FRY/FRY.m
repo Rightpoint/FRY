@@ -9,7 +9,6 @@
 #import "FRY.h"
 #import "FRYActiveTouch.h"
 #import "UIApplication+FRY.h"
-#import "FRYInteraction.h"
 #import "FRYLookup.h"
 #import "FRYLookupSupport.h"
 #import "FRYLookupResult.h"
@@ -18,14 +17,8 @@
 
 @interface FRY()
 
-/**
- * The application to interact with.  This defaults to [UIApplication sharedApplication]
- * but is exposed for testing reasons
- */
-@property (strong, nonatomic) UIApplication *application;
-
 @property (strong, nonatomic) NSMutableArray *activeTouches;
-@property (strong, nonatomic) NSMutableArray *activeInteractions;
+@property (strong, nonatomic) NSMutableArray *activeChecks;
 
 @property (assign, nonatomic) BOOL mainThreadDispatchEnabled;
 
@@ -47,9 +40,8 @@
 {
     self = [super init];
     if ( self ) {
-        self.application = [UIApplication sharedApplication];
         self.activeTouches = [NSMutableArray array];
-        self.activeInteractions = [NSMutableArray array];
+        self.activeChecks = [NSMutableArray array];
         [self setMainThreadDispatchEnabled:YES];
     }
     return self;
@@ -60,37 +52,9 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
 }
 
-- (void)simulateTouch:(FRYSimulatedTouch *)touch matchingView:(NSDictionary *)lookupVariables
+- (void)addLookupCheck:(FRYCheckBlock)check
 {
-    [self simulateTouch:touch matchingView:lookupVariables inTargetWindow:FRYTargetWindowKey];
-}
-- (void)simulateTouch:(FRYSimulatedTouch *)touch matchingView:(NSDictionary *)lookupVariables inTargetWindow:(FRYTargetWindow)targetWindow
-{
-    [self simulateTouches:@[touch] matchingView:lookupVariables inTargetWindow:targetWindow];
-}
-
-- (void)simulateTouches:(NSArray *)touches matchingView:(NSDictionary *)lookupVariables
-{
-    [self simulateTouches:touches matchingView:lookupVariables inTargetWindow:FRYTargetWindowKey];
-}
-
-- (void)simulateTouches:(NSArray *)touches matchingView:(NSDictionary *)lookupVariables inTargetWindow:(FRYTargetWindow)targetWindow
-{
-    if ( lookupVariables ) {
-        [self findViewsMatching:lookupVariables inTargetWindow:targetWindow whenFound:^(NSArray *results) {
-            results = [FRYLookupResult removeAncestorsFromLookupResults:results];
-            NSParameterAssert(results.count == 1);
-            FRYLookupResult *result = [results lastObject];
-            [self simulateTouches:touches inView:result.view frame:result.frame];
-        }];
-    }
-    else {
-        NSArray *windows = [self.application fry_targetWindowsOfType:targetWindow];
-        NSAssert(windows.count == 1, @"Must specify a matching view or a singular target window");
-        UIWindow *window = [windows firstObject];
-        UIView *view = [window.subviews lastObject];
-        [self simulateTouches:touches inView:view frame:view.bounds];
-    }
+    [self.activeChecks addObject:[check copy]];
 }
 
 - (void)simulateTouches:(NSArray *)touches inView:(UIView *)view frame:(CGRect)frame
@@ -102,61 +66,9 @@
         if ( [touch isKindOfClass:[FRYSyntheticTouch class]] ) {
             touch = [(FRYSyntheticTouch *)touch touchInFrame:touchFrameInWindow];
         }
-        [self addTouch:touch inView:view];
-    }
-}
-
-- (void)findViewsMatching:(NSDictionary *)lookupVariables whenFound:(FRYInteractionBlock)foundBlock
-{
-    [self findViewsMatching:lookupVariables inTargetWindow:FRYTargetWindowKey whenFound:foundBlock];
-}
-
-- (void)findViewsMatching:(NSDictionary *)lookupVariables inTargetWindow:(FRYTargetWindow)targetWindow whenFound:(FRYInteractionBlock)foundBlock
-{
-    FRYInteraction *interaction = [FRYInteraction interactionWithTargetWindow:targetWindow lookupVariables:lookupVariables foundBlock:foundBlock];
-    @synchronized(self.activeInteractions) {
-        [self.activeInteractions addObject:interaction];
-    }
-}
-
-- (void)replaceTextWithString:(NSString *)string intoView:(UIView *)view
-{
-    while ( view && [view conformsToProtocol:@protocol(UITextInput)] == NO ) {
-        view = view.superview;
-    }
-    NSAssert(view, @"Could not find view conforming to UITextInput");
-    UIView<UITextInput> *inputView = (id)view;
-    
-    UITextPosition *begin = inputView.beginningOfDocument;
-    UITextPosition *end   = inputView.endOfDocument;
-    UITextRange *allText  = [inputView textRangeFromPosition:begin toPosition:end];
-    NSString *currentText = [inputView textInRange:allText];
-    NSRange range = NSMakeRange(0, [currentText length]);
-    if ( [inputView isKindOfClass:[UITextField class]] ) {
-        UITextField *textField = (id)inputView;
-        if ( [textField.delegate respondsToSelector:@selector(textField:shouldChangeCharactersInRange:replacementString:)] &&
-             [textField.delegate textField:textField shouldChangeCharactersInRange:range replacementString:string] ) {
-            [inputView replaceRange:allText withText:string];
-        }
-    }
-    else if ( [inputView isKindOfClass:[UITextView class]] ) {
-        UITextView *textView = (id)inputView;
-        if ( [textView respondsToSelector:@selector(textView:shouldChangeTextInRange:replacementText:)] &&
-             [textView.delegate textView:textView shouldChangeTextInRange:range replacementText:string] ) {
-            [inputView replaceRange:allText withText:string];
-        }
-    }
-    else {
-        [inputView replaceRange:allText withText:string];
-    }
-}
-
-- (void)addTouch:(FRYSimulatedTouch *)touch inView:(UIView *)view
-{
-    NSTimeInterval startTime = [NSDate timeIntervalSinceReferenceDate];
-    FRYActiveTouch *touchInteraction = [[FRYActiveTouch alloc] initWithSimulatedTouch:touch inView:view startTime:startTime];
-
-    @synchronized(self.activeTouches) {
+        NSTimeInterval startTime = [NSDate timeIntervalSinceReferenceDate];
+        FRYActiveTouch *touchInteraction = [[FRYActiveTouch alloc] initWithSimulatedTouch:touch inView:view startTime:startTime];
+        
         NSLog(@"Performing Touch %@ on %@", touch, view);
         [self.activeTouches addObject:touchInteraction];
     }
@@ -164,66 +76,32 @@
 
 - (void)pruneCompletedTouchInteractions
 {
-    @synchronized(self.activeTouches) {
-        for ( FRYActiveTouch *interaction in [self.activeTouches copy] ) {
-            if ( interaction.currentTouchPhase == UITouchPhaseEnded || interaction.currentTouchPhase == UITouchPhaseCancelled ) {
-                [self.activeTouches removeObject:interaction];
-            }
+    for ( FRYActiveTouch *interaction in [self.activeTouches copy] ) {
+        if ( interaction.currentTouchPhase == UITouchPhaseEnded || interaction.currentTouchPhase == UITouchPhaseCancelled ) {
+            [self.activeTouches removeObject:interaction];
         }
     }
 }
 
 - (BOOL)hasActiveTouches
 {
-    @synchronized(self.activeTouches) {
-        return self.activeTouches.count > 0;
-    }
+    return self.activeTouches.count > 0;
 }
 
 - (BOOL)hasActiveInteractions
 {
-    @synchronized(self.activeInteractions) {
-        return self.activeInteractions.count > 0;
-    }
+    return self.activeChecks.count > 0;
 }
-
-- (UIView *)animatingViewToWaitFor
-{
-    return [self animatingViewToWaitForInTargetWindow:FRYTargetWindowKey];
-}
-
-- (UIView *)animatingViewToWaitForInTargetWindow:(FRYTargetWindow)targetWindow
-{
-    __block UIView *animatingView = nil;
-    if ( [NSThread isMainThread] ) {
-        for ( UIWindow *window in [self.application fry_targetWindowsOfType:targetWindow] ) {
-            UIView *animatingViewInWindow = [window fry_animatingViewToWaitFor];
-            if ( animatingViewInWindow ) {
-                animatingView = animatingViewInWindow;
-                break;
-            }
-        }
-    }
-    else {
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            animatingView = [self animatingViewToWaitForInTargetWindow:targetWindow];
-        });
-    }
-    return animatingView;
-}
-
 
 - (void)clearInteractionsAndTouches
 {
-    @synchronized(self.activeInteractions) {
-        [self.activeInteractions removeAllObjects];
-    }
+    [self.activeChecks removeAllObjects];
 
     // Generate an event for the distantFuture which will generate a 'last' event for all touches, and then prune all touches
     NSDate *distantFuture = [NSDate distantFuture];
     UIEvent *nextEvent = [self eventForCurrentTouchesAtTime:[distantFuture timeIntervalSinceReferenceDate]];
     if ( nextEvent ) {
-        [self.application sendEvent:nextEvent];
+        [[UIApplication sharedApplication] sendEvent:nextEvent];
     }
 }
 
@@ -234,18 +112,17 @@
     NSAssert([NSThread currentThread] == [NSThread mainThread], @"");
     NSMutableArray *touches = [NSMutableArray array];
 
-    @synchronized(self.activeTouches) {
-        for ( FRYActiveTouch *interaction in self.activeTouches ) {
-            UITouch *touch = [interaction touchAtTime:time];
-            // Some active touches are delayed.   Ignore those here.
-            if ( touch ) {
-                [touches addObject:touch];
-            }
+    for ( FRYActiveTouch *interaction in self.activeTouches ) {
+        UITouch *touch = [interaction touchAtTime:time];
+        // Some active touches are delayed.   Ignore those here.
+        if ( touch ) {
+            [touches addObject:touch];
         }
-        [self pruneCompletedTouchInteractions];
     }
+    [self pruneCompletedTouchInteractions];
+
     if ( touches.count > 0 ) {
-        return [self.application fry_eventWithTouches:touches];
+        return [[UIApplication sharedApplication] fry_eventWithTouches:touches];
     }
     else {
         return nil;
@@ -254,43 +131,17 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@:%p touches=%@, lookups=%@, animating=%@", self.class, self, self.activeTouches, self.activeInteractions, self.animatingViewToWaitFor ? @"Waiting" : @"Ready"];
+    return [NSString stringWithFormat:@"<%@:%p touches=%@, lookups=%@", self.class, self, self.activeTouches, self.activeChecks];
 }
-
-@end
-
-@implementation FRY(Dispatch)
 
 - (void)performAllLookups
 {
     NSAssert([NSThread currentThread] == [NSThread mainThread], @"");
 
-    NSArray *activeInteractions = nil;
-    @synchronized(self.activeInteractions) {
-        activeInteractions = [self.activeInteractions copy];
-    }
-    NSMutableArray *completedInteractions = [NSMutableArray array];
-    for ( FRYInteraction *interaction in activeInteractions ) {
-        if ( [self animatingViewToWaitForInTargetWindow:interaction.targetWindow] ) {
-            continue;
+    for ( FRYCheckBlock checkBlock in [self.activeChecks copy] ) {
+        if ( checkBlock() ) {
+            [self.activeChecks removeObject:checkBlock];
         }
-                
-        NSArray *matching = @[];
-        for ( UIWindow *window in [self.application fry_targetWindowsOfType:interaction.targetWindow] ) {
-            id<FRYLookup> lookup = [window.class fry_lookup];
-            NSArray *matchingInWindow = [lookup lookupChildrenOfObject:window matchingVariables:interaction.lookupVariables];
-            matching = [matching arrayByAddingObjectsFromArray:matchingInWindow];
-        }
-        if ( matching.count > 0 ) {
-            NSLog(@"Lookup for %@ found %@", interaction.lookupVariables, matching);
-            
-            interaction.foundBlock(matching);
-            [completedInteractions addObject:interaction];
-        }
-    }
-
-    @synchronized(self.activeInteractions) {
-        [self.activeInteractions removeObjectsInArray:completedInteractions];
     }
 }
 
@@ -301,7 +152,7 @@
     UIEvent *nextEvent = [self eventForCurrentTouchesAtTime:currentTime];
 
     if ( nextEvent ) {
-        [self.application sendEvent:nextEvent];
+        [[UIApplication sharedApplication] sendEvent:nextEvent];
     }
 }
 

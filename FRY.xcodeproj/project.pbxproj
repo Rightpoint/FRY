@@ -47,11 +47,11 @@
 		AB35FD6019E4E4E900228531 /* TestSuiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD5019E4E4E900228531 /* TestSuiteViewController.m */; };
 		AB35FD6219E4E54F00228531 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB35FD6119E4E54F00228531 /* UIKit.framework */; };
 		AB35FD7A19E58B5C00228531 /* FRYMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD6819E4ED6100228531 /* FRYMethodSwizzling.m */; };
+		AB43FCF51A0468600049D520 /* UITextInput+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB43FCF41A0468600049D520 /* UITextInput+FRY.m */; };
 		AB4936F319F69AEE00A6F297 /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03C19DF95AA00038E75 /* libFRY.a */; };
 		ABA5781919E64AE600D77CDA /* FRYLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781119E64AE600D77CDA /* FRYLookup.m */; };
 		ABA5781A19E64AE600D77CDA /* FRYLookupResult.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781319E64AE600D77CDA /* FRYLookupResult.m */; };
 		ABA5781C19E64AE600D77CDA /* NSObject+FRYLookupSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781819E64AE600D77CDA /* NSObject+FRYLookupSupport.m */; };
-		ABA5782319E6506900D77CDA /* FRYInteraction.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5782219E6506900D77CDA /* FRYInteraction.m */; };
 		ABA5782C19E65D1100D77CDA /* FRYDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5782B19E65D1100D77CDA /* FRYDefines.m */; };
 		B9215C4142D84548893B9BCA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89238CE01CB344F78A59E9AE /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -153,6 +153,8 @@
 		AB35FD6419E4ECF200228531 /* FRYEventMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYEventMonitor.m; sourceTree = "<group>"; };
 		AB35FD6719E4ED6100228531 /* FRYMethodSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYMethodSwizzling.h; sourceTree = "<group>"; };
 		AB35FD6819E4ED6100228531 /* FRYMethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYMethodSwizzling.m; sourceTree = "<group>"; };
+		AB43FCF31A0468600049D520 /* UITextInput+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextInput+FRY.h"; sourceTree = "<group>"; };
+		AB43FCF41A0468600049D520 /* UITextInput+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextInput+FRY.m"; sourceTree = "<group>"; };
 		ABA5781019E64AE600D77CDA /* FRYLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYLookup.h; sourceTree = "<group>"; };
 		ABA5781119E64AE600D77CDA /* FRYLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYLookup.m; sourceTree = "<group>"; };
 		ABA5781219E64AE600D77CDA /* FRYLookupResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYLookupResult.h; sourceTree = "<group>"; };
@@ -160,8 +162,6 @@
 		ABA5781419E64AE600D77CDA /* FRYLookupSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYLookupSupport.h; sourceTree = "<group>"; };
 		ABA5781719E64AE600D77CDA /* NSObject+FRYLookupSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+FRYLookupSupport.h"; sourceTree = "<group>"; };
 		ABA5781819E64AE600D77CDA /* NSObject+FRYLookupSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+FRYLookupSupport.m"; sourceTree = "<group>"; };
-		ABA5782119E6506900D77CDA /* FRYInteraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYInteraction.h; sourceTree = "<group>"; };
-		ABA5782219E6506900D77CDA /* FRYInteraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYInteraction.m; sourceTree = "<group>"; };
 		ABA5782A19E65D1100D77CDA /* FRYDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYDefines.h; sourceTree = "<group>"; };
 		ABA5782B19E65D1100D77CDA /* FRYDefines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYDefines.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -316,6 +316,8 @@
 				AB35FCE319DFAEB900228531 /* UITouch+FRY.m */,
 				AB35FD0D19E4DE3500228531 /* UIAccessibility+FRY.h */,
 				AB35FD0E19E4DE3500228531 /* UIAccessibility+FRY.m */,
+				AB43FCF31A0468600049D520 /* UITextInput+FRY.h */,
+				AB43FCF41A0468600049D520 /* UITextInput+FRY.m */,
 				AB184AEC19E8EEC0007CC9DA /* NSRunLoop+FRY.h */,
 				AB184AED19E8EEC0007CC9DA /* NSRunLoop+FRY.m */,
 			);
@@ -413,8 +415,6 @@
 		ABA5781D19E64EAB00D77CDA /* Interaction */ = {
 			isa = PBXGroup;
 			children = (
-				ABA5782119E6506900D77CDA /* FRYInteraction.h */,
-				ABA5782219E6506900D77CDA /* FRYInteraction.m */,
 			);
 			path = Interaction;
 			sourceTree = "<group>";
@@ -614,11 +614,11 @@
 				AB35FCE119DFA6F200228531 /* FRYEventProxy.m in Sources */,
 				AB184AF119EA087D007CC9DA /* FRYTouchEventLog.m in Sources */,
 				AB184AE919E8E0CC007CC9DA /* FRYRecordedTouch.m in Sources */,
+				AB43FCF51A0468600049D520 /* UITextInput+FRY.m in Sources */,
 				AB35FCF019DFB49100228531 /* FRYActiveTouch.m in Sources */,
 				AB184AEB19E8E0CC007CC9DA /* FRYSyntheticTouch.m in Sources */,
 				AB184AEE19E8EEC0007CC9DA /* NSRunLoop+FRY.m in Sources */,
 				AB184AE819E8E0CC007CC9DA /* FRYPointInTime.m in Sources */,
-				ABA5782319E6506900D77CDA /* FRYInteraction.m in Sources */,
 				ABA5781919E64AE600D77CDA /* FRYLookup.m in Sources */,
 				AB184AEA19E8E0CC007CC9DA /* FRYSimulatedTouch.m in Sources */,
 				AB35FCE419DFAEB900228531 /* UITouch+FRY.m in Sources */,

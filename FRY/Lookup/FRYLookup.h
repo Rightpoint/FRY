@@ -10,14 +10,23 @@
 
 @class FRYLookupResult;
 
+typedef NS_ENUM(NSUInteger, FRYLookupType) {
+    FRYLookupTypeDepthFirst = 0,
+    FRYLookupTypeAll,
+};
+
 @protocol FRYLookup <NSObject>
 
 /**
  * Lookup children objects that match the specified variables.   These variables are matched by classes adopting FRYLookupSupport,
  * and returning a FRYLookup object that knows how to check that specific object type.
  */
-#warning Not sure if it is valuable to return multiple objects here, or if we should behave like hitTest:event:, and return the result of the depth first search.
 - (NSArray *)lookupChildrenOfObject:(NSObject *)object matchingVariables:(NSDictionary *)variables;
+
+/**
+ * Return the deepest match in the heirarchy
+ */
+- (NSObject *)depthFirstChildOfObject:(NSObject *)object matchingVariables:(NSDictionary *)variables;
 
 @end
 

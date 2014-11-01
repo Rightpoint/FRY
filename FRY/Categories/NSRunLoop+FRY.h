@@ -10,8 +10,7 @@
 
 @interface NSRunLoop(FRY)
 
-- (void)fry_runUntilEventsLookupsAndAnimationsAreComplete;
-- (void)fry_runUntilEventsLookupsAndAnimationsAreCompleteWithTimeout:(NSTimeInterval)timeout;
-
+- (void)fry_waitForIdle;
+- (void)fry_waitForIdleWithTimeout:(NSTimeInterval)timeout;
 
 @end

@@ -10,6 +10,9 @@
 #import "UIKit+FRYExposePrivate.h"
 #import "FRYEventProxy.h"
 
+#import "UIView+FRY.h"
+#import "FRYLookupSupport.h"
+#import "FRYLookupResult.h"
 
 @implementation UIApplication(FRY)
 
@@ -41,17 +44,6 @@
     return event;
 }
 
-- (FRYTargetWindow)fry_targetWindowForView:(UIView *)view
-{
-    UIWindow *window = view.window;
-    if ( [window isKindOfClass:[UITextEffectsWindow class]] ) {
-        return FRYTargetWindowKeyboard;
-    }
-    else {
-        return FRYTargetWindowKey;
-    }
-}
-
 - (UIWindow *)fry_keyboardWindow
 {
     for ( UIWindow *window in self.windows ) {
@@ -62,21 +54,17 @@
     return nil;
 }
 
-- (NSArray *)fry_targetWindowsOfType:(FRYTargetWindow)targetWindow;
+- (UIView *)fry_animatingViewToWaitFor
 {
-    NSArray *result = nil;
-    switch ( targetWindow ) {
-        case FRYTargetWindowKey:
-            result = @[self.keyWindow];
+    __block UIView *animatingView = nil;
+    for ( UIWindow *window in self.windows ) {
+        UIView *animatingViewInWindow = [window fry_animatingViewToWaitFor];
+        if ( animatingViewInWindow ) {
+            animatingView = animatingViewInWindow;
             break;
-        case FRYTargetWindowAll:
-            result = self.windows;
-            break;
-        case FRYTargetWindowKeyboard:
-            result = @[[self fry_keyboardWindow]];
-            break;
+        }
     }
-    return result;
+    return animatingView;
 }
 
 

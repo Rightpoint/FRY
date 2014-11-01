@@ -8,16 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^FRYVoidBlock)(void);
+
 typedef void(^FRYInteractionBlock)(NSArray *lookupResults);
+typedef void(^FRYFirstMatchBlock)(UIView *view, CGRect frameInView);
+
+typedef BOOL(^FRYCheckBlock)();
 
 OBJC_EXTERN NSTimeInterval const kFRYEventDispatchInterval;
 
-typedef NS_ENUM(NSInteger, FRYTargetWindow) {
-    FRYTargetWindowKey = 0,
-    FRYTargetWindowKeyboard,
-    FRYTargetWindowAll,
-};
 
-
-
-OBJC_EXTERN NSString *FRYMD5String(NSString *input);
+#define FRY_APP [UIApplication sharedApplication]
+#define FRY_KEY [[UIApplication sharedApplication] keyWindow]

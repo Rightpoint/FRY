@@ -9,20 +9,22 @@
 #import "NSRunloop+FRY.h"
 #import "FRY.h"
 
+
 static NSTimeInterval const kFRYRunLoopDefaultTimeout = 5.0;
+
 @implementation NSRunLoop(FRY)
 
-- (void)fry_runUntilEventsLookupsAndAnimationsAreComplete
+- (void)fry_waitForIdle;
 {
-    [self fry_runUntilEventsLookupsAndAnimationsAreCompleteWithTimeout:kFRYRunLoopDefaultTimeout];
+    [self fry_waitForIdleWithTimeout:kFRYRunLoopDefaultTimeout];
 }
 
-- (void)fry_runUntilEventsLookupsAndAnimationsAreCompleteWithTimeout:(NSTimeInterval)timeout
+- (void)fry_waitForIdleWithTimeout:(NSTimeInterval)timeout;
 {
     NSTimeInterval start = [NSDate timeIntervalSinceReferenceDate];
     while ( ([[FRY shared] hasActiveTouches] ||
              [[FRY shared] hasActiveInteractions] ||
-             [[FRY shared] animatingViewToWaitForInTargetWindow:FRYTargetWindowAll]) &&
+             [[UIApplication sharedApplication] fry_animatingViewToWaitFor]) &&
            start + timeout > [NSDate timeIntervalSinceReferenceDate] )
     {
         [[FRY shared] performAllLookups];

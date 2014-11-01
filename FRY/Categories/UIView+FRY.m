@@ -8,6 +8,7 @@
 
 #import "UIView+FRY.h"
 #import "NSObject+FRYLookupSupport.h"
+#import "FRY.h"
 
 @implementation UIView (FRY)
 
@@ -64,6 +65,26 @@
 - (UIView *)fry_lookupMatchingViewAtPoint:(CGPoint)point
 {
     return [self hitTest:point withEvent:nil];
+}
+
+- (void)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView
+{
+    [[FRY shared] simulateTouches:touches inView:self frame:frameInView];
+}
+
+- (void)fry_simulateTouches:(NSArray *)touches
+{
+    [[FRY shared] simulateTouches:touches inView:self frame:self.bounds];
+}
+
+- (void)fry_simulateTouch:(SKSSimulatedTouch *)touch insideRect:(CGRect)frameInView
+{
+    [self fry_simulateTouches:@[touch] insideRect:frameInView];
+}
+
+- (void)fry_simulateTouch:(SKSSimulatedTouch *)touch
+{
+    [self fry_simulateTouches:@[touch]];
 }
 
 @end

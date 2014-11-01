@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class SKSSimulatedTouch;
+
 @interface UIView (FRY)
 
 - (UIView *)fry_animatingViewToWaitFor;
@@ -23,5 +25,11 @@
  * UINavigationBar for instance is always the hitTest:event: target, even though it is not lookup-able.
  */
 - (UIView *)fry_lookupMatchingViewAtPoint:(CGPoint)point;
+
+
+- (void)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView;
+- (void)fry_simulateTouches:(NSArray *)touches;
+- (void)fry_simulateTouch:(SKSSimulatedTouch *)touch insideRect:(CGRect)frameInView;
+- (void)fry_simulateTouch:(SKSSimulatedTouch *)touch;
 
 @end

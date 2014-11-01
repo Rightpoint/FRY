@@ -46,4 +46,27 @@
     return results;
 }
 
+
+- (NSObject *)depthFirstChildOfObject:(NSObject *)object matchingVariables:(NSDictionary *)variables;
+{
+    for ( NSString *childKeyPath in self.childKeyPaths ) {
+        NSArray *children = [object valueForKeyPath:childKeyPath];
+        for ( NSObject *child in children) {
+            if ( [self.descendPredicate evaluateWithObject:child  substitutionVariables:variables] ) {
+                id<FRYLookup> lookup = [child.class fry_lookup];
+                NSObject *result = [lookup depthFirstChildOfObject:child matchingVariables:variables];
+                if ( result ) {
+                    return result;
+                }
+            }
+        }
+    }
+    if ( [self.matchPredicate evaluateWithObject:object substitutionVariables:variables] ) {
+        return self.matchTransform(object);
+    }
+
+    return nil;
+}
+
+
 @end
