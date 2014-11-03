@@ -46,6 +46,9 @@
 		ABCF04E71A06F2630000318A /* UIAccessibility+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD0E19E4DE3500228531 /* UIAccessibility+FRY.m */; };
 		B9215C4142D84548893B9BCA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89238CE01CB344F78A59E9AE /* libPods.a */; };
 		D4082AC11A07D6ED00F03F3C /* UIView+FRYTouchHighlighting.m in Sources */ = {isa = PBXBuildFile; fileRef = D4082AC01A07D6ED00F03F3C /* UIView+FRYTouchHighlighting.m */; };
+		D4082AC31A07F41E00F03F3C /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = D4082AC21A07F41E00F03F3C /* spark.png */; };
+		D4082AC41A07F5A000F03F3C /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = D4082AC21A07F41E00F03F3C /* spark.png */; };
+		D4082AC51A07F5A300F03F3C /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = D4082AC21A07F41E00F03F3C /* spark.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +155,7 @@
 		ABCF04E21A06BE220000318A /* ControlsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlsViewController.m; sourceTree = "<group>"; };
 		D4082ABF1A07D6ED00F03F3C /* UIView+FRYTouchHighlighting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FRYTouchHighlighting.h"; sourceTree = "<group>"; };
 		D4082AC01A07D6ED00F03F3C /* UIView+FRYTouchHighlighting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FRYTouchHighlighting.m"; sourceTree = "<group>"; };
+		D4082AC21A07F41E00F03F3C /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spark.png; path = ../../../spark.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,6 +332,7 @@
 				AB35FCEB19DFB49100228531 /* FRYActiveTouch.m */,
 				D4082ABF1A07D6ED00F03F3C /* UIView+FRYTouchHighlighting.h */,
 				D4082AC01A07D6ED00F03F3C /* UIView+FRYTouchHighlighting.m */,
+				D4082AC21A07F41E00F03F3C /* spark.png */,
 				AB184ADE19E8E0CC007CC9DA /* Model */,
 				AB35FD6319E4ECF200228531 /* FRYEventMonitor.h */,
 				AB35FD6419E4ECF200228531 /* FRYEventMonitor.m */,
@@ -523,6 +528,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB25C05A19DF95AA00038E75 /* InfoPlist.strings in Resources */,
+				D4082AC31A07F41E00F03F3C /* spark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,6 +537,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABCF04C91A06AF200000318A /* Main.storyboard in Resources */,
+				D4082AC41A07F5A000F03F3C /* spark.png in Resources */,
 				ABCF04CB1A06AF200000318A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -539,6 +546,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4082AC51A07F5A300F03F3C /* spark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

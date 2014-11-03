@@ -44,12 +44,6 @@ static NSUInteger const kFRYTouchPhaseUndefined = -1;
     return self;
 }
 
-- (void)dealloc
-{
-    [self.view fry_setFrameHighlighted:NO animated:YES];
-    [self.view fry_highlightPoint:CGPointMake(-1.0f, -1.0f) animated:NO];
-}
-
 - (UITouchPhase)currentTouchPhase
 {
     return self.currentTouch ? self.currentTouch.phase : kFRYTouchPhaseUndefined;
