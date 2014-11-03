@@ -10,12 +10,13 @@ Pod::Spec.new do |s|
 
   s.homepage     = "http://github.com/Raizlabs/FRY"
   s.license      = "MIT"
-  s.author             = { "Brian King" => "brian.king@raizlabs.com" }
+  s.author       = { "Brian King" => "brian.king@raizlabs.com" }
   s.platform     = :ios
-  # s.platform     = :ios, "5.0"
+  # s.platform   = :ios, "5.0"
   s.source       = { :git => "https://github.com/Raizlabs/FRY.git", :tag => "0.1" }
 
   s.source_files  = "FRY", "FRY/**/*.{h,m}"
+  s.resources     = "**/*.png"
 
   s.public_header_files = "FRY/**/*.h"
 
