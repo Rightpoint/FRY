@@ -85,6 +85,7 @@ static NSUInteger const kFRYTouchPhaseUndefined = -1;
         else {
             [self.currentTouch setPhaseAndUpdateTimestamp:UITouchPhaseEnded];
             [self.view fry_setFrameHighlighted:NO animated:YES];
+            viewPoint = CGPointMake(-1.0f, -1.0f);
         }
     }
     
