@@ -86,6 +86,9 @@
             log.startingOffset = relativeTouchTime;
             CGPoint locationInView = [touch locationInView:touch.view];
             UIView *matchingView = [touch.view fry_lookupMatchingViewAtPoint:locationInView];
+            while ( matchingView && [matchingView fry_matchingLookupVariables] == nil ) {
+                matchingView = [matchingView superview];
+            }
             log.viewLookupVariables = [matchingView fry_matchingLookupVariables];
             [self.activeTouchLog setObject:log forKey:touch];
             [self.touchBeganOnViews setObject:touch.view forKey:touch];

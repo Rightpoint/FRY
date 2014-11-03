@@ -8,10 +8,7 @@
 
 - test macro's
 - improve debug for lookup / tap failures
-   - Highlight frames and tap points when simulating touches
 
-- extend lookups to support multiple grammar types (accessibility, arbitrary predicate, etc.)
-  - Clean up lookups to ensure fully tappable (when desired)
 - warn if accessibility is disabled
 
 - Device Event support

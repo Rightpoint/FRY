@@ -48,22 +48,18 @@
 
 - (NSDictionary *)fry_matchingLookupVariables
 {
-    UIView *view = self;
-    while ( view && view.accessibilityLabel == nil ) {
-        view = view.superview;
-    }
     NSMutableDictionary *variables = [NSMutableDictionary dictionary];
-    if ( view.fry_accessibilityLabel && view.accessibilityLabel.length > 0 ) {
-        variables[NSStringFromSelector(@selector(fry_accessibilityLabel))] = view.fry_accessibilityLabel;
+    if ( self.fry_accessibilityLabel && self.accessibilityLabel.length > 0 ) {
+        variables[NSStringFromSelector(@selector(fry_accessibilityLabel))] = self.fry_accessibilityLabel;
     }
-    if ( view.fry_accessibilityValue && view.accessibilityValue.length > 0 ) {
-        variables[NSStringFromSelector(@selector(fry_accessibilityValue))] = view.fry_accessibilityValue;
+    if ( self.fry_accessibilityValue && self.accessibilityValue.length > 0 ) {
+        variables[NSStringFromSelector(@selector(fry_accessibilityValue))] = self.fry_accessibilityValue;
     }
-    if ( view.accessibilityIdentifier && view.accessibilityIdentifier.length > 0 ) {
-        variables[NSStringFromSelector(@selector(accessibilityIdentifier))] = view.accessibilityIdentifier;
+    if ( self.accessibilityIdentifier && self.accessibilityIdentifier.length > 0 ) {
+        variables[NSStringFromSelector(@selector(accessibilityIdentifier))] = self.accessibilityIdentifier;
     }
-    if ( view.accessibilityTraits ) {
-        variables[NSStringFromSelector(@selector(accessibilityTraits))] = @(view.accessibilityTraits);
+    if ( self.accessibilityTraits ) {
+        variables[NSStringFromSelector(@selector(accessibilityTraits))] = @(self.accessibilityTraits);
     }
     
     if ( variables.count > 0 ) {
