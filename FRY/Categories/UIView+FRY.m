@@ -58,10 +58,7 @@
     if ( self.accessibilityIdentifier && self.accessibilityIdentifier.length > 0 ) {
         variables[NSStringFromSelector(@selector(accessibilityIdentifier))] = self.accessibilityIdentifier;
     }
-    if ( self.accessibilityTraits ) {
-        variables[NSStringFromSelector(@selector(accessibilityTraits))] = @(self.accessibilityTraits);
-    }
-    
+
     if ( variables.count > 0 ) {
         return [variables copy];
     }
