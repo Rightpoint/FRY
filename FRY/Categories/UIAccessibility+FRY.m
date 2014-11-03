@@ -8,6 +8,8 @@
 
 #import "UIAccessibility+FRY.h"
 
+UIAccessibilityTraits FRYTextFieldAccessibilityValue = 0x00040000;
+
 @implementation NSObject(FRY)
 
 - (NSString *)fry_accessibilityValue
@@ -54,7 +56,8 @@
 {
     return ((self.accessibilityTraits & UIAccessibilityTraitButton) == UIAccessibilityTraitButton ||
             (self.accessibilityTraits & UIAccessibilityTraitAdjustable) == UIAccessibilityTraitAdjustable ||
-            (self.accessibilityTraits & UIAccessibilityTraitAllowsDirectInteraction) == UIAccessibilityTraitAllowsDirectInteraction);
+            (self.accessibilityTraits & UIAccessibilityTraitAllowsDirectInteraction) == UIAccessibilityTraitAllowsDirectInteraction ||
+            (self.accessibilityTraits & FRYTextFieldAccessibilityValue) == FRYTextFieldAccessibilityValue);
 }
 
 @end
