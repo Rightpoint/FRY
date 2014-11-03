@@ -97,7 +97,7 @@
         
         [FRY_KEY fry_enumerateDepthFirstViewMatching:@{kFRYLookupAccessibilityLabel : actionConfirmation}
                                           usingBlock:^(UIView *view, CGRect frameInView) {
-                                              XCTAssertNotNil(view);
+                                              XCTAssertNotNil(view, @"%@", accessibilityLabel);
                                           }];
     }
 }

@@ -39,7 +39,6 @@
 		ABCF04C31A06AF200000318A /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04C21A06AF200000318A /* MasterViewController.m */; };
 		ABCF04C91A06AF200000318A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABCF04C71A06AF200000318A /* Main.storyboard */; };
 		ABCF04CB1A06AF200000318A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABCF04CA1A06AF200000318A /* Images.xcassets */; };
-		ABCF04CE1A06AF200000318A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABCF04CC1A06AF200000318A /* LaunchScreen.xib */; };
 		ABCF04DA1A06AF210000318A /* ControlsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04D91A06AF210000318A /* ControlsViewControllerTests.m */; };
 		ABCF04E31A06BE220000318A /* ControlsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04E21A06BE220000318A /* ControlsViewController.m */; };
 		ABCF04E51A06E75D0000318A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB35FD6119E4E54F00228531 /* UIKit.framework */; };
@@ -527,7 +526,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABCF04C91A06AF200000318A /* Main.storyboard in Resources */,
-				ABCF04CE1A06AF200000318A /* LaunchScreen.xib in Resources */,
 				ABCF04CB1A06AF200000318A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

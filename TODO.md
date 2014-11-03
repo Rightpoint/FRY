@@ -4,13 +4,14 @@
 - add playback support for touch file
 
 - schedule touches at times, instead of every interval
-- Enhance touch simulation (Bezier paths, Momentum)
+- Enhance touch simulation (Bezier paths, touch-up momentum)
+
 - test macro's
 - improve debug for lookup / tap failures
    - Highlight frames and tap points when simulating touches
 
 - extend lookups to support multiple grammar types (accessibility, arbitrary predicate, etc.)
-- clean up headers
+  - Clean up lookups to ensure fully tappable (when desired)
 - warn if accessibility is disabled
 
 - Device Event support
