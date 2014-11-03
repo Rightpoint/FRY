@@ -6,12 +6,20 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface NSPredicate(FRY)
 
++ (NSPredicate *)fry_matchAccessibilityIdentifier:(NSString *)accessibilityIdentifier;
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel;
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityValue:(NSString *)accessibilityValue;
+
++ (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel
+                          accessibilityValue:(NSString *)accessibilityValue
+                         accessibilityTraits:(UIAccessibilityTraits)accessibilityTraits;
+
++ (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityTraits:(UIAccessibilityTraits)accessibilityTraits;
+
 + (NSPredicate *)fry_matchInteractableAccessibilityLabel:(NSString *)accessibilityLabel;
 + (NSPredicate *)fry_matchInteractableAccessibilityLabel:(NSString *)accessibilityLabel accessibilityValue:(NSString *)accessibilityValue;
 

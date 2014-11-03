@@ -13,12 +13,6 @@
 #import "FRYDefines.h"
 #import "UIView+FRY.h"
 
-NSString* const kFRYLookupAccessibilityIdentifier = @"accessibilityIdentifier";
-NSString* const kFRYLookupAccessibilityValue      = @"accessibilityValue";
-NSString* const kFRYLookupAccessibilityLabel      = @"accessibilityLabel";
-NSString* const kFRYLookupAccessibilityTrait      = @"accessibilityTrait";
-NSString* const kFRYLookupInteractable            = @"interactable";
-
 @implementation NSObject(FRYLookupSupport)
 
 + (NSSet *)fry_childKeyPaths
@@ -38,6 +32,7 @@ NSString* const kFRYLookupInteractable            = @"interactable";
 
 - (void)fry_enumerateDepthFirstViewMatching:(NSPredicate *)predicate usingBlock:(FRYFirstMatchBlock)block;
 {
+    NSParameterAssert(predicate);
     NSParameterAssert(block);
 
     FRYLookupResult *match = [self fry_enumerateDepthFirstViewMatching:predicate];
@@ -46,6 +41,7 @@ NSString* const kFRYLookupInteractable            = @"interactable";
 
 - (FRYLookupResult *)fry_enumerateDepthFirstViewMatching:(NSPredicate *)predicate
 {
+    NSParameterAssert(predicate);
     for ( NSString *childKeyPath in self.class.fry_childKeyPaths ) {
         NSArray *children = [self valueForKeyPath:childKeyPath];
         for ( NSObject *child in children) {
@@ -65,6 +61,7 @@ NSString* const kFRYLookupInteractable            = @"interactable";
 
 - (BOOL)fry_hasSubviewViewMatching:(NSPredicate *)predicate
 {
+    NSParameterAssert(predicate);
     NSMutableArray *array = [NSMutableArray array];
     [self fry_enumerateAllViewsMatching:predicate results:array];
     return array.count != 0;
@@ -72,6 +69,7 @@ NSString* const kFRYLookupInteractable            = @"interactable";
 
 - (void)fry_enumerateAllViewsMatching:(NSPredicate *)predicate usingBlock:(FRYFirstMatchBlock)block
 {
+    NSParameterAssert(predicate);
     NSParameterAssert(block);
     NSMutableArray *results = [NSMutableArray array];
 
@@ -84,6 +82,9 @@ NSString* const kFRYLookupInteractable            = @"interactable";
 
 - (void)fry_enumerateAllViewsMatching:(NSPredicate *)predicate results:(NSMutableArray *)results
 {
+    NSParameterAssert(predicate);
+    NSParameterAssert(results);
+
     if ( [predicate evaluateWithObject:self substitutionVariables:nil] ) {
         [results addObject:[self fry_lookupResult]];
     }

@@ -59,7 +59,7 @@
             0.0,
             self.pointsInTime.count,
             [self recreationCodeXyoffsetsArgument],
-            [self recreationCodeViewLookupVariables]];
+            [self recreationCodeViewMatchingPredicate]];
 }
 
 - (NSString *)recreationCodeXyoffsetsArgument
@@ -71,14 +71,28 @@
     return [xPoints componentsJoinedByString:@", "];
 }
 
-- (NSString *)recreationCodeViewLookupVariables
+- (NSString *)recreationCodeViewMatchingPredicate
 {
-    NSMutableArray *keyPairs = [NSMutableArray array];
+    NSMutableArray *formatPairs = [NSMutableArray array];
+    NSMutableArray *keyValuePairs = [NSMutableArray array];
     [self.viewLookupVariables enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
-        [keyPairs addObject:[NSString stringWithFormat:@"@\"%@\" : @\"%@\"", key, obj]];
+        [formatPairs addObject:@"\%K = \%@"];
+        [keyValuePairs addObject:[NSString stringWithFormat:@"@\"%@\"", key]];
+        if ( [obj isKindOfClass:[NSString class]] ) {
+            [keyValuePairs addObject:[NSString stringWithFormat:@"@\"%@\"", obj]];
+        }
+        else if ( [obj isKindOfClass:[NSNumber class]] ) {
+            [keyValuePairs addObject:[NSString stringWithFormat:@"@(%@)", obj]];
+        }
+        else {
+            [NSException raise:NSInvalidArgumentException format:@"Not sure how to deal with %@", obj];
+        }
     }];
+    NSString *bareFormatString = [formatPairs componentsJoinedByString:@" && "];
+    NSString *keyValueList = [keyValuePairs componentsJoinedByString:@", "];
+
     if ( self.viewLookupVariables ) {
-        return [NSString stringWithFormat:@"@{%@}", [keyPairs componentsJoinedByString:@", "]];
+        return [NSString stringWithFormat:@"[NSPredicate predicateWithFormat:@\"%@\", %@]", bareFormatString, keyValueList];
     }
     else {
         return @"nil";

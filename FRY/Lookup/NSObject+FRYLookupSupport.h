@@ -9,11 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "FRYDefines.h"
 
-OBJC_EXTERN NSString* const kFRYLookupAccessibilityIdentifier;
-OBJC_EXTERN NSString* const kFRYLookupAccessibilityLabel;
-OBJC_EXTERN NSString* const kFRYLookupAccessibilityValue;
-OBJC_EXTERN NSString* const kFRYLookupAccessibilityTrait;
-
 @interface NSObject(FRYLookupSupport)
 
 - (void)fry_enumerateDepthFirstViewMatching:(NSPredicate *)predicate usingBlock:(FRYFirstMatchBlock)block;

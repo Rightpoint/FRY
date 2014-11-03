@@ -23,6 +23,9 @@
 
 @implementation ControlsViewController
 
+/*
+ * This xib is terrible, I'm sorry.  Too many views in one superview, and I'm not patient enough to make the constraints not fail.
+ */
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.triggeredSelectors = [NSMutableSet set];

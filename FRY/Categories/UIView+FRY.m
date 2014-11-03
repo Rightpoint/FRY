@@ -9,6 +9,7 @@
 #import "UIView+FRY.h"
 #import "NSObject+FRYLookupSupport.h"
 #import "FRYTouchDispatch.h"
+#import "UIAccessibility+FRY.h"
 
 @implementation UIView (FRY)
 
@@ -52,13 +53,19 @@
         view = view.superview;
     }
     NSMutableDictionary *variables = [NSMutableDictionary dictionary];
-    if ( view.accessibilityLabel ) {
-        variables[kFRYLookupAccessibilityLabel] = view.accessibilityLabel;
+    if ( view.fry_accessibilityLabel && view.accessibilityLabel.length > 0 ) {
+        variables[NSStringFromSelector(@selector(fry_accessibilityLabel))] = view.fry_accessibilityLabel;
     }
-    if ( view.accessibilityValue ) {
-        variables[kFRYLookupAccessibilityValue] = view.accessibilityValue;
+    if ( view.fry_accessibilityValue && view.accessibilityValue.length > 0 ) {
+        variables[NSStringFromSelector(@selector(fry_accessibilityValue))] = view.fry_accessibilityValue;
     }
-
+    if ( view.accessibilityIdentifier && view.accessibilityIdentifier.length > 0 ) {
+        variables[NSStringFromSelector(@selector(accessibilityIdentifier))] = view.accessibilityIdentifier;
+    }
+    if ( view.accessibilityTraits ) {
+        variables[NSStringFromSelector(@selector(accessibilityTraits))] = @(view.accessibilityTraits);
+    }
+    
     if ( variables.count > 0 ) {
         return [variables copy];
     }
