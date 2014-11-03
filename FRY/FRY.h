@@ -19,3 +19,4 @@
 #import "UIApplication+FRY.h"
 #import "UITextInput+FRY.h"
 #import "UIAccessibility+FRY.h"
+#import "NSPredicate+FRY.h"

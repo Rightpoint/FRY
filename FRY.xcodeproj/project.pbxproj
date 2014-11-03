@@ -29,7 +29,7 @@
 		AB35FD7A19E58B5C00228531 /* FRYMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD6819E4ED6100228531 /* FRYMethodSwizzling.m */; };
 		AB43FCF51A0468600049D520 /* UITextInput+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB43FCF41A0468600049D520 /* UITextInput+FRY.m */; };
 		AB5A891B1A07147700E44C89 /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03C19DF95AA00038E75 /* libFRY.a */; };
-		ABA5781919E64AE600D77CDA /* FRYLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781119E64AE600D77CDA /* FRYLookup.m */; };
+		AB5A891E1A07DEC400E44C89 /* NSPredicate+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB5A891D1A07DEC400E44C89 /* NSPredicate+FRY.m */; };
 		ABA5781A19E64AE600D77CDA /* FRYLookupResult.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781319E64AE600D77CDA /* FRYLookupResult.m */; };
 		ABA5781C19E64AE600D77CDA /* NSObject+FRYLookupSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781819E64AE600D77CDA /* NSObject+FRYLookupSupport.m */; };
 		ABA5782C19E65D1100D77CDA /* FRYDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5782B19E65D1100D77CDA /* FRYDefines.m */; };
@@ -122,8 +122,8 @@
 		AB35FD6819E4ED6100228531 /* FRYMethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYMethodSwizzling.m; sourceTree = "<group>"; };
 		AB43FCF31A0468600049D520 /* UITextInput+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextInput+FRY.h"; sourceTree = "<group>"; };
 		AB43FCF41A0468600049D520 /* UITextInput+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextInput+FRY.m"; sourceTree = "<group>"; };
-		ABA5781019E64AE600D77CDA /* FRYLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYLookup.h; sourceTree = "<group>"; };
-		ABA5781119E64AE600D77CDA /* FRYLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYLookup.m; sourceTree = "<group>"; };
+		AB5A891C1A07DEC400E44C89 /* NSPredicate+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPredicate+FRY.h"; sourceTree = "<group>"; };
+		AB5A891D1A07DEC400E44C89 /* NSPredicate+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPredicate+FRY.m"; sourceTree = "<group>"; };
 		ABA5781219E64AE600D77CDA /* FRYLookupResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYLookupResult.h; sourceTree = "<group>"; };
 		ABA5781319E64AE600D77CDA /* FRYLookupResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYLookupResult.m; sourceTree = "<group>"; };
 		ABA5781419E64AE600D77CDA /* FRYLookupSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYLookupSupport.h; sourceTree = "<group>"; };
@@ -344,13 +344,13 @@
 		ABA5780F19E64AE600D77CDA /* Lookup */ = {
 			isa = PBXGroup;
 			children = (
-				ABA5781019E64AE600D77CDA /* FRYLookup.h */,
-				ABA5781119E64AE600D77CDA /* FRYLookup.m */,
 				ABA5781419E64AE600D77CDA /* FRYLookupSupport.h */,
 				ABA5781219E64AE600D77CDA /* FRYLookupResult.h */,
 				ABA5781319E64AE600D77CDA /* FRYLookupResult.m */,
 				ABA5781719E64AE600D77CDA /* NSObject+FRYLookupSupport.h */,
 				ABA5781819E64AE600D77CDA /* NSObject+FRYLookupSupport.m */,
+				AB5A891C1A07DEC400E44C89 /* NSPredicate+FRY.h */,
+				AB5A891D1A07DEC400E44C89 /* NSPredicate+FRY.m */,
 			);
 			path = Lookup;
 			sourceTree = "<group>";
@@ -594,8 +594,8 @@
 				AB184AEB19E8E0CC007CC9DA /* FRYSyntheticTouch.m in Sources */,
 				AB184AEE19E8EEC0007CC9DA /* NSRunLoop+FRY.m in Sources */,
 				ABCF04E71A06F2630000318A /* UIAccessibility+FRY.m in Sources */,
+				AB5A891E1A07DEC400E44C89 /* NSPredicate+FRY.m in Sources */,
 				AB184AE819E8E0CC007CC9DA /* FRYPointInTime.m in Sources */,
-				ABA5781919E64AE600D77CDA /* FRYLookup.m in Sources */,
 				AB184AEA19E8E0CC007CC9DA /* FRYSimulatedTouch.m in Sources */,
 				AB35FCE419DFAEB900228531 /* UITouch+FRY.m in Sources */,
 			);

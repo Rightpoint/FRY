@@ -7,13 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FRYLookupSupport.h"
+#import "FRYDefines.h"
 
 OBJC_EXTERN NSString* const kFRYLookupAccessibilityIdentifier;
 OBJC_EXTERN NSString* const kFRYLookupAccessibilityLabel;
 OBJC_EXTERN NSString* const kFRYLookupAccessibilityValue;
 OBJC_EXTERN NSString* const kFRYLookupAccessibilityTrait;
 
-@interface NSObject(FRYLookupSupport) <FRYLookupSupport>
+@interface NSObject(FRYLookupSupport)
+
+- (void)fry_enumerateDepthFirstViewMatching:(NSPredicate *)predicate usingBlock:(FRYFirstMatchBlock)block;
+- (void)fry_enumerateAllViewsMatching:(NSPredicate *)predicate usingBlock:(FRYFirstMatchBlock)block;
 
 @end

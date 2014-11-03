@@ -50,4 +50,11 @@
     }
 }
 
+- (BOOL)fry_accessibilityTraitsAreInteractable
+{
+    return ((self.accessibilityTraits & UIAccessibilityTraitButton) == UIAccessibilityTraitButton ||
+            (self.accessibilityTraits & UIAccessibilityTraitAdjustable) == UIAccessibilityTraitAdjustable ||
+            (self.accessibilityTraits & UIAccessibilityTraitAllowsDirectInteraction) == UIAccessibilityTraitAllowsDirectInteraction);
+}
+
 @end

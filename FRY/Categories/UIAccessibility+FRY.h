@@ -13,5 +13,6 @@
 - (NSString *)fry_accessibilityLabel;
 - (NSString *)fry_accessibilityValue;
 - (NSArray *)fry_accessibilityElements;
+- (BOOL)fry_accessibilityTraitsAreInteractable;
 
 @end

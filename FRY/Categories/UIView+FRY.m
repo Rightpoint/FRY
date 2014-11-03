@@ -40,6 +40,11 @@
     return nil;
 }
 
+- (NSArray *)fry_reverseSubviews
+{
+    return [[self.subviews reverseObjectEnumerator] allObjects];
+}
+
 - (NSDictionary *)fry_matchingLookupVariables
 {
     UIView *view = self;
@@ -87,15 +92,15 @@
     [self fry_simulateTouches:@[touch]];
 }
 
-- (void)fry_simulateTouch:(FRYSimulatedTouch *)touch onSubviewMatching:(NSDictionary *)variables
+- (void)fry_simulateTouch:(FRYSimulatedTouch *)touch onSubviewMatching:(NSPredicate *)predicate
 {
-    [self fry_simulateTouches:@[touch] onSubviewMatching:variables];
+    [self fry_simulateTouches:@[touch] onSubviewMatching:predicate];
 }
 
-- (void)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSDictionary *)variables
+- (void)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSPredicate *)predicate
 {
-    [self fry_enumerateDepthFirstViewMatching:variables usingBlock:^(UIView *view, CGRect frameInView) {
-        NSAssert(view != nil, @"Unable to find view matching %@", variables);
+    [self fry_enumerateDepthFirstViewMatching:predicate usingBlock:^(UIView *view, CGRect frameInView) {
+        NSAssert(view != nil, @"Unable to find view matching %@", predicate);
         [view fry_simulateTouches:touches insideRect:frameInView];
     }];
 }

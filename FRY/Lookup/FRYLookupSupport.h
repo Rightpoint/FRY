@@ -7,14 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FRYLookup.h"
-#import "FRYDefines.h"
+
+@class FRYLookupResult;
 
 @protocol FRYLookupSupport <NSObject>
 
-+ (id<FRYLookup>)fry_lookup;
++ (NSSet *)fry_childKeyPaths;
 
-- (void)fry_enumerateDepthFirstViewMatching:(NSDictionary *)variables usingBlock:(FRYFirstMatchBlock)block;
-- (void)fry_enumerateAllViewsMatching:(NSDictionary *)variables usingBlock:(FRYFirstMatchBlock)block;
+- (FRYLookupResult *)fry_lookupResult;
 
 @end
