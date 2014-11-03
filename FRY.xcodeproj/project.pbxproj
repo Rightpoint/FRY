@@ -28,6 +28,7 @@
 		AB35FCF019DFB49100228531 /* FRYActiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCEB19DFB49100228531 /* FRYActiveTouch.m */; };
 		AB35FD7A19E58B5C00228531 /* FRYMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD6819E4ED6100228531 /* FRYMethodSwizzling.m */; };
 		AB43FCF51A0468600049D520 /* UITextInput+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB43FCF41A0468600049D520 /* UITextInput+FRY.m */; };
+		AB5A891B1A07147700E44C89 /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03C19DF95AA00038E75 /* libFRY.a */; };
 		ABA5781919E64AE600D77CDA /* FRYLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781119E64AE600D77CDA /* FRYLookup.m */; };
 		ABA5781A19E64AE600D77CDA /* FRYLookupResult.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781319E64AE600D77CDA /* FRYLookupResult.m */; };
 		ABA5781C19E64AE600D77CDA /* NSObject+FRYLookupSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781819E64AE600D77CDA /* NSObject+FRYLookupSupport.m */; };
@@ -176,6 +177,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB5A891B1A07147700E44C89 /* libFRY.a in Frameworks */,
 				ABCF04E51A06E75D0000318A /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -929,6 +931,7 @@
 				ABCF04DD1A06AF210000318A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ABCF04DE1A06AF210000318A /* Build configuration list for PBXNativeTarget "TestTargetTests" */ = {
 			isa = XCConfigurationList;
@@ -937,6 +940,7 @@
 				ABCF04E01A06AF210000318A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
