@@ -190,6 +190,28 @@
                                       }];
 }
 
+- (void)testStepper
+{
+    for ( NSUInteger i = 0; i < 5; i++) {
+        [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+                 onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"Increment"}];
+        [[NSRunLoop currentRunLoop] fry_waitForIdle];
+    }
+    [FRY_KEY fry_enumerateDepthFirstViewMatching:@{kFRYLookupAccessibilityLabel : @"Slider=55"}
+                                      usingBlock:^(UIView *view, CGRect frameInView) {
+                                          XCTAssertNotNil(view);
+                                      }];
+    for ( NSUInteger i = 0; i < 5; i++) {
+        [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+                 onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"Decrement"}];
+        [[NSRunLoop currentRunLoop] fry_waitForIdle];
+    }
+    [FRY_KEY fry_enumerateDepthFirstViewMatching:@{kFRYLookupAccessibilityLabel : @"Slider=50"}
+                                      usingBlock:^(UIView *view, CGRect frameInView) {
+                                          XCTAssertNotNil(view);
+                                      }];
+}
+
 - (void)testActivityIndicator
 {
     [FRY_KEY fry_enumerateDepthFirstViewMatching:@{kFRYLookupAccessibilityLabel : @"In progress"}

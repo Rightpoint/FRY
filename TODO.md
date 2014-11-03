@@ -5,6 +5,7 @@
 
 - schedule touches at times, instead of every interval
 - Enhance touch simulation (Bezier paths, Momentum)
+- test macro's
 - improve debug for lookup / tap failures
    - Highlight frames and tap points when simulating touches
 
