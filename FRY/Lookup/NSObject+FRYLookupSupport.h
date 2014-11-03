@@ -18,5 +18,6 @@ OBJC_EXTERN NSString* const kFRYLookupAccessibilityTrait;
 
 - (void)fry_enumerateDepthFirstViewMatching:(NSPredicate *)predicate usingBlock:(FRYFirstMatchBlock)block;
 - (void)fry_enumerateAllViewsMatching:(NSPredicate *)predicate usingBlock:(FRYFirstMatchBlock)block;
+- (BOOL)fry_hasSubviewViewMatching:(NSPredicate *)predicate;
 
 @end

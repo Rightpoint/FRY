@@ -63,6 +63,13 @@ NSString* const kFRYLookupInteractable            = @"interactable";
     return nil;
 }
 
+- (BOOL)fry_hasSubviewViewMatching:(NSPredicate *)predicate
+{
+    NSMutableArray *array = [NSMutableArray array];
+    [self fry_enumerateAllViewsMatching:predicate results:array];
+    return array.count != 0;
+}
+
 - (void)fry_enumerateAllViewsMatching:(NSPredicate *)predicate usingBlock:(FRYFirstMatchBlock)block
 {
     NSParameterAssert(block);
