@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		AB184AD019E85C5E007CC9DA /* FRYEventMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD6419E4ECF200228531 /* FRYEventMonitor.m */; };
-		AB184AD119E85CE8007CC9DA /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03C19DF95AA00038E75 /* libFRY.a */; };
 		AB184AD419E85F49007CC9DA /* UIApplication+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCDB19DFA30B00228531 /* UIApplication+FRY.m */; };
 		AB184AE819E8E0CC007CC9DA /* FRYPointInTime.m in Sources */ = {isa = PBXBuildFile; fileRef = AB184AE019E8E0CC007CC9DA /* FRYPointInTime.m */; };
 		AB184AE919E8E0CC007CC9DA /* FRYRecordedTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = AB184AE219E8E0CC007CC9DA /* FRYRecordedTouch.m */; };
@@ -27,32 +26,24 @@
 		AB35FCE119DFA6F200228531 /* FRYEventProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCDF19DFA6F200228531 /* FRYEventProxy.m */; };
 		AB35FCE419DFAEB900228531 /* UITouch+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCE319DFAEB900228531 /* UITouch+FRY.m */; };
 		AB35FCF019DFB49100228531 /* FRYActiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCEB19DFB49100228531 /* FRYActiveTouch.m */; };
-		AB35FD0F19E4DE3500228531 /* UIAccessibility+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD0E19E4DE3500228531 /* UIAccessibility+FRY.m */; };
-		AB35FD3619E4E48100228531 /* Test_HostTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD3519E4E48100228531 /* Test_HostTests.m */; };
-		AB35FD5119E4E4E900228531 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD3E19E4E4E900228531 /* AppDelegate.m */; };
-		AB35FD5219E4E4E900228531 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD3F19E4E4E900228531 /* CollectionViewController.m */; };
-		AB35FD5319E4E4E900228531 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB35FD4019E4E4E900228531 /* Default-568h@2x.png */; };
-		AB35FD5419E4E4E900228531 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = AB35FD4119E4E4E900228531 /* Default.png */; };
-		AB35FD5519E4E4E900228531 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB35FD4219E4E4E900228531 /* Default@2x.png */; };
-		AB35FD5619E4E4E900228531 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB35FD4319E4E4E900228531 /* InfoPlist.strings */; };
-		AB35FD5719E4E4E900228531 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB35FD4519E4E4E900228531 /* MainStoryboard.storyboard */; };
-		AB35FD5819E4E4E900228531 /* GestureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD4719E4E4E900228531 /* GestureViewController.m */; };
-		AB35FD5919E4E4E900228531 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD4819E4E4E900228531 /* main.m */; };
-		AB35FD5A19E4E4E900228531 /* PickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD4919E4E4E900228531 /* PickerController.m */; };
-		AB35FD5B19E4E4E900228531 /* ScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD4A19E4E4E900228531 /* ScrollViewController.m */; };
-		AB35FD5C19E4E4E900228531 /* ShowHideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD4B19E4E4E900228531 /* ShowHideViewController.m */; };
-		AB35FD5D19E4E4E900228531 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD4C19E4E4E900228531 /* TableViewController.m */; };
-		AB35FD5E19E4E4E900228531 /* TapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD4D19E4E4E900228531 /* TapViewController.m */; };
-		AB35FD6019E4E4E900228531 /* TestSuiteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD5019E4E4E900228531 /* TestSuiteViewController.m */; };
-		AB35FD6219E4E54F00228531 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB35FD6119E4E54F00228531 /* UIKit.framework */; };
 		AB35FD7A19E58B5C00228531 /* FRYMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD6819E4ED6100228531 /* FRYMethodSwizzling.m */; };
 		AB43FCF51A0468600049D520 /* UITextInput+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB43FCF41A0468600049D520 /* UITextInput+FRY.m */; };
-		AB4936F319F69AEE00A6F297 /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03C19DF95AA00038E75 /* libFRY.a */; };
 		ABA5781919E64AE600D77CDA /* FRYLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781119E64AE600D77CDA /* FRYLookup.m */; };
 		ABA5781A19E64AE600D77CDA /* FRYLookupResult.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781319E64AE600D77CDA /* FRYLookupResult.m */; };
 		ABA5781C19E64AE600D77CDA /* NSObject+FRYLookupSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781819E64AE600D77CDA /* NSObject+FRYLookupSupport.m */; };
 		ABA5782C19E65D1100D77CDA /* FRYDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5782B19E65D1100D77CDA /* FRYDefines.m */; };
 		ABCF04B31A054F890000318A /* FRYTouchDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04B21A054F890000318A /* FRYTouchDispatch.m */; };
+		ABCF04BD1A06AF200000318A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04BC1A06AF200000318A /* main.m */; };
+		ABCF04C01A06AF200000318A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04BF1A06AF200000318A /* AppDelegate.m */; };
+		ABCF04C31A06AF200000318A /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04C21A06AF200000318A /* MasterViewController.m */; };
+		ABCF04C91A06AF200000318A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABCF04C71A06AF200000318A /* Main.storyboard */; };
+		ABCF04CB1A06AF200000318A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABCF04CA1A06AF200000318A /* Images.xcassets */; };
+		ABCF04CE1A06AF200000318A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABCF04CC1A06AF200000318A /* LaunchScreen.xib */; };
+		ABCF04DA1A06AF210000318A /* ControlsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04D91A06AF210000318A /* ControlsViewControllerTests.m */; };
+		ABCF04E31A06BE220000318A /* ControlsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04E21A06BE220000318A /* ControlsViewController.m */; };
+		ABCF04E51A06E75D0000318A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB35FD6119E4E54F00228531 /* UIKit.framework */; };
+		ABCF04E61A06E7EF0000318A /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03C19DF95AA00038E75 /* libFRY.a */; };
+		ABCF04E71A06F2630000318A /* UIAccessibility+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD0E19E4DE3500228531 /* UIAccessibility+FRY.m */; };
 		B9215C4142D84548893B9BCA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89238CE01CB344F78A59E9AE /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -64,12 +55,12 @@
 			remoteGlobalIDString = AB25C03B19DF95AA00038E75;
 			remoteInfo = FRY;
 		};
-		AB35FD3019E4E48100228531 /* PBXContainerItemProxy */ = {
+		ABCF04D41A06AF200000318A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AB25C03419DF95AA00038E75 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = AB35FD1319E4E48000228531;
-			remoteInfo = "Test Host";
+			remoteGlobalIDString = ABCF04B71A06AF200000318A;
+			remoteInfo = TestTarget;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -109,7 +100,6 @@
 		AB25C05019DF95AA00038E75 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		AB25C05719DF95AA00038E75 /* FRYTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FRYTests-Info.plist"; sourceTree = "<group>"; };
 		AB25C05919DF95AA00038E75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AB25C05B19DF95AA00038E75 /* FRYTouchSynthesisOperationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FRYTouchSynthesisOperationTests.m; sourceTree = "<group>"; };
 		AB25C06619DF95ED00038E75 /* UIAccessibilityElement+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAccessibilityElement+FRY.h"; sourceTree = "<group>"; };
 		AB25C06719DF95ED00038E75 /* UIAccessibilityElement+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAccessibilityElement+FRY.m"; sourceTree = "<group>"; };
 		AB25C06819DF95ED00038E75 /* UIView+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FRY.h"; sourceTree = "<group>"; };
@@ -125,27 +115,6 @@
 		AB35FCEB19DFB49100228531 /* FRYActiveTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYActiveTouch.m; sourceTree = "<group>"; };
 		AB35FD0D19E4DE3500228531 /* UIAccessibility+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAccessibility+FRY.h"; sourceTree = "<group>"; };
 		AB35FD0E19E4DE3500228531 /* UIAccessibility+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAccessibility+FRY.m"; sourceTree = "<group>"; };
-		AB35FD1419E4E48000228531 /* Test Host.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Test Host.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB35FD2F19E4E48000228531 /* Test HostTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Test HostTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB35FD3419E4E48100228531 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AB35FD3519E4E48100228531 /* Test_HostTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test_HostTests.m; sourceTree = "<group>"; };
-		AB35FD3E19E4E4E900228531 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		AB35FD3F19E4E4E900228531 /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
-		AB35FD4019E4E4E900228531 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		AB35FD4119E4E4E900228531 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		AB35FD4219E4E4E900228531 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		AB35FD4419E4E4E900228531 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AB35FD4619E4E4E900228531 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		AB35FD4719E4E4E900228531 /* GestureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureViewController.m; sourceTree = "<group>"; };
-		AB35FD4819E4E4E900228531 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		AB35FD4919E4E4E900228531 /* PickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerController.m; sourceTree = "<group>"; };
-		AB35FD4A19E4E4E900228531 /* ScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewController.m; sourceTree = "<group>"; };
-		AB35FD4B19E4E4E900228531 /* ShowHideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowHideViewController.m; sourceTree = "<group>"; };
-		AB35FD4C19E4E4E900228531 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
-		AB35FD4D19E4E4E900228531 /* TapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapViewController.m; sourceTree = "<group>"; };
-		AB35FD4E19E4E4E900228531 /* Test Host-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Test Host-Info.plist"; sourceTree = "<group>"; };
-		AB35FD4F19E4E4E900228531 /* Test Host-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Test Host-Prefix.pch"; sourceTree = "<group>"; };
-		AB35FD5019E4E4E900228531 /* TestSuiteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSuiteViewController.m; sourceTree = "<group>"; };
 		AB35FD6119E4E54F00228531 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AB35FD6319E4ECF200228531 /* FRYEventMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYEventMonitor.h; sourceTree = "<group>"; };
 		AB35FD6419E4ECF200228531 /* FRYEventMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYEventMonitor.m; sourceTree = "<group>"; };
@@ -165,6 +134,21 @@
 		ABCF04AE1A054F460000318A /* FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRY.h; sourceTree = "<group>"; };
 		ABCF04B11A054F890000318A /* FRYTouchDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYTouchDispatch.h; sourceTree = "<group>"; };
 		ABCF04B21A054F890000318A /* FRYTouchDispatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYTouchDispatch.m; sourceTree = "<group>"; };
+		ABCF04B81A06AF200000318A /* TestTarget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestTarget.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABCF04BB1A06AF200000318A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABCF04BC1A06AF200000318A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		ABCF04BE1A06AF200000318A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		ABCF04BF1A06AF200000318A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		ABCF04C11A06AF200000318A /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		ABCF04C21A06AF200000318A /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		ABCF04C81A06AF200000318A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		ABCF04CA1A06AF200000318A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		ABCF04CD1A06AF200000318A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		ABCF04D31A06AF200000318A /* TestTargetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestTargetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABCF04D81A06AF210000318A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABCF04D91A06AF210000318A /* ControlsViewControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ControlsViewControllerTests.m; sourceTree = "<group>"; };
+		ABCF04E11A06BE220000318A /* ControlsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlsViewController.h; sourceTree = "<group>"; };
+		ABCF04E21A06BE220000318A /* ControlsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,20 +172,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB35FD1119E4E48000228531 /* Frameworks */ = {
+		ABCF04B51A06AF200000318A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB4936F319F69AEE00A6F297 /* libFRY.a in Frameworks */,
-				AB35FD6219E4E54F00228531 /* UIKit.framework in Frameworks */,
+				ABCF04E51A06E75D0000318A /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB35FD2C19E4E48000228531 /* Frameworks */ = {
+		ABCF04D01A06AF200000318A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB184AD119E85CE8007CC9DA /* libFRY.a in Frameworks */,
+				ABCF04E61A06E7EF0000318A /* libFRY.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,8 +212,8 @@
 			children = (
 				AB25C04119DF95AA00038E75 /* FRY */,
 				AB25C05519DF95AA00038E75 /* FRYTests */,
-				AB35FD3D19E4E4E900228531 /* KIFTestHost */,
-				AB35FD3219E4E48100228531 /* Test HostTests */,
+				ABCF04B91A06AF200000318A /* TestTarget */,
+				ABCF04D61A06AF200000318A /* TestTargetTests */,
 				AB25C03E19DF95AA00038E75 /* Frameworks */,
 				AB25C03D19DF95AA00038E75 /* Products */,
 				44E5641396444807AA772D3D /* Pods.xcconfig */,
@@ -242,8 +225,8 @@
 			children = (
 				AB25C03C19DF95AA00038E75 /* libFRY.a */,
 				AB25C04C19DF95AA00038E75 /* FRYTests.xctest */,
-				AB35FD1419E4E48000228531 /* Test Host.app */,
-				AB35FD2F19E4E48000228531 /* Test HostTests.xctest */,
+				ABCF04B81A06AF200000318A /* TestTarget.app */,
+				ABCF04D31A06AF200000318A /* TestTargetTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -287,7 +270,6 @@
 		AB25C05519DF95AA00038E75 /* FRYTests */ = {
 			isa = PBXGroup;
 			children = (
-				AB25C05B19DF95AA00038E75 /* FRYTouchSynthesisOperationTests.m */,
 				AB25C05619DF95AA00038E75 /* Supporting Files */,
 			);
 			path = FRYTests;
@@ -349,47 +331,6 @@
 			path = Touch;
 			sourceTree = "<group>";
 		};
-		AB35FD3219E4E48100228531 /* Test HostTests */ = {
-			isa = PBXGroup;
-			children = (
-				AB35FD3519E4E48100228531 /* Test_HostTests.m */,
-				AB35FD3319E4E48100228531 /* Supporting Files */,
-			);
-			path = "Test HostTests";
-			sourceTree = "<group>";
-		};
-		AB35FD3319E4E48100228531 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				AB35FD3419E4E48100228531 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		AB35FD3D19E4E4E900228531 /* KIFTestHost */ = {
-			isa = PBXGroup;
-			children = (
-				AB35FD3E19E4E4E900228531 /* AppDelegate.m */,
-				AB35FD3F19E4E4E900228531 /* CollectionViewController.m */,
-				AB35FD4019E4E4E900228531 /* Default-568h@2x.png */,
-				AB35FD4119E4E4E900228531 /* Default.png */,
-				AB35FD4219E4E4E900228531 /* Default@2x.png */,
-				AB35FD4319E4E4E900228531 /* InfoPlist.strings */,
-				AB35FD4519E4E4E900228531 /* MainStoryboard.storyboard */,
-				AB35FD4719E4E4E900228531 /* GestureViewController.m */,
-				AB35FD4819E4E4E900228531 /* main.m */,
-				AB35FD4919E4E4E900228531 /* PickerController.m */,
-				AB35FD4A19E4E4E900228531 /* ScrollViewController.m */,
-				AB35FD4B19E4E4E900228531 /* ShowHideViewController.m */,
-				AB35FD4C19E4E4E900228531 /* TableViewController.m */,
-				AB35FD4D19E4E4E900228531 /* TapViewController.m */,
-				AB35FD4E19E4E4E900228531 /* Test Host-Info.plist */,
-				AB35FD4F19E4E4E900228531 /* Test Host-Prefix.pch */,
-				AB35FD5019E4E4E900228531 /* TestSuiteViewController.m */,
-			);
-			path = KIFTestHost;
-			sourceTree = SOURCE_ROOT;
-		};
 		AB35FD6619E4ED5100228531 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -411,6 +352,49 @@
 				ABA5781819E64AE600D77CDA /* NSObject+FRYLookupSupport.m */,
 			);
 			path = Lookup;
+			sourceTree = "<group>";
+		};
+		ABCF04B91A06AF200000318A /* TestTarget */ = {
+			isa = PBXGroup;
+			children = (
+				ABCF04BE1A06AF200000318A /* AppDelegate.h */,
+				ABCF04BF1A06AF200000318A /* AppDelegate.m */,
+				ABCF04C11A06AF200000318A /* MasterViewController.h */,
+				ABCF04C21A06AF200000318A /* MasterViewController.m */,
+				ABCF04E11A06BE220000318A /* ControlsViewController.h */,
+				ABCF04E21A06BE220000318A /* ControlsViewController.m */,
+				ABCF04C71A06AF200000318A /* Main.storyboard */,
+				ABCF04CA1A06AF200000318A /* Images.xcassets */,
+				ABCF04CC1A06AF200000318A /* LaunchScreen.xib */,
+				ABCF04BA1A06AF200000318A /* Supporting Files */,
+			);
+			path = TestTarget;
+			sourceTree = "<group>";
+		};
+		ABCF04BA1A06AF200000318A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ABCF04BB1A06AF200000318A /* Info.plist */,
+				ABCF04BC1A06AF200000318A /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ABCF04D61A06AF200000318A /* TestTargetTests */ = {
+			isa = PBXGroup;
+			children = (
+				ABCF04D91A06AF210000318A /* ControlsViewControllerTests.m */,
+				ABCF04D71A06AF210000318A /* Supporting Files */,
+			);
+			path = TestTargetTests;
+			sourceTree = "<group>";
+		};
+		ABCF04D71A06AF210000318A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ABCF04D81A06AF210000318A /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -453,39 +437,39 @@
 			productReference = AB25C04C19DF95AA00038E75 /* FRYTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		AB35FD1319E4E48000228531 /* Test Host */ = {
+		ABCF04B71A06AF200000318A /* TestTarget */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AB35FD3719E4E48100228531 /* Build configuration list for PBXNativeTarget "Test Host" */;
+			buildConfigurationList = ABCF04DB1A06AF210000318A /* Build configuration list for PBXNativeTarget "TestTarget" */;
 			buildPhases = (
-				AB35FD1019E4E48000228531 /* Sources */,
-				AB35FD1119E4E48000228531 /* Frameworks */,
-				AB35FD1219E4E48000228531 /* Resources */,
+				ABCF04B41A06AF200000318A /* Sources */,
+				ABCF04B51A06AF200000318A /* Frameworks */,
+				ABCF04B61A06AF200000318A /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Test Host";
-			productName = "Test Host";
-			productReference = AB35FD1419E4E48000228531 /* Test Host.app */;
+			name = TestTarget;
+			productName = TestTarget;
+			productReference = ABCF04B81A06AF200000318A /* TestTarget.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AB35FD2E19E4E48000228531 /* Test HostTests */ = {
+		ABCF04D21A06AF200000318A /* TestTargetTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AB35FD3A19E4E48100228531 /* Build configuration list for PBXNativeTarget "Test HostTests" */;
+			buildConfigurationList = ABCF04DE1A06AF210000318A /* Build configuration list for PBXNativeTarget "TestTargetTests" */;
 			buildPhases = (
-				AB35FD2B19E4E48000228531 /* Sources */,
-				AB35FD2C19E4E48000228531 /* Frameworks */,
-				AB35FD2D19E4E48000228531 /* Resources */,
+				ABCF04CF1A06AF200000318A /* Sources */,
+				ABCF04D01A06AF200000318A /* Frameworks */,
+				ABCF04D11A06AF200000318A /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				AB35FD3119E4E48100228531 /* PBXTargetDependency */,
+				ABCF04D51A06AF200000318A /* PBXTargetDependency */,
 			);
-			name = "Test HostTests";
-			productName = "Test HostTests";
-			productReference = AB35FD2F19E4E48000228531 /* Test HostTests.xctest */;
+			name = TestTargetTests;
+			productName = TestTargetTests;
+			productReference = ABCF04D31A06AF200000318A /* TestTargetTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -497,12 +481,12 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Raizlabs;
 				TargetAttributes = {
-					AB35FD1319E4E48000228531 = {
-						CreatedOnToolsVersion = 6.0;
+					ABCF04B71A06AF200000318A = {
+						CreatedOnToolsVersion = 6.0.1;
 					};
-					AB35FD2E19E4E48000228531 = {
-						CreatedOnToolsVersion = 6.0;
-						TestTargetID = AB35FD1319E4E48000228531;
+					ABCF04D21A06AF200000318A = {
+						CreatedOnToolsVersion = 6.0.1;
+						TestTargetID = ABCF04B71A06AF200000318A;
 					};
 				};
 			};
@@ -521,8 +505,8 @@
 			targets = (
 				AB25C03B19DF95AA00038E75 /* FRY */,
 				AB25C04B19DF95AA00038E75 /* FRYTests */,
-				AB35FD1319E4E48000228531 /* Test Host */,
-				AB35FD2E19E4E48000228531 /* Test HostTests */,
+				ABCF04B71A06AF200000318A /* TestTarget */,
+				ABCF04D21A06AF200000318A /* TestTargetTests */,
 			);
 		};
 /* End PBXProject section */
@@ -536,19 +520,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB35FD1219E4E48000228531 /* Resources */ = {
+		ABCF04B61A06AF200000318A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB35FD5519E4E4E900228531 /* Default@2x.png in Resources */,
-				AB35FD5719E4E4E900228531 /* MainStoryboard.storyboard in Resources */,
-				AB35FD5619E4E4E900228531 /* InfoPlist.strings in Resources */,
-				AB35FD5319E4E4E900228531 /* Default-568h@2x.png in Resources */,
-				AB35FD5419E4E4E900228531 /* Default.png in Resources */,
+				ABCF04C91A06AF200000318A /* Main.storyboard in Resources */,
+				ABCF04CE1A06AF200000318A /* LaunchScreen.xib in Resources */,
+				ABCF04CB1A06AF200000318A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB35FD2D19E4E48000228531 /* Resources */ = {
+		ABCF04D11A06AF200000318A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -600,7 +582,6 @@
 				ABA5782C19E65D1100D77CDA /* FRYDefines.m in Sources */,
 				ABCF04B31A054F890000318A /* FRYTouchDispatch.m in Sources */,
 				AB25C08319DF95ED00038E75 /* UIView+FRY.m in Sources */,
-				AB35FD0F19E4DE3500228531 /* UIAccessibility+FRY.m in Sources */,
 				ABA5781A19E64AE600D77CDA /* FRYLookupResult.m in Sources */,
 				AB25C08219DF95ED00038E75 /* UIAccessibilityElement+FRY.m in Sources */,
 				ABA5781C19E64AE600D77CDA /* NSObject+FRYLookupSupport.m in Sources */,
@@ -612,6 +593,7 @@
 				AB35FCF019DFB49100228531 /* FRYActiveTouch.m in Sources */,
 				AB184AEB19E8E0CC007CC9DA /* FRYSyntheticTouch.m in Sources */,
 				AB184AEE19E8EEC0007CC9DA /* NSRunLoop+FRY.m in Sources */,
+				ABCF04E71A06F2630000318A /* UIAccessibility+FRY.m in Sources */,
 				AB184AE819E8E0CC007CC9DA /* FRYPointInTime.m in Sources */,
 				ABA5781919E64AE600D77CDA /* FRYLookup.m in Sources */,
 				AB184AEA19E8E0CC007CC9DA /* FRYSimulatedTouch.m in Sources */,
@@ -626,28 +608,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB35FD1019E4E48000228531 /* Sources */ = {
+		ABCF04B41A06AF200000318A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB35FD5819E4E4E900228531 /* GestureViewController.m in Sources */,
-				AB35FD5219E4E4E900228531 /* CollectionViewController.m in Sources */,
-				AB35FD5919E4E4E900228531 /* main.m in Sources */,
-				AB35FD5B19E4E4E900228531 /* ScrollViewController.m in Sources */,
-				AB35FD5119E4E4E900228531 /* AppDelegate.m in Sources */,
-				AB35FD5A19E4E4E900228531 /* PickerController.m in Sources */,
-				AB35FD5C19E4E4E900228531 /* ShowHideViewController.m in Sources */,
-				AB35FD5D19E4E4E900228531 /* TableViewController.m in Sources */,
-				AB35FD5E19E4E4E900228531 /* TapViewController.m in Sources */,
-				AB35FD6019E4E4E900228531 /* TestSuiteViewController.m in Sources */,
+				ABCF04C01A06AF200000318A /* AppDelegate.m in Sources */,
+				ABCF04C31A06AF200000318A /* MasterViewController.m in Sources */,
+				ABCF04BD1A06AF200000318A /* main.m in Sources */,
+				ABCF04E31A06BE220000318A /* ControlsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB35FD2B19E4E48000228531 /* Sources */ = {
+		ABCF04CF1A06AF200000318A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB35FD3619E4E48100228531 /* Test_HostTests.m in Sources */,
+				ABCF04DA1A06AF210000318A /* ControlsViewControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -659,10 +635,10 @@
 			target = AB25C03B19DF95AA00038E75 /* FRY */;
 			targetProxy = AB25C05219DF95AA00038E75 /* PBXContainerItemProxy */;
 		};
-		AB35FD3119E4E48100228531 /* PBXTargetDependency */ = {
+		ABCF04D51A06AF200000318A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AB35FD1319E4E48000228531 /* Test Host */;
-			targetProxy = AB35FD3019E4E48100228531 /* PBXContainerItemProxy */;
+			target = ABCF04B71A06AF200000318A /* TestTarget */;
+			targetProxy = ABCF04D41A06AF200000318A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -675,20 +651,20 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		AB35FD4319E4E4E900228531 /* InfoPlist.strings */ = {
+		ABCF04C71A06AF200000318A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AB35FD4419E4E4E900228531 /* en */,
+				ABCF04C81A06AF200000318A /* Base */,
 			);
-			name = InfoPlist.strings;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		AB35FD4519E4E4E900228531 /* MainStoryboard.storyboard */ = {
+		ABCF04CC1A06AF200000318A /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				AB35FD4619E4E4E900228531 /* en */,
+				ABCF04CD1A06AF200000318A /* Base */,
 			);
-			name = MainStoryboard.storyboard;
+			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -824,19 +800,18 @@
 			};
 			name = Release;
 		};
-		AB35FD3819E4E48100228531 /* Debug */ = {
+		ABCF04DC1A06AF210000318A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "KIFTestHost/Test Host-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "KIFTestHost/Test Host-Info.plist";
+				INFOPLIST_FILE = TestTarget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -846,15 +821,14 @@
 			};
 			name = Debug;
 		};
-		AB35FD3919E4E48100228531 /* Release */ = {
+		ABCF04DD1A06AF210000318A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "KIFTestHost/Test Host-Prefix.pch";
-				INFOPLIST_FILE = "KIFTestHost/Test Host-Info.plist";
+				INFOPLIST_FILE = TestTarget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -864,7 +838,7 @@
 			};
 			name = Release;
 		};
-		AB35FD3B19E4E48100228531 /* Debug */ = {
+		ABCF04DF1A06AF210000318A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -878,16 +852,22 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Test HostTests/Info.plist";
+				INFOPLIST_FILE = TestTargetTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Test Host.app/Test Host";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestTarget.app/TestTarget";
 			};
 			name = Debug;
 		};
-		AB35FD3C19E4E48100228531 /* Release */ = {
+		ABCF04E01A06AF210000318A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -897,12 +877,18 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "Test HostTests/Info.plist";
+				INFOPLIST_FILE = TestTargetTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Test Host.app/Test Host";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestTarget.app/TestTarget";
 			};
 			name = Release;
 		};
@@ -936,23 +922,21 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AB35FD3719E4E48100228531 /* Build configuration list for PBXNativeTarget "Test Host" */ = {
+		ABCF04DB1A06AF210000318A /* Build configuration list for PBXNativeTarget "TestTarget" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AB35FD3819E4E48100228531 /* Debug */,
-				AB35FD3919E4E48100228531 /* Release */,
+				ABCF04DC1A06AF210000318A /* Debug */,
+				ABCF04DD1A06AF210000318A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
-		AB35FD3A19E4E48100228531 /* Build configuration list for PBXNativeTarget "Test HostTests" */ = {
+		ABCF04DE1A06AF210000318A /* Build configuration list for PBXNativeTarget "TestTargetTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AB35FD3B19E4E48100228531 /* Debug */,
-				AB35FD3C19E4E48100228531 /* Release */,
+				ABCF04DF1A06AF210000318A /* Debug */,
+				ABCF04E01A06AF210000318A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

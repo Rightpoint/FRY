@@ -10,11 +10,6 @@
 
 @class FRYLookupResult;
 
-typedef NS_ENUM(NSUInteger, FRYLookupType) {
-    FRYLookupTypeDepthFirst = 0,
-    FRYLookupTypeAll,
-};
-
 @protocol FRYLookup <NSObject>
 
 /**

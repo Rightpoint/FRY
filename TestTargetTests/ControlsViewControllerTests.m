@@ -1,25 +1,28 @@
 //
-//  Test_HostTests.m
-//  Test HostTests
+//  TestTargetTests.m
+//  TestTargetTests
 //
-//  Created by Brian King on 10/7/14.
+//  Created by Brian King on 11/2/14.
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "ControlsViewController.h"
 #import "FRY.h"
 
-@interface Test_HostTests : XCTestCase
-
+@interface ControlsViewControllerTests : XCTestCase
 
 @end
 
-@implementation Test_HostTests
+@implementation ControlsViewControllerTests
 
-- (void)setUp
-{
+- (void)setUp {
     [super setUp];
+    ControlsViewController *c = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"Controls"];
+    [UIApplication sharedApplication].keyWindow.rootViewController = c;
+    [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.0]];
 }
 
 - (void)tearDown
@@ -34,30 +37,82 @@
 
 - (void)testAccessibilityLabelLookup
 {
-    __block UIView *foundView;
-
-    [FRY_KEY fry_enumerateDepthFirstViewMatching:@{kFRYLookupAccessibilityLabel : @"Tapping"}
-                                      usingBlock:^(UIView *view, CGRect frameInView) {
-                                          foundView = view;
-                                      }];
-
-
-    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+    NSArray *accessibilityLabels = @[
+                                     @"First",
+                                     @"Second",
+                                     @"Action 1",
+                                     @"Action 2",
+                                     @"Action 3",
+                                     @"Stepper",
+                                     @"Slider",
+                                     @"Switch",
+                                     @"Progress",
+                                     @"toolbar item",
+                                     @"TFirst",
+                                     @"TSecond",
+                                     @"toolbar button",
+                                     @"toolbar switch",
+                                     ];
+    NSMutableArray *foundViews = [NSMutableArray array];
     
-    XCTAssertNotNil(foundView);
-    XCTAssertEqualObjects(@"Tapping", [foundView accessibilityLabel]);
+    for ( NSString *accessibilityLabel in accessibilityLabels ) {
+        [FRY_KEY fry_enumerateDepthFirstViewMatching:@{kFRYLookupAccessibilityLabel : accessibilityLabel}
+                                          usingBlock:^(UIView *view, CGRect frameInView) {
+                                              XCTAssertNotNil(view);
+                                              XCTAssertEqualObjects([view accessibilityLabel], accessibilityLabel);
+                                              [foundViews addObject:view];
+                                          }];
+    }
+    
+    
+    XCTAssertTrue(foundViews.count == accessibilityLabels.count);
 }
 
+- (void)testTapping
+{
+    NSArray *accessibilityLabels = @[
+                                     @"Second",
+                                     @"First",
+                                     @"Action 1",
+                                     @"Action 2",
+                                     @"Action 3",
+                                     @"Stepper",
+// Autolayout is giving the switch a wide frame which mucks the tap.
+//                                     @"Switch",
+                                     @"toolbar item",
+                                     @"TFirst",
+                                     @"TSecond",
+                                     @"toolbar button",
+                                     @"toolbar switch",
+                                     ];
+    for ( NSString *accessibilityLabel in accessibilityLabels ) {
+        [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+                 onSubviewMatching:@{kFRYLookupAccessibilityLabel : accessibilityLabel}];
+        [[NSRunLoop currentRunLoop] fry_waitForIdle];
+        
+        NSString *actionConfirmation = [NSString stringWithFormat:@"Action=%@", accessibilityLabel];
+        
+        [FRY_KEY fry_enumerateDepthFirstViewMatching:@{kFRYLookupAccessibilityLabel : actionConfirmation}
+                                          usingBlock:^(UIView *view, CGRect frameInView) {
+                                              NSLog(@"View=%@", view);
+                                              XCTAssertNotNil(view);
+                                          }];
+    }
+}
+
+
+
+/*
 - (void)testAlertViews
 {
     [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
              onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"UIAlertView"}];
-
+    
     [[NSRunLoop currentRunLoop] fry_waitForIdle];
     
     [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
              onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"Cancel"}];
-
+    
     [[NSRunLoop currentRunLoop] fry_waitForIdle];
 }
 
@@ -67,7 +122,7 @@
              onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"Tapping"}];
     
     [[NSRunLoop currentRunLoop] fry_waitForIdle];
-
+    
     [FRY_KEY fry_enumerateDepthFirstViewMatching:@{kFRYLookupAccessibilityLabel : @"Greeting"}
                                       usingBlock:^(UIView *textField, CGRect frameInView) {
                                           [textField fry_simulateTouch:[FRYSyntheticTouch tap] insideRect:frameInView];
@@ -86,7 +141,7 @@
     [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
              onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"Tapping"}];
     [[NSRunLoop currentRunLoop] fry_waitForIdle];
-
+    
     [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
              onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"First"}];
     [[NSRunLoop currentRunLoop] fry_waitForIdle];
@@ -94,11 +149,11 @@
     [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
              onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"Second"}];
     [[NSRunLoop currentRunLoop] fry_waitForIdle];
-
+    
     [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
              onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"First"}];
     [[NSRunLoop currentRunLoop] fry_waitForIdle];
-
+    
     [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
              onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"Happy"}];
     [[NSRunLoop currentRunLoop] fry_waitForIdle];
@@ -112,29 +167,29 @@
                                       usingBlock:^(UIView *view, CGRect frameInView) {
                                           XCTAssertNil(view);
                                       }];
-
+    
     [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
              onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"Slightly Offscreen Button"}];
     [[NSRunLoop currentRunLoop] fry_waitForIdle];
-
+    
     [FRY_KEY fry_enumerateDepthFirstViewMatching:@{kFRYLookupAccessibilityLabel : @"1"}
                                       usingBlock:^(UIView *view, CGRect frameInView) {
                                           XCTAssertNotNil(view);
                                       }];
-
+    
     [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
              onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"Label with Tap Gesture Recognizer"}];
     [[NSRunLoop currentRunLoop] fry_waitForIdle];
-
+    
     [FRY_KEY fry_enumerateDepthFirstViewMatching:@{kFRYLookupAccessibilityLabel : @"2"}
                                       usingBlock:^(UIView *view, CGRect frameInView) {
                                           XCTAssertNotNil(view);
                                       }];
-
-
+    
+    
     [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
              onSubviewMatching:@{kFRYLookupAccessibilityLabel : @"Test Suite"}];
-  
+    
     [[NSRunLoop currentRunLoop] fry_waitForIdle];
 }
 
@@ -171,5 +226,6 @@
              onSubviewMatching:@{@"accessibilityLabel" : @"Test Suite"}];
     [[NSRunLoop currentRunLoop] fry_waitForIdle];
 }
+*/
 
 @end

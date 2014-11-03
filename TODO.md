@@ -4,9 +4,11 @@
 - add playback support for touch file
 
 - schedule touches at times, instead of every interval
-- improve debug for lookup failures
+- Enhance touch simulation (Bezier paths, Momentum)
+- improve debug for lookup / tap failures
+   - Highlight frames and tap points when simulating touches
+
 - extend lookups to support multiple grammar types (accessibility, arbitrary predicate, etc.)
-- add new test target with major components and a webview
 - clean up headers
 - warn if accessibility is disabled
 
@@ -18,3 +20,14 @@
 
 
 - Update README.md
+
+- Test Target
+  - Controls
+  - Text Input
+  - Pickers
+  - Visual Status
+  - Gesture Recognizers
+  - Table View
+  - Collection View
+  - Web Content
+  - Web Form
