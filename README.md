@@ -3,7 +3,7 @@ FRY is an iOS Library inspired by KIF.  The purpose is to simplify iteractions w
 NOTE: Everything is still in alpha, and is subject to change before the 1.0 release.
 
 # Overview
-FRY consists of four features to help writing integration tests:
+FRY consists of three features to help writing integration tests:
 
 - View Lookup
 - Touch Synthesis
