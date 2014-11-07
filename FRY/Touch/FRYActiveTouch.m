@@ -65,6 +65,7 @@ static NSUInteger const kFRYTouchPhaseUndefined = -1;
     if ( self.currentTouch == nil ) {
         self.currentTouch = [[UITouch alloc] initAtPoint:windowPoint inWindow:self.view.window];
         [self.view fry_setFrameHighlighted:YES animated:NO];
+        [self.view fry_highlightPoint:viewPoint animated:NO];
     }
     else {
         [self.currentTouch setLocationInWindow:windowPoint];
@@ -87,10 +88,10 @@ static NSUInteger const kFRYTouchPhaseUndefined = -1;
             [self.view fry_setFrameHighlighted:NO animated:YES];
             viewPoint = CGPointMake(-1.0f, -1.0f);
         }
+        
+        [self.view fry_highlightPoint:viewPoint animated:YES];
     }
     
-    [self.view fry_highlightPoint:viewPoint animated:YES];
-
     self.lastPointInWindow = windowPoint;
     return self.currentTouch;
 }

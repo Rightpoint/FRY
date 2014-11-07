@@ -47,10 +47,11 @@
 		ABCF04E61A06E7EF0000318A /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03C19DF95AA00038E75 /* libFRY.a */; };
 		ABCF04E71A06F2630000318A /* UIAccessibility+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD0E19E4DE3500228531 /* UIAccessibility+FRY.m */; };
 		B9215C4142D84548893B9BCA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89238CE01CB344F78A59E9AE /* libPods.a */; };
-		D4082AC11A07D6ED00F03F3C /* UIView+FRYTouchHighlighting.m in Sources */ = {isa = PBXBuildFile; fileRef = D4082AC01A07D6ED00F03F3C /* UIView+FRYTouchHighlighting.m */; };
-		D4082AC81A0821AC00F03F3C /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = D4082AC71A0821AC00F03F3C /* spark.png */; };
-		D4082AC91A0821B000F03F3C /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = D4082AC71A0821AC00F03F3C /* spark.png */; };
-		D4082ACA1A0821B100F03F3C /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = D4082AC71A0821AC00F03F3C /* spark.png */; };
+		D4CA25161A09089B00A04F26 /* FRYHighlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CA25151A09089B00A04F26 /* FRYHighlightView.m */; };
+		D4CA25191A0908D100A04F26 /* UIView+FRYTouchHighlighting.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CA25181A0908D100A04F26 /* UIView+FRYTouchHighlighting.m */; };
+		D4CA251A1A0908D100A04F26 /* UIView+FRYTouchHighlighting.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CA25181A0908D100A04F26 /* UIView+FRYTouchHighlighting.m */; };
+		D4CA251B1A0908D100A04F26 /* UIView+FRYTouchHighlighting.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CA25181A0908D100A04F26 /* UIView+FRYTouchHighlighting.m */; };
+		D4CA251C1A0908D100A04F26 /* UIView+FRYTouchHighlighting.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CA25181A0908D100A04F26 /* UIView+FRYTouchHighlighting.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,9 +158,11 @@
 		ABCF04D91A06AF210000318A /* ControlsViewControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ControlsViewControllerTests.m; sourceTree = "<group>"; };
 		ABCF04E11A06BE220000318A /* ControlsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlsViewController.h; sourceTree = "<group>"; };
 		ABCF04E21A06BE220000318A /* ControlsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlsViewController.m; sourceTree = "<group>"; };
-		D4082ABF1A07D6ED00F03F3C /* UIView+FRYTouchHighlighting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FRYTouchHighlighting.h"; sourceTree = "<group>"; };
-		D4082AC01A07D6ED00F03F3C /* UIView+FRYTouchHighlighting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FRYTouchHighlighting.m"; sourceTree = "<group>"; };
-		D4082AC71A0821AC00F03F3C /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		D40395831A0CE1CE002200E1 /* FRYSpark.png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYSpark.png.h; sourceTree = "<group>"; };
+		D4CA25141A09089B00A04F26 /* FRYHighlightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYHighlightView.h; sourceTree = "<group>"; };
+		D4CA25151A09089B00A04F26 /* FRYHighlightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYHighlightView.m; sourceTree = "<group>"; };
+		D4CA25171A0908D100A04F26 /* UIView+FRYTouchHighlighting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FRYTouchHighlighting.h"; sourceTree = "<group>"; };
+		D4CA25181A0908D100A04F26 /* UIView+FRYTouchHighlighting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FRYTouchHighlighting.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -305,6 +308,8 @@
 				AB25C06719DF95ED00038E75 /* UIAccessibilityElement+FRY.m */,
 				AB25C06819DF95ED00038E75 /* UIView+FRY.h */,
 				AB25C06919DF95ED00038E75 /* UIView+FRY.m */,
+				D4CA25171A0908D100A04F26 /* UIView+FRYTouchHighlighting.h */,
+				D4CA25181A0908D100A04F26 /* UIView+FRYTouchHighlighting.m */,
 				AB35FCE219DFAEB900228531 /* UITouch+FRY.h */,
 				AB35FCE319DFAEB900228531 /* UITouch+FRY.m */,
 				AB35FD0D19E4DE3500228531 /* UIAccessibility+FRY.h */,
@@ -334,9 +339,6 @@
 				ABCF04B21A054F890000318A /* FRYTouchDispatch.m */,
 				AB35FCEA19DFB49100228531 /* FRYActiveTouch.h */,
 				AB35FCEB19DFB49100228531 /* FRYActiveTouch.m */,
-				D4082ABF1A07D6ED00F03F3C /* UIView+FRYTouchHighlighting.h */,
-				D4082AC01A07D6ED00F03F3C /* UIView+FRYTouchHighlighting.m */,
-				D4082AC71A0821AC00F03F3C /* spark.png */,
 				AB184ADE19E8E0CC007CC9DA /* Model */,
 				AB35FD6319E4ECF200228531 /* FRYEventMonitor.h */,
 				AB35FD6419E4ECF200228531 /* FRYEventMonitor.m */,
@@ -351,6 +353,9 @@
 			children = (
 				AB35FD6719E4ED6100228531 /* FRYMethodSwizzling.h */,
 				AB35FD6819E4ED6100228531 /* FRYMethodSwizzling.m */,
+				D4CA25141A09089B00A04F26 /* FRYHighlightView.h */,
+				D4CA25151A09089B00A04F26 /* FRYHighlightView.m */,
+				D40395831A0CE1CE002200E1 /* FRYSpark.png.h */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -534,7 +539,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB25C05A19DF95AA00038E75 /* InfoPlist.strings in Resources */,
-				D4082AC81A0821AC00F03F3C /* spark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,6 +547,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4082AC91A0821B000F03F3C /* spark.png in Resources */,
+				AB24E0051A0C88670099231F /* AlertTableViewController.xib in Resources */,
 				AB848EFE1A0BB73E00452E5E /* ControlsViewController.xib in Resources */,
 				ABCF04CB1A06AF200000318A /* Images.xcassets in Resources */,
 			);
@@ -552,7 +557,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4082ACA1A0821B100F03F3C /* spark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,7 +602,6 @@
 			files = (
 				AB184AD019E85C5E007CC9DA /* FRYEventMonitor.m in Sources */,
 				AB184AD419E85F49007CC9DA /* UIApplication+FRY.m in Sources */,
-				D4082AC11A07D6ED00F03F3C /* UIView+FRYTouchHighlighting.m in Sources */,
 				ABA5782C19E65D1100D77CDA /* FRYDefines.m in Sources */,
 				ABCF04B31A054F890000318A /* FRYTouchDispatch.m in Sources */,
 				AB25C08319DF95ED00038E75 /* UIView+FRY.m in Sources */,
@@ -616,8 +619,10 @@
 				ABCF04E71A06F2630000318A /* UIAccessibility+FRY.m in Sources */,
 				AB5A891E1A07DEC400E44C89 /* NSPredicate+FRY.m in Sources */,
 				AB184AE819E8E0CC007CC9DA /* FRYPointInTime.m in Sources */,
+				D4CA25161A09089B00A04F26 /* FRYHighlightView.m in Sources */,
 				AB184AEA19E8E0CC007CC9DA /* FRYSimulatedTouch.m in Sources */,
 				AB35FCE419DFAEB900228531 /* UITouch+FRY.m in Sources */,
+				D4CA25191A0908D100A04F26 /* UIView+FRYTouchHighlighting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,6 +630,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4CA251A1A0908D100A04F26 /* UIView+FRYTouchHighlighting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -633,6 +639,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABCF04C01A06AF200000318A /* AppDelegate.m in Sources */,
+				D4CA251B1A0908D100A04F26 /* UIView+FRYTouchHighlighting.m in Sources */,
 				AB24E0081A0C88BF0099231F /* CellItem.m in Sources */,
 				ABCF04BD1A06AF200000318A /* main.m in Sources */,
 				ABCF04E31A06BE220000318A /* ControlsViewController.m in Sources */,
@@ -644,6 +651,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4CA251C1A0908D100A04F26 /* UIView+FRYTouchHighlighting.m in Sources */,
 				AB24E00A1A0C89E20099231F /* AlertTableViewControllerTest.m in Sources */,
 				ABCF04DA1A06AF210000318A /* ControlsViewControllerTests.m in Sources */,
 			);
