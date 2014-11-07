@@ -15,6 +15,10 @@
 		AB184AEB19E8E0CC007CC9DA /* FRYSyntheticTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = AB184AE719E8E0CC007CC9DA /* FRYSyntheticTouch.m */; };
 		AB184AEE19E8EEC0007CC9DA /* NSRunLoop+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB184AED19E8EEC0007CC9DA /* NSRunLoop+FRY.m */; };
 		AB184AF119EA087D007CC9DA /* FRYTouchEventLog.m in Sources */ = {isa = PBXBuildFile; fileRef = AB184AF019EA087D007CC9DA /* FRYTouchEventLog.m */; };
+		AB24E0041A0C88670099231F /* AlertTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB24E0021A0C88670099231F /* AlertTableViewController.m */; };
+		AB24E0051A0C88670099231F /* AlertTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB24E0031A0C88670099231F /* AlertTableViewController.xib */; };
+		AB24E0081A0C88BF0099231F /* CellItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AB24E0071A0C88BF0099231F /* CellItem.m */; };
+		AB24E00A1A0C89E20099231F /* AlertTableViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AB24E0091A0C89E20099231F /* AlertTableViewControllerTest.m */; };
 		AB25C04019DF95AA00038E75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03F19DF95AA00038E75 /* Foundation.framework */; };
 		AB25C04E19DF95AA00038E75 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C04D19DF95AA00038E75 /* XCTest.framework */; };
 		AB25C04F19DF95AA00038E75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03F19DF95AA00038E75 /* Foundation.framework */; };
@@ -29,15 +33,14 @@
 		AB35FD7A19E58B5C00228531 /* FRYMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD6819E4ED6100228531 /* FRYMethodSwizzling.m */; };
 		AB43FCF51A0468600049D520 /* UITextInput+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB43FCF41A0468600049D520 /* UITextInput+FRY.m */; };
 		AB5A891B1A07147700E44C89 /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03C19DF95AA00038E75 /* libFRY.a */; };
-		ABA5781919E64AE600D77CDA /* FRYLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781119E64AE600D77CDA /* FRYLookup.m */; };
+		AB5A891E1A07DEC400E44C89 /* NSPredicate+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB5A891D1A07DEC400E44C89 /* NSPredicate+FRY.m */; };
+		AB848EFE1A0BB73E00452E5E /* ControlsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB848EFD1A0BB73E00452E5E /* ControlsViewController.xib */; };
 		ABA5781A19E64AE600D77CDA /* FRYLookupResult.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781319E64AE600D77CDA /* FRYLookupResult.m */; };
 		ABA5781C19E64AE600D77CDA /* NSObject+FRYLookupSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781819E64AE600D77CDA /* NSObject+FRYLookupSupport.m */; };
 		ABA5782C19E65D1100D77CDA /* FRYDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5782B19E65D1100D77CDA /* FRYDefines.m */; };
 		ABCF04B31A054F890000318A /* FRYTouchDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04B21A054F890000318A /* FRYTouchDispatch.m */; };
 		ABCF04BD1A06AF200000318A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04BC1A06AF200000318A /* main.m */; };
 		ABCF04C01A06AF200000318A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04BF1A06AF200000318A /* AppDelegate.m */; };
-		ABCF04C31A06AF200000318A /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04C21A06AF200000318A /* MasterViewController.m */; };
-		ABCF04C91A06AF200000318A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABCF04C71A06AF200000318A /* Main.storyboard */; };
 		ABCF04CB1A06AF200000318A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABCF04CA1A06AF200000318A /* Images.xcassets */; };
 		ABCF04DA1A06AF210000318A /* ControlsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04D91A06AF210000318A /* ControlsViewControllerTests.m */; };
 		ABCF04E31A06BE220000318A /* ControlsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04E21A06BE220000318A /* ControlsViewController.m */; };
@@ -97,6 +100,12 @@
 		AB184AED19E8EEC0007CC9DA /* NSRunLoop+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSRunLoop+FRY.m"; sourceTree = "<group>"; };
 		AB184AEF19EA087D007CC9DA /* FRYTouchEventLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYTouchEventLog.h; sourceTree = "<group>"; };
 		AB184AF019EA087D007CC9DA /* FRYTouchEventLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYTouchEventLog.m; sourceTree = "<group>"; };
+		AB24E0011A0C88670099231F /* AlertTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertTableViewController.h; sourceTree = "<group>"; };
+		AB24E0021A0C88670099231F /* AlertTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertTableViewController.m; sourceTree = "<group>"; };
+		AB24E0031A0C88670099231F /* AlertTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertTableViewController.xib; sourceTree = "<group>"; };
+		AB24E0061A0C88BF0099231F /* CellItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellItem.h; sourceTree = "<group>"; };
+		AB24E0071A0C88BF0099231F /* CellItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellItem.m; sourceTree = "<group>"; };
+		AB24E0091A0C89E20099231F /* AlertTableViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertTableViewControllerTest.m; sourceTree = "<group>"; };
 		AB25C03C19DF95AA00038E75 /* libFRY.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFRY.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB25C03F19DF95AA00038E75 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AB25C04319DF95AA00038E75 /* FRY-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FRY-Prefix.pch"; sourceTree = "<group>"; };
@@ -127,8 +136,9 @@
 		AB35FD6819E4ED6100228531 /* FRYMethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYMethodSwizzling.m; sourceTree = "<group>"; };
 		AB43FCF31A0468600049D520 /* UITextInput+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextInput+FRY.h"; sourceTree = "<group>"; };
 		AB43FCF41A0468600049D520 /* UITextInput+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextInput+FRY.m"; sourceTree = "<group>"; };
-		ABA5781019E64AE600D77CDA /* FRYLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYLookup.h; sourceTree = "<group>"; };
-		ABA5781119E64AE600D77CDA /* FRYLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYLookup.m; sourceTree = "<group>"; };
+		AB5A891C1A07DEC400E44C89 /* NSPredicate+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPredicate+FRY.h"; sourceTree = "<group>"; };
+		AB5A891D1A07DEC400E44C89 /* NSPredicate+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPredicate+FRY.m"; sourceTree = "<group>"; };
+		AB848EFD1A0BB73E00452E5E /* ControlsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ControlsViewController.xib; sourceTree = "<group>"; };
 		ABA5781219E64AE600D77CDA /* FRYLookupResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYLookupResult.h; sourceTree = "<group>"; };
 		ABA5781319E64AE600D77CDA /* FRYLookupResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYLookupResult.m; sourceTree = "<group>"; };
 		ABA5781419E64AE600D77CDA /* FRYLookupSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYLookupSupport.h; sourceTree = "<group>"; };
@@ -144,9 +154,6 @@
 		ABCF04BC1A06AF200000318A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ABCF04BE1A06AF200000318A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		ABCF04BF1A06AF200000318A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		ABCF04C11A06AF200000318A /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		ABCF04C21A06AF200000318A /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		ABCF04C81A06AF200000318A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ABCF04CA1A06AF200000318A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		ABCF04CD1A06AF200000318A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		ABCF04D31A06AF200000318A /* TestTargetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestTargetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -359,13 +366,13 @@
 		ABA5780F19E64AE600D77CDA /* Lookup */ = {
 			isa = PBXGroup;
 			children = (
-				ABA5781019E64AE600D77CDA /* FRYLookup.h */,
-				ABA5781119E64AE600D77CDA /* FRYLookup.m */,
 				ABA5781419E64AE600D77CDA /* FRYLookupSupport.h */,
 				ABA5781219E64AE600D77CDA /* FRYLookupResult.h */,
 				ABA5781319E64AE600D77CDA /* FRYLookupResult.m */,
 				ABA5781719E64AE600D77CDA /* NSObject+FRYLookupSupport.h */,
 				ABA5781819E64AE600D77CDA /* NSObject+FRYLookupSupport.m */,
+				AB5A891C1A07DEC400E44C89 /* NSPredicate+FRY.h */,
+				AB5A891D1A07DEC400E44C89 /* NSPredicate+FRY.m */,
 			);
 			path = Lookup;
 			sourceTree = "<group>";
@@ -375,14 +382,17 @@
 			children = (
 				ABCF04BE1A06AF200000318A /* AppDelegate.h */,
 				ABCF04BF1A06AF200000318A /* AppDelegate.m */,
-				ABCF04C11A06AF200000318A /* MasterViewController.h */,
-				ABCF04C21A06AF200000318A /* MasterViewController.m */,
 				ABCF04E11A06BE220000318A /* ControlsViewController.h */,
 				ABCF04E21A06BE220000318A /* ControlsViewController.m */,
-				ABCF04C71A06AF200000318A /* Main.storyboard */,
+				AB848EFD1A0BB73E00452E5E /* ControlsViewController.xib */,
 				ABCF04CA1A06AF200000318A /* Images.xcassets */,
 				ABCF04CC1A06AF200000318A /* LaunchScreen.xib */,
 				ABCF04BA1A06AF200000318A /* Supporting Files */,
+				AB24E0011A0C88670099231F /* AlertTableViewController.h */,
+				AB24E0021A0C88670099231F /* AlertTableViewController.m */,
+				AB24E0031A0C88670099231F /* AlertTableViewController.xib */,
+				AB24E0061A0C88BF0099231F /* CellItem.h */,
+				AB24E0071A0C88BF0099231F /* CellItem.m */,
 			);
 			path = TestTarget;
 			sourceTree = "<group>";
@@ -400,6 +410,7 @@
 			isa = PBXGroup;
 			children = (
 				ABCF04D91A06AF210000318A /* ControlsViewControllerTests.m */,
+				AB24E0091A0C89E20099231F /* AlertTableViewControllerTest.m */,
 				ABCF04D71A06AF210000318A /* Supporting Files */,
 			);
 			path = TestTargetTests;
@@ -540,7 +551,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABCF04C91A06AF200000318A /* Main.storyboard in Resources */,
+				AB24E0051A0C88670099231F /* AlertTableViewController.xib in Resources */,
+				AB848EFE1A0BB73E00452E5E /* ControlsViewController.xib in Resources */,
 				ABCF04CB1A06AF200000318A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -609,8 +621,8 @@
 				AB184AEB19E8E0CC007CC9DA /* FRYSyntheticTouch.m in Sources */,
 				AB184AEE19E8EEC0007CC9DA /* NSRunLoop+FRY.m in Sources */,
 				ABCF04E71A06F2630000318A /* UIAccessibility+FRY.m in Sources */,
+				AB5A891E1A07DEC400E44C89 /* NSPredicate+FRY.m in Sources */,
 				AB184AE819E8E0CC007CC9DA /* FRYPointInTime.m in Sources */,
-				ABA5781919E64AE600D77CDA /* FRYLookup.m in Sources */,
 				D4CA25161A09089B00A04F26 /* FRYHighlightView.m in Sources */,
 				AB184AEA19E8E0CC007CC9DA /* FRYSimulatedTouch.m in Sources */,
 				AB35FCE419DFAEB900228531 /* UITouch+FRY.m in Sources */,
@@ -631,10 +643,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABCF04C01A06AF200000318A /* AppDelegate.m in Sources */,
-				ABCF04C31A06AF200000318A /* MasterViewController.m in Sources */,
 				D4CA251B1A0908D100A04F26 /* UIView+FRYTouchHighlighting.m in Sources */,
+				AB24E0081A0C88BF0099231F /* CellItem.m in Sources */,
 				ABCF04BD1A06AF200000318A /* main.m in Sources */,
 				ABCF04E31A06BE220000318A /* ControlsViewController.m in Sources */,
+				AB24E0041A0C88670099231F /* AlertTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -643,6 +656,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4CA251C1A0908D100A04F26 /* UIView+FRYTouchHighlighting.m in Sources */,
+				AB24E00A1A0C89E20099231F /* AlertTableViewControllerTest.m in Sources */,
 				ABCF04DA1A06AF210000318A /* ControlsViewControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -669,14 +683,6 @@
 				AB25C05919DF95AA00038E75 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		ABCF04C71A06AF200000318A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ABCF04C81A06AF200000318A /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		ABCF04CC1A06AF200000318A /* LaunchScreen.xib */ = {

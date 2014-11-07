@@ -14,6 +14,8 @@
 
 - (UIView *)fry_animatingViewToWaitFor;
 
+- (NSArray *)fry_reverseSubviews;
+
 - (NSDictionary *)fry_matchingLookupVariables;
 
 /**
@@ -32,7 +34,7 @@
 - (void)fry_simulateTouch:(FRYSimulatedTouch *)touch insideRect:(CGRect)frameInView;
 - (void)fry_simulateTouch:(FRYSimulatedTouch *)touch;
 
-- (void)fry_simulateTouch:(FRYSimulatedTouch *)touch onSubviewMatching:(NSDictionary *)variables;
-- (void)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSDictionary *)variables;
+- (void)fry_simulateTouch:(FRYSimulatedTouch *)touch onSubviewMatching:(NSPredicate *)predicate;
+- (void)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSPredicate *)predicate;
 
 @end

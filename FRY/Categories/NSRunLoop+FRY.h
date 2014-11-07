@@ -11,6 +11,9 @@
 
 @interface NSRunLoop(FRY)
 
+/**
+ * Wait until all animations are complete, all touches have been dispatched, and user interaction is enabled.
+ */
 - (void)fry_waitForIdle;
 - (void)fry_waitForIdleWithTimeout:(NSTimeInterval)timeout;
 

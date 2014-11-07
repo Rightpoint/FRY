@@ -26,7 +26,6 @@
     }
     
     return (UIView *)element;
-    
 }
 
 @end

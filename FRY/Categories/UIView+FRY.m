@@ -9,6 +9,7 @@
 #import "UIView+FRY.h"
 #import "NSObject+FRYLookupSupport.h"
 #import "FRYTouchDispatch.h"
+#import "UIAccessibility+FRY.h"
 
 @implementation UIView (FRY)
 
@@ -40,18 +41,22 @@
     return nil;
 }
 
+- (NSArray *)fry_reverseSubviews
+{
+    return [[self.subviews reverseObjectEnumerator] allObjects];
+}
+
 - (NSDictionary *)fry_matchingLookupVariables
 {
-    UIView *view = self;
-    while ( view && view.accessibilityLabel == nil ) {
-        view = view.superview;
-    }
     NSMutableDictionary *variables = [NSMutableDictionary dictionary];
-    if ( view.accessibilityLabel ) {
-        variables[kFRYLookupAccessibilityLabel] = view.accessibilityLabel;
+    if ( self.fry_accessibilityLabel && self.accessibilityLabel.length > 0 ) {
+        variables[NSStringFromSelector(@selector(fry_accessibilityLabel))] = self.fry_accessibilityLabel;
     }
-    if ( view.accessibilityValue ) {
-        variables[kFRYLookupAccessibilityValue] = view.accessibilityValue;
+    if ( self.fry_accessibilityValue && self.accessibilityValue.length > 0 ) {
+        variables[NSStringFromSelector(@selector(fry_accessibilityValue))] = self.fry_accessibilityValue;
+    }
+    if ( self.accessibilityIdentifier && self.accessibilityIdentifier.length > 0 ) {
+        variables[NSStringFromSelector(@selector(accessibilityIdentifier))] = self.accessibilityIdentifier;
     }
 
     if ( variables.count > 0 ) {
@@ -66,6 +71,18 @@
 {
     return [self hitTest:point withEvent:nil];
 }
+
+- (UIView *)fry_interactableParent
+{
+    UIView *testView = self;
+    while ( testView &&
+           [testView fry_accessibilityTraitsAreInteractable] == NO &&
+           [testView isUserInteractionEnabled] == NO ) {
+        testView = [testView superview];
+    }
+    return testView;
+}
+
 
 - (void)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView
 {
@@ -87,16 +104,20 @@
     [self fry_simulateTouches:@[touch]];
 }
 
-- (void)fry_simulateTouch:(FRYSimulatedTouch *)touch onSubviewMatching:(NSDictionary *)variables
+- (void)fry_simulateTouch:(FRYSimulatedTouch *)touch onSubviewMatching:(NSPredicate *)predicate
 {
-    [self fry_simulateTouches:@[touch] onSubviewMatching:variables];
+    [self fry_simulateTouches:@[touch] onSubviewMatching:predicate];
 }
 
-- (void)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSDictionary *)variables
+- (void)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSPredicate *)predicate
 {
-    [self fry_enumerateDepthFirstViewMatching:variables usingBlock:^(UIView *view, CGRect frameInView) {
-        NSAssert(view != nil, @"Unable to find view matching %@", variables);
-        [view fry_simulateTouches:touches insideRect:frameInView];
+    [self fry_enumerateDepthFirstViewMatching:predicate usingBlock:^(UIView *view, CGRect frameInView) {
+        NSAssert(view != nil, @"Unable to find view matching %@", predicate);
+        UIView *interactable = (id)[view fry_interactableParent];
+        NSAssert(interactable, @"No Interactable parent of %@", view);
+        CGRect convertedFrame = [interactable convertRect:frameInView fromView:view];
+        
+        [interactable fry_simulateTouches:touches insideRect:convertedFrame];
     }];
 }
 

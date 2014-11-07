@@ -11,106 +11,129 @@
 #import "UIAccessibility+FRY.h"
 #import "UIAccessibilityElement+FRY.h"
 #import "FRYDefines.h"
-
-NSString* const kFRYLookupAccessibilityIdentifier = @"accessibilityIdentifier";
-NSString* const kFRYLookupAccessibilityValue      = @"accessibilityValue";
-NSString* const kFRYLookupAccessibilityLabel      = @"accessibilityLabel";
-NSString* const kFRYLookupAccessibilityTrait      = @"accessibilityTrait";
+#import "UIView+FRY.h"
 
 @implementation NSObject(FRYLookupSupport)
 
-+ (id<FRYLookup>)fry_lookup
++ (NSSet *)fry_childKeyPaths
 {
     // A lookup can not work, since the NSObject extension does not allow us to obtain
     // the containing UIView.  Since NSObject is the only shared heritage between UIView and UIAccessibilityElement
     // support NSObject for the compilers sake, even though we can't do much here.
-    NSAssert(NO, @"Can not create results from NSObject!");
+    NSAssert(NO, @"");
     return nil;
 }
 
-- (void)fry_enumerateDepthFirstViewMatching:(NSDictionary *)variables usingBlock:(FRYFirstMatchBlock)block;
+- (FRYLookupResult *)fry_lookupResult
 {
+    NSAssert(NO, @"");
+    return nil;
+}
+
+- (void)fry_enumerateDepthFirstViewMatching:(NSPredicate *)predicate usingBlock:(FRYFirstMatchBlock)block;
+{
+    NSParameterAssert(predicate);
     NSParameterAssert(block);
-    id<FRYLookup> lookup = [self.class fry_lookup];
-    FRYLookupResult *match = (id)[lookup depthFirstChildOfObject:self matchingVariables:variables];
+
+    FRYLookupResult *match = [self fry_enumerateDepthFirstViewMatching:predicate];
     block(match.view, match.frame);
 }
-- (void)fry_enumerateAllViewsMatching:(NSDictionary *)variables usingBlock:(FRYFirstMatchBlock)block
+
+- (FRYLookupResult *)fry_enumerateDepthFirstViewMatching:(NSPredicate *)predicate
 {
+    NSParameterAssert(predicate);
+    for ( NSString *childKeyPath in self.class.fry_childKeyPaths ) {
+        NSArray *children = [self valueForKeyPath:childKeyPath];
+        for ( NSObject *child in children) {
+            FRYLookupResult *result = [child fry_enumerateDepthFirstViewMatching:predicate];
+            if ( result ) {
+                return result;
+            }
+        }
+    }
+
+    if ( [predicate evaluateWithObject:self substitutionVariables:nil] ) {
+        return [self fry_lookupResult];
+    }
+    
+    return nil;
+}
+
+- (BOOL)fry_hasSubviewViewMatching:(NSPredicate *)predicate
+{
+    NSParameterAssert(predicate);
+    NSMutableArray *array = [NSMutableArray array];
+    [self fry_enumerateAllViewsMatching:predicate results:array];
+    return array.count != 0;
+}
+
+- (void)fry_enumerateAllViewsMatching:(NSPredicate *)predicate usingBlock:(FRYFirstMatchBlock)block
+{
+    NSParameterAssert(predicate);
     NSParameterAssert(block);
-    id<FRYLookup> lookup = [self.class fry_lookup];
-    NSArray *matches = [lookup lookupChildrenOfObject:self matchingVariables:variables];
-    for ( FRYLookupResult *result in matches ) {
+    NSMutableArray *results = [NSMutableArray array];
+
+    [self fry_enumerateAllViewsMatching:predicate results:results];
+
+    for ( FRYLookupResult *result in results ) {
         block(result.view, result.frame);
     }
 }
 
-+ (NSPredicate *)fry_accessibilityPredicate
+- (void)fry_enumerateAllViewsMatching:(NSPredicate *)predicate results:(NSMutableArray *)results
 {
-    return [NSPredicate predicateWithBlock:^BOOL(NSObject<UIAccessibilityIdentification> *object, NSDictionary *bindings) {
-        NSString *accessibilityIdentifier         =  bindings[kFRYLookupAccessibilityIdentifier];
-        NSString *accessibilityLabel              =  bindings[kFRYLookupAccessibilityLabel];
-        NSString *accessibilityValue              =  bindings[kFRYLookupAccessibilityValue];
-        UIAccessibilityTraits accessibilityTraits = [bindings[kFRYLookupAccessibilityTrait] integerValue];
-        return ((accessibilityIdentifier == nil || [[object accessibilityIdentifier] isEqualToString:accessibilityLabel]) &&
-                (accessibilityLabel      == nil || [[object fry_accessibilityLabel] isEqualToString:accessibilityLabel]) &&
-                (accessibilityValue      == nil || [[object fry_accessibilityValue] isEqualToString:accessibilityValue]) &&
-                ([object accessibilityTraits] & accessibilityTraits) == accessibilityTraits );
-    }];
+    NSParameterAssert(predicate);
+    NSParameterAssert(results);
+
+    if ( [predicate evaluateWithObject:self substitutionVariables:nil] ) {
+        [results addObject:[self fry_lookupResult]];
+    }
+
+    for ( NSString *childKeyPath in self.class.fry_childKeyPaths ) {
+        NSArray *children = [self valueForKeyPath:childKeyPath];
+        for ( NSObject *child in children) {
+            [child fry_enumerateAllViewsMatching:predicate results:results];
+        }
+    }
 }
 
 @end
 
 @implementation UIApplication(FRYLookupSupport)
 
-+ (id<FRYLookup>)fry_lookup
++ (NSSet *)fry_childKeyPaths
 {
-    FRYLookup *fryQuery = [[FRYLookup alloc] init];
-    fryQuery.childKeyPaths = @[NSStringFromSelector(@selector(windows))];
-    fryQuery.matchPredicate = [NSPredicate predicateWithValue:NO];
-    fryQuery.matchTransform = ^FRYLookupResult *(UIAccessibilityElement *obj) {
-        return [[FRYLookupResult alloc] initWithView:[obj fry_containingView] frame:[obj accessibilityFrame]];
-    };
-    return fryQuery;
+    return [NSSet setWithObject:NSStringFromSelector(@selector(windows))];
 }
 
 @end
 
 @implementation UIAccessibilityElement(FRYLookupSupport)
 
-+ (id<FRYLookup>)fry_lookup
++ (NSSet *)fry_childKeyPaths
 {
-    FRYLookup *fryQuery = [[FRYLookup alloc] init];
-    fryQuery.childKeyPaths = @[NSStringFromSelector(@selector(fry_accessibilityElements))];
-    fryQuery.matchPredicate = [self fry_accessibilityPredicate];
-    fryQuery.matchTransform = ^FRYLookupResult *(UIAccessibilityElement *obj) {
-        return [[FRYLookupResult alloc] initWithView:[obj fry_containingView] frame:[obj accessibilityFrame]];
-    };
-    return fryQuery;
+    return [NSSet setWithObject:NSStringFromSelector(@selector(fry_accessibilityElements))];
+}
+
+- (FRYLookupResult *)fry_lookupResult
+{
+    UIView *view = [self fry_containingView];
+    CGRect frame = [view convertRect:[self accessibilityFrame] fromView:[view window]];
+    return [[FRYLookupResult alloc] initWithView:[self fry_containingView] frame:frame];
 }
 
 @end
 
 @implementation UIView(FRYLookupSupport)
 
-+ (id<FRYLookup>)fry_lookup
++ (NSSet *)fry_childKeyPaths
 {
-    FRYLookup *fryQuery = [[FRYLookup alloc] init];
-    fryQuery.childKeyPaths = @[NSStringFromSelector(@selector(subviews)), NSStringFromSelector(@selector(fry_accessibilityElements))];
-    fryQuery.matchPredicate = [self fry_accessibilityPredicate];
-    fryQuery.descendPredicate = [NSPredicate predicateWithBlock:^BOOL(NSObject *object, NSDictionary *bindings) {
-        if ( [object isKindOfClass:[UIView class]] ) {
-            UIView *view = (UIView *)object;
-            return (view.hidden || view.alpha <= 0.01f) == NO;
-        }
-        else {
-            return YES;
-        }
-    }];
-    fryQuery.matchTransform = ^FRYLookupResult *(UIView *view) {
-        return [[FRYLookupResult alloc] initWithView:view frame:view.bounds];
-    };
-    return fryQuery;
+    return [NSSet setWithObjects:NSStringFromSelector(@selector(fry_accessibilityElements)), NSStringFromSelector(@selector(fry_reverseSubviews)), nil];
+}
+
+- (FRYLookupResult *)fry_lookupResult
+{
+    return [[FRYLookupResult alloc] initWithView:self frame:self.bounds];
 }
 
 @end
@@ -118,13 +141,9 @@ NSString* const kFRYLookupAccessibilityTrait      = @"accessibilityTrait";
 
 @implementation UIDatePicker(FRYLookupSupport)
 
-+ (id<FRYLookup>)fry_lookup
++ (NSSet *)fry_childKeyPaths
 {
-    FRYLookup *fryQuery = (FRYLookup *)[super fry_lookup];
-    // UIDatePicker has tons of children, none of which we care about.
-    fryQuery.descendPredicate = [NSPredicate predicateWithValue:NO];
-    return fryQuery;
+    return [NSSet set];
 }
-
 
 @end
