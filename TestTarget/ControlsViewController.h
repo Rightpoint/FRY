@@ -24,6 +24,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *sliderStatusLabel;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *toolbarButtonItem;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *navigationButtonItem;
+@property (weak, nonatomic) IBOutlet UIButton *toolbarButton;
 
 @end

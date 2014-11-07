@@ -11,8 +11,7 @@
 
 @interface NSObject(FRYLookupSupport)
 
-- (void)fry_enumerateDepthFirstViewMatching:(NSPredicate *)predicate usingBlock:(FRYFirstMatchBlock)block;
+- (void)fry_farthestDescendentMatching:(NSPredicate *)predicate usingBlock:(FRYFirstMatchBlock)block;
 - (void)fry_enumerateAllViewsMatching:(NSPredicate *)predicate usingBlock:(FRYFirstMatchBlock)block;
-- (BOOL)fry_hasSubviewViewMatching:(NSPredicate *)predicate;
 
 @end

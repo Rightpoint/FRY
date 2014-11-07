@@ -30,22 +30,22 @@
     return nil;
 }
 
-- (void)fry_enumerateDepthFirstViewMatching:(NSPredicate *)predicate usingBlock:(FRYFirstMatchBlock)block;
+- (void)fry_farthestDescendentMatching:(NSPredicate *)predicate usingBlock:(FRYFirstMatchBlock)block;
 {
     NSParameterAssert(predicate);
     NSParameterAssert(block);
 
-    FRYLookupResult *match = [self fry_enumerateDepthFirstViewMatching:predicate];
+    FRYLookupResult *match = [self fry_farthestDescendentMatching:predicate];
     block(match.view, match.frame);
 }
 
-- (FRYLookupResult *)fry_enumerateDepthFirstViewMatching:(NSPredicate *)predicate
+- (FRYLookupResult *)fry_farthestDescendentMatching:(NSPredicate *)predicate
 {
     NSParameterAssert(predicate);
     for ( NSString *childKeyPath in self.class.fry_childKeyPaths ) {
         NSArray *children = [self valueForKeyPath:childKeyPath];
         for ( NSObject *child in children) {
-            FRYLookupResult *result = [child fry_enumerateDepthFirstViewMatching:predicate];
+            FRYLookupResult *result = [child fry_farthestDescendentMatching:predicate];
             if ( result ) {
                 return result;
             }
@@ -57,14 +57,6 @@
     }
     
     return nil;
-}
-
-- (BOOL)fry_hasSubviewViewMatching:(NSPredicate *)predicate
-{
-    NSParameterAssert(predicate);
-    NSMutableArray *array = [NSMutableArray array];
-    [self fry_enumerateAllViewsMatching:predicate results:array];
-    return array.count != 0;
 }
 
 - (void)fry_enumerateAllViewsMatching:(NSPredicate *)predicate usingBlock:(FRYFirstMatchBlock)block

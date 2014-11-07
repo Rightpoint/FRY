@@ -12,7 +12,6 @@
 
 #import "UIView+FRY.h"
 #import "FRYLookupSupport.h"
-#import "FRYLookupResult.h"
 
 @implementation UIApplication(FRY)
 

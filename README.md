@@ -16,12 +16,12 @@ Two types of queries are supported, a depth first query that mimics hitTest trav
 
 ```obj-c
 #define FRY_KEY UIApplication.sharedApplication.keyWindow
-[FRY_KEY fry_enumerateDepthFirstViewMatching:[NSPredicate fry_matchAccessibilityLabel:actionConfirmation]
-                                  usingBlock:^(UIView *view, CGRect frameInView) {
+[FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:actionConfirmation]
+                             usingBlock:^(UIView *view, CGRect frameInView) {
                                           }];
 ```
 
-View lookup is a simple system based on NSPredicate and KeyPaths.  Add implementation to any object (like CALayer or SceneKit) using `-fry_childKeyPaths` and `-fry_lookupSupport`.  Both the `accessibilityElements` and `subviews` are searched on UIView.
+View lookup is a simple system based on NSPredicate and KeyPaths.  Add support to any object (like CALayer or SceneKit) by implementing `-fry_childKeyPaths` and `-fry_lookupSupport`.  UIKit support traverses both `accessibilityElements` and `subviews`.
 
 ### Touch Synthesis
 FRY uses strongly modeled touches to generate UIKit touch events.  This allows for simple arbitrary touch re-creation, and clear API's for creating common touch sequences.

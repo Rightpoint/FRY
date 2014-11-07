@@ -111,9 +111,14 @@
 
 - (void)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSPredicate *)predicate
 {
-    [self fry_enumerateDepthFirstViewMatching:predicate usingBlock:^(UIView *view, CGRect frameInView) {
+    [self fry_farthestDescendentMatching:predicate usingBlock:^(UIView *view, CGRect frameInView) {
         NSAssert(view != nil, @"Unable to find view matching %@", predicate);
-        UIView *interactable = (id)[view fry_interactableParent];
+        
+        // This interactable check is not really needed, but will cause some invalid touch events
+        // to fail quicker.   It will also focus touches on views the developer is probably working with
+        // and skip over some private view heirarchies.   This is especially noticible for the visualization
+        // point of view.
+        UIView *interactable = [view fry_interactableParent];
         NSAssert(interactable, @"No Interactable parent of %@", view);
         CGRect convertedFrame = [interactable convertRect:frameInView fromView:view];
         

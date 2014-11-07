@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "FRYDefines.h"
 
-@class FRYLookupResult;
-
 @interface UIApplication(FRY)
 
 - (UIEvent *)fry_eventWithTouches:(NSArray *)touches;

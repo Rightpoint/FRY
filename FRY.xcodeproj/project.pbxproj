@@ -16,7 +16,6 @@
 		AB184AEE19E8EEC0007CC9DA /* NSRunLoop+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB184AED19E8EEC0007CC9DA /* NSRunLoop+FRY.m */; };
 		AB184AF119EA087D007CC9DA /* FRYTouchEventLog.m in Sources */ = {isa = PBXBuildFile; fileRef = AB184AF019EA087D007CC9DA /* FRYTouchEventLog.m */; };
 		AB24E0041A0C88670099231F /* AlertTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB24E0021A0C88670099231F /* AlertTableViewController.m */; };
-		AB24E0051A0C88670099231F /* AlertTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB24E0031A0C88670099231F /* AlertTableViewController.xib */; };
 		AB24E0081A0C88BF0099231F /* CellItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AB24E0071A0C88BF0099231F /* CellItem.m */; };
 		AB24E00A1A0C89E20099231F /* AlertTableViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AB24E0091A0C89E20099231F /* AlertTableViewControllerTest.m */; };
 		AB25C04019DF95AA00038E75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03F19DF95AA00038E75 /* Foundation.framework */; };
@@ -101,7 +100,6 @@
 		AB184AF019EA087D007CC9DA /* FRYTouchEventLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYTouchEventLog.m; sourceTree = "<group>"; };
 		AB24E0011A0C88670099231F /* AlertTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertTableViewController.h; sourceTree = "<group>"; };
 		AB24E0021A0C88670099231F /* AlertTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertTableViewController.m; sourceTree = "<group>"; };
-		AB24E0031A0C88670099231F /* AlertTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertTableViewController.xib; sourceTree = "<group>"; };
 		AB24E0061A0C88BF0099231F /* CellItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellItem.h; sourceTree = "<group>"; };
 		AB24E0071A0C88BF0099231F /* CellItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellItem.m; sourceTree = "<group>"; };
 		AB24E0091A0C89E20099231F /* AlertTableViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertTableViewControllerTest.m; sourceTree = "<group>"; };
@@ -154,7 +152,6 @@
 		ABCF04BE1A06AF200000318A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		ABCF04BF1A06AF200000318A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		ABCF04CA1A06AF200000318A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		ABCF04CD1A06AF200000318A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		ABCF04D31A06AF200000318A /* TestTargetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestTargetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABCF04D81A06AF210000318A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABCF04D91A06AF210000318A /* ControlsViewControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ControlsViewControllerTests.m; sourceTree = "<group>"; };
@@ -380,12 +377,10 @@
 				ABCF04E11A06BE220000318A /* ControlsViewController.h */,
 				ABCF04E21A06BE220000318A /* ControlsViewController.m */,
 				AB848EFD1A0BB73E00452E5E /* ControlsViewController.xib */,
-				ABCF04CA1A06AF200000318A /* Images.xcassets */,
-				ABCF04CC1A06AF200000318A /* LaunchScreen.xib */,
-				ABCF04BA1A06AF200000318A /* Supporting Files */,
 				AB24E0011A0C88670099231F /* AlertTableViewController.h */,
 				AB24E0021A0C88670099231F /* AlertTableViewController.m */,
-				AB24E0031A0C88670099231F /* AlertTableViewController.xib */,
+				ABCF04CA1A06AF200000318A /* Images.xcassets */,
+				ABCF04BA1A06AF200000318A /* Supporting Files */,
 				AB24E0061A0C88BF0099231F /* CellItem.h */,
 				AB24E0071A0C88BF0099231F /* CellItem.m */,
 			);
@@ -547,7 +542,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB24E0051A0C88670099231F /* AlertTableViewController.xib in Resources */,
 				D4082AC91A0821B000F03F3C /* spark.png in Resources */,
 				AB848EFE1A0BB73E00452E5E /* ControlsViewController.xib in Resources */,
 				ABCF04CB1A06AF200000318A /* Images.xcassets in Resources */,
@@ -677,14 +671,6 @@
 				AB25C05919DF95AA00038E75 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		ABCF04CC1A06AF200000318A /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ABCF04CD1A06AF200000318A /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

@@ -15,6 +15,7 @@
                 <outlet property="sliderStatusLabel" destination="Fay-vH-GHu" id="b7t-F5-JqP"/>
                 <outlet property="stepper" destination="cEF-t1-R21" id="Ul5-V1-jQA"/>
                 <outlet property="switchControl" destination="6mS-cE-gFo" id="P5a-jz-E06"/>
+                <outlet property="toolbarButton" destination="JUt-D9-5yF" id="ZH8-S6-wrF"/>
                 <outlet property="toolbarButtonItem" destination="RTK-Nl-ekh" id="AMr-U2-cfz"/>
                 <outlet property="toolbarSegmentControl" destination="WPE-yb-he8" id="qfU-yr-pyj"/>
                 <outlet property="toolbarSwitchControl" destination="NQ9-H6-j37" id="p0m-OM-QSn"/>
@@ -95,7 +96,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" id="rpu-RQ-ZEF">
-                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" id="WPE-yb-he8">
+                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" id="WPE-yb-he8">
                                 <rect key="frame" x="41" y="7" width="66" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
@@ -103,7 +104,7 @@
                                     <segment title="T2"/>
                                 </segments>
                                 <connections>
-                                    <action selector="segmentControlAction:" destination="-1" eventType="touchUpInside" id="gWZ-I5-MEK"/>
+                                    <action selector="segmentControlAction:" destination="-1" eventType="valueChanged" id="PAV-Jm-TPX"/>
                                 </connections>
                             </segmentedControl>
                         </barButtonItem>
@@ -124,7 +125,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="buttonAction:" destination="-1" eventType="touchDragInside" id="w9w-fE-SaF"/>
+                                    <action selector="buttonAction:" destination="-1" eventType="touchUpInside" id="nwD-Uf-pYk"/>
                                 </connections>
                             </button>
                         </barButtonItem>
