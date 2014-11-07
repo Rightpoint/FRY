@@ -46,7 +46,7 @@ A side effect of strong touch modeling is that FRY can record live touch events 
 [[FRYEventMonitor sharedEventMonitor] enable];
 ```
 
-FRY will attempt to determine an accessibility lookup for the view that was touched, to avoid using screen coordinates if possible and maximize the durability of these commands.  If no accessibility information can be found, absoulte screen coordinates will be used.
+FRY will attempt to use relative coordinates with accessibility lookup information for the view that was touched.  This will maximize the reliability of these commands when UI changes occur.  If no accessibility information can be found, absoulte screen coordinates will be used.
 
 # Installation
 
