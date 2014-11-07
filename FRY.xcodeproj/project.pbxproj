@@ -41,7 +41,6 @@
 		ABCF04B31A054F890000318A /* FRYTouchDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04B21A054F890000318A /* FRYTouchDispatch.m */; };
 		ABCF04BD1A06AF200000318A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04BC1A06AF200000318A /* main.m */; };
 		ABCF04C01A06AF200000318A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04BF1A06AF200000318A /* AppDelegate.m */; };
-		ABCF04C31A06AF200000318A /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04C21A06AF200000318A /* MasterViewController.m */; };
 		ABCF04CB1A06AF200000318A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABCF04CA1A06AF200000318A /* Images.xcassets */; };
 		ABCF04DA1A06AF210000318A /* ControlsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04D91A06AF210000318A /* ControlsViewControllerTests.m */; };
 		ABCF04E31A06BE220000318A /* ControlsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04E21A06BE220000318A /* ControlsViewController.m */; };
@@ -154,8 +153,6 @@
 		ABCF04BC1A06AF200000318A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ABCF04BE1A06AF200000318A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		ABCF04BF1A06AF200000318A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		ABCF04C11A06AF200000318A /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		ABCF04C21A06AF200000318A /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		ABCF04CA1A06AF200000318A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		ABCF04CD1A06AF200000318A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		ABCF04D31A06AF200000318A /* TestTargetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestTargetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -380,8 +377,6 @@
 			children = (
 				ABCF04BE1A06AF200000318A /* AppDelegate.h */,
 				ABCF04BF1A06AF200000318A /* AppDelegate.m */,
-				ABCF04C11A06AF200000318A /* MasterViewController.h */,
-				ABCF04C21A06AF200000318A /* MasterViewController.m */,
 				ABCF04E11A06BE220000318A /* ControlsViewController.h */,
 				ABCF04E21A06BE220000318A /* ControlsViewController.m */,
 				AB848EFD1A0BB73E00452E5E /* ControlsViewController.xib */,
@@ -644,7 +639,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABCF04C01A06AF200000318A /* AppDelegate.m in Sources */,
-				ABCF04C31A06AF200000318A /* MasterViewController.m in Sources */,
 				AB24E0081A0C88BF0099231F /* CellItem.m in Sources */,
 				ABCF04BD1A06AF200000318A /* main.m in Sources */,
 				ABCF04E31A06BE220000318A /* ControlsViewController.m in Sources */,
