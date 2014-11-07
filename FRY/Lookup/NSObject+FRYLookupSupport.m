@@ -102,27 +102,6 @@
     }
 }
 
-- (BOOL)fry_interactable
-{
-    return [self fry_accessibilityTraitsAreInteractable];
-}
-
-- (NSObject *)fry_interactableParent
-{
-    NSObject *testObject = self;
-    while ( testObject && [testObject fry_interactable] == NO ) {
-        NSString *parentKeyPath = [self.class fry_parentKeyPath];
-        if ( parentKeyPath ) {
-            testObject = [testObject valueForKeyPath:parentKeyPath];
-        }
-        else {
-            testObject = nil;
-        }
-    }
-    return testObject;
-}
-
-
 @end
 
 @implementation UIApplication(FRYLookupSupport)
@@ -171,12 +150,6 @@
 {
     return [[FRYLookupResult alloc] initWithView:self frame:self.bounds];
 }
-
-- (BOOL)fry_interactable
-{
-    return [super fry_interactable] || [self isUserInteractionEnabled];
-}
-
 
 @end
 

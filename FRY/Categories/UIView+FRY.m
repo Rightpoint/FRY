@@ -72,6 +72,18 @@
     return [self hitTest:point withEvent:nil];
 }
 
+- (UIView *)fry_interactableParent
+{
+    UIView *testObject = self;
+    while ( testObject &&
+           [testObject fry_accessibilityTraitsAreInteractable] == NO &&
+           [testObject isUserInteractionEnabled] == NO ) {
+        testObject = [testObject superview];
+    }
+    return testObject;
+}
+
+
 - (void)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView
 {
     [[FRYTouchDispatch shared] simulateTouches:touches inView:self frame:frameInView];
