@@ -1,4 +1,4 @@
-FRY is an iOS Testing Library inspired by KIF.  The purpose is to simplify the creation and execution of UI tests that involve touch synthesis.
+FRY is an iOS Library inspired by KIF.  The purpose is to simplify iteractions with UIKit and to make writing UI tests simple.
 
 NOTE: Everything is still in alpha, and is subject to change before the 1.0 release.
 
@@ -16,7 +16,7 @@ View lookup is a simple NSPredicate system.  Two types of queries are supported,
 ```obj-c
 #define FRY_KEY UIApplication.sharedApplication.keyWindow
 [FRY_KEY fry_enumerateDepthFirstViewMatching:[NSPredicate fry_matchAccessibilityLabel:actionConfirmation]
-                                          usingBlock:^(UIView *view, CGRect frameInView) {
+                                  usingBlock:^(UIView *view, CGRect frameInView) {
                                           }];
 ```
 
@@ -25,7 +25,7 @@ FRY uses strongly modeled touches to generate UIKit touch events.  This allows f
 
 ```obj-c
 [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
-         onSubviewMatching:[NSPredicate fry_matchInteractableAccessibilityLabel:accessibilityLabel]];
+         onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:accessibilityLabel]];
 // Other touch objects:
 FRYSyntheticTouch *t1 = [FRYSyntheticTouch dragFromPoint:p1 toPoint:p2 forDuration:1];
 FRYSyntheticTouch *t2 = [FRYSyntheticTouch pinchInToCenterOfPoint:p3 point:p4 duration:1];
@@ -43,14 +43,14 @@ FRY simplifies runloop management of UIKit code (and FRY touch synthesis), with 
 ```
 
 ## Touch Recording and Playback
-A side effect of strong touch modeling is that FRY can record touch events in your application, for later re-creation.  These touches are printed out as the FRY command to reproduce the touch in a unit test.
+A side effect of strong touch modeling is that FRY can record touch events in your application, for later recreation.  When the home button is pressed, The FRY commands to reproduce these touches are printed on the console.
 
 **Enable Monitoring**
 ```obj-c
 [[FRYEventMonitor sharedEventMonitor] enable];
 ```
 
-FRY will attempt to determine an accessibility lookup for the view that was touched, and include relative-touch coordinates, and will avoid using screen coordinates if possible.   This should maximize the durability of these commands.
+FRY will attempt to determine an accessibility lookup for the view that was touched, to avoid using screen coordinates if possible and maximize the durability of these commands.  If no accessibility information can be found, absoulte screen coordinates will be used.
 
 # Installation
 
@@ -61,10 +61,11 @@ Add FRY to your Podfile to install.   If you want to use touch recording, add FR
 ```
 
 # Design Goals
+- Complete Code Coverage and UIKit functionality.
 - Clear separation of query and touching.  UIView lookup will never modify the view heirarchy.
-- Isolate runloop spinning.
-- Keep library logic clean and accomidate UIKit "quirks" via UIView category extensions.
+- Isolate runloop spinning, and minimize test code (XCTest, specta) dependencies.
+- Use simple logic to implement behavior, and complex UIKit categories to hide UIKit implementation details.
 
-
-
+## Design Questions
+- I've never used so many categories, and I'm not sure how to best organize them.
 

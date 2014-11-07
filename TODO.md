@@ -21,12 +21,12 @@
 - Update README.md
 
 - Test Target
-  - Controls
-  - Text Input
-  - Pickers
-  - Visual Status
-  - Gesture Recognizers
+  x Controls
+  x Alerts
   - Table View
   - Collection View
+  - Text Input
+  - Pickers
+  - Gesture Recognizers
   - Web Content
   - Web Form
