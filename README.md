@@ -7,7 +7,6 @@ FRY consists of four features to help writing integration tests:
 
 - View Lookup
 - Touch Synthesis
-- Runloop helper
 - Touch Recording and Playback
 
 ## View Lookup
@@ -28,6 +27,8 @@ FRY uses strongly modeled touches to generate UIKit touch events.  This allows f
 ```obj-c
 [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
          onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:accessibilityLabel]];
+[[NSRunLoop currentRunLoop] fry_waitForIdle];
+
 // Other touch objects:
 FRYSyntheticTouch *t1 = [FRYSyntheticTouch dragFromPoint:p1 toPoint:p2 forDuration:1];
 FRYSyntheticTouch *t2 = [FRYSyntheticTouch pinchInToCenterOfPoint:p3 point:p4 duration:1];
@@ -36,13 +37,6 @@ FRYSyntheticTouch *t3 = [FRYSyntheticTouch touchStarting:0.000 points:33 xyoffse
 ```
 
 Notice that points and touches are specified as multiples of the frame they are dispatched in.   So a tap at point 0.5 0.5 will touch in the center of the view, regardless of the views frame.  All touches are dispatched on the runloop and do not block the main thread.   Touches are complete when -[FRYTouchDispatch hasActiveTouches] returns NO.
-
-## Runloop Helper
-FRY simplifies runloop management of UIKit code (and FRY touch synthesis), with a runloop helper that waits until all animations are complete, all touches have been dispatched, and user interaction is complete.
-
-```obj-c
-[[NSRunLoop currentRunLoop] fry_waitForIdle];
-```
 
 ## Touch Recording and Playback
 A side effect of strong touch modeling is that FRY can record live touch events in your application, for later playback.  When the home button is pressed, The FRY commands to reproduce these touches are printed on the console.
