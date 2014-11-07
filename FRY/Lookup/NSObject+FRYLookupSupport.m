@@ -24,6 +24,11 @@
     return nil;
 }
 
++ (NSString *)fry_parentKeyPath
+{
+    return nil;
+}
+
 - (FRYLookupResult *)fry_lookupResult
 {
     NSAssert(NO, @"");
@@ -97,6 +102,27 @@
     }
 }
 
+- (BOOL)fry_interactable
+{
+    return [self fry_accessibilityTraitsAreInteractable];
+}
+
+- (NSObject *)fry_interactableParent
+{
+    NSObject *testObject = self;
+    while ( testObject && [testObject fry_interactable] == NO ) {
+        NSString *parentKeyPath = [self.class fry_parentKeyPath];
+        if ( parentKeyPath ) {
+            testObject = [testObject valueForKeyPath:parentKeyPath];
+        }
+        else {
+            testObject = nil;
+        }
+    }
+    return testObject;
+}
+
+
 @end
 
 @implementation UIApplication(FRYLookupSupport)
@@ -115,9 +141,16 @@
     return [NSSet setWithObject:NSStringFromSelector(@selector(fry_accessibilityElements))];
 }
 
++ (NSString *)fry_parentKeyPath
+{
+    return NSStringFromSelector(@selector(accessibilityContainer));
+}
+
 - (FRYLookupResult *)fry_lookupResult
 {
-    return [[FRYLookupResult alloc] initWithView:[self fry_containingView] frame:[self accessibilityFrame]];
+    UIView *view = [self fry_containingView];
+    CGRect frame = [view convertRect:[self accessibilityFrame] fromView:[view window]];
+    return [[FRYLookupResult alloc] initWithView:[self fry_containingView] frame:frame];
 }
 
 @end
@@ -129,10 +162,21 @@
     return [NSSet setWithObjects:NSStringFromSelector(@selector(fry_accessibilityElements)), NSStringFromSelector(@selector(fry_reverseSubviews)), nil];
 }
 
++ (NSString *)fry_parentKeyPath
+{
+    return NSStringFromSelector(@selector(superview));
+}
+
 - (FRYLookupResult *)fry_lookupResult
 {
     return [[FRYLookupResult alloc] initWithView:self frame:self.bounds];
 }
+
+- (BOOL)fry_interactable
+{
+    return [super fry_interactable] || [self isUserInteractionEnabled];
+}
+
 
 @end
 

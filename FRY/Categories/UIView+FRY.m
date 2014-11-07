@@ -101,7 +101,11 @@
 {
     [self fry_enumerateDepthFirstViewMatching:predicate usingBlock:^(UIView *view, CGRect frameInView) {
         NSAssert(view != nil, @"Unable to find view matching %@", predicate);
-        [view fry_simulateTouches:touches insideRect:frameInView];
+        UIView *interactable = (id)[view fry_interactableParent];
+        NSAssert(interactable, @"No Interactable parent of %@", view);
+        CGRect convertedFrame = [interactable convertRect:frameInView fromView:view];
+        
+        [interactable fry_simulateTouches:touches insideRect:convertedFrame];
     }];
 }
 
