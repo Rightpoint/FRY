@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "ControlsViewController.h"
 @interface AppDelegate () <UISplitViewControllerDelegate>
 
 @end
@@ -17,10 +17,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-    UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-    navigationController.topViewController.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem;
-    splitViewController.delegate = self;
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = [[ControlsViewController alloc] initWithNibName:@"ControlsViewController" bundle:nil];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

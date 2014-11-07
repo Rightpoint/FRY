@@ -21,7 +21,7 @@
 
 - (void)setUp {
     [super setUp];
-    self.viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"Controls"];
+    self.viewController = [[ControlsViewController alloc] initWithNibName:nil bundle:nil];
     [UIApplication sharedApplication].keyWindow.rootViewController = self.viewController;
     [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.0]];
@@ -51,10 +51,10 @@
                                      @"Slider",
                                      @"Switch",
                                      @"Progress",
-                                     @"toolbar item",
-                                     @"TFirst",
-                                     @"TSecond",
-                                     @"toolbar button",
+                                     @"TI",
+                                     @"T1",
+                                     @"T2",
+                                     @"TB",
                                      @"toolbar switch",
                                      ];
     NSMutableArray *foundViews = [NSMutableArray array];
@@ -75,19 +75,19 @@
 - (void)testTapping
 {
     NSArray *accessibilityLabels = @[
-                                     @"Second",
-                                     @"First",
+//                                     @"Second",
+//                                     @"First",
                                      @"Action 1",
-                                     @"Action 2",
-                                     @"Action 3",
-                                     @[@"Increment", @"Stepper"],
-                                     @[@"Decrement", @"Stepper"],
-                                     @"Switch",
-                                     @"toolbar item",
-                                     @"TFirst",
-                                     @"TSecond",
-                                     @"toolbar button",
-                                     @"toolbar switch",
+//                                     @"Action 2",
+//                                     @"Action 3",
+//                                     @[@"Increment", @"Stepper"],
+//                                     @[@"Decrement", @"Stepper"],
+//                                     @"Switch",
+//                                     @"TI",
+//                                     @"T1",
+//                                     @"T2",
+//                                     @"TB",
+//                                     @"toolbar switch",
                                      ];
     for ( id accessibilityInfo in accessibilityLabels ) {
         NSString *confirmationString = nil;
@@ -134,7 +134,7 @@
         NSObject *value = [self.viewController valueForKey:property];
         [value setValue:@(NO) forKey:@"enabled"];
     }
-    
+
     NSArray *accessibilityLabels = @[
                                      @"Second",
                                      @"First",
@@ -143,11 +143,11 @@
                                      @"Action 3",
                                      @"Stepper",
                                      @"Switch",
-                                     @"toolbar item",
-                                     @"TFirst",
-                                     @"TSecond",
+//                                     @"TI",
+                                     @"T1",
+                                     @"T2",
 // This is not disabling because the UIButtonLabel is disabled, but the UIButton is enabled.
-//                                     @"toolbar button",
+                                     @"TB",
                                      @"toolbar switch",
                                      ];
     for ( NSString *accessibilityLabel in accessibilityLabels ) {
@@ -159,12 +159,12 @@
         
         [FRY_KEY fry_enumerateDepthFirstViewMatching:[NSPredicate fry_matchAccessibilityLabel:actionConfirmation]
                                           usingBlock:^(UIView *view, CGRect frameInView) {
-                                              XCTAssertNil(view);
+                                              XCTAssertNil(view, @"Did not find %@", actionConfirmation);
                                           }];
 
         [FRY_KEY fry_enumerateDepthFirstViewMatching:[NSPredicate fry_matchAccessibilityLabel:@"No Action"]
                                           usingBlock:^(UIView *view, CGRect frameInView) {
-                                              XCTAssertNotNil(view);
+                                              XCTAssertNotNil(view, @"Action label updated for %@", accessibilityLabel);
                                           }];
     }
 }
@@ -186,7 +186,7 @@
                                                       xyoffsets:0.049f,0.452f,0.000, 0.054f,0.452f,0.136, 0.074f,0.419f,0.153, 0.088f,0.387f,0.170, 0.110f,0.387f,0.187, 0.172f,0.387f,0.223, 0.265f,0.387f,0.255, 0.326f,0.419f,0.272, 0.382f,0.484f,0.304, 0.463f,0.629f,0.331, 0.507f,0.661f,0.348, 0.539f,0.694f,0.368, 0.615f,0.742f,0.398, 0.645f,0.742f,0.414, 0.701f,0.742f,0.441, 0.718f,0.742f,0.457, 0.728f,0.774f,0.474, 0.745f,0.774f,0.491, 0.755f,0.774f,0.507, 0.770f,0.774f,0.524, 0.779f,0.774f,0.542, 0.794f,0.774f,0.559, 0.801f,0.774f,0.575, 0.806f,0.806f,0.592, 0.811f,0.806f,0.609, 0.816f,0.806f,0.630, 0.833f,0.806f,0.647, 0.855f,0.806f,0.679, 0.873f,0.806f,0.695, 0.887f,0.806f,0.712, 0.897f,0.806f,0.729, 0.907f,0.806f,0.745, 0.924f,0.806f,0.762, 0.934f,0.806f,0.779, 0.944f,0.806f,0.797, 0.949f,0.806f,0.813, 0.953f,0.806f,0.830, 0.956f,0.806f,0.851, 0.961f,0.806f,0.873, 0.966f,0.806f,0.890, 0.971f,0.806f,0.907, 0.975f,0.806f,0.924, 0.980f,0.806f,0.940, 0.985f,0.806f,0.959, 0.988f,0.806f,1.045, 0.985f,0.806f,1.203, 0.978f,0.806f,1.220, 0.973f,0.806f,1.237, 0.971f,0.806f,1.257, 0.968f,0.806f,1.290, 0.968f,0.774f,1.306, 0.963f,0.774f,1.323, 0.956f,0.742f,1.340, 0.956f,0.710f,1.359, 0.951f,0.710f,1.376, 0.951f,0.677f,1.408, 0.956f,0.677f,1.767, 0.961f,0.677f,1.833, 0.966f,0.677f,1.942, 0.968f,0.677f,1.996, 0.973f,0.677f,2.032, 0.975f,0.677f,2.184, 0.975f,0.677f,2.444]
              onSubviewMatching:[NSPredicate fry_matchInteractableAccessibilityLabel:@"Slider"]];
     [[NSRunLoop currentRunLoop] fry_waitForIdle];
-    [FRY_KEY fry_enumerateDepthFirstViewMatching:[NSPredicate fry_matchAccessibilityLabel:@"Slider=100"]
+    [FRY_KEY fry_enumerateDepthFirstViewMatching:[NSPredicate fry_matchAccessibilityLabel:@"Slider=98"]
                                       usingBlock:^(UIView *view, CGRect frameInView) {
                                           XCTAssertNotNil(view);
                                       }];

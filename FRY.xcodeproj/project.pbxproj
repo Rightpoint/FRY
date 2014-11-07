@@ -30,6 +30,7 @@
 		AB43FCF51A0468600049D520 /* UITextInput+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB43FCF41A0468600049D520 /* UITextInput+FRY.m */; };
 		AB5A891B1A07147700E44C89 /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03C19DF95AA00038E75 /* libFRY.a */; };
 		AB5A891E1A07DEC400E44C89 /* NSPredicate+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB5A891D1A07DEC400E44C89 /* NSPredicate+FRY.m */; };
+		AB848EFE1A0BB73E00452E5E /* ControlsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB848EFD1A0BB73E00452E5E /* ControlsViewController.xib */; };
 		ABA5781A19E64AE600D77CDA /* FRYLookupResult.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781319E64AE600D77CDA /* FRYLookupResult.m */; };
 		ABA5781C19E64AE600D77CDA /* NSObject+FRYLookupSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5781819E64AE600D77CDA /* NSObject+FRYLookupSupport.m */; };
 		ABA5782C19E65D1100D77CDA /* FRYDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5782B19E65D1100D77CDA /* FRYDefines.m */; };
@@ -37,7 +38,6 @@
 		ABCF04BD1A06AF200000318A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04BC1A06AF200000318A /* main.m */; };
 		ABCF04C01A06AF200000318A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04BF1A06AF200000318A /* AppDelegate.m */; };
 		ABCF04C31A06AF200000318A /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04C21A06AF200000318A /* MasterViewController.m */; };
-		ABCF04C91A06AF200000318A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABCF04C71A06AF200000318A /* Main.storyboard */; };
 		ABCF04CB1A06AF200000318A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABCF04CA1A06AF200000318A /* Images.xcassets */; };
 		ABCF04DA1A06AF210000318A /* ControlsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04D91A06AF210000318A /* ControlsViewControllerTests.m */; };
 		ABCF04E31A06BE220000318A /* ControlsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04E21A06BE220000318A /* ControlsViewController.m */; };
@@ -128,6 +128,7 @@
 		AB43FCF41A0468600049D520 /* UITextInput+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextInput+FRY.m"; sourceTree = "<group>"; };
 		AB5A891C1A07DEC400E44C89 /* NSPredicate+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPredicate+FRY.h"; sourceTree = "<group>"; };
 		AB5A891D1A07DEC400E44C89 /* NSPredicate+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPredicate+FRY.m"; sourceTree = "<group>"; };
+		AB848EFD1A0BB73E00452E5E /* ControlsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ControlsViewController.xib; sourceTree = "<group>"; };
 		ABA5781219E64AE600D77CDA /* FRYLookupResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYLookupResult.h; sourceTree = "<group>"; };
 		ABA5781319E64AE600D77CDA /* FRYLookupResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYLookupResult.m; sourceTree = "<group>"; };
 		ABA5781419E64AE600D77CDA /* FRYLookupSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYLookupSupport.h; sourceTree = "<group>"; };
@@ -145,7 +146,6 @@
 		ABCF04BF1A06AF200000318A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		ABCF04C11A06AF200000318A /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		ABCF04C21A06AF200000318A /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
-		ABCF04C81A06AF200000318A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ABCF04CA1A06AF200000318A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		ABCF04CD1A06AF200000318A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		ABCF04D31A06AF200000318A /* TestTargetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestTargetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -374,7 +374,7 @@
 				ABCF04C21A06AF200000318A /* MasterViewController.m */,
 				ABCF04E11A06BE220000318A /* ControlsViewController.h */,
 				ABCF04E21A06BE220000318A /* ControlsViewController.m */,
-				ABCF04C71A06AF200000318A /* Main.storyboard */,
+				AB848EFD1A0BB73E00452E5E /* ControlsViewController.xib */,
 				ABCF04CA1A06AF200000318A /* Images.xcassets */,
 				ABCF04CC1A06AF200000318A /* LaunchScreen.xib */,
 				ABCF04BA1A06AF200000318A /* Supporting Files */,
@@ -536,8 +536,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABCF04C91A06AF200000318A /* Main.storyboard in Resources */,
 				D4082AC91A0821B000F03F3C /* spark.png in Resources */,
+				AB848EFE1A0BB73E00452E5E /* ControlsViewController.xib in Resources */,
 				ABCF04CB1A06AF200000318A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -663,14 +663,6 @@
 				AB25C05919DF95AA00038E75 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		ABCF04C71A06AF200000318A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ABCF04C81A06AF200000318A /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		ABCF04CC1A06AF200000318A /* LaunchScreen.xib */ = {

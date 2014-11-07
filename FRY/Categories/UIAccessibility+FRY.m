@@ -36,8 +36,8 @@ UIAccessibilityTraits FRYTextFieldAccessibilityValue = 0x00040000;
 
 - (NSArray *)fry_accessibilityElements
 {
-    if ( [self respondsToSelector:@selector(accessibilityElements)] ) {
-        return self.accessibilityElements;
+    if ( [self respondsToSelector:NSSelectorFromString(@"accessibilityElements")] ) {
+        return [self valueForKey:@"accessibilityElements"];
     }
     else {
         NSUInteger count = self.accessibilityElementCount == NSNotFound ? 0 : self.accessibilityElementCount;
