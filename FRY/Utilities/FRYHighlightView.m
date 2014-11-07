@@ -9,11 +9,11 @@
 #import "FRYHighlightView.h"
 #import "FRYDefines.h"
 #import "UIView+FRY.h"
-#import "Spark.png.h"
+#import "FRYSpark.png.h"
 
 static NSTimeInterval const kFryHighlightAnimationDuration = 0.1f;
 static NSTimeInterval const kFryUnhighlightAnimationDuration = 0.6f;
-static CGFloat const kFryDefaultPointSize = 20.0f;
+static CGFloat const kFryDefaultPointSize = 15.0f;
 
 #pragma mark - FryTouchEmitter
 

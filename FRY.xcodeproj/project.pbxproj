@@ -154,7 +154,7 @@
 		ABCF04D91A06AF210000318A /* ControlsViewControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ControlsViewControllerTests.m; sourceTree = "<group>"; };
 		ABCF04E11A06BE220000318A /* ControlsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlsViewController.h; sourceTree = "<group>"; };
 		ABCF04E21A06BE220000318A /* ControlsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlsViewController.m; sourceTree = "<group>"; };
-		D4082ACB1A08231200F03F3C /* Spark.png.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Spark.png.h; path = ../../../Spark.png.h; sourceTree = "<group>"; };
+		D40395831A0CE1CE002200E1 /* FRYSpark.png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYSpark.png.h; sourceTree = "<group>"; };
 		D4CA25141A09089B00A04F26 /* FRYHighlightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYHighlightView.h; sourceTree = "<group>"; };
 		D4CA25151A09089B00A04F26 /* FRYHighlightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYHighlightView.m; sourceTree = "<group>"; };
 		D4CA25171A0908D100A04F26 /* UIView+FRYTouchHighlighting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FRYTouchHighlighting.h"; sourceTree = "<group>"; };
@@ -351,7 +351,7 @@
 				AB35FD6819E4ED6100228531 /* FRYMethodSwizzling.m */,
 				D4CA25141A09089B00A04F26 /* FRYHighlightView.h */,
 				D4CA25151A09089B00A04F26 /* FRYHighlightView.m */,
-				D4082ACB1A08231200F03F3C /* Spark.png.h */,
+				D40395831A0CE1CE002200E1 /* FRYSpark.png.h */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
