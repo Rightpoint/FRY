@@ -24,11 +24,6 @@
     return nil;
 }
 
-+ (NSString *)fry_parentKeyPath
-{
-    return nil;
-}
-
 - (FRYLookupResult *)fry_lookupResult
 {
     NSAssert(NO, @"");
@@ -120,11 +115,6 @@
     return [NSSet setWithObject:NSStringFromSelector(@selector(fry_accessibilityElements))];
 }
 
-+ (NSString *)fry_parentKeyPath
-{
-    return NSStringFromSelector(@selector(accessibilityContainer));
-}
-
 - (FRYLookupResult *)fry_lookupResult
 {
     UIView *view = [self fry_containingView];
@@ -139,11 +129,6 @@
 + (NSSet *)fry_childKeyPaths
 {
     return [NSSet setWithObjects:NSStringFromSelector(@selector(fry_accessibilityElements)), NSStringFromSelector(@selector(fry_reverseSubviews)), nil];
-}
-
-+ (NSString *)fry_parentKeyPath
-{
-    return NSStringFromSelector(@selector(superview));
 }
 
 - (FRYLookupResult *)fry_lookupResult
