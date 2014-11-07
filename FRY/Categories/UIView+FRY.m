@@ -74,13 +74,13 @@
 
 - (UIView *)fry_interactableParent
 {
-    UIView *testObject = self;
-    while ( testObject &&
-           [testObject fry_accessibilityTraitsAreInteractable] == NO &&
-           [testObject isUserInteractionEnabled] == NO ) {
-        testObject = [testObject superview];
+    UIView *testView = self;
+    while ( testView &&
+           [testView fry_accessibilityTraitsAreInteractable] == NO &&
+           [testView isUserInteractionEnabled] == NO ) {
+        testView = [testView superview];
     }
-    return testObject;
+    return testView;
 }
 
 
