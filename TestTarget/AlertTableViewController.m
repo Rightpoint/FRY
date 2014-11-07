@@ -39,6 +39,9 @@ NS_ENUM(NSUInteger, AlertType) {
                     ];
     
     self.actions = @[
+                     [CellItem itemWithTitle:@"Action One" block:^{
+                         [[[UIActionSheet alloc] initWithTitle:@"Title" delegate:nil cancelButtonTitle:@"OK" destructiveButtonTitle:@"Destructive" otherButtonTitles:@"Other", nil] showInView:self.view];
+                     }],
                     ];
 }
 
@@ -47,6 +50,11 @@ NS_ENUM(NSUInteger, AlertType) {
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return AlertTypeCount;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return section == AlertTypeAlert ? @"Alert" : @"Action";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

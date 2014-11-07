@@ -55,4 +55,18 @@
     }
 }
 
+- (void)testBasicActions
+{
+
+    for ( NSString *response in @[@"Destructive", @"Other", @"OK"] ) {
+        [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+                 onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"Action One"]];
+        [[NSRunLoop currentRunLoop] fry_waitForIdle];
+
+        [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+                 onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:response]];
+        [[NSRunLoop currentRunLoop] fry_waitForIdle];
+    }
+}
+
 @end
