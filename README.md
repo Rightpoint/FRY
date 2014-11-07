@@ -1,6 +1,6 @@
 # FRY: A UIKit Interaction Library
 
-FRY is an iOS Library inspired by KIF.  The purpose is to simplify iteractions with UIKit and to make writing UI tests simple.
+FRY is an iOS Library inspired by KIF.  The purpose is to simplify iteractions with UIKit and make writing UI tests simple.
 
 NOTE: Everything is still in alpha, and is subject to change before the 1.0 release.
 
@@ -67,4 +67,3 @@ Add FRY to your Podfile to install.   If you want to use touch recording, add FR
 
 ### Design Questions
 - I've never used so many categories, and I'm not sure how to best organize them.
-
