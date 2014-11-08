@@ -8,6 +8,13 @@
 
 #import "FRYSimulatedTouch.h"
 
+typedef NS_ENUM(NSInteger, FRYTouchDirection) {
+    FRYTouchDirectionUp = 1,
+    FRYTouchDirectionDown,
+    FRYTouchDirectionRight,
+    FRYTouchDirectionLeft
+};
+
 /**
  * A synthetic touch is a touch to be created programatically.  It is oblivious to absolute coordinate space.
  *
@@ -19,6 +26,9 @@
 + (FRYSyntheticTouch *)tap;
 + (FRYSyntheticTouch *)tapAtPoint:(CGPoint)point;
 + (FRYSyntheticTouch *)dragFromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint forDuration:(NSTimeInterval)duration;
++ (FRYSyntheticTouch *)pressAndDragFromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint forDuration:(NSTimeInterval)duration;
++ (FRYSyntheticTouch *)swipeInDirection:(FRYTouchDirection)direction;
++ (FRYSyntheticTouch *)swipeInDirection:(FRYTouchDirection)direction duration:(NSTimeInterval)duration;
 
 + (NSArray *)doubleTap;
 + (NSArray *)doubleTapAtPoint:(CGPoint)point;

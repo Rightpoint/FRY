@@ -12,10 +12,6 @@
 
 @implementation NSPredicate(FRY)
 
-+ (NSPredicate *)fry_matchAccessibilityIdentifier:(NSString *)accessibilityIdentifier
-{
-    return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(accessibilityIdentifier)), accessibilityIdentifier];
-}
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel
 {
     NSParameterAssert(accessibilityLabel);
@@ -29,6 +25,18 @@
     return [NSPredicate predicateWithFormat:@"%K = %@ && %K = %@",
             NSStringFromSelector(@selector(fry_accessibilityLabel)), accessibilityLabel,
             NSStringFromSelector(@selector(fry_accessibilityValue)), accessibilityValue];
+}
+
++ (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityTrait:(UIAccessibilityTraits)traits
+{
+    return [NSPredicate predicateWithFormat:@"%K = %@ && (%K & %@) = %@",
+            NSStringFromSelector(@selector(fry_accessibilityLabel)), accessibilityLabel,
+            NSStringFromSelector(@selector(accessibilityTraits)), @(traits), @(traits)];
+}
+
++ (NSPredicate *)fry_matchAccessibilityIdentifier:(NSString *)accessibilityIdentifier
+{
+    return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(accessibilityIdentifier)), accessibilityIdentifier];
 }
 
 @end

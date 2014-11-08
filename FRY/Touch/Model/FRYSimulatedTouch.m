@@ -75,8 +75,8 @@
     CGSize pointDifference = CGSizeMake(afterPit.location.x - beforePit.location.x, afterPit.location.y - beforePit.location.y);
     CGFloat timeTranslate = interPointInterval / gapInterval;
     
-    CGPoint result = CGPointMake(afterPit.location.x + (pointDifference.width * timeTranslate),
-                                 afterPit.location.y + (pointDifference.height * timeTranslate));
+    CGPoint result = CGPointMake(beforePit.location.x + (pointDifference.width * timeTranslate),
+                                 beforePit.location.y + (pointDifference.height * timeTranslate));
     if (isnan(result.x) || isnan(result.y)) {
         result = lastPit.location;
     }

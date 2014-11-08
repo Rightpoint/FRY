@@ -77,9 +77,10 @@
     [self updateProgressForSelector:_cmd];
     [self updateLastAction:@"Slider"];
 
-    self.stepper.value = sender.value;
+
+    self.stepper.value = (NSUInteger)ceilf(sender.value / 5) * 5;
     self.sliderStatusLabel.text = [NSString stringWithFormat:@"Slider=%.0f",
-                                   sender.value];
+                                   self.stepper.value];
 }
 
 - (IBAction)switchAction:(UISwitch *)sender

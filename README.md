@@ -60,12 +60,18 @@ Add FRY to your Podfile to install.   If you want to use touch recording, add FR
    pod 'FRY', :git => 'git@github.com:Raizlabs/FRY.git'
 ```
 
+## Why Not KIF?
+KIF is amazing framework that has pushed forward UI testing on iOS.  However, I was unable to completely understand or trust the code base.  There are tons of work arounds for tons of UIKit issues spread around the code, without a clear understanding of why, or if they're still applicable to current versions of iOS.  The core design difference with KIF that pushed me to write FRY without looking to maintain compatibility is that looking up a view can modify the view heirarchy to find it.   This causes a lot of bizarre bugs, and from a testing perspective, is not desirable.
+
 ## Design Goals
 - Complete Code Coverage and UIKit functionality.
 - Clear separation of query and touching.  UIView lookup will never modify the view heirarchy.
 - Use simple logic to implement behavior, and categories to hide complex UIKit implementation details.
-- Isolate runloop spinning
+- Minimize knowledge and checks against UIKit private classes.
+- Isolate runloop spinning.
 - Minimize or eliminate test framework integration.
 
 ### Design Questions
 - I've never used so many categories, and I'm not sure how to best organize them.
+
+
