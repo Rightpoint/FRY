@@ -546,8 +546,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4082AC91A0821B000F03F3C /* spark.png in Resources */,
-				AB24E0051A0C88670099231F /* AlertTableViewController.xib in Resources */,
 				AB848EFE1A0BB73E00452E5E /* ControlsViewController.xib in Resources */,
 				ABCF04CB1A06AF200000318A /* Images.xcassets in Resources */,
 			);
@@ -867,7 +865,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = TestTargetTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = (
@@ -892,7 +890,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = TestTargetTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = (

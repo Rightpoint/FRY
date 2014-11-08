@@ -52,9 +52,6 @@
     if ( self.fry_accessibilityLabel && self.accessibilityLabel.length > 0 ) {
         variables[NSStringFromSelector(@selector(fry_accessibilityLabel))] = self.fry_accessibilityLabel;
     }
-    if ( self.fry_accessibilityValue && self.accessibilityValue.length > 0 ) {
-        variables[NSStringFromSelector(@selector(fry_accessibilityValue))] = self.fry_accessibilityValue;
-    }
     if ( self.accessibilityIdentifier && self.accessibilityIdentifier.length > 0 ) {
         variables[NSStringFromSelector(@selector(accessibilityIdentifier))] = self.accessibilityIdentifier;
     }
