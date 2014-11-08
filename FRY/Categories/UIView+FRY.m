@@ -7,13 +7,13 @@
 //
 
 #import "UIView+FRY.h"
-#import "NSObject+FRYLookupSupport.h"
+#import "NSObject+FRYLookup.h"
 #import "FRYTouchDispatch.h"
 #import "UIAccessibility+FRY.h"
 
 @implementation UIView (FRY)
 
-- (UIView *)fry_animatingViewToWaitFor
+- (BOOL)fry_isAnimating
 {
     NSTimeInterval uptime = [[NSProcessInfo processInfo] systemUptime];
     BOOL isAnimating = NO;
@@ -21,7 +21,7 @@
     for (NSString *animationKey in self.layer.animationKeys ) {
         CAAnimation *animation = [self.layer animationForKey:animationKey];
         NSTimeInterval animationEnd = animation.beginTime + animation.duration + animation.timeOffset;
-
+        
         if ( [animation.fillMode isEqualToString:kCAFillModeRemoved] ) {
             isAnimating = YES;
         }
@@ -29,7 +29,12 @@
             isAnimating = YES;
         }
     }
-    if ( isAnimating ) {
+    return isAnimating;
+}
+
+- (UIView *)fry_animatingViewToWaitFor
+{
+    if ( [self fry_isAnimating] ) {
         return self;
     }
     for ( UIView *subview in self.subviews ) {

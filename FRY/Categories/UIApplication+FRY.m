@@ -11,7 +11,6 @@
 #import "FRYEventProxy.h"
 
 #import "UIView+FRY.h"
-#import "FRYLookupSupport.h"
 
 @implementation UIApplication(FRY)
 

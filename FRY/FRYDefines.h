@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^FRYFirstMatchBlock)(UIView *view, CGRect frameInView);
+typedef void(^FRYMatchBlock)(UIView *view, CGRect frameInView);
 
 typedef BOOL(^FRYCheckBlock)();
 typedef NSString *(^FRYCheckFailureExplaination)();

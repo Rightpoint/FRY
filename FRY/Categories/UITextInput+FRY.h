@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ * This is not very authentic text input, but is a place holder until
+ * more accurate typing can be done.
+ */
 @interface UITextField(FRY)
 
 - (void)fry_replaceTextWithString:(NSString *)string;

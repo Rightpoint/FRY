@@ -13,7 +13,7 @@
 #import "FRYRecordedTouch.h"
 #import "FRYTouchDispatch.h"
 
-#import "NSObject+FRYLookupSupport.h"
+#import "NSObject+FRYLookup.h"
 #import "NSRunLoop+FRY.h"
 #import "UIView+FRY.h"
 #import "UIApplication+FRY.h"

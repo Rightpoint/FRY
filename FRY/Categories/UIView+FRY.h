@@ -12,6 +12,8 @@
 
 @interface UIView (FRY)
 
+- (BOOL)fry_isAnimating;
+
 - (UIView *)fry_animatingViewToWaitFor;
 
 - (NSArray *)fry_reverseSubviews;
