@@ -46,7 +46,6 @@ static const void *FRYUITouchViewWhereTouchBegan = &FRYUITouchViewWhereTouchBega
         // Wipes out some values.  Needs to be first.
         [self setWindow:window];
         
-#warning tapCount, firstTouchForView, and isTap may not be correctly set in all scenarios.  This doesn't seem to bother KIF though.
         [self setTapCount:1];
         [self _setLocationInWindow:point resetPrevious:YES];
         

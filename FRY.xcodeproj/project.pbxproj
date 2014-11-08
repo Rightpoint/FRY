@@ -26,6 +26,7 @@
 		AB25C05A19DF95AA00038E75 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB25C05819DF95AA00038E75 /* InfoPlist.strings */; };
 		AB25C08319DF95ED00038E75 /* UIView+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB25C06919DF95ED00038E75 /* UIView+FRY.m */; };
 		AB2659631A0E96B20074FF2E /* TableViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB2659621A0E96B20074FF2E /* TableViewControllerTests.m */; };
+		AB2659681A0ECE4E0074FF2E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB2659671A0ECE4E0074FF2E /* Default-568h@2x.png */; };
 		AB35FCE119DFA6F200228531 /* FRYEventProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCDF19DFA6F200228531 /* FRYEventProxy.m */; };
 		AB35FCE419DFAEB900228531 /* UITouch+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCE319DFAEB900228531 /* UITouch+FRY.m */; };
 		AB35FCF019DFB49100228531 /* FRYActiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCEB19DFB49100228531 /* FRYActiveTouch.m */; };
@@ -115,6 +116,7 @@
 		AB25C06819DF95ED00038E75 /* UIView+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FRY.h"; sourceTree = "<group>"; };
 		AB25C06919DF95ED00038E75 /* UIView+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FRY.m"; sourceTree = "<group>"; };
 		AB2659621A0E96B20074FF2E /* TableViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewControllerTests.m; sourceTree = "<group>"; };
+		AB2659671A0ECE4E0074FF2E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		AB35FCDA19DFA30B00228531 /* UIApplication+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+FRY.h"; sourceTree = "<group>"; };
 		AB35FCDB19DFA30B00228531 /* UIApplication+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+FRY.m"; sourceTree = "<group>"; };
 		AB35FCDE19DFA6F200228531 /* FRYEventProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYEventProxy.h; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 		AB25C03319DF95AA00038E75 = {
 			isa = PBXGroup;
 			children = (
+				AB2659671A0ECE4E0074FF2E /* Default-568h@2x.png */,
 				AB25C04119DF95AA00038E75 /* FRY */,
 				AB25C05519DF95AA00038E75 /* FRYTests */,
 				ABCF04B91A06AF200000318A /* TestTarget */,
@@ -546,6 +549,7 @@
 			files = (
 				AB848EFE1A0BB73E00452E5E /* ControlsViewController.xib in Resources */,
 				ABCF04CB1A06AF200000318A /* Images.xcassets in Resources */,
+				AB2659681A0ECE4E0074FF2E /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -822,7 +826,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = TestTarget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -839,7 +843,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				INFOPLIST_FILE = TestTarget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";

@@ -43,7 +43,7 @@ Notice that points and touches are specified as multiples of the frame they are 
 Touches are complete when `-[FRYTouchDispatch hasActiveTouches]` returns `NO`.  There is a helper on `NSRunLoop`, `fry_waitForIdle` that will spin the runloop until all touches are finished and all UI Animations have completed.  This greatly simplifies flow-control, and eliminiates the vast majority of `CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.5, false)`.  If you find yourself wanting to add these to your tests, consider adding animation to your UI instead.
 
 ### Touch Recording and Playback
-A side effect of strong touch modeling is that FRY can record live touch events in your application, for later playback.  When the home button is pressed, The FRY commands to reproduce these touches are printed on the console.
+A side effect of strong touch modeling is that FRY can record live touch events in your application for later playback.  When the home button is pressed, The FRY commands to reproduce these touches are printed on the console.
 
 *To Enable Monitoring*
 ```obj-c
@@ -61,13 +61,13 @@ Add FRY to your Podfile to install.   If you want to use touch recording, add FR
 ```
 
 ## Why Not KIF?
-KIF is amazing framework that has pushed forward UI testing on iOS.  However, I was unable to completely understand or trust the code base.  There are tons of work arounds for tons of UIKit issues spread around the code, without a clear understanding of why, or if they're still applicable to current versions of iOS.  The core design difference with KIF that pushed me to write FRY without looking to maintain compatibility is that looking up a view can modify the view heirarchy to find it.   This causes a lot of bizarre bugs, and from a testing perspective, is not desirable.
+KIF is amazing framework that has pushed forward UI testing on iOS.  However, I was unable to completely understand or trust the code base.  There are tons of work arounds for tons of UIKit issues spread around the code, without a clear understanding of why, or if they're still applicable to current versions of iOS.  The core design difference with KIF that pushed me to write FRY without looking to maintain compatibility is that looking up a view can modify the view heirarchy to find it.   This causes a lot of bizarre issues, and not usually what I want from a testing perspective.
 
 ## Design Goals
 - Complete Code Coverage and UIKit functionality.
 - Clear separation of query and touching.  UIView lookup will never modify the view heirarchy.
 - Use simple logic to implement behavior, and categories to hide complex UIKit implementation details.
-- Minimize knowledge and checks against UIKit private classes.
+- Minimize knowledge of and checks against UIKit private classes.
 - Isolate runloop spinning.
 - Minimize or eliminate test framework integration.
 
