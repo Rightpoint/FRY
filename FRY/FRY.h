@@ -17,6 +17,7 @@
 #import "NSRunLoop+FRY.h"
 #import "UIView+FRY.h"
 #import "UIApplication+FRY.h"
-#import "UITextInput+FRY.h"
+#import "FRYTypist.h"
 #import "UIAccessibility+FRY.h"
+#import "UITextInput+FRY.h"
 #import "NSPredicate+FRY.h"

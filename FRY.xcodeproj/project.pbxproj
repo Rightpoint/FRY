@@ -27,11 +27,15 @@
 		AB25C08319DF95ED00038E75 /* UIView+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB25C06919DF95ED00038E75 /* UIView+FRY.m */; };
 		AB2659631A0E96B20074FF2E /* TableViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB2659621A0E96B20074FF2E /* TableViewControllerTests.m */; };
 		AB2659681A0ECE4E0074FF2E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB2659671A0ECE4E0074FF2E /* Default-568h@2x.png */; };
+		AB2659701A0F2A710074FF2E /* TextFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB26596E1A0F2A710074FF2E /* TextFieldViewController.m */; };
+		AB2659711A0F2A710074FF2E /* TextFieldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB26596F1A0F2A710074FF2E /* TextFieldViewController.xib */; };
+		AB2659731A0F2AE10074FF2E /* TextFieldViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB2659721A0F2AE10074FF2E /* TextFieldViewControllerTests.m */; };
+		AB26597A1A0FBE140074FF2E /* FRYTypist.m in Sources */ = {isa = PBXBuildFile; fileRef = AB2659791A0FBE140074FF2E /* FRYTypist.m */; };
+		AB26597D1A0FE7430074FF2E /* UITextInput+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB26597C1A0FE7430074FF2E /* UITextInput+FRY.m */; };
 		AB35FCE119DFA6F200228531 /* FRYEventProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCDF19DFA6F200228531 /* FRYEventProxy.m */; };
 		AB35FCE419DFAEB900228531 /* UITouch+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCE319DFAEB900228531 /* UITouch+FRY.m */; };
 		AB35FCF019DFB49100228531 /* FRYActiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCEB19DFB49100228531 /* FRYActiveTouch.m */; };
 		AB35FD7A19E58B5C00228531 /* FRYMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD6819E4ED6100228531 /* FRYMethodSwizzling.m */; };
-		AB43FCF51A0468600049D520 /* UITextInput+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB43FCF41A0468600049D520 /* UITextInput+FRY.m */; };
 		AB5A891B1A07147700E44C89 /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03C19DF95AA00038E75 /* libFRY.a */; };
 		AB5A891E1A07DEC400E44C89 /* NSPredicate+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB5A891D1A07DEC400E44C89 /* NSPredicate+FRY.m */; };
 		AB848EFE1A0BB73E00452E5E /* ControlsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB848EFD1A0BB73E00452E5E /* ControlsViewController.xib */; };
@@ -117,6 +121,15 @@
 		AB25C06919DF95ED00038E75 /* UIView+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FRY.m"; sourceTree = "<group>"; };
 		AB2659621A0E96B20074FF2E /* TableViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewControllerTests.m; sourceTree = "<group>"; };
 		AB2659671A0ECE4E0074FF2E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		AB26596D1A0F2A710074FF2E /* TextFieldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldViewController.h; sourceTree = "<group>"; };
+		AB26596E1A0F2A710074FF2E /* TextFieldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldViewController.m; sourceTree = "<group>"; };
+		AB26596F1A0F2A710074FF2E /* TextFieldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldViewController.xib; sourceTree = "<group>"; };
+		AB2659721A0F2AE10074FF2E /* TextFieldViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldViewControllerTests.m; sourceTree = "<group>"; };
+		AB2659771A0F37630074FF2E /* UIKit+FRYCastCompanions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIKit+FRYCastCompanions.h"; sourceTree = "<group>"; };
+		AB2659781A0FBE140074FF2E /* FRYTypist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYTypist.h; sourceTree = "<group>"; };
+		AB2659791A0FBE140074FF2E /* FRYTypist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYTypist.m; sourceTree = "<group>"; };
+		AB26597B1A0FE7430074FF2E /* UITextInput+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextInput+FRY.h"; sourceTree = "<group>"; };
+		AB26597C1A0FE7430074FF2E /* UITextInput+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextInput+FRY.m"; sourceTree = "<group>"; };
 		AB35FCDA19DFA30B00228531 /* UIApplication+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+FRY.h"; sourceTree = "<group>"; };
 		AB35FCDB19DFA30B00228531 /* UIApplication+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+FRY.m"; sourceTree = "<group>"; };
 		AB35FCDE19DFA6F200228531 /* FRYEventProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYEventProxy.h; sourceTree = "<group>"; };
@@ -133,8 +146,6 @@
 		AB35FD6419E4ECF200228531 /* FRYEventMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYEventMonitor.m; sourceTree = "<group>"; };
 		AB35FD6719E4ED6100228531 /* FRYMethodSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYMethodSwizzling.h; sourceTree = "<group>"; };
 		AB35FD6819E4ED6100228531 /* FRYMethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYMethodSwizzling.m; sourceTree = "<group>"; };
-		AB43FCF31A0468600049D520 /* UITextInput+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextInput+FRY.h"; sourceTree = "<group>"; };
-		AB43FCF41A0468600049D520 /* UITextInput+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextInput+FRY.m"; sourceTree = "<group>"; };
 		AB5A891C1A07DEC400E44C89 /* NSPredicate+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPredicate+FRY.h"; sourceTree = "<group>"; };
 		AB5A891D1A07DEC400E44C89 /* NSPredicate+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPredicate+FRY.m"; sourceTree = "<group>"; };
 		AB848EFD1A0BB73E00452E5E /* ControlsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ControlsViewController.xib; sourceTree = "<group>"; };
@@ -267,6 +278,7 @@
 				ABA5782A19E65D1100D77CDA /* FRYDefines.h */,
 				ABA5782B19E65D1100D77CDA /* FRYDefines.m */,
 				AB35FCE519DFB49100228531 /* Touch */,
+				AB2659691A0F26F40074FF2E /* Typing */,
 				ABA5780F19E64AE600D77CDA /* Lookup */,
 				AB35FD6619E4ED5100228531 /* Utilities */,
 				AB35FCDD19DFA6F200228531 /* Private */,
@@ -304,6 +316,8 @@
 		AB25C06519DF95ED00038E75 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				AB26597B1A0FE7430074FF2E /* UITextInput+FRY.h */,
+				AB26597C1A0FE7430074FF2E /* UITextInput+FRY.m */,
 				AB35FCDA19DFA30B00228531 /* UIApplication+FRY.h */,
 				AB35FCDB19DFA30B00228531 /* UIApplication+FRY.m */,
 				AB25C06819DF95ED00038E75 /* UIView+FRY.h */,
@@ -314,12 +328,20 @@
 				AB35FCE319DFAEB900228531 /* UITouch+FRY.m */,
 				AB35FD0D19E4DE3500228531 /* UIAccessibility+FRY.h */,
 				AB35FD0E19E4DE3500228531 /* UIAccessibility+FRY.m */,
-				AB43FCF31A0468600049D520 /* UITextInput+FRY.h */,
-				AB43FCF41A0468600049D520 /* UITextInput+FRY.m */,
 				AB184AEC19E8EEC0007CC9DA /* NSRunLoop+FRY.h */,
 				AB184AED19E8EEC0007CC9DA /* NSRunLoop+FRY.m */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		AB2659691A0F26F40074FF2E /* Typing */ = {
+			isa = PBXGroup;
+			children = (
+				AB2659771A0F37630074FF2E /* UIKit+FRYCastCompanions.h */,
+				AB2659781A0FBE140074FF2E /* FRYTypist.h */,
+				AB2659791A0FBE140074FF2E /* FRYTypist.m */,
+			);
+			path = Typing;
 			sourceTree = "<group>";
 		};
 		AB35FCDD19DFA6F200228531 /* Private */ = {
@@ -384,6 +406,9 @@
 				ABCFAC081A0E94BA003B91BC /* TableViewController.m */,
 				AB24E0011A0C88670099231F /* AlertTableViewController.h */,
 				AB24E0021A0C88670099231F /* AlertTableViewController.m */,
+				AB26596D1A0F2A710074FF2E /* TextFieldViewController.h */,
+				AB26596E1A0F2A710074FF2E /* TextFieldViewController.m */,
+				AB26596F1A0F2A710074FF2E /* TextFieldViewController.xib */,
 				ABCF04CA1A06AF200000318A /* Images.xcassets */,
 				ABCF04BA1A06AF200000318A /* Supporting Files */,
 				AB24E0061A0C88BF0099231F /* CellItem.h */,
@@ -407,6 +432,7 @@
 				ABCF04D91A06AF210000318A /* ControlsViewControllerTests.m */,
 				AB24E0091A0C89E20099231F /* AlertTableViewControllerTest.m */,
 				AB2659621A0E96B20074FF2E /* TableViewControllerTests.m */,
+				AB2659721A0F2AE10074FF2E /* TextFieldViewControllerTests.m */,
 				ABCF04D71A06AF210000318A /* Supporting Files */,
 			);
 			path = TestTargetTests;
@@ -547,6 +573,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB2659711A0F2A710074FF2E /* TextFieldViewController.xib in Resources */,
 				AB848EFE1A0BB73E00452E5E /* ControlsViewController.xib in Resources */,
 				ABCF04CB1A06AF200000318A /* Images.xcassets in Resources */,
 				AB2659681A0ECE4E0074FF2E /* Default-568h@2x.png in Resources */,
@@ -609,13 +636,14 @@
 				AB35FD7A19E58B5C00228531 /* FRYMethodSwizzling.m in Sources */,
 				AB35FCE119DFA6F200228531 /* FRYEventProxy.m in Sources */,
 				AB184AF119EA087D007CC9DA /* FRYTouchEventLog.m in Sources */,
+				AB26597D1A0FE7430074FF2E /* UITextInput+FRY.m in Sources */,
 				AB184AE919E8E0CC007CC9DA /* FRYRecordedTouch.m in Sources */,
-				AB43FCF51A0468600049D520 /* UITextInput+FRY.m in Sources */,
 				AB35FCF019DFB49100228531 /* FRYActiveTouch.m in Sources */,
 				AB184AEB19E8E0CC007CC9DA /* FRYSyntheticTouch.m in Sources */,
 				AB184AEE19E8EEC0007CC9DA /* NSRunLoop+FRY.m in Sources */,
 				ABCF04E71A06F2630000318A /* UIAccessibility+FRY.m in Sources */,
 				AB5A891E1A07DEC400E44C89 /* NSPredicate+FRY.m in Sources */,
+				AB26597A1A0FBE140074FF2E /* FRYTypist.m in Sources */,
 				AB184AE819E8E0CC007CC9DA /* FRYPointInTime.m in Sources */,
 				D4CA25161A09089B00A04F26 /* FRYHighlightView.m in Sources */,
 				AB184AEA19E8E0CC007CC9DA /* FRYSimulatedTouch.m in Sources */,
@@ -640,6 +668,7 @@
 				D4CA251B1A0908D100A04F26 /* UIView+FRYTouchHighlighting.m in Sources */,
 				AB24E0081A0C88BF0099231F /* CellItem.m in Sources */,
 				ABCF04BD1A06AF200000318A /* main.m in Sources */,
+				AB2659701A0F2A710074FF2E /* TextFieldViewController.m in Sources */,
 				ABCF04E31A06BE220000318A /* ControlsViewController.m in Sources */,
 				ABCFAC0A1A0E94BA003B91BC /* TableViewController.m in Sources */,
 				AB24E0041A0C88670099231F /* AlertTableViewController.m in Sources */,
@@ -654,6 +683,7 @@
 				AB24E00A1A0C89E20099231F /* AlertTableViewControllerTest.m in Sources */,
 				ABCF04DA1A06AF210000318A /* ControlsViewControllerTests.m in Sources */,
 				AB2659631A0E96B20074FF2E /* TableViewControllerTests.m in Sources */,
+				AB2659731A0F2AE10074FF2E /* TextFieldViewControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

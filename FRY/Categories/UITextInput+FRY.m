@@ -10,41 +10,27 @@
 
 @implementation UITextField(FRY)
 
-- (void)fry_replaceTextWithString:(NSString *)string
+- (void)fry_selectAll;
 {
     UITextPosition *begin = self.beginningOfDocument;
     UITextPosition *end   = self.endOfDocument;
     UITextRange *allText  = [self textRangeFromPosition:begin toPosition:end];
-    NSString *currentText = [self textInRange:allText];
-    NSRange range = NSMakeRange(0, [currentText length]);
-    BOOL shouldReplace = YES;
-    if ( [self.delegate respondsToSelector:@selector(textField:shouldChangeCharactersInRange:replacementString:)] ) {
-        shouldReplace = [self.delegate textField:self shouldChangeCharactersInRange:range replacementString:string];
-    }
-    if ( shouldReplace ) {
-        [self replaceRange:allText withText:string];
-    }
+    
+    [self setSelectedTextRange:allText];
 }
 
 @end
 
 @implementation UITextView(FRY)
 
-- (void)fry_replaceTextWithString:(NSString *)string
+- (void)fry_selectAll;
 {
     UITextPosition *begin = self.beginningOfDocument;
     UITextPosition *end   = self.endOfDocument;
     UITextRange *allText  = [self textRangeFromPosition:begin toPosition:end];
-    NSString *currentText = [self textInRange:allText];
-    NSRange range = NSMakeRange(0, [currentText length]);
-    BOOL shouldReplace = YES;
-    if ( [self.delegate respondsToSelector:@selector(textView:shouldChangeTextInRange:replacementText:)] ) {
-        shouldReplace = [self.delegate textView:self shouldChangeTextInRange:range replacementText:string];
-    }
-    if ( shouldReplace ) {
-        [self replaceRange:allText withText:string];
-    }
-
+    
+    [self setSelectedTextRange:allText];
 }
+
 
 @end

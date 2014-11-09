@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "FRYSimulatedTouch.h"
+#import "FRYSyntheticTouch.h"
 
 @interface UIView (FRY)
 

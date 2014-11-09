@@ -14,12 +14,12 @@
  */
 @interface UITextField(FRY)
 
-- (void)fry_replaceTextWithString:(NSString *)string;
+- (void)fry_selectAll;
 
 @end
 
 @interface UITextView(FRY)
 
-- (void)fry_replaceTextWithString:(NSString *)string;
+- (void)fry_selectAll;
 
 @end

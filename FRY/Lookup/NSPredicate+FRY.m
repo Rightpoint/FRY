@@ -27,6 +27,12 @@
             NSStringFromSelector(@selector(fry_accessibilityValue)), accessibilityValue];
 }
 
++ (NSPredicate *)fry_matchAccessibilityValue:(NSString *)accessibilityValue;
+{
+    NSParameterAssert(accessibilityValue);
+    return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(fry_accessibilityValue)), accessibilityValue];
+}
+
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityTrait:(UIAccessibilityTraits)traits
 {
     return [NSPredicate predicateWithFormat:@"%K = %@ && (%K & %@) = %@",

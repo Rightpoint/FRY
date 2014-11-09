@@ -32,27 +32,3 @@ typedef struct __GSEvent * GSEventRef;
 
 @end
 
-@interface UITextEffectsWindow : UIWindow
-
-@end
-
-@interface FRYKBKey : NSObject
-
-- (NSString *)representedString;
-- (CGRect)frame;
-
-@end
-
-@interface FRYKBKeyplane : NSObject // UIKBKeyplane
-
-- (BOOL)isShiftKeyplane;
-
-- (NSArray *)keys;
-
-@end
-
-@interface FRYKBKeyplaneView : UIView // UIKBKeyplaneView
-
-- (FRYKBKeyplane *)keyplane;
-@end
-

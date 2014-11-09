@@ -8,11 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "FRYDefines.h"
+#import "UIKit+FRYExposePrivate.h"
+#import "FRYTypist.h"
 
 @interface UIApplication(FRY)
 
 - (UIEvent *)fry_eventWithTouches:(NSArray *)touches;
 
 - (UIView *)fry_animatingViewToWaitFor;
+
+- (FRYTypist *)fry_typist;
+
 
 @end
