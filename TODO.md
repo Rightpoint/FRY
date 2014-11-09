@@ -23,10 +23,10 @@
 - Test Target
   x Controls
   x Alerts
-  - Table View
+  X Table View
+  - Pickers
   - Collection View
   - Text Input
-  - Pickers
   - Gesture Recognizers
   - Web Content
   - Web Form
