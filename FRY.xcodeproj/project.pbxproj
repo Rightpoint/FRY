@@ -54,6 +54,7 @@
 		ABCF04E71A06F2630000318A /* UIAccessibility+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD0E19E4DE3500228531 /* UIAccessibility+FRY.m */; };
 		ABCFAC051A0E7B79003B91BC /* NSObject+FRYLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCFAC041A0E7B79003B91BC /* NSObject+FRYLookup.m */; };
 		ABCFAC0A1A0E94BA003B91BC /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCFAC081A0E94BA003B91BC /* TableViewController.m */; };
+		ABDABF111A11820B004FF038 /* UIPickerView+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = ABDABF101A11820B004FF038 /* UIPickerView+FRY.m */; };
 		B9215C4142D84548893B9BCA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89238CE01CB344F78A59E9AE /* libPods.a */; };
 		D4CA25161A09089B00A04F26 /* FRYHighlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CA25151A09089B00A04F26 /* FRYHighlightView.m */; };
 		D4CA25191A0908D100A04F26 /* UIView+FRYTouchHighlighting.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CA25181A0908D100A04F26 /* UIView+FRYTouchHighlighting.m */; };
@@ -177,6 +178,8 @@
 		ABCFAC061A0E7CF4003B91BC /* FRYLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYLookup.h; sourceTree = "<group>"; };
 		ABCFAC071A0E94BA003B91BC /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		ABCFAC081A0E94BA003B91BC /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		ABDABF0F1A11820B004FF038 /* UIPickerView+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPickerView+FRY.h"; sourceTree = "<group>"; };
+		ABDABF101A11820B004FF038 /* UIPickerView+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPickerView+FRY.m"; sourceTree = "<group>"; };
 		D40395831A0CE1CE002200E1 /* FRYSpark.png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYSpark.png.h; sourceTree = "<group>"; };
 		D4CA25141A09089B00A04F26 /* FRYHighlightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYHighlightView.h; sourceTree = "<group>"; };
 		D4CA25151A09089B00A04F26 /* FRYHighlightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYHighlightView.m; sourceTree = "<group>"; };
@@ -331,6 +334,8 @@
 				AB25C06919DF95ED00038E75 /* UIView+FRY.m */,
 				D4CA25171A0908D100A04F26 /* UIView+FRYTouchHighlighting.h */,
 				D4CA25181A0908D100A04F26 /* UIView+FRYTouchHighlighting.m */,
+				ABDABF0F1A11820B004FF038 /* UIPickerView+FRY.h */,
+				ABDABF101A11820B004FF038 /* UIPickerView+FRY.m */,
 				AB35FCE219DFAEB900228531 /* UITouch+FRY.h */,
 				AB35FCE319DFAEB900228531 /* UITouch+FRY.m */,
 				AB35FD0D19E4DE3500228531 /* UIAccessibility+FRY.h */,
@@ -642,6 +647,7 @@
 				AB184AD019E85C5E007CC9DA /* FRYEventMonitor.m in Sources */,
 				AB184AD419E85F49007CC9DA /* UIApplication+FRY.m in Sources */,
 				ABA5782C19E65D1100D77CDA /* FRYDefines.m in Sources */,
+				ABDABF111A11820B004FF038 /* UIPickerView+FRY.m in Sources */,
 				ABCF04B31A054F890000318A /* FRYTouchDispatch.m in Sources */,
 				AB25C08319DF95ED00038E75 /* UIView+FRY.m in Sources */,
 				ABCFAC051A0E7B79003B91BC /* NSObject+FRYLookup.m in Sources */,

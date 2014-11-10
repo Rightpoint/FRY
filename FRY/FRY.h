@@ -20,4 +20,5 @@
 #import "FRYTypist.h"
 #import "UIAccessibility+FRY.h"
 #import "UITextInput+FRY.h"
+#import "UIPickerView+FRY.h"
 #import "NSPredicate+FRY.h"

@@ -24,7 +24,7 @@
     [UIApplication sharedApplication].keyWindow.rootViewController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
     [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.0]];
-    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:450000]];
+//    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:450000]];
 }
 
 - (void)tearDown {
@@ -36,9 +36,46 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testPickerOne
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+             onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"One"]];
+    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+    
+    XCTAssertNotNil([FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:@"Select = One"]]);
+    
+    UIPickerView *inputPicker = (id)[FRY_APP fry_inputViewOfClass:[UIPickerView class]];
+    XCTAssertNotNil(inputPicker);
+    
+    XCTAssertTrue([inputPicker fry_selectTitle:@"44" inComponent:0 animated:YES]);
+    
+    XCTAssertNotNil([FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:@"Picker = 44 / 0"]]);
+    
+    XCTAssertTrue([inputPicker fry_selectTitle:@"99" inComponent:0 animated:YES]);
+    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+    
+    XCTAssertNotNil([FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:@"Picker = 99 / 0"]]);
+}
+
+- (void)testPickerTwo
+{
+    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+             onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"Two"]];
+    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+    
+    XCTAssertNotNil([FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:@"Select = Two"]]);
+    
+    UIPickerView *inputPicker = (id)[FRY_APP fry_inputViewOfClass:[UIPickerView class]];
+    XCTAssertNotNil(inputPicker);
+    
+    XCTAssertTrue([inputPicker fry_selectTitle:@"44" inComponent:0 animated:YES]);
+    
+    XCTAssertNotNil([FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:@"Picker = 44 / 0"]]);
+    
+    XCTAssertTrue([inputPicker fry_selectTitle:@"99" inComponent:1 animated:YES]);
+    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+    
+    XCTAssertNotNil([FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:@"Picker = 99 / 1"]]);
 }
 
 @end

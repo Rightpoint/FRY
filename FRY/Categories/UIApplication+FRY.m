@@ -13,6 +13,7 @@
 #import "UIView+FRY.h"
 #import "UIKit+FRYExposePrivate.h"
 #import "NSObject+FRYLookup.h"
+#import "NSPredicate+FRY.h"
 
 @implementation UIApplication(FRY)
 
@@ -51,6 +52,22 @@
     NSAssert(keyboard != nil, @"Could not find the keyboard.  Wait till it appears, or try command-k to reveal the keyboard.");
     return [[FRYTypist alloc] initWithPrivateKeyboard:keyboard];
 }
+
+- (UIWindow *)fry_inputViewWindow
+{
+    for ( UIWindow *window in self.windows ) {
+        if ( [window isKindOfClass:NSClassFromString(@"UITextEffectsWindow")] ) {
+            return window;
+        }
+    }
+    return nil;
+}
+
+- (UIView *)fry_inputViewOfClass:(Class)klass
+{
+    return [[[self fry_inputViewWindow] fry_farthestDescendentMatching:[NSPredicate fry_matchClass:klass]] fry_representingView];
+}
+
 
 - (UIView *)fry_animatingViewToWaitFor
 {

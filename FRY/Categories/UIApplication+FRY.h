@@ -19,5 +19,14 @@
 
 - (FRYTypist *)fry_typist;
 
+/**
+ * Return the window that incapsulates input views
+ */
+- (UIWindow *)fry_inputViewWindow;
+
+/**
+ * Return the first view that is a subview of fry_inputViewWindow matching klass.
+ */
+- (UIView *)fry_inputViewOfClass:(Class)klass;
 
 @end

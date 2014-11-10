@@ -45,4 +45,9 @@
     return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(accessibilityIdentifier)), accessibilityIdentifier];
 }
 
++ (NSPredicate *)fry_matchClass:(Class)klass
+{
+    return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(class)), klass];
+}
+
 @end
