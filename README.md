@@ -21,7 +21,7 @@ Two types of queries are supported, a depth first query that mimics hitTest trav
                                           }];
 ```
 
-View lookup is a simple system based on NSPredicate and KeyPaths.  Add support to any object (like CALayer or SceneKit) by implementing `-fry_childKeyPaths` and `-fry_lookupSupport`.  UIKit support traverses both `accessibilityElements` and `subviews`.
+View lookup is a simple system based on NSPredicate and KeyPaths.  Add support to any object (like CALayer or SceneKit) by implementing `-fry_childKeyPaths`, `-fry_representingView`, and `fry_frameInView`.  UIKit support traverses both `accessibilityElements` and `subviews`.
 
 ### Touch Synthesis
 FRY uses strongly modeled touches to generate UIKit touch events.  This allows for simple arbitrary touch re-creation, and clear API's for creating common touch sequences.

@@ -32,6 +32,9 @@
 		AB2659731A0F2AE10074FF2E /* TextFieldViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB2659721A0F2AE10074FF2E /* TextFieldViewControllerTests.m */; };
 		AB26597A1A0FBE140074FF2E /* FRYTypist.m in Sources */ = {isa = PBXBuildFile; fileRef = AB2659791A0FBE140074FF2E /* FRYTypist.m */; };
 		AB26597D1A0FE7430074FF2E /* UITextInput+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB26597C1A0FE7430074FF2E /* UITextInput+FRY.m */; };
+		AB2659801A106A4C0074FF2E /* PickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB26597F1A106A4C0074FF2E /* PickerViewController.m */; };
+		AB2659821A106FB00074FF2E /* PickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB2659811A106FB00074FF2E /* PickerViewController.xib */; };
+		AB2659841A10753A0074FF2E /* PickerViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB2659831A10753A0074FF2E /* PickerViewControllerTests.m */; };
 		AB35FCE119DFA6F200228531 /* FRYEventProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCDF19DFA6F200228531 /* FRYEventProxy.m */; };
 		AB35FCE419DFAEB900228531 /* UITouch+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCE319DFAEB900228531 /* UITouch+FRY.m */; };
 		AB35FCF019DFB49100228531 /* FRYActiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCEB19DFB49100228531 /* FRYActiveTouch.m */; };
@@ -130,6 +133,10 @@
 		AB2659791A0FBE140074FF2E /* FRYTypist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYTypist.m; sourceTree = "<group>"; };
 		AB26597B1A0FE7430074FF2E /* UITextInput+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextInput+FRY.h"; sourceTree = "<group>"; };
 		AB26597C1A0FE7430074FF2E /* UITextInput+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextInput+FRY.m"; sourceTree = "<group>"; };
+		AB26597E1A106A4C0074FF2E /* PickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerViewController.h; sourceTree = "<group>"; };
+		AB26597F1A106A4C0074FF2E /* PickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerViewController.m; sourceTree = "<group>"; };
+		AB2659811A106FB00074FF2E /* PickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerViewController.xib; sourceTree = "<group>"; };
+		AB2659831A10753A0074FF2E /* PickerViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerViewControllerTests.m; sourceTree = "<group>"; };
 		AB35FCDA19DFA30B00228531 /* UIApplication+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+FRY.h"; sourceTree = "<group>"; };
 		AB35FCDB19DFA30B00228531 /* UIApplication+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+FRY.m"; sourceTree = "<group>"; };
 		AB35FCDE19DFA6F200228531 /* FRYEventProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYEventProxy.h; sourceTree = "<group>"; };
@@ -409,6 +416,9 @@
 				AB26596D1A0F2A710074FF2E /* TextFieldViewController.h */,
 				AB26596E1A0F2A710074FF2E /* TextFieldViewController.m */,
 				AB26596F1A0F2A710074FF2E /* TextFieldViewController.xib */,
+				AB26597E1A106A4C0074FF2E /* PickerViewController.h */,
+				AB26597F1A106A4C0074FF2E /* PickerViewController.m */,
+				AB2659811A106FB00074FF2E /* PickerViewController.xib */,
 				ABCF04CA1A06AF200000318A /* Images.xcassets */,
 				ABCF04BA1A06AF200000318A /* Supporting Files */,
 				AB24E0061A0C88BF0099231F /* CellItem.h */,
@@ -433,6 +443,7 @@
 				AB24E0091A0C89E20099231F /* AlertTableViewControllerTest.m */,
 				AB2659621A0E96B20074FF2E /* TableViewControllerTests.m */,
 				AB2659721A0F2AE10074FF2E /* TextFieldViewControllerTests.m */,
+				AB2659831A10753A0074FF2E /* PickerViewControllerTests.m */,
 				ABCF04D71A06AF210000318A /* Supporting Files */,
 			);
 			path = TestTargetTests;
@@ -576,6 +587,7 @@
 				AB2659711A0F2A710074FF2E /* TextFieldViewController.xib in Resources */,
 				AB848EFE1A0BB73E00452E5E /* ControlsViewController.xib in Resources */,
 				ABCF04CB1A06AF200000318A /* Images.xcassets in Resources */,
+				AB2659821A106FB00074FF2E /* PickerViewController.xib in Resources */,
 				AB2659681A0ECE4E0074FF2E /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -668,6 +680,7 @@
 				D4CA251B1A0908D100A04F26 /* UIView+FRYTouchHighlighting.m in Sources */,
 				AB24E0081A0C88BF0099231F /* CellItem.m in Sources */,
 				ABCF04BD1A06AF200000318A /* main.m in Sources */,
+				AB2659801A106A4C0074FF2E /* PickerViewController.m in Sources */,
 				AB2659701A0F2A710074FF2E /* TextFieldViewController.m in Sources */,
 				ABCF04E31A06BE220000318A /* ControlsViewController.m in Sources */,
 				ABCFAC0A1A0E94BA003B91BC /* TableViewController.m in Sources */,
@@ -679,6 +692,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB2659841A10753A0074FF2E /* PickerViewControllerTests.m in Sources */,
 				D4CA251C1A0908D100A04F26 /* UIView+FRYTouchHighlighting.m in Sources */,
 				AB24E00A1A0C89E20099231F /* AlertTableViewControllerTest.m in Sources */,
 				ABCF04DA1A06AF210000318A /* ControlsViewControllerTests.m in Sources */,

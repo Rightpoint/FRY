@@ -12,17 +12,6 @@
 #import "UIView+FRY.h"
 #import "NSRunLoop+FRY.h"
 
-typedef NS_ENUM(NSUInteger, FRYKeyInteractionType) {
-    FRYKeyInteractionTypeKey = 2,
-    FRYKeyInteractionTypeDelete = 4,
-    FRYKeyInteractionTypeDictation = 4,
-    FRYKeyInteractionTypeInternational = 9,
-    FRYKeyInteractionTypeMore = 11,
-    FRYKeyInteractionTypeReturn = 13,
-    FRYKeyInteractionTypeShift = 14,
-    FRYKeyInteractionTypeSpace = 15,
-};
-
 @interface FRYTypist()
 
 @property (strong, nonatomic) FRYKeyboardLayoutStar *keyboard;
@@ -72,10 +61,11 @@ typedef NS_ENUM(NSUInteger, FRYKeyInteractionType) {
 
 - (void)tapKeyWithRepresentedString:(NSString *)representedString
 {
-
     FRYKBKeyTree *key = [self.keyboard baseKeyForString:representedString];
-    
+
     FRYKBKeyTree *nextKeyPlane = nil;
+    // Calling keyplaneForKey: on this keyplane can return a layout keyplane rather than self.keyboard.keyplane
+    // So check the keys array instead.
     if ( [self.keyboard.keyplane.keys containsObject:key] ) {
         nextKeyPlane = self.keyboard.keyplane;
     }
