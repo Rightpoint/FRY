@@ -40,7 +40,6 @@
 {
     [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
              onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"One"]];
-    [[NSRunLoop currentRunLoop] fry_waitForIdle];
     
     XCTAssertNotNil([FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:@"Select = One"]]);
     
@@ -52,7 +51,6 @@
     XCTAssertNotNil([FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:@"Picker = 44 / 0"]]);
     
     XCTAssertTrue([inputPicker fry_selectTitle:@"99" inComponent:0 animated:YES]);
-    [[NSRunLoop currentRunLoop] fry_waitForIdle];
     
     XCTAssertNotNil([FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:@"Picker = 99 / 0"]]);
 }
@@ -61,7 +59,6 @@
 {
     [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
              onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"Two"]];
-    [[NSRunLoop currentRunLoop] fry_waitForIdle];
     
     XCTAssertNotNil([FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:@"Select = Two"]]);
     
@@ -73,7 +70,6 @@
     XCTAssertNotNil([FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:@"Picker = 44 / 0"]]);
     
     XCTAssertTrue([inputPicker fry_selectTitle:@"99" inComponent:1 animated:YES]);
-    [[NSRunLoop currentRunLoop] fry_waitForIdle];
     
     XCTAssertNotNil([FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:@"Picker = 99 / 1"]]);
 }

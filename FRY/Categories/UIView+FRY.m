@@ -10,6 +10,7 @@
 #import "NSObject+FRYLookup.h"
 #import "FRYTouchDispatch.h"
 #import "UIAccessibility+FRY.h"
+#import "NSRunLoop+FRY.h"
 
 @implementation UIView (FRY)
 
@@ -89,11 +90,12 @@
 - (void)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView
 {
     [[FRYTouchDispatch shared] simulateTouches:touches inView:self frame:frameInView];
+    [[NSRunLoop currentRunLoop] fry_waitForIdle];
 }
 
 - (void)fry_simulateTouches:(NSArray *)touches
 {
-    [[FRYTouchDispatch shared] simulateTouches:touches inView:self frame:self.bounds];
+    [self fry_simulateTouches:touches insideRect:self.bounds];
 }
 
 - (void)fry_simulateTouch:(FRYSimulatedTouch *)touch insideRect:(CGRect)frameInView
