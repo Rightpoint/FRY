@@ -55,7 +55,6 @@
 		ABCFAC051A0E7B79003B91BC /* NSObject+FRYLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCFAC041A0E7B79003B91BC /* NSObject+FRYLookup.m */; };
 		ABCFAC0A1A0E94BA003B91BC /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCFAC081A0E94BA003B91BC /* TableViewController.m */; };
 		ABDABF111A11820B004FF038 /* UIPickerView+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = ABDABF101A11820B004FF038 /* UIPickerView+FRY.m */; };
-		B9215C4142D84548893B9BCA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89238CE01CB344F78A59E9AE /* libPods.a */; };
 		D4CA25161A09089B00A04F26 /* FRYHighlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CA25151A09089B00A04F26 /* FRYHighlightView.m */; };
 		D4CA25191A0908D100A04F26 /* UIView+FRYTouchHighlighting.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CA25181A0908D100A04F26 /* UIView+FRYTouchHighlighting.m */; };
 		D4CA251A1A0908D100A04F26 /* UIView+FRYTouchHighlighting.m in Sources */ = {isa = PBXBuildFile; fileRef = D4CA25181A0908D100A04F26 /* UIView+FRYTouchHighlighting.m */; };
@@ -93,7 +92,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		44E5641396444807AA772D3D /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		89238CE01CB344F78A59E9AE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB184ADF19E8E0CC007CC9DA /* FRYPointInTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYPointInTime.h; sourceTree = "<group>"; };
 		AB184AE019E8E0CC007CC9DA /* FRYPointInTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYPointInTime.m; sourceTree = "<group>"; };
@@ -193,7 +191,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB25C04019DF95AA00038E75 /* Foundation.framework in Frameworks */,
-				B9215C4142D84548893B9BCA /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,7 +251,6 @@
 				ABCF04D61A06AF200000318A /* TestTargetTests */,
 				AB25C03E19DF95AA00038E75 /* Frameworks */,
 				AB25C03D19DF95AA00038E75 /* Products */,
-				44E5641396444807AA772D3D /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -469,11 +465,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB25C05F19DF95AA00038E75 /* Build configuration list for PBXNativeTarget "FRY" */;
 			buildPhases = (
-				1F21E3A86F4F48ABB1634D12 /* Check Pods Manifest.lock */,
 				AB25C03819DF95AA00038E75 /* Sources */,
 				AB25C03919DF95AA00038E75 /* Frameworks */,
 				AB25C03A19DF95AA00038E75 /* CopyFiles */,
-				3F28592FAB694A4BB967246E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -605,39 +599,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		1F21E3A86F4F48ABB1634D12 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		3F28592FAB694A4BB967246E /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AB25C03819DF95AA00038E75 /* Sources */ = {
@@ -804,7 +765,6 @@
 		};
 		AB25C06019DF95AA00038E75 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 44E5641396444807AA772D3D /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/FRY.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -817,7 +777,6 @@
 		};
 		AB25C06119DF95AA00038E75 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 44E5641396444807AA772D3D /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/FRY.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
