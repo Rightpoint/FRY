@@ -15,6 +15,7 @@
 
 - (UIEvent *)fry_eventWithTouches:(NSArray *)touches;
 
+- (NSArray *)fry_animatingViews;
 - (UIView *)fry_animatingViewToWaitFor;
 
 - (FRYTypist *)fry_typist;
