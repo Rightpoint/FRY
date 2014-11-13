@@ -47,10 +47,7 @@
 
 - (FRYTypist *)fry_typist
 {
-    NSPredicate *privateKeyboardPredicate = [FRYTypist privateKeyboardPredicate];
-    UIView *keyboard = [[self fry_farthestDescendentMatching:privateKeyboardPredicate] fry_representingView];
-    NSAssert(keyboard != nil, @"Could not find the keyboard.  Wait till it appears, or try command-k to reveal the keyboard.");
-    return [[FRYTypist alloc] initWithPrivateKeyboard:keyboard];
+    return [[FRYTypist alloc] init];
 }
 
 - (UIWindow *)fry_inputViewWindow

@@ -14,36 +14,17 @@
 
 @interface FRYTypist()
 
-@property (strong, nonatomic) FRYKeyboardLayoutStar *keyboard;
 
 @end
 
 @implementation FRYTypist
 
-+ (NSString *)privateKeyboardClassName
+- (FRYKeyboardLayoutStar *)keyboard
 {
-    return @"UIKeyboardLayoutStar";
-}
-
-+ (Class)privateKeyboardClass
-{
-    return NSClassFromString([self privateKeyboardClassName]);
-}
-
-+ (NSPredicate *)privateKeyboardPredicate;
-{
-    return [NSPredicate predicateWithFormat:@"class.description = %@",
-            [self privateKeyboardClassName]];
-}
-
-- (id)initWithPrivateKeyboard:(UIView *)keyboard
-{
-    NSAssert([keyboard isKindOfClass:[self.class privateKeyboardClass]], @"");
-    self = [super init];
-    if ( self ) {
-        _keyboard = (id)keyboard;
-    }
-    return self;
+    NSPredicate *privateKeyboardPredicate = [NSPredicate predicateWithFormat:@"class.description = %@", @"UIKeyboardLayoutStar"];   
+    UIView *keyboard = [[[UIApplication sharedApplication] fry_farthestDescendentMatching:privateKeyboardPredicate] fry_representingView];
+    NSAssert(keyboard != nil, @"Could not find the keyboard.  Wait till it appears, or try command-k to reveal the keyboard.");
+    return (FRYKeyboardLayoutStar *)keyboard;
 }
 
 - (void)typeString:(NSString *)string
@@ -55,8 +36,6 @@
         NSString *representedString = [NSString stringWithFormat: @"%C", buffer[i]];
         [self tapKeyWithRepresentedString:representedString];
     }
-#warning Fix issue with fry_waitForIdle not waiting for the key-press to finish.
-    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.05]];
 }
 
 - (void)tapKeyWithRepresentedString:(NSString *)representedString
@@ -89,7 +68,6 @@
     else {
         [self.keyboard fry_simulateTouch:[FRYSyntheticTouch tap]
                               insideRect:[key frame]];
-        [[NSRunLoop currentRunLoop] fry_waitForIdle];
     }
 }
 

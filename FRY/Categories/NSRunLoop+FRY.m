@@ -54,6 +54,9 @@ static NSTimeInterval const kFRYRunLoopDefaultTimeout = 5.0;
     if ( [NSDate timeIntervalSinceReferenceDate] > start + timeout ) {
         [NSException raise:kFRYCheckFailedExcetion format:@"Check Failed: %@", failureExplaination()];
     }
+    else {
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.05]];
+    }
 }
 
 @end

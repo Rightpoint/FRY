@@ -10,10 +10,6 @@
 
 @interface FRYTypist : NSObject
 
-+ (NSPredicate *)privateKeyboardPredicate;
-
-- (id)initWithPrivateKeyboard:(UIView *)keyboard;
-
 - (void)typeString:(NSString *)string;
 
 @end
