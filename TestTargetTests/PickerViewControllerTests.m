@@ -38,7 +38,7 @@
 
 - (void)testPickerOne
 {
-    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+    [FRY_KEY fry_simulateTouch:[FRYTouch tap]
              onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"One"]];
     
     XCTAssertNotNil([FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:@"Select = One"]]);
@@ -57,7 +57,7 @@
 
 - (void)testPickerTwo
 {
-    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+    [FRY_KEY fry_simulateTouch:[FRYTouch tap]
              onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"Two"]];
     
     XCTAssertNotNil([FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:@"Select = Two"]]);

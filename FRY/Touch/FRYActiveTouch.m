@@ -8,7 +8,7 @@
 
 #import "FRYActiveTouch.h"
 #import "FRYPointInTime.h"
-#import "FRYSimulatedTouch.h"
+#import "FRYTouch.h"
 #import "UITouch+FRY.h"
 #import "UIView+FRYTouchHighlighting.h"
 
@@ -22,7 +22,7 @@ static NSUInteger const kFRYTouchPhaseUndefined = -1;
 
 @interface FRYActiveTouch()
 
-@property (strong, nonatomic) FRYSimulatedTouch *touchDefinition;
+@property (strong, nonatomic) FRYTouch *touchDefinition;
 @property (strong, nonatomic) UIView *view;
 @property (assign, nonatomic) NSTimeInterval startTime;
 
@@ -33,7 +33,7 @@ static NSUInteger const kFRYTouchPhaseUndefined = -1;
 
 @implementation FRYActiveTouch
 
-- (id)initWithSimulatedTouch:(FRYSimulatedTouch *)touch inView:(UIView *)view startTime:(NSTimeInterval)startTime;
+- (id)initWithSimulatedTouch:(FRYTouch *)touch inView:(UIView *)view startTime:(NSTimeInterval)startTime;
 {
     self = [super init];
     if ( self ) {

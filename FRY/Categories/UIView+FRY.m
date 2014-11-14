@@ -98,17 +98,17 @@
     [self fry_simulateTouches:touches insideRect:self.bounds];
 }
 
-- (void)fry_simulateTouch:(FRYSimulatedTouch *)touch insideRect:(CGRect)frameInView
+- (void)fry_simulateTouch:(FRYTouch *)touch insideRect:(CGRect)frameInView
 {
     [self fry_simulateTouches:@[touch] insideRect:frameInView];
 }
 
-- (void)fry_simulateTouch:(FRYSimulatedTouch *)touch
+- (void)fry_simulateTouch:(FRYTouch *)touch
 {
     [self fry_simulateTouches:@[touch]];
 }
 
-- (void)fry_simulateTouch:(FRYSimulatedTouch *)touch onSubviewMatching:(NSPredicate *)predicate
+- (void)fry_simulateTouch:(FRYTouch *)touch onSubviewMatching:(NSPredicate *)predicate
 {
     [self fry_simulateTouches:@[touch] onSubviewMatching:predicate];
 }

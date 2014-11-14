@@ -38,7 +38,7 @@
 
 - (void)testTapByPlaceholder
 {
-    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+    [FRY_KEY fry_simulateTouch:[FRYTouch tap]
              onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"placeholder"]];
     
     FRYTypist *typist = [[UIApplication sharedApplication] fry_typist];

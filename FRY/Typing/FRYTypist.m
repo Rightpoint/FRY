@@ -66,7 +66,7 @@
         }
     }
     else {
-        [self.keyboard fry_simulateTouch:[FRYSyntheticTouch tap]
+        [self.keyboard fry_simulateTouch:[FRYTouch tap]
                               insideRect:[key frame]];
     }
 }

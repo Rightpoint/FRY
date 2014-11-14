@@ -8,9 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "FRYSimulatedTouch.h"
-#import "FRYSyntheticTouch.h"
-#import "FRYRecordedTouch.h"
+#import "FRYTouch.h"
 #import "FRYTouchDispatch.h"
 
 #import "NSObject+FRYLookup.h"

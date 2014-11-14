@@ -8,7 +8,7 @@
 
 #import "FRYTouchDispatch.h"
 #import "FRYActiveTouch.h"
-#import "FRYSyntheticTouch.h"
+#import "FRYTouch.h"
 #import "UIApplication+FRY.h"
 #import "UIView+FRY.h"
 #import "UITouch+FRY.h"
@@ -53,9 +53,9 @@
     NSAssert([NSThread currentThread] == [NSThread mainThread], @"");
 
     CGRect touchFrameInWindow = [view.window convertRect:frame fromView:view];
-    for ( __strong FRYSimulatedTouch *touch in touches ) {
-        if ( [touch isKindOfClass:[FRYSyntheticTouch class]] ) {
-            touch = [(FRYSyntheticTouch *)touch touchInFrame:touchFrameInWindow];
+    for ( __strong FRYTouch *touch in touches ) {
+        if ( touch.pointsAreAbsolute == NO ) {
+            touch = [touch touchInFrame:touchFrameInWindow];
         }
         NSTimeInterval startTime = [NSDate timeIntervalSinceReferenceDate];
         FRYActiveTouch *touchInteraction = [[FRYActiveTouch alloc] initWithSimulatedTouch:touch inView:view startTime:startTime];

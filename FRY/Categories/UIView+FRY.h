@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "FRYSimulatedTouch.h"
-#import "FRYSyntheticTouch.h"
+#import "FRYTouch.h"
 
 @interface UIView (FRY)
 
@@ -34,10 +33,10 @@
 
 - (void)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView;
 - (void)fry_simulateTouches:(NSArray *)touches;
-- (void)fry_simulateTouch:(FRYSimulatedTouch *)touch insideRect:(CGRect)frameInView;
-- (void)fry_simulateTouch:(FRYSimulatedTouch *)touch;
+- (void)fry_simulateTouch:(FRYTouch *)touch insideRect:(CGRect)frameInView;
+- (void)fry_simulateTouch:(FRYTouch *)touch;
 
-- (void)fry_simulateTouch:(FRYSimulatedTouch *)touch onSubviewMatching:(NSPredicate *)predicate;
+- (void)fry_simulateTouch:(FRYTouch *)touch onSubviewMatching:(NSPredicate *)predicate;
 - (void)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSPredicate *)predicate;
 
 @end

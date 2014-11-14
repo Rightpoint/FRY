@@ -43,7 +43,7 @@
 - (void)populateTable
 {
     for ( NSUInteger i = 0; i < 5; i++ ) {
-        [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+        [FRY_KEY fry_simulateTouch:[FRYTouch tap]
                  onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"Add"]];
     }
 }
@@ -63,7 +63,7 @@
 {
     [self populateTable];
     for ( NSUInteger i = 0; i < 5; i++ ) {
-        [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+        [FRY_KEY fry_simulateTouch:[FRYTouch tap]
                  onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:TableViewTitleForRow(i)]];
         
         [FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:TableViewTitleForRow(i) accessibilityTrait:UIAccessibilityTraitSelected]
@@ -76,7 +76,7 @@
 - (void)testEditLabels
 {
     [self populateTable];
-    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+    [FRY_KEY fry_simulateTouch:[FRYTouch tap]
              onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"Edit"]];
 
     for ( NSUInteger i = 0; i < 5; i++ ) {
@@ -94,14 +94,14 @@
 - (void)testDeleteTap
 {
     [self populateTable];
-    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+    [FRY_KEY fry_simulateTouch:[FRYTouch tap]
              onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"Edit"]];
 
     for ( NSUInteger i = 0; i < 5; i++ ) {
-        [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+        [FRY_KEY fry_simulateTouch:[FRYTouch tap]
                  onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:TableViewDeleteTitleForRow(i)]];
         
-        [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+        [FRY_KEY fry_simulateTouch:[FRYTouch tap]
                  onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:TableViewDeleteConfirmTitleForRow(i)]];
     }
 }
@@ -111,10 +111,10 @@
     [self populateTable];
 
     for ( NSUInteger i = 0; i < 5; i++ ) {
-        [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch swipeInDirection:FRYTouchDirectionLeft]
+        [FRY_KEY fry_simulateTouch:[FRYTouch swipeInDirection:FRYTouchDirectionLeft]
                  onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:TableViewTitleForRow(i)]];
         
-        [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+        [FRY_KEY fry_simulateTouch:[FRYTouch tap]
                  onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:TableViewDeleteConfirmTitleForRow(i)]];
     }
 }
@@ -122,7 +122,7 @@
 - (void)testReorder
 {
     [self populateTable];
-    [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
+    [FRY_KEY fry_simulateTouch:[FRYTouch tap]
              onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"Edit"]];
     
     __block UIView *reorderKnobView = nil;
@@ -133,7 +133,7 @@
                                  }];
     // Drag the view down 4 rows
     CGRect originalLocation = [FRY_KEY convertRect:reorderKnobView.bounds fromView:reorderKnobView];
-    [reorderKnobView fry_simulateTouch:[FRYSyntheticTouch pressAndDragFromPoint:CGPointMake(0.5, 0.5)
+    [reorderKnobView fry_simulateTouch:[FRYTouch pressAndDragFromPoint:CGPointMake(0.5, 0.5)
                                                                         toPoint:CGPointMake(0.5, 4.5)
                                                                     forDuration:1]];
     
