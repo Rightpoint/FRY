@@ -25,6 +25,7 @@ typedef NS_ENUM(NSInteger, FRYTouchDirection) {
 @interface FRYTouch : NSObject <NSCopying>
 
 + (FRYTouch *)touchStarting:(NSTimeInterval)startingOffset points:(NSUInteger)points xyoffsets:(double)xYorOffset, ...;
++ (FRYTouch *)touchStarting:(NSTimeInterval)startingOffset points:(NSUInteger)points absoluteXyoffsets:(double)xYorOffset, ...;
 + (FRYTouch *)tap;
 + (FRYTouch *)tapAtPoint:(CGPoint)point;
 + (FRYTouch *)dragFromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint forDuration:(NSTimeInterval)duration;

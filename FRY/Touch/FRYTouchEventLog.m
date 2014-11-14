@@ -51,13 +51,14 @@
 {
     
     return [NSString stringWithFormat:@"\
-[FRY_KEY fry_simulateTouch:[%@ touchStarting:%.3f\n\
-                                                points:%zd\n\
-                                                xyoffsets:%@]\n\
+[FRY_KEY fry_simulateTouch:[FRYTouch touchStarting:%.3f\n\
+                                            points:%zd\n\
+                                         %@:%@]\n\
          onSubviewMatching:%@];\n",
-            self.translatedIntoView ? @"FRYSyntheticTouch" : @"FRYRecordedTouch",
             0.0,
             self.pointsInTime.count,
+            self.translatedIntoView ? @"xyoffsets" : @"absoluteXyoffsets",
+
             [self recreationCodeXyoffsetsArgument],
             [self recreationCodeViewMatchingPredicate]];
 }

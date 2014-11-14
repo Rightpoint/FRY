@@ -41,6 +41,24 @@ static const NSTimeInterval kFRYSwipeLocationEnd   = 0.7f;
     return touch;
 }
 
++ (FRYTouch *)touchStarting:(NSTimeInterval)startingOffset points:(NSUInteger)points absoluteXyoffsets:(double)xYorOffset, ...
+{
+    // Not sure how to chain in va_args.  Dup code above.
+    FRYTouch *touch = [[self alloc] init];
+    touch.startingOffset = startingOffset;
+    va_list args;
+    va_start(args, xYorOffset);
+    for ( NSUInteger i = 0; i < points; i++ ) {
+        CGFloat x = i == 0 ? xYorOffset : va_arg(args, double);
+        CGFloat y = va_arg(args, double);
+        NSTimeInterval offset = va_arg(args, double);
+        
+        [touch.pointsInTime addObject:[[FRYPointInTime alloc] initWithLocation:CGPointMake(x, y) offset:offset]];
+    }
+    touch.pointsAreAbsolute = YES;
+    return touch;
+}
+
 + (FRYTouch *)tap
 {
     return [self tapAtPoint:CGPointMake(0.5, 0.5)];
