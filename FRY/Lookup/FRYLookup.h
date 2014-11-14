@@ -8,26 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "FRYDefines.h"
+#import "FRYLookupSupport.h"
 
 /**
  * This protocol will add support for performing an NSPredicate search over an arbitrary tree structure.
  */
-@protocol FRYLookup <NSObject>
-
-/**
- * The keypaths that should be traversed.
- */
-+ (NSSet *)fry_childKeyPaths;
-
-/**
- * The view object that contains this object
- */
-- (UIView *)fry_representingView;
-
-/**
- * The location inside the frame where this object exists.
- */
-- (CGRect)fry_frameInView;
+@protocol FRYLookup <FRYLookupSupport>
 
 /**
  * A depth first traversal, similar to hitTest:event:, to return the deepest object in the tree matching the

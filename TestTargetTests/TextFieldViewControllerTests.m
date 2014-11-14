@@ -40,12 +40,13 @@
 {
     [FRY_KEY fry_simulateTouch:[FRYSyntheticTouch tap]
              onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"placeholder"]];
-    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+    
     FRYTypist *typist = [[UIApplication sharedApplication] fry_typist];
     NSArray *stringsToTest = @[
                                @"Tt8/*",
                                @"Thissss is text",
                                @"8 * 8 /",
+                               @"VERYLONGTEXTWITHMANYUPPERCASELETTERS",
                                ];
     for ( NSString *string in stringsToTest ) {
         [typist typeString:string];

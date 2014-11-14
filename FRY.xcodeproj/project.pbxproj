@@ -176,6 +176,7 @@
 		ABCFAC061A0E7CF4003B91BC /* FRYLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYLookup.h; sourceTree = "<group>"; };
 		ABCFAC071A0E94BA003B91BC /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		ABCFAC081A0E94BA003B91BC /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		ABD0269C1A1562D4006EA757 /* FRYLookupSupport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRYLookupSupport.h; sourceTree = "<group>"; };
 		ABDABF0F1A11820B004FF038 /* UIPickerView+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPickerView+FRY.h"; sourceTree = "<group>"; };
 		ABDABF101A11820B004FF038 /* UIPickerView+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPickerView+FRY.m"; sourceTree = "<group>"; };
 		D40395831A0CE1CE002200E1 /* FRYSpark.png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYSpark.png.h; sourceTree = "<group>"; };
@@ -394,6 +395,7 @@
 			isa = PBXGroup;
 			children = (
 				ABCFAC061A0E7CF4003B91BC /* FRYLookup.h */,
+				ABD0269C1A1562D4006EA757 /* FRYLookupSupport.h */,
 				ABCFAC031A0E7B79003B91BC /* NSObject+FRYLookup.h */,
 				ABCFAC041A0E7B79003B91BC /* NSObject+FRYLookup.m */,
 				AB5A891C1A07DEC400E44C89 /* NSPredicate+FRY.h */,
