@@ -40,6 +40,12 @@
             NSStringFromSelector(@selector(accessibilityTraits)), @(traits), @(traits)];
 }
 
++ (NSPredicate *)fry_matchAccessibilityTrait:(UIAccessibilityTraits)traits
+{
+    return [NSPredicate predicateWithFormat:@"(%K & %@) = %@",
+            NSStringFromSelector(@selector(accessibilityTraits)), @(traits), @(traits)];
+}
+
 + (NSPredicate *)fry_matchAccessibilityIdentifier:(NSString *)accessibilityIdentifier
 {
     return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(accessibilityIdentifier)), accessibilityIdentifier];

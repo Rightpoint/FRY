@@ -38,9 +38,8 @@
 
 - (void)testTapByPlaceholder
 {
-    [FRY_KEY fry_simulateTouch:[FRYTouch tap]
-             onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"placeholder"]];
-    
+    FRYD_KEY.accessibilityLabel(@"placeholder").depthFirst().tap();
+
     FRYTypist *typist = [[UIApplication sharedApplication] fry_typist];
     NSArray *stringsToTest = @[
                                @"Tt8/*",
@@ -51,9 +50,8 @@
     for ( NSString *string in stringsToTest ) {
         [typist typeString:string];
         
-        id<FRYLookup> l = [FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityValue:string]];
-        XCTAssertNotNil(l);
-        UITextField *tf = (id)[[l fry_representingView] superview];
+        // Notice how ugly this is.  superview?!   fail!
+        UITextField *tf = (id)[FRYD_KEY.accessibilityValue(string).depthFirst().present().view superview];
         XCTAssertTrue([tf isKindOfClass:[UITextField class]]);
         [tf fry_selectAll];
     }

@@ -21,13 +21,13 @@
 @property (copy,   nonatomic) NSString *filename;
 @property (assign, nonatomic) NSUInteger lineNumber;
 
-@property (copy, nonatomic) NSArray *results;
+@property (copy, nonatomic) NSSet *results;
 
 @end
 
 @implementation FRYDSLResult
 
-- (id)initWithResults:(NSArray *)results testCase:(id)testCase inFile:(NSString *)filename atLine:(NSUInteger)lineNumber
+- (id)initWithResults:(NSSet *)results testCase:(id)testCase inFile:(NSString *)filename atLine:(NSUInteger)lineNumber
 {
     self = [super init];
     if ( self ) {
@@ -42,13 +42,13 @@
 - (id<FRYLookup>)singularResult
 {
     [self check:self.results.count == 1 explaination:[NSString stringWithFormat:@"Only expected 1 lookup result, found %zd", self.results.count]];
-    return self.results.lastObject;
+    return self.results.anyObject;
 }
 
 - (void)check:(BOOL)result explaination:(NSString *)explaination
 {
-    if ( result == NO && [self.testTarget respondsToSelector:@selector(recordFailureWithDescription:inFile:atLine:expected:)])
-    {
+    NSAssert([self.testTarget respondsToSelector:@selector(recordFailureWithDescription:inFile:atLine:expected:)], @"Called from a non test function.  Not sure how to perform checks.");
+    if ( result == NO ) {
         [self.testTarget recordFailureWithDescription:explaination inFile:self.filename atLine:self.lineNumber expected:YES];
     }
 }
@@ -105,6 +105,11 @@
         [view fry_simulateTouches:touches insideRect:frameInView];
         return self;
     };
+}
+
+- (UIView *)view
+{
+    return [[self singularResult] fry_representingView];
 }
 
 @end

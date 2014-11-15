@@ -20,7 +20,7 @@ typedef FRYDSLResult *(^FRYDSLMatchBlock)(UIView *view, CGRect frameInView);
 
 @interface FRYDSLResult : NSObject
 
-- (id)initWithResults:(NSArray *)results testCase:(id)testCase inFile:(NSString *)filename atLine:(NSUInteger)lineNumber;
+- (id)initWithResults:(NSSet *)results testCase:(id)testCase inFile:(NSString *)filename atLine:(NSUInteger)lineNumber;
 
 @property (copy, nonatomic, readonly) FRYDSLBlock present;
 @property (copy, nonatomic, readonly) FRYDSLBlock absent;
@@ -29,5 +29,6 @@ typedef FRYDSLResult *(^FRYDSLMatchBlock)(UIView *view, CGRect frameInView);
 @property (copy, nonatomic, readonly) FRYDSLBlock tap;
 @property (copy, nonatomic, readonly) FRYDSLTouchBlock touch;
 @property (copy, nonatomic, readonly) FRYDSLArrayBlock touches;
+@property (copy, nonatomic, readonly) UIView *view;
 
 @end

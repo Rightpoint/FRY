@@ -43,8 +43,7 @@
 - (void)populateTable
 {
     for ( NSUInteger i = 0; i < 5; i++ ) {
-        [FRY_KEY fry_simulateTouch:[FRYTouch tap]
-                 onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"Add"]];
+        FRYD_KEY.accessibilityLabel(@"Add").depthFirst().tap();
     }
 }
 
@@ -52,10 +51,7 @@
 {
     [self populateTable];
     for ( NSUInteger i = 0; i < 5; i++ ) {
-        [FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:TableViewTitleForRow(i)]
-                                     usingBlock:^(UIView *view, CGRect frameInView) {
-                                         XCTAssertNotNil(view, @"");
-                                     }];
+        FRYD_KEY.accessibilityLabel(TableViewTitleForRow(i)).depthFirst().present();
     }
 }
 
@@ -63,46 +59,30 @@
 {
     [self populateTable];
     for ( NSUInteger i = 0; i < 5; i++ ) {
-        [FRY_KEY fry_simulateTouch:[FRYTouch tap]
-                 onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:TableViewTitleForRow(i)]];
-        
-        [FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:TableViewTitleForRow(i) accessibilityTrait:UIAccessibilityTraitSelected]
-                                     usingBlock:^(UIView *view, CGRect frameInView) {
-                                         XCTAssertNotNil(view, @"");
-                                     }];
+        FRYD_KEY.accessibilityLabel(TableViewTitleForRow(i)).depthFirst().tap();
+        FRYD_KEY.accessibilityLabel(TableViewTitleForRow(i)).accessibilityTraits(UIAccessibilityTraitSelected).all().present();
     }
 }
 
 - (void)testEditLabels
 {
     [self populateTable];
-    [FRY_KEY fry_simulateTouch:[FRYTouch tap]
-             onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"Edit"]];
+    FRYD_KEY.accessibilityLabel(@"Edit").depthFirst().tap();
 
     for ( NSUInteger i = 0; i < 5; i++ ) {
-        [FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:TableViewReorderTitleForRow(i)]
-                                     usingBlock:^(UIView *view, CGRect frameInView) {
-                                         XCTAssertNotNil(view, @"");
-                                     }];
-        [FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:TableViewDeleteTitleForRow(i)]
-                                     usingBlock:^(UIView *view, CGRect frameInView) {
-                                         XCTAssertNotNil(view, @"");
-                                     }];
+        FRYD_KEY.accessibilityLabel(TableViewReorderTitleForRow(i)).depthFirst().present();
+        FRYD_KEY.accessibilityLabel(TableViewDeleteTitleForRow(i)).depthFirst().present();
     }
 }
 
 - (void)testDeleteTap
 {
     [self populateTable];
-    [FRY_KEY fry_simulateTouch:[FRYTouch tap]
-             onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"Edit"]];
+    FRYD_KEY.accessibilityLabel(@"Edit").depthFirst().tap();
 
     for ( NSUInteger i = 0; i < 5; i++ ) {
-        [FRY_KEY fry_simulateTouch:[FRYTouch tap]
-                 onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:TableViewDeleteTitleForRow(i)]];
-        
-        [FRY_KEY fry_simulateTouch:[FRYTouch tap]
-                 onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:TableViewDeleteConfirmTitleForRow(i)]];
+        FRYD_KEY.accessibilityLabel(TableViewDeleteTitleForRow(i)).depthFirst().tap();
+        FRYD_KEY.accessibilityLabel(TableViewDeleteConfirmTitleForRow(i)).depthFirst().tap();
     }
 }
 
@@ -111,37 +91,26 @@
     [self populateTable];
 
     for ( NSUInteger i = 0; i < 5; i++ ) {
-        [FRY_KEY fry_simulateTouch:[FRYTouch swipeInDirection:FRYTouchDirectionLeft]
-                 onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:TableViewTitleForRow(i)]];
-        
-        [FRY_KEY fry_simulateTouch:[FRYTouch tap]
-                 onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:TableViewDeleteConfirmTitleForRow(i)]];
+        FRYD_KEY.accessibilityLabel(TableViewTitleForRow(i)).depthFirst().touch([FRYTouch swipeInDirection:FRYTouchDirectionLeft]);
+        FRYD_KEY.accessibilityLabel(TableViewDeleteConfirmTitleForRow(i)).depthFirst().tap();
     }
 }
 
 - (void)testReorder
 {
     [self populateTable];
-    [FRY_KEY fry_simulateTouch:[FRYTouch tap]
-             onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"Edit"]];
+    FRYD_KEY.accessibilityLabel(@"Edit").depthFirst().tap();
     
-    __block UIView *reorderKnobView = nil;
-    [FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:TableViewReorderTitleForRow(0)]
-                                 usingBlock:^(UIView *view, CGRect frameInView) {
-                                     XCTAssertNotNil(view, @"");
-                                     reorderKnobView = view;
-                                 }];
+    UIView *reorderKnobView = FRYD_KEY.accessibilityLabel(TableViewReorderTitleForRow(0)).depthFirst().present().view;
+
     // Drag the view down 4 rows
     CGRect originalLocation = [FRY_KEY convertRect:reorderKnobView.bounds fromView:reorderKnobView];
     [reorderKnobView fry_simulateTouch:[FRYTouch pressAndDragFromPoint:CGPointMake(0.5, 0.5)
                                                                         toPoint:CGPointMake(0.5, 4.5)
                                                                     forDuration:1]];
     
-    [FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:TableViewReorderTitleForRow(0)]
-                                 usingBlock:^(UIView *view, CGRect frameInView) {
-                                     XCTAssertNotNil(view, @"");
-                                     reorderKnobView = view;
-                                 }];
+    reorderKnobView = FRYD_KEY.accessibilityLabel(TableViewReorderTitleForRow(0)).depthFirst().present().view;
+
     CGRect newLocation = [FRY_KEY convertRect:reorderKnobView.bounds fromView:reorderKnobView];
     
     XCTAssertFalse(CGRectEqualToRect(originalLocation, newLocation));

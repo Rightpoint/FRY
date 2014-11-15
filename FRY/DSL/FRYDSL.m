@@ -73,6 +73,14 @@
     };
 }
 
+- (FRYDSLTraitsBlock)accessibilityTraits
+{
+    return ^(UIAccessibilityTraits traits) {
+        [self.subPredicates addObject:[NSPredicate fry_matchAccessibilityTrait:traits]];
+        return self;
+    };
+}
+
 - (FRYDSLClassBlock)ofClass
 {
     return ^(Class klass) {
@@ -92,7 +100,7 @@
 - (FRYDSLBlock)all
 {
     return ^() {
-        NSArray *results = [self.lookupOrigin fry_allChildrenMatching:self.predicate];
+        NSSet *results = [self.lookupOrigin fry_allChildrenMatching:self.predicate];
         return [[FRYDSLResult alloc] initWithResults:results testCase:self.testTarget inFile:self.filename atLine:self.lineNumber];
     };
 }
@@ -101,7 +109,7 @@
 {
     return ^() {
         id<FRYLookup> result = [self.lookupOrigin fry_farthestDescendentMatching:self.predicate];
-        NSArray *results = result ? @[result] : @[];
+        NSSet *results = result ? [NSSet setWithObject:result] : [NSSet set];
         return [[FRYDSLResult alloc] initWithResults:results testCase:self.testTarget inFile:self.filename atLine:self.lineNumber];
     };
 }

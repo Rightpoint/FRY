@@ -18,6 +18,7 @@
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityValue:(NSString *)accessibilityValue;
 + (NSPredicate *)fry_matchAccessibilityValue:(NSString *)accessibilityValue;
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityTrait:(UIAccessibilityTraits)traits;
++ (NSPredicate *)fry_matchAccessibilityTrait:(UIAccessibilityTraits)traits;
 + (NSPredicate *)fry_matchAccessibilityIdentifier:(NSString *)accessibilityIdentifier;
 + (NSPredicate *)fry_matchClass:(Class)klass;
 

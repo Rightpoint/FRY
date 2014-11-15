@@ -44,11 +44,8 @@
     [[NSRunLoop currentRunLoop] fry_waitForIdle];
 
     for ( NSString *label in @[@"One", @"Two", @"Three"] ) {
-        [FRY_KEY fry_simulateTouch:[FRYTouch tap]
-                 onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:label]];
-
-        [FRY_KEY fry_simulateTouch:[FRYTouch tap]
-                 onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"OK"]];
+        FRYD_KEY.accessibilityLabel(label).depthFirst().tap();
+        FRYD_KEY.accessibilityLabel(@"OK").depthFirst().tap();
     }
 }
 
@@ -56,11 +53,8 @@
 {
 
     for ( NSString *response in @[@"Destructive", @"Other", @"OK"] ) {
-        [FRY_KEY fry_simulateTouch:[FRYTouch tap]
-                 onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"Action One"]];
-
-        [FRY_KEY fry_simulateTouch:[FRYTouch tap]
-                 onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:response]];
+        FRYD_KEY.accessibilityLabel(@"Action One").depthFirst().tap();
+        FRYD_KEY.accessibilityLabel(response).depthFirst().tap();
     }
 }
 

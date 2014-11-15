@@ -29,6 +29,6 @@
  */
 - (void)fry_enumerateAllChildrenMatching:(NSPredicate *)predicate usingBlock:(FRYMatchBlock)block;
 
-- (NSArray *)fry_allChildrenMatching:(NSPredicate *)predicate;
+- (NSSet *)fry_allChildrenMatching:(NSPredicate *)predicate;
 
 @end

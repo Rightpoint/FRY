@@ -16,6 +16,7 @@
 @class FRYDSLResult;
 
 typedef FRYDSL *(^FRYDSLStringBlock)(NSString *);
+typedef FRYDSL *(^FRYDSLTraitsBlock)(UIAccessibilityTraits);
 typedef FRYDSL *(^FRYDSLClassBlock)(Class);
 typedef FRYDSL *(^FRYDSLPredicateBlock)(NSPredicate *);
 
@@ -30,6 +31,7 @@ typedef FRYDSLResult *(^FRYDSLBlock)();
 
 @property (copy, nonatomic, readonly) FRYDSLStringBlock accessibilityLabel;
 @property (copy, nonatomic, readonly) FRYDSLStringBlock accessibilityValue;
+@property (copy, nonatomic, readonly) FRYDSLTraitsBlock accessibilityTraits;
 @property (copy, nonatomic, readonly) FRYDSLClassBlock ofClass;
 @property (copy, nonatomic, readonly) FRYDSLPredicateBlock matching;
 

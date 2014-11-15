@@ -63,7 +63,7 @@
     return nil;
 }
 
-- (void)fry_enumerateAllChildrenMatching:(NSPredicate *)predicate results:(NSMutableArray *)results
+- (void)fry_enumerateAllChildrenMatching:(NSPredicate *)predicate results:(NSMutableSet *)results
 {
     NSParameterAssert(predicate);
     NSParameterAssert(results);
@@ -84,7 +84,7 @@
 {
     NSParameterAssert(predicate);
     NSParameterAssert(block);
-    NSMutableArray *results = [NSMutableArray array];
+    NSMutableSet *results = [NSMutableSet set];
     
     [self fry_enumerateAllChildrenMatching:predicate results:results];
     
@@ -95,7 +95,7 @@
 
 - (NSArray *)fry_allChildrenMatching:(NSPredicate *)predicate
 {
-    NSMutableArray *results = [NSMutableArray array];
+    NSMutableSet *results = [NSMutableSet set];
     
     [self fry_enumerateAllChildrenMatching:predicate results:results];
 
