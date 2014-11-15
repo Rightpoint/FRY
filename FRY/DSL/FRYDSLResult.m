@@ -8,6 +8,9 @@
 
 #import "FRYDSLResult.h"
 #import "UIView+FRY.h"
+#import "UITextInput+FRY.h"
+#import "FRYTypist.h"
+#import "UIApplication+FRY.h"
 
 @interface NSObject(FRYTestStub)
 
@@ -110,6 +113,29 @@
 - (UIView *)view
 {
     return [[self singularResult] fry_representingView];
+}
+
+- (FRYDSLBlock)selectText
+{
+    return ^() {
+        UIView *view = [self view];
+        while ( view && [view respondsToSelector:@selector(fry_selectAll)] == NO ) {
+            view = [view superview];
+        }
+        [self check:view != nil explaination:[NSString stringWithFormat:@"Could not find superview of %@ to select text of.", [self view]]];
+
+        [(UITextField *)view fry_selectAll];
+        return self;
+    };
+}
+
+- (FRYDSLResultStringBlock)type
+{
+    return ^(NSString *string) {
+        FRYTypist *typist = [[UIApplication sharedApplication] fry_typist];
+        [typist typeString:string];
+        return self;
+    };
 }
 
 @end

@@ -49,11 +49,8 @@
                                ];
     for ( NSString *string in stringsToTest ) {
         [typist typeString:string];
-        
-        // Notice how ugly this is.  superview?!   fail!
-        UITextField *tf = (id)[FRYD_KEY.accessibilityValue(string).depthFirst().present().view superview];
-        XCTAssertTrue([tf isKindOfClass:[UITextField class]]);
-        [tf fry_selectAll];
+
+        FRYD_KEY.accessibilityValue(string).depthFirst().present().selectText();
     }
 }
 

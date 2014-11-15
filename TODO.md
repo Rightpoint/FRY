@@ -6,11 +6,6 @@
 - schedule touches at times, instead of every interval
 - Enhance touch simulation (Bezier paths, touch-up momentum)
 
-- test macro's
-- improve debug for lookup / tap failures
-
-- warn if accessibility is disabled
-
 - Device Event support
   - Rotation
   - lifecycle events
@@ -24,9 +19,9 @@
   x Controls
   x Alerts
   X Table View
-  - Pickers
+  X Text Input
+  X Pickers
   - Collection View
-  - Text Input
   - Gesture Recognizers
   - Web Content
   - Web Form
