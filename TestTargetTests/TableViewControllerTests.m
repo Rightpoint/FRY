@@ -43,7 +43,7 @@
 - (void)populateTable
 {
     for ( NSUInteger i = 0; i < 5; i++ ) {
-        FRYD_KEY.accessibilityLabel(@"Add").depthFirst().tap();
+        FRY_KEY.accessibilityLabel(@"Add").depthFirst().tap();
     }
 }
 
@@ -51,7 +51,7 @@
 {
     [self populateTable];
     for ( NSUInteger i = 0; i < 5; i++ ) {
-        FRYD_KEY.accessibilityLabel(TableViewTitleForRow(i)).depthFirst().present();
+        FRY_KEY.accessibilityLabel(TableViewTitleForRow(i)).depthFirst().present();
     }
 }
 
@@ -59,30 +59,30 @@
 {
     [self populateTable];
     for ( NSUInteger i = 0; i < 5; i++ ) {
-        FRYD_KEY.accessibilityLabel(TableViewTitleForRow(i)).depthFirst().tap();
-        FRYD_KEY.accessibilityLabel(TableViewTitleForRow(i)).accessibilityTraits(UIAccessibilityTraitSelected).all().present();
+        FRY_KEY.accessibilityLabel(TableViewTitleForRow(i)).depthFirst().tap();
+        FRY.accessibilityLabel(TableViewTitleForRow(i)).accessibilityTraits(UIAccessibilityTraitSelected).all().present();
     }
 }
 
 - (void)testEditLabels
 {
     [self populateTable];
-    FRYD_KEY.accessibilityLabel(@"Edit").depthFirst().tap();
+    FRY_KEY.accessibilityLabel(@"Edit").depthFirst().tap();
 
     for ( NSUInteger i = 0; i < 5; i++ ) {
-        FRYD_KEY.accessibilityLabel(TableViewReorderTitleForRow(i)).depthFirst().present();
-        FRYD_KEY.accessibilityLabel(TableViewDeleteTitleForRow(i)).depthFirst().present();
+        FRY_KEY.accessibilityLabel(TableViewReorderTitleForRow(i)).depthFirst().present();
+        FRY_KEY.accessibilityLabel(TableViewDeleteTitleForRow(i)).depthFirst().present();
     }
 }
 
 - (void)testDeleteTap
 {
     [self populateTable];
-    FRYD_KEY.accessibilityLabel(@"Edit").depthFirst().tap();
+    FRY_KEY.accessibilityLabel(@"Edit").depthFirst().tap();
 
     for ( NSUInteger i = 0; i < 5; i++ ) {
-        FRYD_KEY.accessibilityLabel(TableViewDeleteTitleForRow(i)).depthFirst().tap();
-        FRYD_KEY.accessibilityLabel(TableViewDeleteConfirmTitleForRow(i)).depthFirst().tap();
+        FRY_KEY.accessibilityLabel(TableViewDeleteTitleForRow(i)).depthFirst().tap();
+        FRY_KEY.accessibilityLabel(TableViewDeleteConfirmTitleForRow(i)).depthFirst().tap();
     }
 }
 
@@ -91,27 +91,27 @@
     [self populateTable];
 
     for ( NSUInteger i = 0; i < 5; i++ ) {
-        FRYD_KEY.accessibilityLabel(TableViewTitleForRow(i)).depthFirst().touch([FRYTouch swipeInDirection:FRYTouchDirectionLeft]);
-        FRYD_KEY.accessibilityLabel(TableViewDeleteConfirmTitleForRow(i)).depthFirst().tap();
+        FRY_KEY.accessibilityLabel(TableViewTitleForRow(i)).depthFirst().touch([FRYTouch swipeInDirection:FRYTouchDirectionLeft]);
+        FRY_KEY.accessibilityLabel(TableViewDeleteConfirmTitleForRow(i)).depthFirst().tap();
     }
 }
 
 - (void)testReorder
 {
     [self populateTable];
-    FRYD_KEY.accessibilityLabel(@"Edit").depthFirst().tap();
+    FRY_KEY.accessibilityLabel(@"Edit").depthFirst().tap();
     
-    UIView *reorderKnobView = FRYD_KEY.accessibilityLabel(TableViewReorderTitleForRow(0)).depthFirst().present().view;
+    UIView *reorderKnobView = FRY_KEY.accessibilityLabel(TableViewReorderTitleForRow(0)).depthFirst().present().view;
 
     // Drag the view down 4 rows
-    CGRect originalLocation = [FRY_KEY convertRect:reorderKnobView.bounds fromView:reorderKnobView];
+    CGRect originalLocation = [[FRY_KEY.lookupOrigin fry_representingView] convertRect:reorderKnobView.bounds fromView:reorderKnobView];
     [reorderKnobView fry_simulateTouch:[FRYTouch pressAndDragFromPoint:CGPointMake(0.5, 0.5)
                                                                         toPoint:CGPointMake(0.5, 4.5)
                                                                     forDuration:1]];
     
-    reorderKnobView = FRYD_KEY.accessibilityLabel(TableViewReorderTitleForRow(0)).depthFirst().present().view;
+    reorderKnobView = FRY_KEY.accessibilityLabel(TableViewReorderTitleForRow(0)).depthFirst().present().view;
 
-    CGRect newLocation = [FRY_KEY convertRect:reorderKnobView.bounds fromView:reorderKnobView];
+    CGRect newLocation = [[FRY_KEY.lookupOrigin fry_representingView] convertRect:reorderKnobView.bounds fromView:reorderKnobView];
     
     XCTAssertFalse(CGRectEqualToRect(originalLocation, newLocation));
 }

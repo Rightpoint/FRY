@@ -12,8 +12,7 @@
 
 - (BOOL)fry_selectTitle:(NSString *)title inComponent:(NSUInteger)componentIndex animated:(BOOL)animated
 {
-    NSInteger componentCount = [self.dataSource numberOfComponentsInPickerView:self];
-    NSAssert(componentIndex < componentCount, @"Invalid component");
+    NSAssert(componentIndex < [self.dataSource numberOfComponentsInPickerView:self], @"Invalid component");
     NSAssert([self.delegate respondsToSelector:@selector(pickerView:titleForRow:forComponent:)], @"Can only selectTitle if it delegate responds to pickerView:titleForRow:forComponent:");
     BOOL found = NO;
     NSInteger rowCount = [self.dataSource pickerView:self numberOfRowsInComponent:componentIndex];

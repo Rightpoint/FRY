@@ -44,8 +44,8 @@
     [[NSRunLoop currentRunLoop] fry_waitForIdle];
 
     for ( NSString *label in @[@"One", @"Two", @"Three"] ) {
-        FRYD_KEY.accessibilityLabel(label).depthFirst().tap();
-        FRYD_KEY.accessibilityLabel(@"OK").depthFirst().tap();
+        FRY_KEY.accessibilityLabel(label).depthFirst().tap();
+        FRY_KEY.accessibilityLabel(@"OK").depthFirst().tap();
     }
 }
 
@@ -53,8 +53,8 @@
 {
 
     for ( NSString *response in @[@"Destructive", @"Other", @"OK"] ) {
-        FRYD_KEY.accessibilityLabel(@"Action One").depthFirst().tap();
-        FRYD_KEY.accessibilityLabel(response).depthFirst().tap();
+        FRY_KEY.accessibilityLabel(@"Action One").depthFirst().tap();
+        FRY_KEY.accessibilityLabel(response).depthFirst().tap();
     }
 }
 

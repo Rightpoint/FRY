@@ -18,4 +18,4 @@ OBJC_EXTERN NSString *kFRYCheckFailedExcetion;
 
 
 #define FRY_APP [UIApplication sharedApplication]
-#define FRY_KEY [[UIApplication sharedApplication] keyWindow]
+#define FRY_KEY_WINDOW [[UIApplication sharedApplication] keyWindow]

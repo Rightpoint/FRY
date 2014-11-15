@@ -38,37 +38,35 @@
 
 - (void)testPickerOne
 {
-    FRYD_KEY.accessibilityLabel(@"One").depthFirst().tap();
-    FRYD_KEY.accessibilityLabel(@"Select = One").all().present();
+    FRY_KEY.accessibilityLabel(@"One").depthFirst().tap();
+    FRY_KEY.accessibilityLabel(@"Select = One").all().present();
 
-#warning This API still sucks.  Doesn't use / integrate with DSL well.
     UIPickerView *inputPicker = (id)[FRY_APP fry_inputViewOfClass:[UIPickerView class]];
     XCTAssertNotNil(inputPicker);
     
     XCTAssertTrue([inputPicker fry_selectTitle:@"44" inComponent:0 animated:YES]);
     
-    XCTAssertNotNil([FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:@"Picker = 44 / 0"]]);
-    
+    FRY_KEY.accessibilityLabel(@"Picker = 44 / 0").all().present();
+
     XCTAssertTrue([inputPicker fry_selectTitle:@"99" inComponent:0 animated:YES]);
-    
-    XCTAssertNotNil([FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:@"Picker = 99 / 0"]]);
+    FRY_KEY.accessibilityLabel(@"Picker = 99 / 0").all().present();
 }
 
 - (void)testPickerTwo
 {
-    FRYD_KEY.accessibilityLabel(@"Two").depthFirst().tap();
-    FRYD_KEY.accessibilityLabel(@"Select = Two").all().present();
+    FRY_KEY.accessibilityLabel(@"Two").depthFirst().tap();
+    FRY_KEY.accessibilityLabel(@"Select = Two").all().present();
    
     UIPickerView *inputPicker = (id)[FRY_APP fry_inputViewOfClass:[UIPickerView class]];
     XCTAssertNotNil(inputPicker);
     
     XCTAssertTrue([inputPicker fry_selectTitle:@"44" inComponent:0 animated:YES]);
     
-    FRYD_KEY.accessibilityLabel(@"Picker = 44 / 0").all().present();
+    FRY_KEY.accessibilityLabel(@"Picker = 44 / 0").all().present();
 
     XCTAssertTrue([inputPicker fry_selectTitle:@"99" inComponent:1 animated:YES]);
     
-    FRYD_KEY.accessibilityLabel(@"Picker = 99 / 1").all().present();
+    FRY_KEY.accessibilityLabel(@"Picker = 99 / 1").all().present();
 }
 
 @end

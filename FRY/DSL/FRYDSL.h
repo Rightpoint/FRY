@@ -25,8 +25,9 @@ typedef FRYDSLResult *(^FRYDSLBlock)();
 
 @interface FRYDSL : NSObject
 
-- (id)initForAppWithTestTarget:(id)target inFile:(NSString *)filename atLine:(NSUInteger)lineNumber;
-- (id)initForKeyWindowWithTestTarget:(id)target inFile:(NSString *)filename atLine:(NSUInteger)lineNumber;
+- (id)initForLookup:(id<FRYLookup>)lookupOrigin withTestTarget:(id)target inFile:(NSString *)filename atLine:(NSUInteger)lineNumber;
+
+@property (strong, nonatomic, readonly) id<FRYLookup> lookupOrigin;
 
 
 @property (copy, nonatomic, readonly) FRYDSLStringBlock accessibilityLabel;
@@ -42,6 +43,6 @@ typedef FRYDSLResult *(^FRYDSLBlock)();
 
 
 
-#define FRYD [[FRYDSL alloc] initForAppWithTestTarget:self inFile:[NSString stringWithUTF8String:__FILE__] atLine:__LINE__]
-#define FRYD_KEY [[FRYDSL alloc] initForKeyWindowWithTestTarget:self inFile:[NSString stringWithUTF8String:__FILE__] atLine:__LINE__]
+#define FRY [[FRYDSL alloc] initForLookup:[UIApplication sharedApplication] withTestTarget:self inFile:[NSString stringWithUTF8String:__FILE__] atLine:__LINE__]
+#define FRY_KEY [[FRYDSL alloc] initForLookup:[[UIApplication sharedApplication] keyWindow] withTestTarget:self inFile:[NSString stringWithUTF8String:__FILE__] atLine:__LINE__]
 

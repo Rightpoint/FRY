@@ -5,12 +5,12 @@
 //  Created by Brian King on 11/14/14.
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
-
-#import "FRYDSLResult.h"
+#import "UIApplication+FRY.h"
 #import "UIView+FRY.h"
 #import "UITextInput+FRY.h"
+
+#import "FRYDSLResult.h"
 #import "FRYTypist.h"
-#import "UIApplication+FRY.h"
 
 @interface NSObject(FRYTestStub)
 

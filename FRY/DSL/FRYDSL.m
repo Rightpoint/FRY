@@ -6,11 +6,12 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "FRYDSL.h"
 #import "UIApplication+FRY.h"
 #import "UIView+FRY.h"
-#import "NSObject+FRYLookup.h"
 #import "NSPredicate+FRY.h"
+
+#import "FRYDSL.h"
+#import "NSObject+FRYLookup.h"
 #import "FRYDSLResult.h"
 
 @interface FRYDSL()
@@ -26,7 +27,7 @@
 
 @implementation FRYDSL
 
-- (id)initForAppWithTestTarget:(id)target inFile:(NSString *)filename atLine:(NSUInteger)lineNumber
+- (id)initForLookup:(id<FRYLookup>)lookupOrigin withTestTarget:(id)target inFile:(NSString *)filename atLine:(NSUInteger)lineNumber;
 {
     self = [super init];
     if ( self ) {
@@ -34,20 +35,7 @@
         self.filename = filename;
         self.lineNumber = lineNumber;
         self.subPredicates = [NSMutableArray array];
-        self.lookupOrigin = [UIApplication sharedApplication];
-    }
-    return self;
-}
-
-- (id)initForKeyWindowWithTestTarget:(id)target inFile:(NSString *)filename atLine:(NSUInteger)lineNumber
-{
-    self = [super init];
-    if ( self ) {
-        self.testTarget = target;
-        self.filename = filename;
-        self.lineNumber = lineNumber;
-        self.subPredicates = [NSMutableArray array];
-        self.lookupOrigin = [[UIApplication sharedApplication] keyWindow];
+        self.lookupOrigin = lookupOrigin;
     }
     return self;
 }
