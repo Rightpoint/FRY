@@ -60,7 +60,12 @@
     for ( NSString *accessibilityLabel in accessibilityLabels ) {
         FRY.accessibilityLabel(accessibilityLabel).depthFirst().present();
     }
-    }
+}
+
+- (void)testAccessibilityTraits
+{
+    FRY.accessibilityTraits(UIAccessibilityTraitButton).all().count(14);
+}
 
 - (void)testTapping
 {

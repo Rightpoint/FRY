@@ -10,11 +10,11 @@
 #import "UIView+FRY.h"
 #import "NSPredicate+FRY.h"
 
-#import "FRYDSL.h"
+#import "FRYDSLQuery.h"
 #import "NSObject+FRYLookup.h"
 #import "FRYDSLResult.h"
 
-@interface FRYDSL()
+@interface FRYDSLQuery()
 
 @property (strong, nonatomic) id testTarget;
 @property (copy,   nonatomic) NSString *filename;
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation FRYDSL
+@implementation FRYDSLQuery
 
 - (id)initForLookup:(id<FRYLookup>)lookupOrigin withTestTarget:(id)target inFile:(NSString *)filename atLine:(NSUInteger)lineNumber;
 {

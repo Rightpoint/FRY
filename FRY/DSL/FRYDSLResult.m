@@ -50,6 +50,8 @@
 
 - (void)check:(BOOL)result explaination:(NSString *)explaination
 {
+    NSParameterAssert(explaination);
+    // Easily add support for other frameworks by messaging failures here.
     NSAssert([self.testTarget respondsToSelector:@selector(recordFailureWithDescription:inFile:atLine:expected:)], @"Called from a non test function.  Not sure how to perform checks.");
     if ( result == NO ) {
         [self.testTarget recordFailureWithDescription:explaination inFile:self.filename atLine:self.lineNumber expected:YES];
@@ -93,6 +95,7 @@
 - (FRYDSLTouchBlock)touch
 {
     return ^(FRYTouch *touch) {
+        NSParameterAssert(touch);
         UIView *view = [[self.singularResult fry_representingView] fry_interactableParent];
         CGRect frameInView = [self.singularResult fry_frameInView];
         [view fry_simulateTouch:touch insideRect:frameInView];
@@ -103,16 +106,12 @@
 - (FRYDSLArrayBlock)touches
 {
     return ^(NSArray *touches) {
+        NSParameterAssert(touches);
         UIView *view = [[self.singularResult fry_representingView] fry_interactableParent];
         CGRect frameInView = [self.singularResult fry_frameInView];
         [view fry_simulateTouches:touches insideRect:frameInView];
         return self;
     };
-}
-
-- (UIView *)view
-{
-    return [[self singularResult] fry_representingView];
 }
 
 - (FRYDSLBlock)selectText
@@ -129,13 +128,17 @@
     };
 }
 
-- (FRYDSLResultStringBlock)type
+- (UIView *)view
 {
-    return ^(NSString *string) {
-        FRYTypist *typist = [[UIApplication sharedApplication] fry_typist];
-        [typist typeString:string];
-        return self;
-    };
+    return [[self singularResult] fry_representingView];
+}
+
+- (void)onEach:(FRYMatchBlock)matchBlock
+{
+    NSParameterAssert(matchBlock);
+    for ( id<FRYLookup> lookup in self.results ) {
+        matchBlock([lookup fry_representingView], [lookup fry_frameInView]);
+    }
 }
 
 @end

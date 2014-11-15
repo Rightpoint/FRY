@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FRYDSL.h"
+#import "FRYDSLQuery.h"
 
 @class FRYDSLResult;
 @class FRYTouch;
@@ -16,7 +16,6 @@ typedef FRYDSLResult *(^FRYDSLArrayBlock)(NSArray *);
 typedef FRYDSLResult *(^FRYDSLResultStringBlock)(NSString *);
 typedef FRYDSLResult *(^FRYDSLTouchBlock)(FRYTouch *);
 typedef FRYDSLResult *(^FRYDSLIntegerBlock)(NSInteger);
-typedef FRYDSLResult *(^FRYDSLMatchBlock)(UIView *view, CGRect frameInView);
 
 
 @interface FRYDSLResult : NSObject
@@ -30,9 +29,9 @@ typedef FRYDSLResult *(^FRYDSLMatchBlock)(UIView *view, CGRect frameInView);
 @property (copy, nonatomic, readonly) FRYDSLBlock tap;
 @property (copy, nonatomic, readonly) FRYDSLTouchBlock touch;
 @property (copy, nonatomic, readonly) FRYDSLArrayBlock touches;
-@property (copy, nonatomic, readonly) UIView *view;
-
 @property (copy, nonatomic, readonly) FRYDSLBlock selectText;
-@property (copy, nonatomic, readonly) FRYDSLResultStringBlock type;
+
+@property (copy, nonatomic, readonly) UIView *view;
+- (void)onEach:(FRYMatchBlock)matchBlock;
 
 @end

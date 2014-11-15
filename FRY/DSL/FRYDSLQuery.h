@@ -11,19 +11,19 @@
 #import "FRYDefines.h"
 #import "FRYLookup.h"
 
-@class FRYDSL;
+@class FRYDSLQuery;
 @class FRYTouch;
 @class FRYDSLResult;
 
-typedef FRYDSL *(^FRYDSLStringBlock)(NSString *);
-typedef FRYDSL *(^FRYDSLTraitsBlock)(UIAccessibilityTraits);
-typedef FRYDSL *(^FRYDSLClassBlock)(Class);
-typedef FRYDSL *(^FRYDSLPredicateBlock)(NSPredicate *);
+typedef FRYDSLQuery *(^FRYDSLStringBlock)(NSString *);
+typedef FRYDSLQuery *(^FRYDSLTraitsBlock)(UIAccessibilityTraits);
+typedef FRYDSLQuery *(^FRYDSLClassBlock)(Class);
+typedef FRYDSLQuery *(^FRYDSLPredicateBlock)(NSPredicate *);
 
 typedef FRYDSLResult *(^FRYDSLBlock)();
 
 
-@interface FRYDSL : NSObject
+@interface FRYDSLQuery : NSObject
 
 - (id)initForLookup:(id<FRYLookup>)lookupOrigin withTestTarget:(id)target inFile:(NSString *)filename atLine:(NSUInteger)lineNumber;
 
@@ -43,6 +43,6 @@ typedef FRYDSLResult *(^FRYDSLBlock)();
 
 
 
-#define FRY [[FRYDSL alloc] initForLookup:[UIApplication sharedApplication] withTestTarget:self inFile:[NSString stringWithUTF8String:__FILE__] atLine:__LINE__]
-#define FRY_KEY [[FRYDSL alloc] initForLookup:[[UIApplication sharedApplication] keyWindow] withTestTarget:self inFile:[NSString stringWithUTF8String:__FILE__] atLine:__LINE__]
+#define FRY [[FRYDSLQuery alloc] initForLookup:[UIApplication sharedApplication] withTestTarget:self inFile:[NSString stringWithUTF8String:__FILE__] atLine:__LINE__]
+#define FRY_KEY [[FRYDSLQuery alloc] initForLookup:[[UIApplication sharedApplication] keyWindow] withTestTarget:self inFile:[NSString stringWithUTF8String:__FILE__] atLine:__LINE__]
 

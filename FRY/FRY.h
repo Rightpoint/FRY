@@ -21,5 +21,5 @@
 #import "UIPickerView+FRY.h"
 #import "NSPredicate+FRY.h"
 
-#import "FRYDSL.h"
+#import "FRYDSLQuery.h"
 #import "FRYDSLResult.h"

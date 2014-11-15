@@ -15,10 +15,12 @@ FRY consists of three features to help writing integration tests:
 Two types of queries are supported, a depth first query that mimics hitTest traversal, and a query that will return all matching objects.
 
 ```obj-c
-#define FRY_KEY UIApplication.sharedApplication.keyWindow
-[FRY_KEY fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:actionConfirmation]
-                             usingBlock:^(UIView *view, CGRect frameInView) {
-                                          }];
+FRY.accessibilityLabel(@"My Label").depthFirst().present();
+FRY.accessibilityTraits(@"My Label").all().present();
+FRY.accessibilityTraits(UIAccessibilityTraitButton).all().count(14);
+
+// Or the more traditional Objective-C API:
+
 ```
 
 View lookup is a simple system based on NSPredicate and KeyPaths.  Add support to any object (like CALayer or SceneKit) by implementing `-fry_childKeyPaths`, `-fry_representingView`, and `fry_frameInView`.  UIKit support traverses both `accessibilityElements` and `subviews`.
