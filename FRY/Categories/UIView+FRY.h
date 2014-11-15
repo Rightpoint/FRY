@@ -16,6 +16,8 @@
 
 - (UIView *)fry_animatingViewToWaitFor;
 
+- (UIView *)fry_interactableParent;
+
 - (NSArray *)fry_reverseSubviews;
 
 - (NSDictionary *)fry_matchingLookupVariables;

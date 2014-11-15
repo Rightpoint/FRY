@@ -63,19 +63,6 @@
     return nil;
 }
 
-- (void)fry_enumerateAllChildrenMatching:(NSPredicate *)predicate usingBlock:(FRYMatchBlock)block
-{
-    NSParameterAssert(predicate);
-    NSParameterAssert(block);
-    NSMutableArray *results = [NSMutableArray array];
-    
-    [self fry_enumerateAllChildrenMatching:predicate results:results];
-    
-    for ( id<FRYLookup> result in results ) {
-        block([result fry_representingView], [result fry_frameInView]);
-    }
-}
-
 - (void)fry_enumerateAllChildrenMatching:(NSPredicate *)predicate results:(NSMutableArray *)results
 {
     NSParameterAssert(predicate);
@@ -92,6 +79,29 @@
         }
     }
 }
+
+- (void)fry_enumerateAllChildrenMatching:(NSPredicate *)predicate usingBlock:(FRYMatchBlock)block
+{
+    NSParameterAssert(predicate);
+    NSParameterAssert(block);
+    NSMutableArray *results = [NSMutableArray array];
+    
+    [self fry_enumerateAllChildrenMatching:predicate results:results];
+    
+    for ( id<FRYLookup> result in results ) {
+        block([result fry_representingView], [result fry_frameInView]);
+    }
+}
+
+- (NSArray *)fry_allChildrenMatching:(NSPredicate *)predicate
+{
+    NSMutableArray *results = [NSMutableArray array];
+    
+    [self fry_enumerateAllChildrenMatching:predicate results:results];
+
+    return [results copy];
+}
+
 
 @end
 

@@ -20,3 +20,6 @@
 #import "UITextInput+FRY.h"
 #import "UIPickerView+FRY.h"
 #import "NSPredicate+FRY.h"
+
+#import "FRYDSL.h"
+#import "FRYDSLResult.h"
