@@ -22,6 +22,8 @@
 
 - (NSDictionary *)fry_matchingLookupVariables;
 
+- (NSIndexPath *)fry_indexPathInContainer;
+
 /**
  * This method returns the view that is lookup-able at a given point.  hitTest will often return
  * a containing UIView and handle the hit testing internally, but that UIView will not be able to be

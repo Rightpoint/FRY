@@ -20,6 +20,7 @@
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityTrait:(UIAccessibilityTraits)traits;
 + (NSPredicate *)fry_matchAccessibilityTrait:(UIAccessibilityTraits)traits;
 + (NSPredicate *)fry_matchAccessibilityIdentifier:(NSString *)accessibilityIdentifier;
++ (NSPredicate *)fry_matchContainerIndexPath:(NSIndexPath *)indexPath;
 + (NSPredicate *)fry_matchClass:(Class)klass;
 
 - (NSString *)fry_descriptionOfEvaluationWithObject:(id)object;

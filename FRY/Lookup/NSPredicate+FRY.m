@@ -51,9 +51,14 @@
     return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(accessibilityIdentifier)), accessibilityIdentifier];
 }
 
++ (NSPredicate *)fry_matchContainerIndexPath:(NSIndexPath *)indexPath
+{
+    return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(fry_indexPathInContainer)), indexPath];
+}
+
 + (NSPredicate *)fry_matchClass:(Class)klass
 {
-    return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(class)), klass];
+    return [NSPredicate predicateWithFormat:@"SELF isKindOfClass:%@", klass];
 }
 
 - (NSString *)fry_descriptionOfEvaluationWithObject:(id)object

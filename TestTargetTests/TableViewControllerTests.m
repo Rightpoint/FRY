@@ -70,6 +70,15 @@
     }
 }
 
+- (void)testSelectedStateByIndexPath
+{
+    [self populateTable];
+    for ( NSUInteger i = 0; i < ROW_COUNT; i++ ) {
+        FRY.atIndexPath([NSIndexPath indexPathForRow:i inSection:0]).depthFirst().tap();
+        FRY.accessibilityLabel(TableViewTitleForRow(i)).accessibilityTraits(UIAccessibilityTraitSelected).all().present();
+    }
+}
+
 - (void)testEditLabels
 {
     [self populateTable];

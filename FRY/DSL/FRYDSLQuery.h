@@ -19,6 +19,7 @@ typedef FRYDSLQuery *(^FRYDSLStringBlock)(NSString *);
 typedef FRYDSLQuery *(^FRYDSLTraitsBlock)(UIAccessibilityTraits);
 typedef FRYDSLQuery *(^FRYDSLClassBlock)(Class);
 typedef FRYDSLQuery *(^FRYDSLPredicateBlock)(NSPredicate *);
+typedef FRYDSLQuery *(^FRYDSLIndexPathBlock)(NSIndexPath *);
 
 typedef FRYDSLResult *(^FRYDSLBlock)();
 
@@ -38,6 +39,7 @@ typedef FRYDSLResult *(^FRYDSLBlock)();
 @property (copy, nonatomic, readonly) FRYDSLStringBlock accessibilityValue;
 @property (copy, nonatomic, readonly) FRYDSLTraitsBlock accessibilityTraits;
 @property (copy, nonatomic, readonly) FRYDSLClassBlock ofClass;
+@property (copy, nonatomic, readonly) FRYDSLIndexPathBlock atIndexPath;
 @property (copy, nonatomic, readonly) FRYDSLPredicateBlock matching;
 
 @property (copy, nonatomic, readonly) FRYDSLBlock all;

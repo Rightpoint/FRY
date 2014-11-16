@@ -70,6 +70,20 @@
     }
 }
 
+- (NSIndexPath *)fry_indexPathInContainer
+{
+    UIView *container = [self superview];
+    while ( container && [container respondsToSelector:@selector(indexPathForCell:)] == NO ) {
+        container = [container superview];
+    }
+    if ( container ) {
+        return [container performSelector:@selector(indexPathForCell:) withObject:self];
+    }
+    else {
+        return nil;
+    }
+}
+
 - (UIView *)fry_lookupMatchingViewAtPoint:(CGPoint)point
 {
     return [self hitTest:point withEvent:nil];
