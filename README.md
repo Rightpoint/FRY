@@ -48,7 +48,7 @@ FRYSyntheticTouch *t3 = [FRYSyntheticTouch touchStarting:0.000 points:33 xyoffse
 
 Notice that points and touches are specified as multiples of the frame they are dispatched in.   So a tap at point 0.5 0.5 will touch in the center of the view, regardless of the views frame.  All touches are dispatched via timers on the main runloop and do not block the main thread.  
 
-Touches are complete when `-[FRYTouchDispatch hasActiveTouches]` returns `NO`.  There is a helper on `NSRunLoop`, `fry_waitForIdle` that will spin the runloop until all touches are finished and all UI Animations have completed.  This greatly simplifies flow-control, and eliminiates the vast majority of `CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.5, false)`.  If you find yourself wanting to add these to your tests, consider adding animation to your UI instead.
+Touches are complete when `-[FRYTouchDispatch hasActiveTouches]` returns `NO`.  There is a helper on `NSRunLoop`, `fry_waitForIdle` that will spin the runloop until all touches are finished and all UI Animations have completed.  This greatly simplifies flow-control, and eliminiates the vast majority of `CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.5, false)`.  If you find yourself wanting to add these to your tests, consider adding an animation to your UI instead.  
 
 ### Touch Recording and Playback
 A side effect of strong touch modeling is that FRY can record live touch events in your application for later playback.  When the home button is pressed, The FRY commands to reproduce these touches are printed on the console.
