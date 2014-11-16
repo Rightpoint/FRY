@@ -25,6 +25,9 @@
     [UIApplication sharedApplication].keyWindow.rootViewController = self.viewController;
     [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.0]];
+
+//    [[UIApplication sharedApplication] rotateIfNeeded:UIDeviceOrientationLandscapeLeft];
+//    [[NSRunLoop currentRunLoop] fry_waitForIdle];
 }
 
 - (void)tearDown

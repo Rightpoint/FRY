@@ -12,16 +12,35 @@
 
 @interface UIView (FRY)
 
+/**
+ *  Check to see if the view has any active CAAnimation objects.
+ */
 - (BOOL)fry_isAnimating;
 
 - (UIView *)fry_animatingViewToWaitFor;
 
+/**
+ *  Find the superview that has more interactability than this view.
+ *  This is not needed for any reason, but often chooses a view that is
+ *  more interesting in case of tapping private subviews.
+ */
 - (UIView *)fry_interactableParent;
 
+/**
+ *  Return all subviews in reverse order.
+ */
 - (NSArray *)fry_reverseSubviews;
 
+/**
+ *  Return a dictionary that identifies the current view.   This is used
+ *  by the touch recorder to help re-create touches in a more durable manner.
+ */
 - (NSDictionary *)fry_matchingLookupVariables;
 
+/**
+ *  If the view is a cell in a containerview, this will return the index path for this view.
+ *  It works with UITableViewCells and UICollectionViewCells.
+ */
 - (NSIndexPath *)fry_indexPathInContainer;
 
 /**

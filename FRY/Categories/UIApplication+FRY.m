@@ -14,6 +14,7 @@
 #import "UIKit+FRYExposePrivate.h"
 #import "NSObject+FRYLookup.h"
 #import "NSPredicate+FRY.h"
+#import "NSRunLoop+FRY.h"
 
 @implementation UIApplication(FRY)
 

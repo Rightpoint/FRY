@@ -8,18 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-/**
- * This is not very authentic text input, but is a place holder until
- * more accurate typing can be done.
- */
 @interface UITextField(FRY)
 
+/**
+ *  Helper method to select all text in a UITextField
+ */
 - (void)fry_selectAll;
 
 @end
 
 @interface UITextView(FRY)
 
+/**
+ *  Helper method to select all text in a UITextView
+ */
 - (void)fry_selectAll;
 
 @end

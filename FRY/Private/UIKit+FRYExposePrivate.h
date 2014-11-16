@@ -24,6 +24,10 @@ typedef struct __GSEvent * GSEventRef;
 -(BOOL)handleEvent:(GSEventRef)event withNewEvent:(id)newEvent;
 
 - (UIEvent *)_touchesEvent;
+
+- (BOOL)rotateIfNeeded:(UIDeviceOrientation)orientation;
+- (void)rotateIfNeeded:(UIDeviceOrientation)orientation completion:(void (^)(void))completion;
+
 @end
 
 @interface NSObject (FRYExposePrivate)
