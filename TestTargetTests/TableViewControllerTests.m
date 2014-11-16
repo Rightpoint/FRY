@@ -1,3 +1,4 @@
+
 //
 //  TableViewControllerTests.m
 //  FRY
@@ -12,7 +13,9 @@
 
 #define TableViewReorderTitleForRow(i) [NSString stringWithFormat:@"Reorder Item %zd", i]
 #define TableViewDeleteTitleForRow(i) [NSString stringWithFormat:@"Delete Item %zd", i]
-#define TableViewDeleteConfirmTitleForRow(i) [NSString stringWithFormat:@"Delete, Item %zd", i]
+#define TableViewDeleteConfirmTitleForRow(i) [[UIDevice currentDevice].systemVersion intValue] == 8 ? @"Delete" : [NSString stringWithFormat:@"Delete, Item %zd", i]
+
+#define ROW_COUNT 2
 
 @interface TableViewControllerTests : XCTestCase
 
@@ -28,6 +31,10 @@
     [UIApplication sharedApplication].keyWindow.rootViewController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
     [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.0]];
+
+// Enable this to aide in lookup failures.
+//    [NSObject fry_enableLookupDebugForObjects:@[self.viewController.tableView]];
+//    [FRYDSLResult setPauseForeverOnFailure:YES];
 //    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:450000]];
 }
 
@@ -42,7 +49,7 @@
 
 - (void)populateTable
 {
-    for ( NSUInteger i = 0; i < 5; i++ ) {
+    for ( NSUInteger i = 0; i < ROW_COUNT; i++ ) {
         FRY_KEY.accessibilityLabel(@"Add").depthFirst().tap();
     }
 }
@@ -50,7 +57,7 @@
 - (void)testPopulation
 {
     [self populateTable];
-    for ( NSUInteger i = 0; i < 5; i++ ) {
+    for ( NSUInteger i = 0; i < ROW_COUNT; i++ ) {
         FRY_KEY.accessibilityLabel(TableViewTitleForRow(i)).depthFirst().present();
     }
 }
@@ -58,8 +65,8 @@
 - (void)testSelectedState
 {
     [self populateTable];
-    for ( NSUInteger i = 0; i < 5; i++ ) {
-        FRY_KEY.accessibilityLabel(TableViewTitleForRow(i)).depthFirst().tap();
+    for ( NSUInteger i = 0; i < ROW_COUNT; i++ ) {
+        FRY.accessibilityLabel(TableViewTitleForRow(i)).depthFirst().tap();
         FRY.accessibilityLabel(TableViewTitleForRow(i)).accessibilityTraits(UIAccessibilityTraitSelected).all().present();
     }
 }
@@ -69,9 +76,9 @@
     [self populateTable];
     FRY_KEY.accessibilityLabel(@"Edit").depthFirst().tap();
 
-    for ( NSUInteger i = 0; i < 5; i++ ) {
-        FRY_KEY.accessibilityLabel(TableViewReorderTitleForRow(i)).depthFirst().present();
-        FRY_KEY.accessibilityLabel(TableViewDeleteTitleForRow(i)).depthFirst().present();
+    for ( NSUInteger i = 1; i < ROW_COUNT; i++ ) {
+        FRY_KEY.accessibilityLabel(TableViewReorderTitleForRow(i)).all().present();
+        FRY_KEY.accessibilityLabel(TableViewDeleteTitleForRow(i)).all().present();
     }
 }
 
@@ -80,7 +87,7 @@
     [self populateTable];
     FRY_KEY.accessibilityLabel(@"Edit").depthFirst().tap();
 
-    for ( NSUInteger i = 0; i < 5; i++ ) {
+    for ( NSUInteger i = 0; i < ROW_COUNT; i++ ) {
         FRY_KEY.accessibilityLabel(TableViewDeleteTitleForRow(i)).depthFirst().tap();
         FRY_KEY.accessibilityLabel(TableViewDeleteConfirmTitleForRow(i)).depthFirst().tap();
     }
@@ -90,7 +97,7 @@
 {
     [self populateTable];
 
-    for ( NSUInteger i = 0; i < 5; i++ ) {
+    for ( NSUInteger i = 0; i < ROW_COUNT; i++ ) {
         FRY_KEY.accessibilityLabel(TableViewTitleForRow(i)).depthFirst().touch([FRYTouch swipeInDirection:FRYTouchDirectionLeft]);
         FRY_KEY.accessibilityLabel(TableViewDeleteConfirmTitleForRow(i)).depthFirst().tap();
     }

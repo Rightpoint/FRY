@@ -20,7 +20,9 @@ typedef FRYDSLResult *(^FRYDSLIntegerBlock)(NSInteger);
 
 @interface FRYDSLResult : NSObject
 
-- (id)initWithResults:(NSSet *)results testCase:(id)testCase inFile:(NSString *)filename atLine:(NSUInteger)lineNumber;
++ (void)setPauseForeverOnFailure:(BOOL)pause;
+
+- (id)initWithResults:(NSSet *)results query:(FRYDSLQuery *)query;
 
 @property (copy, nonatomic, readonly) FRYDSLBlock present;
 @property (copy, nonatomic, readonly) FRYDSLBlock absent;

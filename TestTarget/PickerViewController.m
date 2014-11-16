@@ -21,11 +21,11 @@ typedef NS_ENUM(NSInteger, PickerViewControllerInput) {
 @property (weak, nonatomic) IBOutlet UISegmentedControl *inputTypeSegmentedControl;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
-@property (weak, nonatomic) IBOutlet UIDatePicker *timePicker;
-@property (weak, nonatomic) IBOutlet UIDatePicker *dateTimePicker;
-@property (weak, nonatomic) IBOutlet UIPickerView *onePicker;
-@property (weak, nonatomic) IBOutlet UIPickerView *twoPicker;
+@property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (strong, nonatomic) IBOutlet UIDatePicker *timePicker;
+@property (strong, nonatomic) IBOutlet UIDatePicker *dateTimePicker;
+@property (strong, nonatomic) IBOutlet UIPickerView *onePicker;
+@property (strong, nonatomic) IBOutlet UIPickerView *twoPicker;
 
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 @property (strong, nonatomic) NSDateFormatter *timeFormatter;

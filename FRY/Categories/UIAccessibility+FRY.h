@@ -8,6 +8,9 @@
 
 #import <UIKit/UIAccessibility.h>
 
+OBJC_EXTERN UIAccessibilityTraits FRYTextFieldAccessibilityValue;
+OBJC_EXTERN UIAccessibilityTraits FRYAccessibilityTraitContainer;
+
 @interface NSObject(FRY)
 
 - (NSString *)fry_accessibilityLabel;

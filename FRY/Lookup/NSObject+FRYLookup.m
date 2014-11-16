@@ -9,8 +9,20 @@
 #import "NSObject+FRYLookup.h"
 #import "UIView+FRY.h"
 #import "UIAccessibility+FRY.h"
+#import "NSPredicate+FRY.h"
 
 @interface NSObject(FRYLookup)<FRYLookup>
+@end
+
+static NSArray *__fry_enableLookupDebugForObjects = nil;
+
+@implementation NSObject(FRYLookupDebug)
+
++ (void)fry_enableLookupDebugForObjects:(NSArray *)objects
+{
+    __fry_enableLookupDebugForObjects = objects;
+}
+
 @end
 
 @implementation NSObject(FRYLookup)
@@ -63,20 +75,47 @@
     return nil;
 }
 
-- (void)fry_enumerateAllChildrenMatching:(NSPredicate *)predicate results:(NSMutableSet *)results
+- (void)fry_enumerateAllChildrenMatching:(NSPredicate *)predicate results:(NSMutableSet *)results debug:(BOOL)debug
 {
     NSParameterAssert(predicate);
     NSParameterAssert(results);
     
-    if ( [predicate evaluateWithObject:self substitutionVariables:nil] ) {
-        [results addObject:self];
+    BOOL match = [predicate evaluateWithObject:self substitutionVariables:nil];
+    if ( debug ) {
+        NSLog(@"%@%@", [predicate fry_descriptionOfEvaluationWithObject:self], match ? @" == MATCH" : @"");
+    }
+    if ( match ) {
+        [self fry_addNonDuplicateObject:self toResults:results];
     }
     
     for ( NSString *childKeyPath in [self.class fry_childKeyPaths] ) {
         NSArray *children = [self valueForKeyPath:childKeyPath];
         for ( NSObject *child in children) {
-            [child fry_enumerateAllChildrenMatching:predicate results:results];
+            BOOL childDebug = debug == NO ? [__fry_enableLookupDebugForObjects containsObject:child] : YES;
+            [child fry_enumerateAllChildrenMatching:predicate
+                                            results:results
+                                              debug:childDebug];
         }
+    }
+}
+
+/**
+ *  We have to perform some special duplicate checking durring all enumeration.   While traversing the entire tree,
+ *  views and accessibilityElements can match the same logical result in different objects.   This method 
+ *  will compaire the results of fry_representingView and fry_frameInView to determine duplicates.
+ */
+- (void)fry_addNonDuplicateObject:(NSObject<FRYLookup> *)object toResults:(NSMutableSet *)results
+{
+    BOOL duplicate = NO;
+    for ( NSObject<FRYLookup> *result in results ) {
+        if ( [[object fry_representingView] isEqual:[result fry_representingView]] &&
+            CGRectEqualToRect([object fry_frameInView], [result fry_frameInView]) ) {
+            duplicate = YES;
+            break;
+        }
+    }
+    if ( duplicate == NO ) {
+        [results addObject:object];
     }
 }
 
@@ -86,19 +125,19 @@
     NSParameterAssert(block);
     NSMutableSet *results = [NSMutableSet set];
     
-    [self fry_enumerateAllChildrenMatching:predicate results:results];
+    [self fry_enumerateAllChildrenMatching:predicate results:results debug:NO];
     
     for ( id<FRYLookup> result in results ) {
         block([result fry_representingView], [result fry_frameInView]);
     }
 }
 
-- (NSArray *)fry_allChildrenMatching:(NSPredicate *)predicate
+- (NSSet *)fry_allChildrenMatching:(NSPredicate *)predicate
 {
     NSMutableSet *results = [NSMutableSet set];
     
-    [self fry_enumerateAllChildrenMatching:predicate results:results];
-
+    [self fry_enumerateAllChildrenMatching:predicate results:results debug:NO];
+    
     return [results copy];
 }
 

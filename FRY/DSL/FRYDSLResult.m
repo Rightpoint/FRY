@@ -12,6 +12,8 @@
 #import "FRYDSLResult.h"
 #import "FRYTypist.h"
 
+static BOOL pauseOnFailure = NO;
+
 @interface NSObject(FRYTestStub)
 
 - (void) recordFailureWithDescription:(NSString *) description inFile:(NSString *) filename atLine:(NSUInteger) lineNumber expected:(BOOL) expected;
@@ -20,23 +22,23 @@
 
 @interface FRYDSLResult()
 
-@property (strong, nonatomic) id testTarget;
-@property (copy,   nonatomic) NSString *filename;
-@property (assign, nonatomic) NSUInteger lineNumber;
-
+@property (strong, nonatomic) FRYDSLQuery *query;
 @property (copy, nonatomic) NSSet *results;
 
 @end
 
 @implementation FRYDSLResult
 
-- (id)initWithResults:(NSSet *)results testCase:(id)testCase inFile:(NSString *)filename atLine:(NSUInteger)lineNumber
++ (void)setPauseForeverOnFailure:(BOOL)pause;
+{
+    pauseOnFailure = pause;
+}
+
+- (id)initWithResults:(NSSet *)results query:(FRYDSLQuery *)query
 {
     self = [super init];
     if ( self ) {
-        self.testTarget = testCase;
-        self.filename = filename;
-        self.lineNumber = lineNumber;
+        self.query = query;
         self.results = results;
     }
     return self;
@@ -52,9 +54,16 @@
 {
     NSParameterAssert(explaination);
     // Easily add support for other frameworks by messaging failures here.
-    NSAssert([self.testTarget respondsToSelector:@selector(recordFailureWithDescription:inFile:atLine:expected:)], @"Called from a non test function.  Not sure how to perform checks.");
+    NSAssert([self.query.testTarget respondsToSelector:@selector(recordFailureWithDescription:inFile:atLine:expected:)], @"Called from a non test function.  Not sure how to perform checks.");
     if ( result == NO ) {
-        [self.testTarget recordFailureWithDescription:explaination inFile:self.filename atLine:self.lineNumber expected:YES];
+        explaination = [explaination stringByAppendingFormat:@"\nGot:%@\nLookup Origin:%@\nPredicate:%@\n",
+                        self.results,
+                        self.query.lookupOrigin,
+                        self.query.predicate];
+        [self.query.testTarget recordFailureWithDescription:explaination inFile:self.query.filename atLine:self.query.lineNumber expected:YES];
+        while ( pauseOnFailure ) {
+            [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
+        }
     }
 }
 

@@ -28,6 +28,10 @@ typedef FRYDSLResult *(^FRYDSLBlock)();
 - (id)initForLookup:(id<FRYLookup>)lookupOrigin withTestTarget:(id)target inFile:(NSString *)filename atLine:(NSUInteger)lineNumber;
 
 @property (strong, nonatomic, readonly) id<FRYLookup> lookupOrigin;
+@property (strong, nonatomic, readonly) id testTarget;
+@property (copy,   nonatomic, readonly) NSString *filename;
+@property (assign, nonatomic, readonly) NSUInteger lineNumber;
+- (NSPredicate *)predicate;
 
 
 @property (copy, nonatomic, readonly) FRYDSLStringBlock accessibilityLabel;

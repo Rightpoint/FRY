@@ -8,7 +8,8 @@
 
 #import "UIAccessibility+FRY.h"
 
-UIAccessibilityTraits FRYTextFieldAccessibilityValue = 0x00040000;
+UIAccessibilityTraits FRYAccessibilityTraitTextField = 0x000000040000;
+UIAccessibilityTraits FRYAccessibilityTraitContainer = 0x200000000000;
 
 @implementation NSObject(FRY)
 
@@ -36,20 +37,17 @@ UIAccessibilityTraits FRYTextFieldAccessibilityValue = 0x00040000;
 
 - (NSArray *)fry_accessibilityElements
 {
-    if ( [self respondsToSelector:NSSelectorFromString(@"accessibilityElements")] ) {
-        return [self valueForKey:@"accessibilityElements"];
+    // Do not call accessibilityElements, it is unreliable.   accessibilityElements return nil for
+    // table views with accessibilityElementCount > 0, on iOS8 which is terrible.
+    NSUInteger count = self.accessibilityElementCount == NSNotFound ? 0 : self.accessibilityElementCount;
+    NSMutableArray *result = [NSMutableArray arrayWithCapacity:count];
+    for (NSInteger accessibilityElementIndex = 0; accessibilityElementIndex < count; accessibilityElementIndex++) {
+        NSObject *subelement = [self accessibilityElementAtIndex:accessibilityElementIndex];
+        NSAssert(subelement != nil, @"");
+        
+        [result addObject:subelement];
     }
-    else {
-        NSUInteger count = self.accessibilityElementCount == NSNotFound ? 0 : self.accessibilityElementCount;
-        NSMutableArray *result = [NSMutableArray arrayWithCapacity:count];
-        for (NSInteger accessibilityElementIndex = 0; accessibilityElementIndex < count; accessibilityElementIndex++) {
-            NSObject *subelement = [self accessibilityElementAtIndex:accessibilityElementIndex];
-            NSAssert(subelement != nil, @"");
-            
-            [result addObject:subelement];
-        }
-        return [result copy];
-    }
+    return [result copy];
 }
 
 - (BOOL)fry_accessibilityTraitsAreInteractable
@@ -57,7 +55,8 @@ UIAccessibilityTraits FRYTextFieldAccessibilityValue = 0x00040000;
     return ((self.accessibilityTraits & UIAccessibilityTraitButton) == UIAccessibilityTraitButton ||
             (self.accessibilityTraits & UIAccessibilityTraitAdjustable) == UIAccessibilityTraitAdjustable ||
             (self.accessibilityTraits & UIAccessibilityTraitAllowsDirectInteraction) == UIAccessibilityTraitAllowsDirectInteraction ||
-            (self.accessibilityTraits & FRYTextFieldAccessibilityValue) == FRYTextFieldAccessibilityValue);
+            (self.accessibilityTraits & FRYAccessibilityTraitTextField) == FRYAccessibilityTraitTextField);
 }
 
 @end
+

@@ -228,7 +228,7 @@ static const NSTimeInterval kFRYSwipeLocationEnd   = 0.7f;
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@:%p pointsInTime=%@, startingOffset=%f", self.class, self, self.pointsInTime, self.startingOffset];
+    return [NSString stringWithFormat:@"<%@:%p pointsInTime.count=%zd, startingOffset=%f", self.class, self, self.pointsInTime.count, self.startingOffset];
 }
 
 @end

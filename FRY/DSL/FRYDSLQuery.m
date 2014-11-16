@@ -21,7 +21,6 @@
 @property (assign, nonatomic) NSUInteger lineNumber;
 @property (strong, nonatomic) id<FRYLookup> lookupOrigin;
 @property (strong, nonatomic) NSMutableArray *subPredicates;
-@property (copy, nonatomic) FRYMatchBlock block;
 
 @end
 
@@ -89,7 +88,7 @@
 {
     return ^() {
         NSSet *results = [self.lookupOrigin fry_allChildrenMatching:self.predicate];
-        return [[FRYDSLResult alloc] initWithResults:results testCase:self.testTarget inFile:self.filename atLine:self.lineNumber];
+        return [[FRYDSLResult alloc] initWithResults:results query:self];
     };
 }
 
@@ -98,7 +97,7 @@
     return ^() {
         id<FRYLookup> result = [self.lookupOrigin fry_farthestDescendentMatching:self.predicate];
         NSSet *results = result ? [NSSet setWithObject:result] : [NSSet set];
-        return [[FRYDSLResult alloc] initWithResults:results testCase:self.testTarget inFile:self.filename atLine:self.lineNumber];
+        return [[FRYDSLResult alloc] initWithResults:results query:self];
     };
 }
 

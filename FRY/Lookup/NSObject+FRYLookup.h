@@ -15,3 +15,10 @@
 @end
 @interface UIAccessibilityElement(FRYLookup) <FRYLookup>
 @end
+
+
+@interface NSObject(FRYLookupDebug)
+
++ (void)fry_enableLookupDebugForObjects:(NSArray *)objects;
+
+@end
