@@ -34,16 +34,16 @@ FRY uses strongly modeled touches to generate UIKit touch events.  This allows f
 
 ```obj-c
 FRY.accessibilityLabel(@"My Label").depthFirst().tap()
-FRY.accessibilityLabel(@"My Label").depthFirst().touches([FRYSyntheticTouch doubleTap])
+FRY.accessibilityLabel(@"My Label").depthFirst().touches([FRYTouch doubleTap])
 
-[[[UIApplication sharedApplication] keyWindow] fry_simulateTouch:[FRYSyntheticTouch tap]
+[[[UIApplication sharedApplication] keyWindow] fry_simulateTouch:[FRYTouch tap]
                                                onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"My Label"]];
 
 // Other touch objects:
-FRYSyntheticTouch *t1 = [FRYSyntheticTouch dragFromPoint:p1 toPoint:p2 forDuration:1];
-FRYSyntheticTouch *t2 = [FRYSyntheticTouch pinchInToCenterOfPoint:p3 point:p4 duration:1];
+FRYTouch *t1 = [FRYTouch dragFromPoint:p1 toPoint:p2 forDuration:1];
+FRYTouch *t2 = [FRYTouch pinchInToCenterOfPoint:p3 point:p4 duration:1];
 // Or, slightly more complex.
-FRYSyntheticTouch *t3 = [FRYSyntheticTouch touchStarting:0.000 points:33 xyoffsets:0.941f,0.597f,0.000, 0.934f,0.597f,0.094, 0.919f,0.597f,0.121, 0.853f,0.597f,0.147, 0.801f,0.597f,0.164, 0.750f,0.597f,0.182, 0.686f,0.597f,0.215, 0.667f,0.597f,0.232, 0.625f,0.548f,0.264, 0.610f,0.548f,0.282, 0.571f,0.548f,0.322, 0.547f,0.548f,0.350, 0.542f,0.548f,0.367, 0.534f,0.548f,0.386, 0.532f,0.548f,0.416, 0.527f,0.548f,0.448, 0.522f,0.548f,0.472, 0.517f,0.548f,0.504, 0.517f,0.581f,0.604, 0.512f,0.581f,0.692, 0.510f,0.581f,0.720, 0.505f,0.581f,0.737, 0.500f,0.581f,0.765, 0.505f,0.581f,1.170, 0.510f,0.581f,1.216, 0.515f,0.581f,1.263, 0.517f,0.581f,1.350, 0.522f,0.581f,1.382, 0.525f,0.581f,1.452, 0.520f,0.581f,1.624, 0.515f,0.581f,1.641, 0.510f,0.581f,1.670, 0.500f,0.581f,1.698];
+FRYcTouch *t3 = [FRYTouch touchStarting:0.000 points:33 xyoffsets:0.941f,0.597f,0.000, 0.934f,0.597f,0.094, 0.919f,0.597f,0.121, 0.853f,0.597f,0.147, 0.801f,0.597f,0.164, 0.750f,0.597f,0.182, 0.686f,0.597f,0.215, 0.667f,0.597f,0.232, 0.625f,0.548f,0.264, 0.610f,0.548f,0.282, 0.571f,0.548f,0.322, 0.547f,0.548f,0.350, 0.542f,0.548f,0.367, 0.534f,0.548f,0.386, 0.532f,0.548f,0.416, 0.527f,0.548f,0.448, 0.522f,0.548f,0.472, 0.517f,0.548f,0.504, 0.517f,0.581f,0.604, 0.512f,0.581f,0.692, 0.510f,0.581f,0.720, 0.505f,0.581f,0.737, 0.500f,0.581f,0.765, 0.505f,0.581f,1.170, 0.510f,0.581f,1.216, 0.515f,0.581f,1.263, 0.517f,0.581f,1.350, 0.522f,0.581f,1.382, 0.525f,0.581f,1.452, 0.520f,0.581f,1.624, 0.515f,0.581f,1.641, 0.510f,0.581f,1.670, 0.500f,0.581f,1.698];
 ```
 
 Notice that points and touches are specified as multiples of the frame they are dispatched in.   So a tap at point 0.5 0.5 will touch in the center of the view, regardless of the views frame.  All touches are dispatched via timers on the main runloop and do not block the main thread.  
