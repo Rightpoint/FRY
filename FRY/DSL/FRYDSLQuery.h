@@ -32,7 +32,9 @@ typedef FRYDSLResult *(^FRYDSLBlock)();
 @property (strong, nonatomic, readonly) id testTarget;
 @property (copy,   nonatomic, readonly) NSString *filename;
 @property (assign, nonatomic, readonly) NSUInteger lineNumber;
+
 - (NSPredicate *)predicate;
+- (NSSet *)performQuery;
 
 
 @property (copy, nonatomic, readonly) FRYDSLStringBlock accessibilityLabel;

@@ -78,7 +78,14 @@ NS_ENUM(NSUInteger, AlertType) {
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSelector:@selector(triggerBlockAtIndexPath:) withObject:indexPath afterDelay:0.5];
+//    [self triggerBlockAtIndexPath:indexPath];
+}
+
+- (void)triggerBlockAtIndexPath:(NSIndexPath *)indexPath
+{
     [self cellItemAtIndexPath:indexPath].block();
 }
 

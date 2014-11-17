@@ -16,6 +16,7 @@ typedef FRYDSLResult *(^FRYDSLArrayBlock)(NSArray *);
 typedef FRYDSLResult *(^FRYDSLResultStringBlock)(NSString *);
 typedef FRYDSLResult *(^FRYDSLTouchBlock)(FRYTouch *);
 typedef FRYDSLResult *(^FRYDSLIntegerBlock)(NSInteger);
+typedef FRYDSLResult *(^FRYDSLTimeIntervalBlock)(NSTimeInterval);
 
 
 @interface FRYDSLResult : NSObject
@@ -24,6 +25,7 @@ typedef FRYDSLResult *(^FRYDSLIntegerBlock)(NSInteger);
 
 - (id)initWithResults:(NSSet *)results query:(FRYDSLQuery *)query;
 
+@property (copy, nonatomic, readonly) FRYDSLTimeIntervalBlock waitFor;
 @property (copy, nonatomic, readonly) FRYDSLBlock present;
 @property (copy, nonatomic, readonly) FRYDSLBlock absent;
 @property (copy, nonatomic, readonly) FRYDSLIntegerBlock count;

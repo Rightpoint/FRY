@@ -25,6 +25,8 @@ static BOOL pauseOnFailure = NO;
 @property (strong, nonatomic) FRYDSLQuery *query;
 @property (copy, nonatomic) NSSet *results;
 
+@property (assign, nonatomic) NSTimeInterval timeout;
+
 @end
 
 @implementation FRYDSLResult
@@ -40,22 +42,28 @@ static BOOL pauseOnFailure = NO;
     if ( self ) {
         self.query = query;
         self.results = results;
+        self.timeout = 0;
     }
     return self;
 }
 
-- (id<FRYLookup>)singularResult
-{
-    [self check:self.results.count == 1 explaination:[NSString stringWithFormat:@"Only expected 1 lookup result, found %zd", self.results.count]];
-    return self.results.anyObject;
-}
-
-- (void)check:(BOOL)result explaination:(NSString *)explaination
+- (void)check:(FRYCheckBlock)check explaination:(NSString *)explaination
 {
     NSParameterAssert(explaination);
     // Easily add support for other frameworks by messaging failures here.
     NSAssert([self.query.testTarget respondsToSelector:@selector(recordFailureWithDescription:inFile:atLine:expected:)], @"Called from a non test function.  Not sure how to perform checks.");
-    if ( result == NO ) {
+    
+    NSTimeInterval start = [NSDate timeIntervalSinceReferenceDate];
+    NSTimeInterval now   = start;
+    BOOL isOK = check();
+    while ( isOK == NO && now - start < self.timeout) {
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:self.timeout / 10]];
+        self.results = [self.query performQuery];
+        isOK = check();
+        now = [NSDate timeIntervalSinceReferenceDate];
+    }
+    
+    if ( isOK == NO ) {
         explaination = [explaination stringByAppendingFormat:@"\nGot:%@\nLookup Origin:%@\nPredicate:%@\n",
                         self.results,
                         self.query.lookupOrigin,
@@ -65,6 +73,12 @@ static BOOL pauseOnFailure = NO;
             [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
         }
     }
+}
+
+- (id<FRYLookup>)singularResult
+{
+    [self check:^BOOL{return self.results.count == 1;} explaination:[NSString stringWithFormat:@"Only expected 1 lookup result, found %zd", self.results.count]];
+    return self.results.anyObject;
 }
 
 - (FRYDSLBlock)present
@@ -78,7 +92,7 @@ static BOOL pauseOnFailure = NO;
 - (FRYDSLBlock)absent
 {
     return ^() {
-        [self check:self.results.count == 0 explaination:[NSString stringWithFormat:@"Expected 0 lookup results to be present, found %zd", self.results.count]];
+        [self check:^BOOL{return self.results.count == 0;} explaination:[NSString stringWithFormat:@"Expected 0 lookup results to be present, found %zd", self.results.count]];
         return self;
     };
 }
@@ -86,7 +100,15 @@ static BOOL pauseOnFailure = NO;
 - (FRYDSLIntegerBlock) count
 {
     return ^(NSInteger count) {
-        [self check:self.results.count == count explaination:[NSString stringWithFormat:@"Expected %zd lookup results to be present, found %zd", count, self.results.count]];
+        [self check:^BOOL{return self.results.count == count;} explaination:[NSString stringWithFormat:@"Expected %zd lookup results to be present, found %zd", count, self.results.count]];
+        return self;
+    };
+}
+
+- (FRYDSLTimeIntervalBlock)waitFor
+{
+    return ^(NSTimeInterval timeout) {
+        self.timeout = timeout;
         return self;
     };
 }
@@ -94,8 +116,9 @@ static BOOL pauseOnFailure = NO;
 - (FRYDSLBlock)tap
 {
     return ^() {
-        UIView *view = [[self.singularResult fry_representingView] fry_interactableParent];
-        CGRect frameInView = [self.singularResult fry_frameInView];
+        id<FRYLookup> lookup = [self singularResult];
+        UIView *view = [[lookup fry_representingView] fry_interactableParent];
+        CGRect frameInView = [lookup fry_frameInView];
         [view fry_simulateTouch:[FRYTouch tap] insideRect:frameInView];
         return self;
     };
@@ -105,8 +128,9 @@ static BOOL pauseOnFailure = NO;
 {
     return ^(FRYTouch *touch) {
         NSParameterAssert(touch);
-        UIView *view = [[self.singularResult fry_representingView] fry_interactableParent];
-        CGRect frameInView = [self.singularResult fry_frameInView];
+        id<FRYLookup> lookup = [self singularResult];
+        UIView *view = [[lookup fry_representingView] fry_interactableParent];
+        CGRect frameInView = [lookup fry_frameInView];
         [view fry_simulateTouch:touch insideRect:frameInView];
         return self;
     };
@@ -116,8 +140,9 @@ static BOOL pauseOnFailure = NO;
 {
     return ^(NSArray *touches) {
         NSParameterAssert(touches);
-        UIView *view = [[self.singularResult fry_representingView] fry_interactableParent];
-        CGRect frameInView = [self.singularResult fry_frameInView];
+        id<FRYLookup> lookup = [self singularResult];
+        UIView *view = [[lookup fry_representingView] fry_interactableParent];
+        CGRect frameInView = [lookup fry_frameInView];
         [view fry_simulateTouches:touches insideRect:frameInView];
         return self;
     };
@@ -130,7 +155,7 @@ static BOOL pauseOnFailure = NO;
         while ( view && [view respondsToSelector:@selector(fry_selectAll)] == NO ) {
             view = [view superview];
         }
-        [self check:view != nil explaination:[NSString stringWithFormat:@"Could not find superview of %@ to select text of.", [self view]]];
+        [self check:^BOOL{return view != nil;} explaination:[NSString stringWithFormat:@"Could not find superview of %@ to select text of.", [self view]]];
 
         [(UITextField *)view fry_selectAll];
         return self;

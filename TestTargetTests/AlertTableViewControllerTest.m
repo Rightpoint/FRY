@@ -44,8 +44,9 @@
     [[NSRunLoop currentRunLoop] fry_waitForIdle];
 
     for ( NSString *label in @[@"One", @"Two", @"Three"] ) {
-        FRY_KEY.accessibilityLabel(label).depthFirst().tap();
-        FRY_KEY.accessibilityLabel(@"OK").depthFirst().tap();
+        FRY.accessibilityLabel(label).depthFirst().tap();
+        // The alertview is shown .5 seconds after tap, so wait a second for it to appear.
+        FRY.accessibilityLabel(@"OK").depthFirst().waitFor(1).tap();
     }
 }
 
@@ -53,8 +54,8 @@
 {
 
     for ( NSString *response in @[@"Destructive", @"Other", @"OK"] ) {
-        FRY_KEY.accessibilityLabel(@"Action One").depthFirst().tap();
-        FRY_KEY.accessibilityLabel(response).depthFirst().tap();
+        FRY.accessibilityLabel(@"Action One").depthFirst().tap();
+        FRY.accessibilityLabel(response).depthFirst().waitFor(1).tap();
     }
 }
 

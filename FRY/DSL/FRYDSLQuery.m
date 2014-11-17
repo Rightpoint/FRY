@@ -14,6 +14,12 @@
 #import "NSObject+FRYLookup.h"
 #import "FRYDSLResult.h"
 
+
+typedef NS_ENUM(NSInteger, FRYDSLQueryType) {
+    FRYDSLQueryTypeDepthFirst,
+    FRYDSLQueryTypeAll
+};
+
 @interface FRYDSLQuery()
 
 @property (strong, nonatomic) id testTarget;
@@ -21,6 +27,8 @@
 @property (assign, nonatomic) NSUInteger lineNumber;
 @property (strong, nonatomic) id<FRYLookup> lookupOrigin;
 @property (strong, nonatomic) NSMutableArray *subPredicates;
+@property (assign, nonatomic) NSTimeInterval timeout;
+@property (assign, nonatomic) FRYDSLQueryType queryType;
 
 @end
 
@@ -35,6 +43,7 @@
         self.lineNumber = lineNumber;
         self.subPredicates = [NSMutableArray array];
         self.lookupOrigin = lookupOrigin;
+        self.timeout = 0.0;
     }
     return self;
 }
@@ -95,18 +104,37 @@
 - (FRYDSLBlock)all
 {
     return ^() {
-        NSSet *results = [self.lookupOrigin fry_allChildrenMatching:self.predicate];
-        return [[FRYDSLResult alloc] initWithResults:results query:self];
+        self.queryType = FRYDSLQueryTypeAll;
+        return [[FRYDSLResult alloc] initWithResults:[self performQuery] query:self];
     };
 }
 
 - (FRYDSLBlock)depthFirst
 {
     return ^() {
-        id<FRYLookup> result = [self.lookupOrigin fry_farthestDescendentMatching:self.predicate];
-        NSSet *results = result ? [NSSet setWithObject:result] : [NSSet set];
-        return [[FRYDSLResult alloc] initWithResults:results query:self];
+        self.queryType = FRYDSLQueryTypeDepthFirst;
+        return [[FRYDSLResult alloc] initWithResults:[self performQuery] query:self];
     };
+}
+
+- (NSSet *)performQuery
+{
+    NSSet *results = nil;
+    switch ( self.queryType ) {
+        case FRYDSLQueryTypeDepthFirst: {
+            id<FRYLookup> result = [self.lookupOrigin fry_farthestDescendentMatching:self.predicate];
+            results = result ? [NSSet setWithObject:result] : [NSSet set];
+            break;
+        }
+        case FRYDSLQueryTypeAll:
+            results = [self.lookupOrigin fry_allChildrenMatching:self.predicate];
+            break;
+            
+        default:
+            break;
+    }
+
+    return results;
 }
 
 @end
