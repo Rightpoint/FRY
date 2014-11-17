@@ -40,6 +40,11 @@
 - (UIWindow *)fry_inputViewWindow;
 
 /**
+ *  Return windows and the keyWindow.   keyWindow is not always in the windows array.
+ */
+- (NSArray *)fry_allWindows;
+
+/**
  * Return the first view that is a subview of fry_inputViewWindow matching klass.
  */
 - (UIView *)fry_inputViewOfClass:(Class)klass;

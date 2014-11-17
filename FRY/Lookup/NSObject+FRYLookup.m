@@ -10,6 +10,7 @@
 #import "UIView+FRY.h"
 #import "UIAccessibility+FRY.h"
 #import "NSPredicate+FRY.h"
+#import "UIApplication+FRY.h"
 
 @interface NSObject(FRYLookup)<FRYLookup>
 @end
@@ -149,7 +150,7 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
 
 + (NSSet *)fry_childKeyPaths
 {
-    return [NSSet setWithObject:NSStringFromSelector(@selector(windows))];
+    return [NSSet setWithObject:NSStringFromSelector(@selector(fry_allWindows))];
 }
 
 - (UIView *)fry_representingView

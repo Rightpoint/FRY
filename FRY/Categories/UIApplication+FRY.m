@@ -61,6 +61,18 @@
     return nil;
 }
 
+- (NSArray *)fry_allWindows
+{
+    UIWindow *keyWindow = [self keyWindow];
+    if ( keyWindow && [self.windows containsObject:keyWindow] == NO ) {
+        return [self.windows arrayByAddingObject:keyWindow];
+    }
+    else {
+        return self.windows;
+    }
+}
+
+
 - (UIView *)fry_inputViewOfClass:(Class)klass
 {
     return [[[self fry_inputViewWindow] fry_farthestDescendentMatching:[NSPredicate fry_matchClass:klass]] fry_representingView];
