@@ -79,7 +79,6 @@
 - (FRYDSLIndexPathBlock)atIndexPath
 {
     return ^(NSIndexPath *indexPath) {
-        [self.subPredicates addObject:[NSPredicate fry_matchClass:[UIView class]]];
         [self.subPredicates addObject:[NSPredicate fry_matchContainerIndexPath:indexPath]];
         return self;
     };

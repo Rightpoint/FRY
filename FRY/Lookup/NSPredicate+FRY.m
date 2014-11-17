@@ -53,7 +53,10 @@
 
 + (NSPredicate *)fry_matchContainerIndexPath:(NSIndexPath *)indexPath
 {
-    return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(fry_indexPathInContainer)), indexPath];
+    return [NSCompoundPredicate andPredicateWithSubpredicates:@[[NSPredicate fry_matchClass:[UIView class]],
+                                                                [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(fry_indexPathInContainer)), indexPath]
+                                                                ]];
+    
 }
 
 + (NSPredicate *)fry_matchClass:(Class)klass

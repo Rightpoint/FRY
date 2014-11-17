@@ -148,4 +148,19 @@
     
 }
 
+- (void)testScrollingByIndexPath
+{
+    self.viewController.tableView.rowHeight = 180.0f;
+    [self.viewController.tableView reloadData];
+    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+    for ( NSUInteger i = 0; i < 10; i++ ) {
+        FRY_KEY.accessibilityLabel(@"Add").depthFirst().tap();
+    }
+    // This is a better test, as the containerIndexPath is not returned by accessibilityElements.
+    XCTAssert([self.viewController.tableView fry_searchForViewsMatching:[NSPredicate fry_matchContainerIndexPath:[NSIndexPath indexPathForRow:9 inSection:0]] lookInDirection:FRYDirectionDown]);
+    // Looking down should not work.
+    XCTAssertFalse([self.viewController.tableView fry_searchForViewsMatching:[NSPredicate fry_matchContainerIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] lookInDirection:FRYDirectionDown]);
+    XCTAssert([self.viewController.tableView fry_searchForViewsMatching:[NSPredicate fry_matchContainerIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] lookInDirection:FRYDirectionUp]);
+}
+
 @end

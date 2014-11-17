@@ -29,6 +29,8 @@
     id<FRYLookup> result = [self fry_farthestDescendentMatching:predicate];
     if ( result ) {
         CGRect viewFrame = [self convertRect:[result fry_frameInView] fromView:[result fry_representingView]];
+        viewFrame.origin.x -= self.contentInset.left;
+        viewFrame.origin.y -= self.contentInset.top;
         [self fry_scrollAndWaitToContentOffset:viewFrame.origin];
     }
     return result != nil;
