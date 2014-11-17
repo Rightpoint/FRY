@@ -46,7 +46,7 @@
                                @"Thissss is text",
                                @"8 * 8 /",
 // This is buggy.  issue #5
-//                               @"VERYLONGTEXTWITHMANYUPPERCASELETTERS",
+                               @"VERYLONGTEXTWITHMANYUPPERCASELETTERS",
                                ];
     for ( NSString *string in stringsToTest ) {
         [typist typeString:string];
@@ -54,5 +54,30 @@
         FRY_KEY.accessibilityValue(string).depthFirst().present().selectText();
     }
 }
+
+/**
+ *  This test takes entirely too long to run, and will be commented out.
+ *  Make sure you execute it if any typing code is changed.
+ */
+//- (void)testTypingEntirelyTooMuch
+//{
+//    FRY_KEY.accessibilityLabel(@"placeholder").depthFirst().tap();
+//    
+//    FRYTypist *typist = [[UIApplication sharedApplication] fry_typist];
+//
+//    NSArray *stringsToTest = @[
+//                               @"Tt8/*",
+//                               @"Thissss is text",
+//                               @"8 * 8 /",
+//                               @"VERYLONGTEXTWITHMANYUPPERCASELETTERS",
+//                               ];
+//    for ( NSUInteger i = 0; i < 50; i++ ) {
+//        for ( NSString *string in stringsToTest ) {
+//            [typist typeString:string];
+//            
+//            FRY_KEY.accessibilityValue(string).depthFirst().present().selectText();
+//        }
+//    }
+//}
 
 @end

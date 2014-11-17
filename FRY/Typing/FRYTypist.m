@@ -68,6 +68,11 @@
     else {
         [self.keyboard fry_simulateTouch:[FRYTouch tap]
                               insideRect:[key frame]];
+        [[NSRunLoop currentRunLoop] fry_waitForCheck:^BOOL{
+            return self.keyboard.activeKey == nil;
+        } withFailureExplaination:^NSString *{
+            return @"Active key did not nil out....";
+        }];
     }
 }
 

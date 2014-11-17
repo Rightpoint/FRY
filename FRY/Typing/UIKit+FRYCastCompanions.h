@@ -24,9 +24,9 @@
 
 @interface FRYKeyboardLayoutStar : UIView
 
-//@property(retain, nonatomic) UIKBTree *activeKey; // @synthesize activeKey=_activeKey;
-@property(readonly, nonatomic) FRYKBKeyTree *keyplane; // @synthesize keyplane=_keyplane;
-@property(readonly, nonatomic) FRYKBKeyTree *keyboard; // @synthesize keyboard=_keyboard;
+@property(retain, nonatomic) FRYKBKeyTree *activeKey;
+@property(readonly, nonatomic) FRYKBKeyTree *keyplane;
+@property(readonly, nonatomic) FRYKBKeyTree *keyboard;
 - (FRYKBKeyTree *)baseKeyForString:(NSString *)arg1;
 
 
