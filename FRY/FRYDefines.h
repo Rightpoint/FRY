@@ -19,3 +19,11 @@ OBJC_EXTERN NSString *kFRYCheckFailedExcetion;
 
 #define FRY_APP [UIApplication sharedApplication]
 #define FRY_KEY_WINDOW [[UIApplication sharedApplication] keyWindow]
+
+typedef NS_ENUM(NSInteger, FRYDirection) {
+    FRYDirectionUp = 1,
+    FRYDirectionDown,
+    FRYDirectionRight,
+    FRYDirectionLeft
+};
+

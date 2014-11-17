@@ -106,7 +106,7 @@
     [self populateTable];
 
     for ( NSUInteger i = 0; i < ROW_COUNT; i++ ) {
-        FRY_KEY.accessibilityLabel(TableViewTitleForRow(i)).depthFirst().touch([FRYTouch swipeInDirection:FRYTouchDirectionLeft]);
+        FRY_KEY.accessibilityLabel(TableViewTitleForRow(i)).depthFirst().touch([FRYTouch swipeInDirection:FRYDirectionLeft]);
         FRY_KEY.accessibilityLabel(TableViewDeleteConfirmTitleForRow(i)).depthFirst().tap();
     }
 }
@@ -129,6 +129,23 @@
     CGRect newLocation = [FRY_KEY_WINDOW convertRect:reorderKnobView.bounds fromView:reorderKnobView];
     
     XCTAssertFalse(CGRectEqualToRect(originalLocation, newLocation));
+}
+
+- (void)testScrolling
+{
+    self.viewController.tableView.rowHeight = 180.0f;
+    [self.viewController.tableView reloadData];
+    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+    for ( NSUInteger i = 0; i < 10; i++ ) {
+        FRY_KEY.accessibilityLabel(@"Add").depthFirst().tap();
+    }
+    // This is not a good test of fry_searchForViewsMatching:lookInDirection: as UITableView returns accessibility elements for the entire data set, visible
+    // or not.   But lets ensure that it works anyway, because I don't have any other tests.
+    XCTAssert([self.viewController.tableView fry_searchForViewsMatching:[NSPredicate fry_matchAccessibilityLabel:@"Item 9"] lookInDirection:FRYDirectionDown]);
+    XCTAssert([self.viewController.tableView fry_searchForViewsMatching:[NSPredicate fry_matchAccessibilityLabel:@"Item 9"] lookInDirection:FRYDirectionDown]);
+    XCTAssert([self.viewController.tableView fry_searchForViewsMatching:[NSPredicate fry_matchAccessibilityLabel:@"Item 0"] lookInDirection:FRYDirectionDown]);
+    XCTAssert([self.viewController.tableView fry_searchForViewsMatching:[NSPredicate fry_matchAccessibilityLabel:@"Item 9"] lookInDirection:FRYDirectionDown]);
+    
 }
 
 @end

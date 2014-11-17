@@ -7,13 +7,7 @@
 //
 
 @import UIKit;
-
-typedef NS_ENUM(NSInteger, FRYTouchDirection) {
-    FRYTouchDirectionUp = 1,
-    FRYTouchDirectionDown,
-    FRYTouchDirectionRight,
-    FRYTouchDirectionLeft
-};
+#import "FRYDefines.h"
 
 /**
  * A simulated touch models the touch sequence of one finger.   This object
@@ -30,8 +24,8 @@ typedef NS_ENUM(NSInteger, FRYTouchDirection) {
 + (FRYTouch *)tapAtPoint:(CGPoint)point;
 + (FRYTouch *)dragFromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint forDuration:(NSTimeInterval)duration;
 + (FRYTouch *)pressAndDragFromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint forDuration:(NSTimeInterval)duration;
-+ (FRYTouch *)swipeInDirection:(FRYTouchDirection)direction;
-+ (FRYTouch *)swipeInDirection:(FRYTouchDirection)direction duration:(NSTimeInterval)duration;
++ (FRYTouch *)swipeInDirection:(FRYDirection)direction;
++ (FRYTouch *)swipeInDirection:(FRYDirection)direction duration:(NSTimeInterval)duration;
 + (NSArray *)doubleTap;
 + (NSArray *)doubleTapAtPoint:(CGPoint)point;
 

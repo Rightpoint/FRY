@@ -89,31 +89,31 @@ static const NSTimeInterval kFRYSwipeLocationEnd   = 0.7f;
     return definition;
 }
 
-+ (FRYTouch *)swipeInDirection:(FRYTouchDirection)direction
++ (FRYTouch *)swipeInDirection:(FRYDirection)direction
 {
     return [self swipeInDirection:direction duration:kFRYSwipeDefaultDuration];
 }
 
-+ (FRYTouch *)swipeInDirection:(FRYTouchDirection)direction duration:(NSTimeInterval)duration
++ (FRYTouch *)swipeInDirection:(FRYDirection)direction duration:(NSTimeInterval)duration
 {
     FRYTouch *touch = nil;
     switch ( direction ) {
-        case FRYTouchDirectionUp:
+        case FRYDirectionUp:
             touch = [self dragFromPoint:CGPointMake(kFRYTouchLocationMid, kFRYSwipeLocationStart)
                                 toPoint:CGPointMake(kFRYTouchLocationMid, kFRYSwipeLocationEnd)
                             forDuration:duration];
             break;
-        case FRYTouchDirectionDown:
+        case FRYDirectionDown:
             touch = [self dragFromPoint:CGPointMake(kFRYTouchLocationMid, kFRYSwipeLocationEnd)
                                 toPoint:CGPointMake(kFRYTouchLocationMid, kFRYSwipeLocationStart)
                             forDuration:duration];
             break;
-        case FRYTouchDirectionRight:
+        case FRYDirectionRight:
             touch = [self dragFromPoint:CGPointMake(kFRYSwipeLocationStart, kFRYTouchLocationMid)
                                 toPoint:CGPointMake(kFRYSwipeLocationEnd,   kFRYTouchLocationMid)
                             forDuration:duration];
             break;
-        case FRYTouchDirectionLeft:
+        case FRYDirectionLeft:
             touch = [self dragFromPoint:CGPointMake(kFRYSwipeLocationEnd,   kFRYTouchLocationMid)
                                 toPoint:CGPointMake(kFRYSwipeLocationStart, kFRYTouchLocationMid)
                             forDuration:duration];
