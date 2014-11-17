@@ -10,20 +10,23 @@
 #import "UIView+FRY.h"
 #import "UIAccessibility+FRY.h"
 
-@implementation NSPredicate(FRY)
+@implementation NSPredicate (FRY)
 
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel
 {
     NSParameterAssert(accessibilityLabel);
-    return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(fry_accessibilityLabel)), accessibilityLabel];
+    return [NSPredicate predicateWithFormat:@"%K = %@ && %K = %@",
+            NSStringFromSelector(@selector(fry_accessibilityLabel)), accessibilityLabel,
+            NSStringFromSelector(@selector(isAccessibilityElement)), @(YES)];
 }
 
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityValue:(NSString *)accessibilityValue
 {
     NSParameterAssert(accessibilityLabel);
     NSParameterAssert(accessibilityValue);
-    return [NSPredicate predicateWithFormat:@"%K = %@ && %K = %@",
+    return [NSPredicate predicateWithFormat:@"%K = %@ && %K = %@ && %K = %@",
             NSStringFromSelector(@selector(fry_accessibilityLabel)), accessibilityLabel,
+            NSStringFromSelector(@selector(isAccessibilityElement)), @(YES),
             NSStringFromSelector(@selector(fry_accessibilityValue)), accessibilityValue];
 }
 
@@ -35,8 +38,9 @@
 
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityTrait:(UIAccessibilityTraits)traits
 {
-    return [NSPredicate predicateWithFormat:@"%K = %@ && (%K & %@) = %@",
+    return [NSPredicate predicateWithFormat:@"%K = %@ && %K = %@ && (%K & %@) = %@",
             NSStringFromSelector(@selector(fry_accessibilityLabel)), accessibilityLabel,
+            NSStringFromSelector(@selector(isAccessibilityElement)), @(YES),
             NSStringFromSelector(@selector(accessibilityTraits)), @(traits), @(traits)];
 }
 
@@ -56,7 +60,6 @@
     return [NSCompoundPredicate andPredicateWithSubpredicates:@[[NSPredicate fry_matchClass:[UIView class]],
                                                                 [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(fry_indexPathInContainer)), indexPath]
                                                                 ]];
-    
 }
 
 + (NSPredicate *)fry_matchClass:(Class)klass
@@ -85,7 +88,8 @@
 - (NSString *)fry_descriptionOfCompoundPredicateType
 {
     NSString *result = nil;
-    switch ( self.compoundPredicateType) {
+    switch ( self.compoundPredicateType )
+    {
         case NSNotPredicateType:
             result = @"NOT";
             break;
@@ -103,8 +107,10 @@
 
 @end
 
-NSString *FRYStringFromPredicateOperatorType(NSPredicateOperatorType operator) {
-    switch ( operator ) {
+NSString * FRYStringFromPredicateOperatorType(NSPredicateOperatorType operator)
+{
+    switch ( operator )
+    {
         case NSLessThanPredicateOperatorType:
             return @"<";
         case NSLessThanOrEqualToPredicateOperatorType:
@@ -142,12 +148,13 @@ NSString *FRYStringFromPredicateOperatorType(NSPredicateOperatorType operator) {
 - (NSString *)fry_descriptionOfDirectEvaluationWithObject:(id)object
 {
     NSString *result = [self description];
-    switch ( self.expressionType ) {
+    switch ( self.expressionType )
+    {
         case NSKeyPathExpressionType:
             // All that work to add this.
             result = [NSString stringWithFormat:@"(%p.%@ = '%@')", object, self.keyPath, [object valueForKeyPath:self.keyPath]];
             break;
-        default: ;
+        default:;
     }
     return result;
 }
@@ -159,7 +166,8 @@ NSString *FRYStringFromPredicateOperatorType(NSPredicateOperatorType operator) {
 - (NSString *)fry_descriptionOfEvaluationWithObject:(id)object
 {
     NSString *result = nil;
-    switch ( self.comparisonPredicateModifier ) {
+    switch ( self.comparisonPredicateModifier )
+    {
         case NSDirectPredicateModifier:
             result = [self fry_descriptionOfDirectEvaluationWithObject:object];
             break;
@@ -174,10 +182,8 @@ NSString *FRYStringFromPredicateOperatorType(NSPredicateOperatorType operator) {
 {
     NSString *lhs = [self.leftExpression fry_descriptionOfDirectEvaluationWithObject:object];
     NSString *rhs = [self.rightExpression fry_descriptionOfDirectEvaluationWithObject:object];
-
+    
     return [NSString stringWithFormat:@"(%@ %@ %@)", lhs, FRYStringFromPredicateOperatorType(self.predicateOperatorType), rhs];
 }
 
 @end
-
-
