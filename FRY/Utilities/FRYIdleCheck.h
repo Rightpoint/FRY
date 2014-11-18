@@ -12,16 +12,40 @@
 
 + (FRYIdleCheck *)system;
 
-+ (void)setSystemIdleCheck:(FRYIdleCheck *)idleCheck;
++ (void)setupSystemChecks:(NSArray *)checks;
 
 - (BOOL)isIdle;
 
 - (NSString *)busyDescription;
 
-- (NSTimeInterval)defaultTimeoutForRunloop;
+@property (assign, nonatomic) NSTimeInterval timeout;
 
 - (BOOL)waitForIdle;
 
-- (void)ignoreAnimationsOnViewsMatching:(NSPredicate *)predicate;
+@end
+
+
+@interface FRYTouchDispatchedCheck : FRYIdleCheck
 
 @end
+
+@interface FRYAnimationCompleteCheck : FRYIdleCheck
+
+@end
+
+@interface FRYInteractionsEnabledCheck : FRYIdleCheck
+
+@end
+
+@interface FRYCompoundCheck : FRYIdleCheck
+
+- (instancetype)initWithChecks:(NSArray *)checks;
+
+@property (strong, nonatomic, readonly) NSArray *checks;
+
+@end
+
+//@interface FRYOperationQueueIdleCheck : FRYIdleCheck
+//@end
+//@interface FRYNetworkingIdleCheck :FRYIdleCheck
+//@end

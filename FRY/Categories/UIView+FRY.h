@@ -52,12 +52,12 @@
 - (UIView *)fry_lookupMatchingViewAtPoint:(CGPoint)point;
 
 
-- (void)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView;
-- (void)fry_simulateTouches:(NSArray *)touches;
-- (void)fry_simulateTouch:(FRYTouch *)touch insideRect:(CGRect)frameInView;
-- (void)fry_simulateTouch:(FRYTouch *)touch;
+- (BOOL)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView;
+- (BOOL)fry_simulateTouches:(NSArray *)touches;
+- (BOOL)fry_simulateTouch:(FRYTouch *)touch insideRect:(CGRect)frameInView;
+- (BOOL)fry_simulateTouch:(FRYTouch *)touch;
 
-- (void)fry_simulateTouch:(FRYTouch *)touch onSubviewMatching:(NSPredicate *)predicate;
-- (void)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSPredicate *)predicate;
+- (BOOL)fry_simulateTouch:(FRYTouch *)touch onSubviewMatching:(NSPredicate *)predicate;
+- (BOOL)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSPredicate *)predicate;
 
 @end

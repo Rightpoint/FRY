@@ -87,47 +87,51 @@
 }
 
 
-- (void)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView
+- (BOOL)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView
 {
     [[FRYTouchDispatch shared] simulateTouches:touches inView:self frame:frameInView];
-    [[FRYIdleCheck system] waitForIdle];
+    return [[FRYIdleCheck system] waitForIdle];
 }
 
-- (void)fry_simulateTouches:(NSArray *)touches
+- (BOOL)fry_simulateTouches:(NSArray *)touches
 {
-    [self fry_simulateTouches:touches insideRect:self.bounds];
+    return [self fry_simulateTouches:touches insideRect:self.bounds];
 }
 
-- (void)fry_simulateTouch:(FRYTouch *)touch insideRect:(CGRect)frameInView
+- (BOOL)fry_simulateTouch:(FRYTouch *)touch insideRect:(CGRect)frameInView
 {
-    [self fry_simulateTouches:@[touch] insideRect:frameInView];
+    return [self fry_simulateTouches:@[touch] insideRect:frameInView];
 }
 
-- (void)fry_simulateTouch:(FRYTouch *)touch
+- (BOOL)fry_simulateTouch:(FRYTouch *)touch
 {
-    [self fry_simulateTouches:@[touch]];
+    return [self fry_simulateTouches:@[touch]];
 }
 
-- (void)fry_simulateTouch:(FRYTouch *)touch onSubviewMatching:(NSPredicate *)predicate
+- (BOOL)fry_simulateTouch:(FRYTouch *)touch onSubviewMatching:(NSPredicate *)predicate
 {
-    [self fry_simulateTouches:@[touch] onSubviewMatching:predicate];
+    return [self fry_simulateTouches:@[touch] onSubviewMatching:predicate];
 }
 
-- (void)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSPredicate *)predicate
+- (BOOL)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSPredicate *)predicate
 {
-    [self fry_farthestDescendentMatching:predicate usingBlock:^(UIView *view, CGRect frameInView) {
-        NSAssert(view != nil, @"Unable to find view matching %@", predicate);
+    id<FRYLookup> lookup = [self fry_farthestDescendentMatching:predicate];
+    BOOL touchOk = NO;
+    if ( lookup ) {
         
         // This interactable check is not really needed, but will cause some invalid touch events
         // to fail quicker.   It will also focus touches on views the developer is probably working with
         // and skip over some private view heirarchies.   This is especially noticible for the visualization
         // point of view.
+        UIView *view = [lookup fry_representingView];
+        CGRect frameInView = [lookup fry_frameInView];
         UIView *interactable = [view fry_interactableParent];
         NSAssert(interactable, @"No Interactable parent of %@", view);
         CGRect convertedFrame = [interactable convertRect:frameInView fromView:view];
         
-        [interactable fry_simulateTouches:touches insideRect:convertedFrame];
-    }];
+        touchOk = [interactable fry_simulateTouches:touches insideRect:convertedFrame];
+    }
+    return touchOk;
 }
 
 

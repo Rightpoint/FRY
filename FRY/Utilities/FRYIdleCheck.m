@@ -14,11 +14,6 @@
 static NSTimeInterval const kFRYIdleCheckDefaultTimeout = 5.0;
 static FRYIdleCheck *systemIdleCheck = nil;
 
-@interface FRYIdleCheck()
-
-@property (strong, nonatomic) NSMutableSet *ignorePredicates;
-
-@end
 
 @implementation FRYIdleCheck
 
@@ -26,44 +21,44 @@ static FRYIdleCheck *systemIdleCheck = nil;
 {
     NSAssert([NSThread currentThread] == [NSThread mainThread], @"%@ is not thread safe, call on main thread only", self.class);
     if ( systemIdleCheck == nil ) {
-        systemIdleCheck = [[FRYIdleCheck alloc] init];
+        NSArray *checks = @[[[FRYAnimationCompleteCheck alloc] init],
+                            [[FRYInteractionsEnabledCheck alloc] init],
+                            [[FRYTouchDispatchedCheck alloc] init]
+                            ];
+
+        systemIdleCheck = [[FRYCompoundCheck alloc] initWithChecks:checks];
     }
     return systemIdleCheck;
 }
 
-+ (void)setSystemIdleCheck:(FRYIdleCheck *)idleCheck
++ (void)setupSystemChecks:(NSArray *)checks
 {
     NSAssert([NSThread currentThread] == [NSThread mainThread], @"%@ is not thread safe, call on main thread only", self.class);
-    systemIdleCheck = idleCheck;
+    systemIdleCheck = [[FRYCompoundCheck alloc] initWithChecks:checks];
 }
 
 - (instancetype)init
 {
     self = [super init];
     if ( self ) {
-        self.ignorePredicates = [NSMutableSet set];
+        self.timeout = kFRYIdleCheckDefaultTimeout;
     }
     return self;
 }
 
 - (BOOL)isIdle
 {
-    return ([[FRYTouchDispatch shared] hasActiveTouches] == NO &&
-            [[UIApplication sharedApplication] isIgnoringInteractionEvents] == NO &&
-            [self animatingViews].count == 0);
+    return YES;
 }
 
 - (NSString *)busyDescription
 {
-    return [NSString stringWithFormat:@"%@%@%@",
-            [[FRYTouchDispatch shared] hasActiveTouches] ? @"Still have active touches\n" : @"",
-            [[UIApplication sharedApplication] isIgnoringInteractionEvents] ? @"UIApplication is ignoring interaction events\n" : @"",
-            [self animatingViews].count != 0 ? [NSString stringWithFormat:@"%@ are still animating", [self animatingViews]] : @""];
+    return @"";
 }
 
 - (NSTimeInterval)defaultTimeoutForRunloop
 {
-    return [[FRYTouchDispatch shared] maxTouchDuration] + kFRYIdleCheckDefaultTimeout;
+    return kFRYIdleCheckDefaultTimeout;
 }
 
 - (BOOL)waitForIdle
@@ -76,6 +71,55 @@ static FRYIdleCheck *systemIdleCheck = nil;
         NSLog(@"%@", [self busyDescription]);
     }
     return isIdle;
+}
+
+@end
+
+
+@implementation FRYTouchDispatchedCheck : FRYIdleCheck
+
+- (BOOL)isIdle
+{
+    return [[FRYTouchDispatch shared] hasActiveTouches] == NO;
+}
+
+- (NSTimeInterval)timeout
+{
+    return [[FRYTouchDispatch shared] maxTouchDuration] + super.timeout;
+}
+
+- (NSString *)busyDescription
+{
+    return @"Still have active touches\n";
+}
+
+@end
+
+@interface FRYAnimationCompleteCheck()
+
+@property (strong, nonatomic) NSMutableSet *ignorePredicates;
+
+@end
+
+@implementation FRYAnimationCompleteCheck : FRYIdleCheck
+
+- (instancetype)init
+{
+    self = [super init];
+    if ( self ) {
+        self.ignorePredicates = [NSMutableSet set];
+    }
+    return self;
+}
+
+- (BOOL)isIdle
+{
+    return [self animatingViews].count == 0;
+}
+
+- (NSString *)busyDescription
+{
+    return [NSString stringWithFormat:@"%@ are still animating", [self animatingViews]];
 }
 
 - (NSArray *)animatingViews
@@ -93,3 +137,53 @@ static FRYIdleCheck *systemIdleCheck = nil;
 }
 
 @end
+
+@implementation FRYInteractionsEnabledCheck : FRYIdleCheck
+
+- (BOOL)isIdle
+{
+    return [[UIApplication sharedApplication] isIgnoringInteractionEvents] == NO;
+}
+
+- (NSString *)busyDescription
+{
+    return @"UIApplication is ignoring interaction events";
+}
+
+@end
+
+@implementation FRYCompoundCheck : FRYIdleCheck
+
+- (instancetype)initWithChecks:(NSArray *)checks;
+{
+    self = [super init];
+    if ( self ) {
+        _checks = checks;
+    }
+    return self;
+}
+
+- (BOOL)isIdle
+{
+    BOOL isIdle = YES;
+    for ( FRYIdleCheck *check in self.checks ) {
+        if ( [check isIdle] == NO ) {
+            isIdle = NO;
+        }
+    }
+    return isIdle;
+}
+
+- (NSString *)busyDescription
+{
+    NSMutableString *busyDescription = [NSMutableString string];
+    for ( FRYIdleCheck *check in self.checks ) {
+        if ( [check isIdle] == NO ) {
+            [busyDescription appendString:[check busyDescription]];
+        }
+    }
+    return [busyDescription copy];
+}
+
+@end
+
