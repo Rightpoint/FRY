@@ -10,7 +10,7 @@
 #import "NSObject+FRYLookup.h"
 #import "FRYTouchDispatch.h"
 #import "UIAccessibility+FRY.h"
-#import "NSRunLoop+FRY.h"
+#import "FRYIdleCheck.h"
 
 @implementation UIView (FRY)
 
@@ -31,20 +31,6 @@
         }
     }
     return isAnimating;
-}
-
-- (UIView *)fry_animatingViewToWaitFor
-{
-    if ( [self fry_isAnimating] ) {
-        return self;
-    }
-    for ( UIView *subview in self.subviews ) {
-        UIView *animatingSubview = [subview fry_animatingViewToWaitFor];
-        if ( animatingSubview ) {
-            return animatingSubview;
-        }
-    }
-    return nil;
 }
 
 - (NSArray *)fry_reverseSubviews
@@ -104,7 +90,7 @@
 - (void)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView
 {
     [[FRYTouchDispatch shared] simulateTouches:touches inView:self frame:frameInView];
-    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+    [[FRYIdleCheck system] waitForIdle];
 }
 
 - (void)fry_simulateTouches:(NSArray *)touches
@@ -144,15 +130,6 @@
     }];
 }
 
-
-@end
-
-@implementation UIActivityIndicatorView(FRY)
-
-- (UIView *)fry_animatingViewToWaitFor
-{
-    return nil;
-}
 
 @end
 

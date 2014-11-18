@@ -41,7 +41,7 @@
 
 - (void)testBasic
 {
-    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+    [[FRYIdleCheck system] waitForIdle];
 
     for ( NSString *label in @[@"One", @"Two", @"Three"] ) {
         FRY.accessibilityLabel(label).depthFirst().tap();

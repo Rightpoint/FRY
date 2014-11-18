@@ -50,7 +50,7 @@ typedef FRYDSLResult *(^FRYDSLBlock)();
 @end
 
 
-
-#define FRY [[FRYDSLQuery alloc] initForLookup:[UIApplication sharedApplication] withTestTarget:self inFile:[NSString stringWithUTF8String:__FILE__] atLine:__LINE__]
-#define FRY_KEY [[FRYDSLQuery alloc] initForLookup:[[UIApplication sharedApplication] keyWindow] withTestTarget:self inFile:[NSString stringWithUTF8String:__FILE__] atLine:__LINE__]
+#define FRYQ(view) [[FRYDSLQuery alloc] initForLookup:view withTestTarget:self inFile:[NSString stringWithUTF8String:__FILE__] atLine:__LINE__]
+#define FRY        FRYQ([UIApplication sharedApplication])
+#define FRY_KEY    FRYQ([[UIApplication sharedApplication] keyWindow])
 

@@ -135,7 +135,7 @@
 {
     self.viewController.tableView.rowHeight = 180.0f;
     [self.viewController.tableView reloadData];
-    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+    [[FRYIdleCheck system] waitForIdle];
     for ( NSUInteger i = 0; i < 10; i++ ) {
         FRY_KEY.accessibilityLabel(@"Add").depthFirst().tap();
     }
@@ -152,7 +152,7 @@
 {
     self.viewController.tableView.rowHeight = 180.0f;
     [self.viewController.tableView reloadData];
-    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+    [[FRYIdleCheck system] waitForIdle];
     for ( NSUInteger i = 0; i < 10; i++ ) {
         FRY_KEY.accessibilityLabel(@"Add").depthFirst().tap();
     }

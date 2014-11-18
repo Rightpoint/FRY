@@ -11,7 +11,6 @@
 typedef void(^FRYMatchBlock)(UIView *view, CGRect frameInView);
 
 typedef BOOL(^FRYCheckBlock)();
-typedef NSString *(^FRYCheckFailureExplaination)();
 
 OBJC_EXTERN NSTimeInterval const kFRYEventDispatchInterval;
 OBJC_EXTERN NSString *kFRYCheckFailedExcetion;

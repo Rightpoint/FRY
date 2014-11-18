@@ -49,9 +49,9 @@ static CGFloat const kFryDefaultPointSize = 15.0f;
 
 #pragma mark - public methods
 
-- (UIView *)fry_animatingViewToWaitFor
+- (BOOL)fry_isAnimating
 {
-    return nil;
+    return NO;
 }
 
 - (void)setPointSize:(CGFloat)pointSize

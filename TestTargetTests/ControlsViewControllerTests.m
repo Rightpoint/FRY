@@ -185,6 +185,7 @@
 
 - (void)testActivityIndicator
 {
+    [[FRYIdleCheck system] ignoreAnimationsOnViewsMatching:[NSPredicate predicateWithFormat:@"class.description == 'UIActivityIndicatorView'"]];
     FRY_KEY.accessibilityLabel(@"Switch").depthFirst().tap();
     FRY_KEY.accessibilityLabel(@"In progress").all().count(1);
 

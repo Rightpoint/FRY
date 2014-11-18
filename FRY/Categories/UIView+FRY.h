@@ -17,8 +17,6 @@
  */
 - (BOOL)fry_isAnimating;
 
-- (UIView *)fry_animatingViewToWaitFor;
-
 /**
  *  Find the superview that has more interactability than this view.
  *  This is not needed for any reason, but often chooses a view that is
