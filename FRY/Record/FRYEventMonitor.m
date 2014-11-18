@@ -103,11 +103,11 @@
             UIView *touchedView = [self.touchBeganOnViews objectForKey:touch];
             // Discard the lookup variables if the touch left the view and the view wasn't made first responder.
             // the first responder check was added because touching a UITextField caused the touches view to disappear.
-            if ( touch.view == nil && [touchedView isFirstResponder] == NO ) {
+            if ( touch.view == nil && touchedView && [touchedView isFirstResponder] == NO ) {
                 log.viewLookupVariables = nil;
             }
-            if ( touch.view && log.viewLookupVariables ) {
-                [log translateTouchesIntoViewCoordinates:touch.view];
+            if ( touchedView && log.viewLookupVariables ) {
+                [log translateTouchesIntoViewCoordinates:touchedView];
             }
             [self.touchDefinitions addObject:[self.activeTouchLog objectForKey:touch]];
             [self.activeTouchLog removeObjectForKey:touch];

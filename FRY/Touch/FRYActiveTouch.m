@@ -63,7 +63,8 @@ static NSUInteger const kFRYTouchPhaseUndefined = -1;
     CGPoint viewPoint = [self.view.window convertPoint:windowPoint toView:self.view];
 
     if ( self.currentTouch == nil ) {
-        self.currentTouch = [[UITouch alloc] initAtPoint:windowPoint inWindow:self.view.window];
+        UIWindow *window = [self.view isKindOfClass:[UIWindow class]] ? (id)self.view : self.view.window;
+        self.currentTouch = [[UITouch alloc] initAtPoint:windowPoint inWindow:window];
         [self.view fry_setFrameHighlighted:YES animated:NO];
         [self.view fry_highlightPoint:viewPoint animated:NO];
     }
