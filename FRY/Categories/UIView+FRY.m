@@ -129,7 +129,10 @@
 
 - (void)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSPredicate *)predicate
 {
-    [self fry_farthestDescendentMatching:predicate usingBlock:^(UIView *view, CGRect frameInView) {
+    if ( predicate ) {
+        id <FRYLookup> lookup = [self fry_farthestDescendentMatching:predicate];
+        UIView *view = [lookup fry_representingView];
+        CGRect frameInView = [lookup fry_frameInView];
         NSAssert(view != nil, @"Unable to find view matching %@", predicate);
         
         // This interactable check is not really needed, but will cause some invalid touch events
@@ -141,7 +144,10 @@
         CGRect convertedFrame = [interactable convertRect:frameInView fromView:view];
         
         [interactable fry_simulateTouches:touches insideRect:convertedFrame];
-    }];
+    }
+    else {
+        [self fry_simulateTouches:touches insideRect:self.bounds];
+    }
 }
 
 

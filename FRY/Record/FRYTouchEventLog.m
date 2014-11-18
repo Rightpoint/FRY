@@ -41,7 +41,7 @@
 - (void)translateTouchesIntoViewCoordinates:(UIView *)view
 {
     for ( FRYPointInTime *pointInTime in self.pointsInTime ) {
-        CGPoint convertedLocation = [view.window convertPoint:pointInTime.location toView:view];
+        CGPoint convertedLocation = [view convertPoint:pointInTime.location fromView:view.window];
         pointInTime.location = CGPointMake(convertedLocation.x / view.frame.size.width, convertedLocation.y / view.frame.size.height);
     }
     self.translatedIntoView = YES;
@@ -51,9 +51,9 @@
 {
     
     return [NSString stringWithFormat:@"\
-[FRY_KEY fry_simulateTouch:[FRYTouch touchStarting:%.3f\n\
-                                            points:%zd\n\
-                                         %@:%@]\n\
+[FRY_KEY_WINDOW fry_simulateTouch:[FRYTouch touchStarting:%.3f\n\
+                                                   points:%zd\n\
+                                                %@:%@]\n\
          onSubviewMatching:%@];\n",
             0.0,
             self.pointsInTime.count,
