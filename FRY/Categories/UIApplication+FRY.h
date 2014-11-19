@@ -24,12 +24,6 @@
 - (NSArray *)fry_animatingViews;
 
 /**
- * Return the first of the animating views to wait for.
- * This API should be deprecated!
- */
-- (UIView *)fry_animatingViewToWaitFor;
-
-/**
  *  Return a helper typing object.
  */
 - (FRYTypist *)fry_typist;

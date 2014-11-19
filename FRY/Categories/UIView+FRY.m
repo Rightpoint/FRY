@@ -10,7 +10,7 @@
 #import "NSObject+FRYLookup.h"
 #import "FRYTouchDispatch.h"
 #import "UIAccessibility+FRY.h"
-#import "NSRunLoop+FRY.h"
+#import "FRYIdleCheck.h"
 
 @implementation UIView (FRY)
 
@@ -31,20 +31,6 @@
         }
     }
     return isAnimating;
-}
-
-- (UIView *)fry_animatingViewToWaitFor
-{
-    if ( [self fry_isAnimating] ) {
-        return self;
-    }
-    for ( UIView *subview in self.subviews ) {
-        UIView *animatingSubview = [subview fry_animatingViewToWaitFor];
-        if ( animatingSubview ) {
-            return animatingSubview;
-        }
-    }
-    return nil;
 }
 
 - (NSArray *)fry_reverseSubviews
@@ -100,35 +86,49 @@
     return testView;
 }
 
+- (BOOL)fry_parentViewOfClass:(Class)klass
+{
+    BOOL matchingParent = NO;
+    UIView *view = [self superview];
+    while ( view ) {
+        if ( [view isKindOfClass:klass] ) {
+            matchingParent = YES;
+            break;
+        }
+        view = [view superview];
+    }
+    return view;
+}
 
-- (void)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView
+- (BOOL)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView
 {
     [[FRYTouchDispatch shared] simulateTouches:touches inView:self frame:frameInView];
-    [[NSRunLoop currentRunLoop] fry_waitForIdle];
+    return [[FRYIdleCheck system] waitForIdle];
 }
 
-- (void)fry_simulateTouches:(NSArray *)touches
+- (BOOL)fry_simulateTouches:(NSArray *)touches
 {
-    [self fry_simulateTouches:touches insideRect:self.bounds];
+    return [self fry_simulateTouches:touches insideRect:self.bounds];
 }
 
-- (void)fry_simulateTouch:(FRYTouch *)touch insideRect:(CGRect)frameInView
+- (BOOL)fry_simulateTouch:(FRYTouch *)touch insideRect:(CGRect)frameInView
 {
-    [self fry_simulateTouches:@[touch] insideRect:frameInView];
+    return [self fry_simulateTouches:@[touch] insideRect:frameInView];
 }
 
-- (void)fry_simulateTouch:(FRYTouch *)touch
+- (BOOL)fry_simulateTouch:(FRYTouch *)touch
 {
-    [self fry_simulateTouches:@[touch]];
+    return [self fry_simulateTouches:@[touch]];
 }
 
-- (void)fry_simulateTouch:(FRYTouch *)touch onSubviewMatching:(NSPredicate *)predicate
+- (BOOL)fry_simulateTouch:(FRYTouch *)touch onSubviewMatching:(NSPredicate *)predicate
 {
-    [self fry_simulateTouches:@[touch] onSubviewMatching:predicate];
+    return [self fry_simulateTouches:@[touch] onSubviewMatching:predicate];
 }
 
-- (void)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSPredicate *)predicate
+- (BOOL)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSPredicate *)predicate
 {
+    BOOL touchOk = NO;
     if ( predicate ) {
         id <FRYLookup> lookup = [self fry_farthestDescendentMatching:predicate];
         UIView *view = [lookup fry_representingView];
@@ -143,22 +143,14 @@
         NSAssert(interactable, @"No Interactable parent of %@", view);
         CGRect convertedFrame = [interactable convertRect:frameInView fromView:view];
         
-        [interactable fry_simulateTouches:touches insideRect:convertedFrame];
+        touchOk = [interactable fry_simulateTouches:touches insideRect:convertedFrame];
     }
     else {
-        [self fry_simulateTouches:touches insideRect:self.bounds];
+        touchOk = [self fry_simulateTouches:touches insideRect:self.bounds];
     }
+    return touchOk;
 }
 
-
-@end
-
-@implementation UIActivityIndicatorView(FRY)
-
-- (UIView *)fry_animatingViewToWaitFor
-{
-    return nil;
-}
 
 @end
 

@@ -76,7 +76,7 @@
     [self fry_scrollAndWaitToContentOffset:offset];
 }
 
-- (void)fry_scrollAndWaitToContentOffset:(CGPoint)offset
+- (BOOL)fry_scrollAndWaitToContentOffset:(CGPoint)offset
 {
     __block BOOL scrollComplete = NO;
     [UIView animateWithDuration:0.5 animations:^{
@@ -84,11 +84,10 @@
     } completion:^(BOOL finished) {
         scrollComplete = YES;
     }];
-    [[NSRunLoop currentRunLoop] fry_waitForCheck:^BOOL{
+    BOOL idle = [[NSRunLoop currentRunLoop] fry_waitWithTimeout:1 forCheck:^BOOL{
         return scrollComplete;
-    } withFailureExplaination:^NSString *{
-        return @"Scroll could not complete";
     }];
+    return idle;
 }
 
 @end

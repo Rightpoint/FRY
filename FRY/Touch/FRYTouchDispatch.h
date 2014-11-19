@@ -22,6 +22,11 @@
 - (BOOL)hasActiveTouches;
 
 /**
+ *  Return the amount of time that the touch dispatch has touch intervals scheduled for.
+ */
+- (NSTimeInterval)maxTouchDuration;
+
+/**
  * Clear out any touches and lookups.  This will send cancel events for any active touches to ensure that
  * the application state doesn't get munged.
  */

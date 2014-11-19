@@ -41,8 +41,6 @@
 
 - (void)testBasic
 {
-    [[NSRunLoop currentRunLoop] fry_waitForIdle];
-
     for ( NSString *label in @[@"One", @"Two", @"Three"] ) {
         FRY.accessibilityLabel(label).depthFirst().tap();
         // The alertview is shown .5 seconds after tap, so wait a second for it to appear.

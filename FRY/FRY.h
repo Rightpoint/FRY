@@ -13,6 +13,7 @@
 
 #import "NSObject+FRYLookup.h"
 #import "NSRunLoop+FRY.h"
+#import "FRYIdleCheck.h"
 #import "UIView+FRY.h"
 #import "UIApplication+FRY.h"
 #import "FRYTypist.h"
@@ -24,3 +25,11 @@
 
 #import "FRYDSLQuery.h"
 #import "FRYDSLResult.h"
+
+
+#import "FRYIdleCheck.h"
+#import "FRYTouchDispatchedCheck.h"
+#import "FRYAnimationCompleteCheck.h"
+#import "FRYInteractionsEnabledCheck.h"
+#import "FRYCompoundCheck.h"
+#import "FRYIdleOperationQueueCheck.h"
