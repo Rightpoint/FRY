@@ -14,6 +14,7 @@
 		AB17BAB11A1C3959008EC56E /* FRYCompoundCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = AB17BAB01A1C3959008EC56E /* FRYCompoundCheck.m */; };
 		AB17BAB41A1C3A66008EC56E /* FRYIdleOperationQueueCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = AB17BAB31A1C3A66008EC56E /* FRYIdleOperationQueueCheck.m */; };
 		AB17BAB71A1C3FDA008EC56E /* Idle.md in Sources */ = {isa = PBXBuildFile; fileRef = AB17BAB51A1C3FDA008EC56E /* Idle.md */; };
+		AB17BABA1A1C4913008EC56E /* UIScrollView+FRYScrollingState.m in Sources */ = {isa = PBXBuildFile; fileRef = AB17BAB91A1C4913008EC56E /* UIScrollView+FRYScrollingState.m */; };
 		AB184AD419E85F49007CC9DA /* UIApplication+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCDB19DFA30B00228531 /* UIApplication+FRY.m */; };
 		AB184AEE19E8EEC0007CC9DA /* NSRunLoop+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB184AED19E8EEC0007CC9DA /* NSRunLoop+FRY.m */; };
 		AB24E0041A0C88670099231F /* AlertTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB24E0021A0C88670099231F /* AlertTableViewController.m */; };
@@ -56,7 +57,6 @@
 		ABCF04DA1A06AF210000318A /* ControlsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04D91A06AF210000318A /* ControlsViewControllerTests.m */; };
 		ABCF04E31A06BE220000318A /* ControlsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04E21A06BE220000318A /* ControlsViewController.m */; };
 		ABCF04E51A06E75D0000318A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB35FD6119E4E54F00228531 /* UIKit.framework */; };
-		ABCF04E61A06E7EF0000318A /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03C19DF95AA00038E75 /* libFRY.a */; };
 		ABCF04E71A06F2630000318A /* UIAccessibility+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD0E19E4DE3500228531 /* UIAccessibility+FRY.m */; };
 		ABCFAC051A0E7B79003B91BC /* NSObject+FRYLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCFAC041A0E7B79003B91BC /* NSObject+FRYLookup.m */; };
 		ABCFAC0A1A0E94BA003B91BC /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCFAC081A0E94BA003B91BC /* TableViewController.m */; };
@@ -114,6 +114,9 @@
 		AB17BAB21A1C3A66008EC56E /* FRYIdleOperationQueueCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYIdleOperationQueueCheck.h; sourceTree = "<group>"; };
 		AB17BAB31A1C3A66008EC56E /* FRYIdleOperationQueueCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYIdleOperationQueueCheck.m; sourceTree = "<group>"; };
 		AB17BAB51A1C3FDA008EC56E /* Idle.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Idle.md; sourceTree = "<group>"; };
+		AB17BAB81A1C4913008EC56E /* UIScrollView+FRYScrollingState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+FRYScrollingState.h"; sourceTree = "<group>"; };
+		AB17BAB91A1C4913008EC56E /* UIScrollView+FRYScrollingState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+FRYScrollingState.m"; sourceTree = "<group>"; };
+		AB17BABB1A1C800F008EC56E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		AB184AEC19E8EEC0007CC9DA /* NSRunLoop+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSRunLoop+FRY.h"; sourceTree = "<group>"; };
 		AB184AED19E8EEC0007CC9DA /* NSRunLoop+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSRunLoop+FRY.m"; sourceTree = "<group>"; };
 		AB24E0011A0C88670099231F /* AlertTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertTableViewController.h; sourceTree = "<group>"; };
@@ -241,7 +244,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABCF04E61A06E7EF0000318A /* libFRY.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +297,7 @@
 		AB25C03E19DF95AA00038E75 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AB17BABB1A1C800F008EC56E /* QuartzCore.framework */,
 				AB35FD6119E4E54F00228531 /* UIKit.framework */,
 				AB25C03F19DF95AA00038E75 /* Foundation.framework */,
 				AB25C04D19DF95AA00038E75 /* XCTest.framework */,
@@ -370,6 +373,8 @@
 				AB184AED19E8EEC0007CC9DA /* NSRunLoop+FRY.m */,
 				ABC12EC71A192FC900BD7556 /* UIScrollView+FRY.h */,
 				ABC12EC81A192FC900BD7556 /* UIScrollView+FRY.m */,
+				AB17BAB81A1C4913008EC56E /* UIScrollView+FRYScrollingState.h */,
+				AB17BAB91A1C4913008EC56E /* UIScrollView+FRYScrollingState.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -685,6 +690,7 @@
 				ABED6EA81A16FCB30009D44A /* FRYDSLResult.m in Sources */,
 				AB17BAB11A1C3959008EC56E /* FRYCompoundCheck.m in Sources */,
 				AB17BAB71A1C3FDA008EC56E /* Idle.md in Sources */,
+				AB17BABA1A1C4913008EC56E /* UIScrollView+FRYScrollingState.m in Sources */,
 				D4CA25161A09089B00A04F26 /* FRYHighlightView.m in Sources */,
 				AB35FCE419DFAEB900228531 /* UITouch+FRY.m in Sources */,
 				AB17BAA81A1C391D008EC56E /* FRYTouchDispatchedCheck.m in Sources */,

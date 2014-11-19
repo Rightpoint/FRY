@@ -30,9 +30,9 @@ typedef struct __GSEvent * GSEventRef;
 
 @end
 
-@interface NSObject (FRYExposePrivate)
+@interface UIScrollView (FRYExposePrivate)
 
-- (void)tapInteractionWithLocation:(CGPoint)point;
+-(void)_startTimer:(BOOL)timer;
+-(void)_scrollViewDidEndDecelerating;
 
 @end
-

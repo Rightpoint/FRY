@@ -8,8 +8,8 @@
 
 #import "UIScrollView+FRY.h"
 #import "NSObject+FRYLookup.h"
-#import "NSRunLoop+FRY.h"
 #import "FRYTouch.h"
+#import "FRYIdleCheck.h"
 
 @implementation UIScrollView(FRY)
 
@@ -78,16 +78,9 @@
 
 - (BOOL)fry_scrollAndWaitToContentOffset:(CGPoint)offset
 {
-    __block BOOL scrollComplete = NO;
-    [UIView animateWithDuration:0.5 animations:^{
-        [self setContentOffset:offset animated:NO];
-    } completion:^(BOOL finished) {
-        scrollComplete = YES;
-    }];
-    BOOL idle = [[NSRunLoop currentRunLoop] fry_waitWithTimeout:1 forCheck:^BOOL{
-        return scrollComplete;
-    }];
-    return idle;
+    [self setContentOffset:offset animated:YES];
+    return [[FRYIdleCheck system] waitForIdle];
 }
 
 @end
+

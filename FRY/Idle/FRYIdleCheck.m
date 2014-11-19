@@ -67,6 +67,7 @@ static FRYIdleCheck *systemIdleCheck = nil;
 
 - (BOOL)waitForIdle
 {
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.0]];
     BOOL isIdle = [[NSRunLoop currentRunLoop] fry_waitWithTimeout:[self defaultTimeoutForRunloop]
                                                          forCheck:^BOOL{
                                                              return [self isIdle];
