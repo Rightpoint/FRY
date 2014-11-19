@@ -13,6 +13,7 @@
 		AB17BAAE1A1C394B008EC56E /* FRYInteractionsEnabledCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = AB17BAAD1A1C394B008EC56E /* FRYInteractionsEnabledCheck.m */; };
 		AB17BAB11A1C3959008EC56E /* FRYCompoundCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = AB17BAB01A1C3959008EC56E /* FRYCompoundCheck.m */; };
 		AB17BAB41A1C3A66008EC56E /* FRYIdleOperationQueueCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = AB17BAB31A1C3A66008EC56E /* FRYIdleOperationQueueCheck.m */; };
+		AB17BAB71A1C3FDA008EC56E /* Idle.md in Sources */ = {isa = PBXBuildFile; fileRef = AB17BAB51A1C3FDA008EC56E /* Idle.md */; };
 		AB184AD419E85F49007CC9DA /* UIApplication+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCDB19DFA30B00228531 /* UIApplication+FRY.m */; };
 		AB184AEE19E8EEC0007CC9DA /* NSRunLoop+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB184AED19E8EEC0007CC9DA /* NSRunLoop+FRY.m */; };
 		AB24E0041A0C88670099231F /* AlertTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB24E0021A0C88670099231F /* AlertTableViewController.m */; };
@@ -112,6 +113,7 @@
 		AB17BAB01A1C3959008EC56E /* FRYCompoundCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYCompoundCheck.m; sourceTree = "<group>"; };
 		AB17BAB21A1C3A66008EC56E /* FRYIdleOperationQueueCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYIdleOperationQueueCheck.h; sourceTree = "<group>"; };
 		AB17BAB31A1C3A66008EC56E /* FRYIdleOperationQueueCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYIdleOperationQueueCheck.m; sourceTree = "<group>"; };
+		AB17BAB51A1C3FDA008EC56E /* Idle.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Idle.md; sourceTree = "<group>"; };
 		AB184AEC19E8EEC0007CC9DA /* NSRunLoop+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSRunLoop+FRY.h"; sourceTree = "<group>"; };
 		AB184AED19E8EEC0007CC9DA /* NSRunLoop+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSRunLoop+FRY.m"; sourceTree = "<group>"; };
 		AB24E0011A0C88670099231F /* AlertTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertTableViewController.h; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 		AB17BAA21A1C38FA008EC56E /* Idle */ = {
 			isa = PBXGroup;
 			children = (
+				AB17BAB51A1C3FDA008EC56E /* Idle.md */,
 				AB17BAA31A1C38FA008EC56E /* FRYIdleCheck.h */,
 				AB17BAA41A1C38FA008EC56E /* FRYIdleCheck.m */,
 				AB17BAA61A1C391D008EC56E /* FRYTouchDispatchedCheck.h */,
@@ -681,6 +684,7 @@
 				AB26597A1A0FBE140074FF2E /* FRYTypist.m in Sources */,
 				ABED6EA81A16FCB30009D44A /* FRYDSLResult.m in Sources */,
 				AB17BAB11A1C3959008EC56E /* FRYCompoundCheck.m in Sources */,
+				AB17BAB71A1C3FDA008EC56E /* Idle.md in Sources */,
 				D4CA25161A09089B00A04F26 /* FRYHighlightView.m in Sources */,
 				AB35FCE419DFAEB900228531 /* UITouch+FRY.m in Sources */,
 				AB17BAA81A1C391D008EC56E /* FRYTouchDispatchedCheck.m in Sources */,
