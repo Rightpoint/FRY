@@ -22,6 +22,7 @@
 + (NSPredicate *)fry_matchAccessibilityIdentifier:(NSString *)accessibilityIdentifier;
 + (NSPredicate *)fry_matchContainerIndexPath:(NSIndexPath *)indexPath;
 + (NSPredicate *)fry_matchClass:(Class)klass;
++ (NSPredicate *)fry_parentViewOfClass:(Class)klass;
 
 - (NSString *)fry_descriptionOfEvaluationWithObject:(id)object;
 

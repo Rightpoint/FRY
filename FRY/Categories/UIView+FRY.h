@@ -51,6 +51,7 @@
  */
 - (UIView *)fry_lookupMatchingViewAtPoint:(CGPoint)point;
 
+- (BOOL)fry_parentViewOfClass:(Class)klass;
 
 - (BOOL)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView;
 - (BOOL)fry_simulateTouches:(NSArray *)touches;

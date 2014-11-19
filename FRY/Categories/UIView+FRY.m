@@ -86,6 +86,19 @@
     return testView;
 }
 
+- (BOOL)fry_parentViewOfClass:(Class)klass
+{
+    BOOL matchingParent = NO;
+    UIView *view = [self superview];
+    while ( view ) {
+        if ( [view isKindOfClass:klass] ) {
+            matchingParent = YES;
+            break;
+        }
+        view = [view superview];
+    }
+    return view;
+}
 
 - (BOOL)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView
 {
