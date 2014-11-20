@@ -11,9 +11,9 @@
 /**
  * This will support touch recording and some newer, cooler features.
  */
-@interface FRYEventMonitor : NSObject
+@interface FRYTouchRecorder : NSObject
 
-+ (FRYEventMonitor *)sharedEventMonitor;
++ (FRYTouchRecorder *)shared;
 
 - (void)enable;
 - (void)disable;

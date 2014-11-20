@@ -10,7 +10,6 @@
 #import "FRYPointInTime.h"
 #import "FRYTouch.h"
 #import "UITouch+FRY.h"
-#import "UIView+FRYTouchHighlighting.h"
 
 static CGFloat FRYDistanceBetweenPoints(CGPoint p1, CGPoint p2) {
     CGFloat xDist = (p2.x - p1.x);
@@ -65,8 +64,6 @@ static NSUInteger const kFRYTouchPhaseUndefined = -1;
     if ( self.currentTouch == nil ) {
         UIWindow *window = [self.view isKindOfClass:[UIWindow class]] ? (id)self.view : self.view.window;
         self.currentTouch = [[UITouch alloc] initAtPoint:windowPoint inWindow:window];
-        [self.view fry_setFrameHighlighted:YES animated:NO];
-        [self.view fry_highlightPoint:viewPoint animated:NO];
     }
     else {
         [self.currentTouch setLocationInWindow:windowPoint];
@@ -77,7 +74,6 @@ static NSUInteger const kFRYTouchPhaseUndefined = -1;
                 }
                 else {
                     [self.currentTouch setPhaseAndUpdateTimestamp:UITouchPhaseCancelled];
-                    [self.view fry_setFrameHighlighted:NO animated:YES];
                 }
             }
             else {
@@ -86,11 +82,8 @@ static NSUInteger const kFRYTouchPhaseUndefined = -1;
         }
         else {
             [self.currentTouch setPhaseAndUpdateTimestamp:UITouchPhaseEnded];
-            [self.view fry_setFrameHighlighted:NO animated:YES];
             viewPoint = CGPointMake(-1.0f, -1.0f);
         }
-        
-        [self.view fry_highlightPoint:viewPoint animated:YES];
     }
     
     self.lastPointInWindow = windowPoint;

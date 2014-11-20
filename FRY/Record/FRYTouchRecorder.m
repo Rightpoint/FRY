@@ -6,14 +6,16 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "FRYEventMonitor.h"
+#import "FRYTouchRecorder.h"
 #import "FRYMethodSwizzling.h"
 #import "UIKit+FRYExposePrivate.h"
 #import "FRYTouchEventLog.h"
 #import "UIView+FRY.h"
 #import "UITouch+FRY.h"
 
-@interface FRYEventMonitor()
+#import "FRYTouchHighlightWindow.h"
+
+@interface FRYTouchRecorder()
 
 @property (assign, nonatomic) NSTimeInterval startTime;
 @property (strong, nonatomic) NSMutableArray *touchDefinitions;
@@ -23,19 +25,13 @@
 
 @end
 
-@implementation FRYEventMonitor
+@implementation FRYTouchRecorder
 
-+ (void)load
++ (FRYTouchRecorder *)shared
 {
-    [[self sharedEventMonitor] enable];
-}
-
-
-+ (FRYEventMonitor *)sharedEventMonitor
-{
-    static FRYEventMonitor *monitor = nil;
+    static FRYTouchRecorder *monitor = nil;
     if ( monitor == nil ) {
-        monitor = [[FRYEventMonitor alloc] init];
+        monitor = [[FRYTouchRecorder alloc] init];
     }
     return monitor;
 }
@@ -55,7 +51,9 @@
                                              selector:@selector(printTouchLogOnResign)
                                                  name:UIApplicationWillResignActiveNotification
                                                object:nil];
-                                                                
+    
+    [FRYTouchHighlightWindow enable];
+    [FRYTouchHighlightWindow touchHighlightWindow].userInteractionEnabled = NO;
 }
 
 - (void)disable
@@ -67,12 +65,14 @@
                                method:@selector(sendEvent:)
                             withClass:[self class]
                                method:@selector(fry_sendEvent:)];
+    [FRYTouchHighlightWindow disable];
 }
 
 - (void)fry_sendEvent:(UIEvent *)event
 {
     [self fry_sendEvent:event];
-    [[FRYEventMonitor sharedEventMonitor] monitorEvent:event];
+    [[FRYTouchRecorder shared] monitorEvent:event];
+    [[FRYTouchHighlightWindow touchHighlightWindow] sendEvent:event];
 }
 
 - (void)monitorEvent:(UIEvent *)event
