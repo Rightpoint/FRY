@@ -13,7 +13,6 @@ typedef void(^FRYMatchBlock)(UIView *view, CGRect frameInView);
 typedef BOOL(^FRYCheckBlock)();
 
 OBJC_EXTERN NSTimeInterval const kFRYEventDispatchInterval;
-OBJC_EXTERN NSString *kFRYCheckFailedExcetion;
 
 
 #define FRY_APP [UIApplication sharedApplication]

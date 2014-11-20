@@ -12,7 +12,6 @@
 #import <objc/runtime.h>
 
 NSTimeInterval const kFRYEventDispatchInterval = 0.01;
-NSString *kFRYCheckFailedExcetion = @"FRY Failed Check";
 
 @interface FRYCleanupSimulator : NSObject
 @end
