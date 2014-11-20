@@ -64,6 +64,12 @@
     return [NSPredicate predicateWithFormat:@"SELF isKindOfClass:%@", klass];
 }
 
++ (NSPredicate *)fry_parentViewOfClass:(Class)klass
+{
+    return [NSCompoundPredicate andPredicateWithSubpredicates:@[[NSPredicate fry_matchClass:[UIView class]],
+                                                                [NSPredicate predicateWithFormat:@"SELF fry_parentViewOfClass:%@", klass]]];
+}
+
 - (NSString *)fry_descriptionOfEvaluationWithObject:(id)object
 {
     return @"Unknown";

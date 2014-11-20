@@ -78,37 +78,14 @@
     return [[[self fry_inputViewWindow] fry_farthestDescendentMatching:[NSPredicate fry_matchClass:klass]] fry_representingView];
 }
 
-- (UIView *)fry_animatingViewToWaitFor
-{
-    __block UIView *animatingView = nil;
-    for ( UIWindow *window in self.windows ) {
-        UIView *animatingViewInWindow = [window fry_animatingViewToWaitFor];
-        if ( animatingViewInWindow ) {
-            animatingView = animatingViewInWindow;
-            break;
-        }
-    }
-    return animatingView;
-}
-
 - (NSArray *)fry_animatingViews;
 {
-    NSMutableArray *animatingViews = [NSMutableArray array];
-
-    [self fry_enumerateAllChildrenMatching:[NSPredicate predicateWithBlock:^BOOL(UIView *viewOrElement, NSDictionary *bindings) {
+    NSSet *animatingLookups = [self fry_allChildrenMatching:[NSPredicate predicateWithBlock:^BOOL(UIView *viewOrElement, NSDictionary *bindings) {
         BOOL isView = [viewOrElement isKindOfClass:[UIView class]];
-        BOOL isAnimating = NO;
-        if ( isView ) {
-            isAnimating = [viewOrElement fry_isAnimating];
-        }
-        if ( isAnimating ) {
-            NSLog(@"");
-        }
-        return isView && isAnimating;
-    }] usingBlock:^(UIView *view, CGRect frameInView) {
-        [animatingViews addObject:view];
-    }];
-    return animatingViews;
+        BOOL isAnimating = isView ? [viewOrElement fry_isAnimating] : NO;
+        return isAnimating;
+    }]];
+    return [[animatingLookups allObjects] valueForKeyPath:NSStringFromSelector(@selector(fry_representingView))];
 }
 
 @end

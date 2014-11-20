@@ -12,12 +12,10 @@
 @interface NSRunLoop(FRY)
 
 /**
- * Wait until all animations are complete, all touches have been dispatched, and user interaction is enabled.
+ * Wait for the condition to be true with the specified timeout.
+ *
+ * This method returns YES if the check passed before the timeout interval.
  */
-- (void)fry_waitForIdle;
-- (void)fry_waitForIdleWithTimeout:(NSTimeInterval)timeout;
-
-- (void)fry_waitForCheck:(FRYCheckBlock)checkBlock withFailureExplaination:(FRYCheckFailureExplaination)failureExplaination;
-- (void)fry_waitWithTimeout:(NSTimeInterval)timeout forCheck:(FRYCheckBlock)checkBlock withFailureExplaination:(FRYCheckFailureExplaination)failureExplaination;
+- (BOOL)fry_waitWithTimeout:(NSTimeInterval)timeout forCheck:(FRYCheckBlock)checkBlock;
 
 @end

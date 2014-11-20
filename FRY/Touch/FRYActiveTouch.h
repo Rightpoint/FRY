@@ -20,6 +20,7 @@
 @property (assign, nonatomic, readonly) NSTimeInterval startTime;
 @property (strong, nonatomic, readonly) UIView *view;
 @property (assign, nonatomic, readonly) UITouchPhase currentTouchPhase;
+@property (strong, nonatomic, readonly) FRYTouch *touchDefinition;
 
 - (UITouch *)touchAtTime:(NSTimeInterval)currentTime;
 

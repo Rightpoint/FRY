@@ -26,6 +26,9 @@
     [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.0]];
 
+    // This test does not want to wait for animations under the activity indicator view.
+    [FRYAnimationCompleteCheck addIgnorePredicate:[NSPredicate fry_parentViewOfClass:[UIActivityIndicatorView class]]];
+
 //    [[UIApplication sharedApplication] rotateIfNeeded:UIDeviceOrientationLandscapeLeft];
 //    [[NSRunLoop currentRunLoop] fry_waitForIdle];
 }

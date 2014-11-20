@@ -79,6 +79,15 @@
     return self.activeTouches.count > 0;
 }
 
+- (NSTimeInterval)maxTouchDuration;
+{
+    NSTimeInterval duration = 0;
+    for ( FRYActiveTouch *touch in [self.activeTouches copy] ) {
+        duration = MAX(duration, [touch.touchDefinition duration]);
+    }
+    return duration;
+}
+
 - (void)clearInteractionsAndTouches
 {
     // Generate an event for the distantFuture which will generate a 'last' event for all touches, and then prune all touches
