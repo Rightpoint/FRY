@@ -36,3 +36,11 @@ typedef struct __GSEvent * GSEventRef;
 -(void)_scrollViewDidEndDecelerating;
 
 @end
+
+@interface UIKeyboardImpl : NSObject
++ (UIKeyboardImpl *)sharedInstance;
+- (void)addInputString:(NSString *)string;
+- (void)deleteFromInput;
+@property(getter=isInHardwareKeyboardMode) BOOL inHardwareKeyboardMode;
+@property(retain) UIResponder<UIKeyInput> * delegate;
+@end

@@ -11,6 +11,8 @@
 #import "NSObject+FRYLookup.h"
 #import "UIView+FRY.h"
 #import "NSRunLoop+FRY.h"
+#import "FRYIdleCheck.h"
+#import "UIKit+FRYExposePrivate.h"
 
 @interface FRYTypist()
 
@@ -31,14 +33,34 @@
 {
     unichar         buffer[string.length+1];
     [string getCharacters:buffer range:NSMakeRange(0, string.length)];
-
+    
     for ( NSUInteger i=0; i < string.length; i++ ) {
         NSString *representedString = [NSString stringWithFormat: @"%C", buffer[i]];
-        [self tapKeyWithRepresentedString:representedString];
+        if ( [UIKeyboardImpl sharedInstance].isInHardwareKeyboardMode ) {
+            [self tapHardwareKeyWithString:representedString];
+        }
+        else {
+            [self tapSoftwareKeyWithRepresentedString:representedString];
+        }
+    }
+    // Violating my own rule here, and adding a wait.
+    // There is probably some state I can check, but I'm not up for snooping
+    // around on private api's and it's fixed time for any sized string.
+    if ( [UIKeyboardImpl sharedInstance].isInHardwareKeyboardMode ) {
+        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
     }
 }
 
-- (void)tapKeyWithRepresentedString:(NSString *)representedString
+- (void)tapHardwareKeyWithString:(NSString *)string
+{
+    if ([string isEqualToString:@"\b"]) {
+        [[UIKeyboardImpl sharedInstance] deleteFromInput];
+    } else {
+        [[UIKeyboardImpl sharedInstance] addInputString:string];
+    }
+}
+
+- (void)tapSoftwareKeyWithRepresentedString:(NSString *)representedString
 {
     FRYKBKeyTree *key = [self.keyboard baseKeyForString:representedString];
 
@@ -54,12 +76,12 @@
 
     if ( nextKeyPlane != self.keyboard.keyplane ) {
         if ( [self.keyboard.keyplane isLetters] != [nextKeyPlane isLetters]) {
-            [self tapKeyWithRepresentedString:@"More"];
-            [self tapKeyWithRepresentedString:representedString];
+            [self tapSoftwareKeyWithRepresentedString:@"More"];
+            [self tapSoftwareKeyWithRepresentedString:representedString];
         }
         else if ( [self.keyboard.keyplane isShiftKeyplane] != [nextKeyPlane isShiftKeyplane]) {
-            [self tapKeyWithRepresentedString:@"Shift"];
-            [self tapKeyWithRepresentedString:representedString];
+            [self tapSoftwareKeyWithRepresentedString:@"Shift"];
+            [self tapSoftwareKeyWithRepresentedString:representedString];
         }
         else {
             [NSException raise:NSInvalidArgumentException format:@"Can not find key"];
