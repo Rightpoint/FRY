@@ -22,6 +22,7 @@ static BOOL pauseOnFailure = NO;
 
 @interface FRYDSLResult()
 
+@property (strong, nonatomic) NSString *checkDescription;
 @property (strong, nonatomic) FRYDSLQuery *query;
 @property (copy, nonatomic) NSSet *results;
 
@@ -47,9 +48,8 @@ static BOOL pauseOnFailure = NO;
     return self;
 }
 
-- (void)check:(FRYCheckBlock)check explaination:(NSString *)explaination
+- (BOOL)check:(FRYCheckBlock)check
 {
-    NSParameterAssert(explaination);
     // Easily add support for other frameworks by messaging failures here.
     NSAssert([self.query.testTarget respondsToSelector:@selector(recordFailureWithDescription:inFile:atLine:expected:)], @"Called from a non test function.  Not sure how to perform checks.");
     
@@ -63,21 +63,31 @@ static BOOL pauseOnFailure = NO;
         now = [NSDate timeIntervalSinceReferenceDate];
     }
     
-    if ( isOK == NO ) {
-        explaination = [explaination stringByAppendingFormat:@"\nGot:%@\nLookup Origin:%@\nPredicate:%@\n",
-                        self.results,
-                        self.query.lookupOrigin,
-                        self.query.predicate];
+    if ( isOK ) {
+        NSLog(@"%@ for query %@ on %@ returned %@\n",
+              self.checkDescription,
+              self.query.predicate,
+              self.query.lookupOrigin,
+              self.results);
+    }
+    else {
+        NSString *explaination = [NSString stringWithFormat:@"%@ failed\nGot:%@\nLookup Origin:%@\nPredicate:%@\n",
+                                  self.checkDescription,
+                                  self.results,
+                                  self.query.lookupOrigin,
+                                  self.query.predicate];
         [self.query.testTarget recordFailureWithDescription:explaination inFile:self.query.filename atLine:self.query.lineNumber expected:YES];
         while ( pauseOnFailure ) {
             [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
         }
     }
+    return isOK;
 }
 
 - (id<FRYLookup>)singularResult
 {
-    [self check:^BOOL{return self.results.count == 1;} explaination:[NSString stringWithFormat:@"Only expected 1 lookup result, found %zd", self.results.count]];
+    self.checkDescription = @"Only one result";
+    [self check:^BOOL{return self.results.count == 1;}];
     return self.results.anyObject;
 }
 
@@ -92,15 +102,15 @@ static BOOL pauseOnFailure = NO;
 - (FRYDSLBlock)absent
 {
     return ^() {
-        [self check:^BOOL{return self.results.count == 0;} explaination:[NSString stringWithFormat:@"Expected 0 lookup results to be present, found %zd", self.results.count]];
-        return self;
+        return self.count(0);
     };
 }
 
 - (FRYDSLIntegerBlock) count
 {
     return ^(NSInteger count) {
-        [self check:^BOOL{return self.results.count == count;} explaination:[NSString stringWithFormat:@"Expected %zd lookup results to be present, found %zd", count, self.results.count]];
+        self.checkDescription = [NSString stringWithFormat:@"Result Count is %zd", count];
+        [self check:^BOOL{return self.results.count == count;}];
         return self;
     };
 }
@@ -155,7 +165,8 @@ static BOOL pauseOnFailure = NO;
         while ( view && [view respondsToSelector:@selector(fry_selectAll)] == NO ) {
             view = [view superview];
         }
-        [self check:^BOOL{return view != nil;} explaination:[NSString stringWithFormat:@"Could not find superview of %@ to select text of.", [self view]]];
+        self.checkDescription = [NSString stringWithFormat:@"Could not find superview of %@ to select text of.", [self view]];
+        [self check:^BOOL{return view != nil;}];
 
         [(UITextField *)view fry_selectAll];
         return self;

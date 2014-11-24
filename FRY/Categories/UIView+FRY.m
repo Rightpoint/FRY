@@ -97,7 +97,7 @@
         }
         view = [view superview];
     }
-    return view;
+    return view != nil;
 }
 
 - (BOOL)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView
