@@ -11,22 +11,32 @@
 #import "UIApplication+FRY.h"
 #import "FRYDefines.h"
 
+typedef void(^FRYRunLoopObserverBlock)(CFRunLoopObserverRef observer, CFRunLoopActivity activity);
 
 @implementation NSRunLoop(FRY)
 
 - (BOOL)fry_waitWithTimeout:(NSTimeInterval)timeout forCheck:(FRYCheckBlock)checkBlock;
 {
-    // Spin the runloop for a tad, incase some action initiated a performSelector:withObject:afterDelay:
-    // which will cause some state change very soon.
-    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.001]];
+    FRYRunLoopObserverBlock before = ^(CFRunLoopObserverRef observer, CFRunLoopActivity activity) {
+
+        if ( checkBlock() ) {
+            CFRunLoopStop([self getCFRunLoop]);
+        }
+        else {
+            CFRunLoopWakeUp([self getCFRunLoop]);
+        }
+    };
+
+    CFRunLoopObserverRef observer = CFRunLoopObserverCreateWithHandler(NULL, kCFRunLoopBeforeWaiting, true, 0, before);
+    CFRunLoopAddObserver([self getCFRunLoop], observer, kCFRunLoopDefaultMode);
 
     NSTimeInterval start = [NSDate timeIntervalSinceReferenceDate];
-    while ( checkBlock() == NO &&
-            start + timeout > [NSDate timeIntervalSinceReferenceDate] )
-    {
-        [self runUntilDate:[NSDate dateWithTimeIntervalSinceNow:kFRYEventDispatchInterval]];
-    }
+
+    CFRunLoopRunInMode(kCFRunLoopDefaultMode, timeout, false);
     
+    CFRunLoopRemoveObserver([self getCFRunLoop], observer, kCFRunLoopDefaultMode);
+    CFRelease(observer);
+
     return start + timeout > [NSDate timeIntervalSinceReferenceDate];
 }
 
