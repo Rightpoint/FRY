@@ -101,6 +101,24 @@ typedef NS_ENUM(NSInteger, FRYDSLQueryType) {
     };
 }
 
+- (FRYDSLIndexPathBlock)rowAtIndexPath
+{
+    return ^(NSIndexPath *indexPath) {
+        [self.subPredicates addObject:[NSPredicate fry_matchClass:[UITableViewCell class]]];
+        [self.subPredicates addObject:[NSPredicate fry_matchContainerIndexPath:indexPath]];
+        return self;
+    };
+}
+
+- (FRYDSLIndexPathBlock)itemAtIndexPath
+{
+    return ^(NSIndexPath *indexPath) {
+        [self.subPredicates addObject:[NSPredicate fry_matchClass:[UICollectionViewCell class]]];
+        [self.subPredicates addObject:[NSPredicate fry_matchContainerIndexPath:indexPath]];
+        return self;
+    };
+}
+
 - (FRYDSLPredicateBlock)matching
 {
     return ^(NSPredicate *predicate) {
@@ -260,6 +278,11 @@ typedef NS_ENUM(NSInteger, FRYDSLQueryType) {
 - (UIView *)view
 {
     return [[self singularResult] fry_representingView];
+}
+
+- (FRYDSLQuery *)subQuery
+{
+    return [[FRYDSLQuery alloc] initForLookup:self.lookupOrigin withTestTarget:self.testTarget inFile:self.filename atLine:self.lineNumber];
 }
 
 - (void)onEach:(FRYMatchBlock)matchBlock

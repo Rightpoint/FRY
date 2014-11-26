@@ -46,6 +46,8 @@ typedef FRYDSLQuery *(^FRYDSLTouchesBlock)(NSArray *touches);
 @property (copy, nonatomic, readonly) FRYDSLTraitsBlock accessibilityTraits;
 @property (copy, nonatomic, readonly) FRYDSLClassBlock ofClass;
 @property (copy, nonatomic, readonly) FRYDSLIndexPathBlock atIndexPath;
+@property (copy, nonatomic, readonly) FRYDSLIndexPathBlock rowAtIndexPath;
+@property (copy, nonatomic, readonly) FRYDSLIndexPathBlock itemAtIndexPath;
 @property (copy, nonatomic, readonly) FRYDSLPredicateBlock matching;
 
 @property (copy, nonatomic, readonly) FRYDSLTimeIntervalBlock waitFor;
@@ -59,6 +61,7 @@ typedef FRYDSLQuery *(^FRYDSLTouchesBlock)(NSArray *touches);
 @property (copy, nonatomic, readonly) FRYDSLBlock selectText;
 
 @property (copy, nonatomic, readonly) UIView *view;
+@property (copy, nonatomic, readonly) FRYDSLQuery *subQuery;
 - (void)onEach:(FRYMatchBlock)matchBlock;
 
 @end
