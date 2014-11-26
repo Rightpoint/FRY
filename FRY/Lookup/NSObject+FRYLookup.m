@@ -30,8 +30,7 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
 
 + (NSSet *)fry_childKeyPaths
 {
-    [NSException raise:NSInvalidArgumentException format:@"%@ does not support being traversed", self.class];
-    return nil;
+    return [NSSet setWithObject:NSStringFromSelector(@selector(fry_accessibilityElements))];
 }
 
 - (UIView *)fry_representingView
@@ -168,11 +167,6 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
 @end
 
 @implementation UIAccessibilityElement(FRYLookup)
-
-+ (NSSet *)fry_childKeyPaths
-{
-    return [NSSet setWithObject:NSStringFromSelector(@selector(fry_accessibilityElements))];
-}
 
 - (UIView *)fry_representingView
 {
