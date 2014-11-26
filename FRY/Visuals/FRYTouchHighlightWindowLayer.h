@@ -8,15 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FRYTouchHighlightWindow : UIWindow
+/**
+ * This window layer is a layer that will stick on top of all UIWindow.layer superlayer.
+ * This is done rather than a custom UIWindow subclass to ensure that event handling is
+ * never disturbed.
+ */
+@interface FRYTouchHighlightWindowLayer : CALayer
 
 + (void)enable;
 + (void)disable;
-+ (FRYTouchHighlightWindow *)touchHighlightWindow;
++ (FRYTouchHighlightWindowLayer *)touchHighlightWindow;
 
 @property (assign, nonatomic) BOOL highlightViewFrames;
 
 @property (strong, nonatomic) UIColor *touchColor;
 @property (strong, nonatomic) UIColor *frameBorderColor;
+
+- (void)visualizeEvent:(UIEvent *)event;
 
 @end

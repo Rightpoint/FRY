@@ -13,7 +13,7 @@
 #import "UIView+FRY.h"
 #import "UITouch+FRY.h"
 
-#import "FRYTouchHighlightWindow.h"
+#import "FRYTouchHighlightWindowLayer.h"
 
 @interface FRYTouchRecorder()
 
@@ -52,8 +52,7 @@
                                                  name:UIApplicationWillResignActiveNotification
                                                object:nil];
     
-    [FRYTouchHighlightWindow enable];
-    [FRYTouchHighlightWindow touchHighlightWindow].userInteractionEnabled = NO;
+    [FRYTouchHighlightWindowLayer enable];
 }
 
 - (void)disable
@@ -65,14 +64,14 @@
                                method:@selector(sendEvent:)
                             withClass:[self class]
                                method:@selector(fry_sendEvent:)];
-    [FRYTouchHighlightWindow disable];
+    [FRYTouchHighlightWindowLayer disable];
 }
 
 - (void)fry_sendEvent:(UIEvent *)event
 {
     [self fry_sendEvent:event];
     [[FRYTouchRecorder shared] monitorEvent:event];
-    [[FRYTouchHighlightWindow touchHighlightWindow] sendEvent:event];
+    [[FRYTouchHighlightWindowLayer touchHighlightWindow] visualizeEvent:event];
 }
 
 - (void)monitorEvent:(UIEvent *)event

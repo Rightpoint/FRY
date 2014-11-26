@@ -17,9 +17,9 @@ The majority of FRY code is implemented as categories on objects.   Due to the w
 Two types of queries are supported, a depth-first query that mimics hitTest traversal, and a query that will return all matching objects.
 
 ```obj-c
-FRY.accessibilityLabel(@"My Label").depthFirst().present();
-FRY.accessibilityLabel(@"My Label").all().present();
-FRY.accessibilityTraits(UIAccessibilityTraitButton).all().count(14);
+FRY.accessibilityLabel(@"My Label").present();
+FRY.accessibilityLabel(@"My Label").present();
+FRY.accessibilityTraits(UIAccessibilityTraitButton).count(14);
 
 // Or the more traditional Objective-C API:
 id<FRYLookup> l = [FRY_KEY_WINDOW fry_farthestDescendentMatching:[NSPredicate fry_matchAccessibilityLabel:actionConfirmation]];
@@ -33,8 +33,8 @@ View lookup is a simple system based on NSPredicate and KeyPaths.  Add support t
 FRY uses strongly modeled touches to generate UIKit touch events.  This allows for simple arbitrary touch re-creation, and clear API's for creating common touch sequences.
 
 ```obj-c
-FRY.accessibilityLabel(@"My Label").depthFirst().tap()
-FRY.accessibilityLabel(@"My Label").depthFirst().touches([FRYTouch doubleTap])
+FRY.accessibilityLabel(@"My Label").tap()
+FRY.accessibilityLabel(@"My Label").touches([FRYTouch doubleTap])
 
 [[[UIApplication sharedApplication] keyWindow] fry_simulateTouch:[FRYTouch tap]
                                                onSubviewMatching:[NSPredicate fry_matchAccessibilityLabel:@"My Label"]];

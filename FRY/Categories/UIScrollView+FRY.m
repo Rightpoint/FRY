@@ -41,16 +41,16 @@
     BOOL moreSpace = NO;
     switch ( direction ) {
         case FRYDirectionUp:
-            moreSpace = self.contentOffset.y - self.frame.size.height > self.contentInset.top;
+            moreSpace = self.contentOffset.y > self.contentInset.top;
             break;
         case FRYDirectionDown:
-            moreSpace = self.contentOffset.y + self.frame.size.height < self.contentSize.height + self.contentInset.bottom;
+            moreSpace = self.contentOffset.y + self.bounds.size.height < self.contentSize.height + self.contentInset.bottom;
             break;
         case FRYDirectionLeft:
-            moreSpace = self.contentOffset.x - self.frame.size.width > self.contentInset.left;
+            moreSpace = self.contentOffset.x > self.contentInset.left;
             break;
         case FRYDirectionRight:
-            moreSpace = self.contentOffset.x + self.frame.size.width < self.contentSize.width + self.contentInset.top;
+            moreSpace = self.contentOffset.x + self.bounds.size.width < self.contentSize.width + self.contentInset.top;
             break;
     }
     return moreSpace;
@@ -73,12 +73,15 @@
             offset.x += self.frame.size.width;
             break;
     }
+    offset.x = MIN(offset.x, self.contentSize.width - self.bounds.size.width);
+    offset.y = MIN(offset.y, self.contentSize.height - self.bounds.size.height);
     [self fry_scrollAndWaitToContentOffset:offset];
 }
 
 - (BOOL)fry_scrollAndWaitToContentOffset:(CGPoint)offset
 {
     [self setContentOffset:offset animated:YES];
+    [[NSRunLoop currentRunLoop] runMode:NSRunLoopCommonModes beforeDate:[NSDate dateWithTimeIntervalSinceNow:1]];
     return [[FRYIdleCheck system] waitForIdle];
 }
 

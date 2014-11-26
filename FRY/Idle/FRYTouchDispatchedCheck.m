@@ -23,7 +23,7 @@
 
 - (NSString *)busyDescription
 {
-    return @"Still have active touches\n";
+    return [NSString stringWithFormat:@"Still have active touches: %@\n", [FRYTouchDispatch shared]];
 }
 
 @end

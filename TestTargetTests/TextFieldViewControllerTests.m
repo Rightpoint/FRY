@@ -24,6 +24,7 @@
     [UIApplication sharedApplication].keyWindow.rootViewController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
     [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.0]];
+
     //    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:450000]];
 }
 
@@ -38,7 +39,7 @@
 
 - (void)testTapByPlaceholder
 {
-    FRY_KEY.accessibilityLabel(@"placeholder").depthFirst().tap();
+    FRY_KEY.accessibilityLabel(@"placeholder").tap();
 
     FRYTypist *typist = [[UIApplication sharedApplication] fry_typist];
     NSArray *stringsToTest = @[
@@ -51,7 +52,7 @@
     for ( NSString *string in stringsToTest ) {
         [typist typeString:string];
 
-        FRY_KEY.accessibilityValue(string).depthFirst().present().selectText();
+        FRY_KEY.accessibilityValue(string).present().selectText();
     }
 }
 

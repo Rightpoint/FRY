@@ -24,6 +24,7 @@
     [UIApplication sharedApplication].keyWindow.rootViewController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
     [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.0]];
+
 //    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:450000]];
 }
 
@@ -38,35 +39,35 @@
 
 - (void)testPickerOne
 {
-    FRY_KEY.accessibilityLabel(@"One").depthFirst().tap();
-    FRY_KEY.accessibilityLabel(@"Select = One").all().present();
+    FRY_KEY.accessibilityLabel(@"One").tap();
+    FRY_KEY.accessibilityLabel(@"Select = One").present();
 
     UIPickerView *inputPicker = (id)[FRY_APP fry_inputViewOfClass:[UIPickerView class]];
     XCTAssertNotNil(inputPicker);
     
     XCTAssertTrue([inputPicker fry_selectTitle:@"44" inComponent:0 animated:YES]);
     
-    FRY_KEY.accessibilityLabel(@"Picker = 44 / 0").all().present();
+    FRY_KEY.accessibilityLabel(@"Picker = 44 / 0").present();
 
     XCTAssertTrue([inputPicker fry_selectTitle:@"99" inComponent:0 animated:YES]);
-    FRY_KEY.accessibilityLabel(@"Picker = 99 / 0").all().present();
+    FRY_KEY.accessibilityLabel(@"Picker = 99 / 0").present();
 }
 
 - (void)testPickerTwo
 {
-    FRY_KEY.accessibilityLabel(@"Two").depthFirst().tap();
-    FRY_KEY.accessibilityLabel(@"Select = Two").all().present();
+    FRY_KEY.accessibilityLabel(@"Two").tap();
+    FRY_KEY.accessibilityLabel(@"Select = Two").present();
    
     UIPickerView *inputPicker = (id)[FRY_APP fry_inputViewOfClass:[UIPickerView class]];
     XCTAssertNotNil(inputPicker);
     
     XCTAssertTrue([inputPicker fry_selectTitle:@"44" inComponent:0 animated:YES]);
     
-    FRY_KEY.accessibilityLabel(@"Picker = 44 / 0").all().present();
+    FRY_KEY.accessibilityLabel(@"Picker = 44 / 0").present();
 
     XCTAssertTrue([inputPicker fry_selectTitle:@"99" inComponent:1 animated:YES]);
     
-    FRY_KEY.accessibilityLabel(@"Picker = 99 / 1").all().present();
+    FRY_KEY.accessibilityLabel(@"Picker = 99 / 1").present();
 }
 
 @end

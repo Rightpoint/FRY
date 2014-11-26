@@ -6,21 +6,21 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "FRYTouchHighlightWindow.h"
+#import "FRYTouchHighlightWindowLayer.h"
 #import "FRYTouchLayer.h"
 
-static FRYTouchHighlightWindow *fry_touchHighlightWindow = nil;
+static FRYTouchHighlightWindowLayer *fry_touchHighlightWindow = nil;
 
-@interface FRYTouchHighlightWindow()
+@interface FRYTouchHighlightWindowLayer()
 
 @property (strong, nonatomic) NSMutableDictionary *touchLayerByKey;
 
 @end
 
 
-@implementation FRYTouchHighlightWindow
+@implementation FRYTouchHighlightWindowLayer
 
-+ (FRYTouchHighlightWindow *)touchHighlightWindow
++ (FRYTouchHighlightWindowLayer *)touchHighlightWindow
 {
     return fry_touchHighlightWindow;
 }
@@ -28,21 +28,29 @@ static FRYTouchHighlightWindow *fry_touchHighlightWindow = nil;
 + (void)enable
 {
     if ( fry_touchHighlightWindow == nil ) {
-        fry_touchHighlightWindow = [[FRYTouchHighlightWindow alloc] init];
-        [[self touchHighlightWindow] makeKeyAndVisible];
+        fry_touchHighlightWindow = [[FRYTouchHighlightWindowLayer alloc] init];
+        [fry_touchHighlightWindow updateLayer];
+        [[NSNotificationCenter defaultCenter] addObserver:fry_touchHighlightWindow
+                                                 selector:@selector(updateLayer)
+                                                     name:UIWindowDidBecomeKeyNotification
+                                                   object:nil];
     }
 }
 
 + (void)disable
 {
+    if ( fry_touchHighlightWindow != nil ) {
+        [[NSNotificationCenter defaultCenter] removeObserver:fry_touchHighlightWindow
+                                                        name:UIWindowDidBecomeKeyNotification
+                                                      object:nil];
+    }
     fry_touchHighlightWindow = nil;
 }
 
 - (instancetype)init
 {
-    self = [super initWithFrame:[[UIScreen mainScreen] bounds]];
+    self = [super init];
     if ( self ) {
-        self.windowLevel = UIWindowLevelAlert + 1;
         self.highlightViewFrames = YES;
         self.touchLayerByKey = [NSMutableDictionary dictionary];
         self.frameBorderColor = [UIColor colorWithRed:0.329 green:0.329 blue:0.329 alpha:1];
@@ -52,9 +60,18 @@ static FRYTouchHighlightWindow *fry_touchHighlightWindow = nil;
     return self;
 }
 
-- (void)sendEvent:(UIEvent *)event
+- (void)updateLayer
 {
-    [super sendEvent:event];
+    // Ensure that this layer is always on top by monitoring key window changes.
+    CALayer *windowSuperLayer = [[[[UIApplication sharedApplication] keyWindow] layer] superlayer];
+    fry_touchHighlightWindow.bounds = windowSuperLayer.bounds;
+    fry_touchHighlightWindow.position = CGPointMake(CGRectGetMidX(windowSuperLayer.bounds),
+                                                    CGRectGetMidY(windowSuperLayer.bounds));
+    [windowSuperLayer insertSublayer:fry_touchHighlightWindow above:windowSuperLayer];
+}
+
+- (void)visualizeEvent:(UIEvent *)event
+{
     for (UITouch *touch in event.allTouches) {
         [self updateDisplayForTouch:touch];
     }
@@ -68,7 +85,8 @@ static FRYTouchHighlightWindow *fry_touchHighlightWindow = nil;
         case UITouchPhaseBegan: {
             [self beginTouchWithKey:key atPoint:locationInWindow];
             if ( touch.view && self.highlightViewFrames ) {
-                CGRect frameInWindow = [self convertRect:touch.view.bounds fromView:touch.view];
+                UIWindow *window = touch.view.window;
+                CGRect frameInWindow = [window convertRect:touch.view.bounds fromView:touch.view];
                 [self highlightFrame:frameInWindow];
             }
             break;
@@ -90,9 +108,9 @@ static FRYTouchHighlightWindow *fry_touchHighlightWindow = nil;
     FRYTouchLayer *layer = [FRYTouchLayer layer];
     layer.touchColor = self.touchColor.CGColor;
     layer.bounds = self.bounds;
-    layer.position = self.center;
+    layer.position = self.position;
     self.touchLayerByKey[key] = layer;
-    [self.layer addSublayer:layer];
+    [self addSublayer:layer];
     return layer;
 }
 
@@ -136,7 +154,7 @@ static FRYTouchHighlightWindow *fry_touchHighlightWindow = nil;
     layer.opacity = 0.0f;
     layer.borderWidth = 2.0f;
     layer.borderColor = self.frameBorderColor.CGColor;
-    [self.layer addSublayer:layer];
+    [self addSublayer:layer];
     [self performSelector:@selector(animateInLayerFrame:) withObject:layer afterDelay:0.0];
 }
 

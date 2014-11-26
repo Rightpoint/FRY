@@ -47,6 +47,7 @@ static void *FRYScrollingStateScrollingKey = &FRYScrollingStateScrollingKey;
                      } completion:^(BOOL finished) {
                          [self fry_setIsScrolling:NO];
                      }];
+
 }
 
 - (BOOL)fry_isScrolling;

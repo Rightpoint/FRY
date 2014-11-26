@@ -24,8 +24,6 @@
 #import "UIScrollView+FRY.h"
 
 #import "FRYDSLQuery.h"
-#import "FRYDSLResult.h"
-
 
 #import "FRYIdleCheck.h"
 #import "FRYTouchDispatchedCheck.h"

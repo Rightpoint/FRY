@@ -20,8 +20,11 @@ typedef FRYDSLQuery *(^FRYDSLTraitsBlock)(UIAccessibilityTraits);
 typedef FRYDSLQuery *(^FRYDSLClassBlock)(Class);
 typedef FRYDSLQuery *(^FRYDSLPredicateBlock)(NSPredicate *);
 typedef FRYDSLQuery *(^FRYDSLIndexPathBlock)(NSIndexPath *);
-
-typedef FRYDSLResult *(^FRYDSLBlock)();
+typedef FRYDSLQuery *(^FRYDSLBlock)();
+typedef FRYDSLQuery *(^FRYDSLIntegerBlock)(NSInteger);
+typedef FRYDSLQuery *(^FRYDSLTimeIntervalBlock)();
+typedef FRYDSLQuery *(^FRYDSLTouchBlock)(FRYTouch *touch);
+typedef FRYDSLQuery *(^FRYDSLTouchesBlock)(NSArray *touches);
 
 
 @interface FRYDSLQuery : NSObject
@@ -32,6 +35,7 @@ typedef FRYDSLResult *(^FRYDSLBlock)();
 @property (strong, nonatomic, readonly) id testTarget;
 @property (copy,   nonatomic, readonly) NSString *filename;
 @property (assign, nonatomic, readonly) NSUInteger lineNumber;
+@property (assign, nonatomic) NSTimeInterval timeout;
 
 - (NSPredicate *)predicate;
 - (NSSet *)performQuery;
@@ -44,8 +48,18 @@ typedef FRYDSLResult *(^FRYDSLBlock)();
 @property (copy, nonatomic, readonly) FRYDSLIndexPathBlock atIndexPath;
 @property (copy, nonatomic, readonly) FRYDSLPredicateBlock matching;
 
-@property (copy, nonatomic, readonly) FRYDSLBlock all;
-@property (copy, nonatomic, readonly) FRYDSLBlock depthFirst;
+@property (copy, nonatomic, readonly) FRYDSLTimeIntervalBlock waitFor;
+@property (copy, nonatomic, readonly) FRYDSLBlock present;
+@property (copy, nonatomic, readonly) FRYDSLBlock absent;
+@property (copy, nonatomic, readonly) FRYDSLIntegerBlock count;
+
+@property (copy, nonatomic, readonly) FRYDSLBlock tap;
+@property (copy, nonatomic, readonly) FRYDSLTouchBlock touch;
+@property (copy, nonatomic, readonly) FRYDSLTouchesBlock touches;
+@property (copy, nonatomic, readonly) FRYDSLBlock selectText;
+
+@property (copy, nonatomic, readonly) UIView *view;
+- (void)onEach:(FRYMatchBlock)matchBlock;
 
 @end
 

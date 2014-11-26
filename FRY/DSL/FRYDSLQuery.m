@@ -9,11 +9,17 @@
 #import "UIApplication+FRY.h"
 #import "UIView+FRY.h"
 #import "NSPredicate+FRY.h"
+#import "NSRunLoop+FRY.h"
+#import "UITextInput+FRY.h"
 
 #import "FRYDSLQuery.h"
 #import "NSObject+FRYLookup.h"
-#import "FRYDSLResult.h"
 
+@interface NSObject(FRYTestStub)
+
+- (void) recordFailureWithDescription:(NSString *) description inFile:(NSString *) filename atLine:(NSUInteger) lineNumber expected:(BOOL) expected;
+
+@end
 
 typedef NS_ENUM(NSInteger, FRYDSLQueryType) {
     FRYDSLQueryTypeDepthFirst,
@@ -22,13 +28,15 @@ typedef NS_ENUM(NSInteger, FRYDSLQueryType) {
 
 @interface FRYDSLQuery()
 
+@property (strong, nonatomic) NSString *checkDescription;
 @property (strong, nonatomic) id testTarget;
 @property (copy,   nonatomic) NSString *filename;
 @property (assign, nonatomic) NSUInteger lineNumber;
 @property (strong, nonatomic) id<FRYLookup> lookupOrigin;
 @property (strong, nonatomic) NSMutableArray *subPredicates;
-@property (assign, nonatomic) NSTimeInterval timeout;
 @property (assign, nonatomic) FRYDSLQueryType queryType;
+
+@property (copy, nonatomic) NSSet *results;
 
 @end
 
@@ -43,7 +51,7 @@ typedef NS_ENUM(NSInteger, FRYDSLQueryType) {
         self.lineNumber = lineNumber;
         self.subPredicates = [NSMutableArray array];
         self.lookupOrigin = lookupOrigin;
-        self.timeout = 0.0;
+        self.timeout = 1.0;
     }
     return self;
 }
@@ -101,22 +109,6 @@ typedef NS_ENUM(NSInteger, FRYDSLQueryType) {
     };
 }
 
-- (FRYDSLBlock)all
-{
-    return ^() {
-        self.queryType = FRYDSLQueryTypeAll;
-        return [[FRYDSLResult alloc] initWithResults:[self performQuery] query:self];
-    };
-}
-
-- (FRYDSLBlock)depthFirst
-{
-    return ^() {
-        self.queryType = FRYDSLQueryTypeDepthFirst;
-        return [[FRYDSLResult alloc] initWithResults:[self performQuery] query:self];
-    };
-}
-
 - (NSSet *)performQuery
 {
     NSSet *results = nil;
@@ -135,6 +127,148 @@ typedef NS_ENUM(NSInteger, FRYDSLQueryType) {
     }
 
     return results;
+}
+
+#pragma mark - Checking
+
+- (BOOL)check:(FRYCheckBlock)check
+{
+    // Easily add support for other frameworks by messaging failures here.
+    NSAssert([self.testTarget respondsToSelector:@selector(recordFailureWithDescription:inFile:atLine:expected:)], @"Called from a non test function.  Not sure how to perform checks.");
+    
+    BOOL isOK = [[NSRunLoop currentRunLoop] fry_waitWithTimeout:self.timeout forCheck:^BOOL{
+        self.results = [self performQuery];
+        return check();
+    }];
+    
+    if ( self.timeout == 0 ) {
+        self.results = [self performQuery];
+        isOK = check();
+    }
+    
+    if ( isOK ) {
+        NSLog(@"%@ for query %@ on %@ returned %@\n",
+              self.checkDescription,
+              self.predicate,
+              self.lookupOrigin,
+              self.results);
+    }
+    else {
+        NSString *explaination = [NSString stringWithFormat:@"%@ failed\nGot:%@\nLookup Origin:%@\nPredicate:%@\n",
+                                  self.checkDescription,
+                                  self.results,
+                                  self.lookupOrigin,
+                                  self.predicate];
+        [self.testTarget recordFailureWithDescription:explaination inFile:self.filename atLine:self.lineNumber expected:YES];
+    }
+    return isOK;
+}
+
+- (id<FRYLookup>)singularResult
+{
+    self.checkDescription = @"Only one result";
+    [self check:^BOOL{return self.results.count == 1;}];
+    return self.results.anyObject;
+}
+
+- (FRYDSLBlock)present
+{
+    return ^() {
+        self.queryType = FRYDSLQueryTypeDepthFirst;
+        [self singularResult];
+        return self;
+    };
+}
+
+- (FRYDSLBlock)absent
+{
+    return ^() {
+        self.queryType = FRYDSLQueryTypeAll;
+        return self.count(0);
+    };
+}
+
+- (FRYDSLIntegerBlock)count
+{
+    return ^(NSInteger count) {
+        self.queryType = FRYDSLQueryTypeAll;
+        self.checkDescription = [NSString stringWithFormat:@"Result Count is %zd", count];
+        [self check:^BOOL{return self.results.count == count;}];
+        return self;
+    };
+}
+
+- (FRYDSLTimeIntervalBlock)waitFor
+{
+    return ^(NSTimeInterval timeout) {
+        self.timeout = timeout;
+        return self;
+    };
+}
+
+- (FRYDSLBlock)tap
+{
+    return ^() {
+        self.queryType = FRYDSLQueryTypeDepthFirst;
+        id<FRYLookup> lookup = [self singularResult];
+        UIView *view = [[lookup fry_representingView] fry_interactableParent];
+        CGRect frameInView = [lookup fry_frameInView];
+        [view fry_simulateTouch:[FRYTouch tap] insideRect:frameInView];
+        return self;
+    };
+}
+
+- (FRYDSLTouchBlock)touch
+{
+    return ^(FRYTouch *touch) {
+        self.queryType = FRYDSLQueryTypeDepthFirst;
+        NSParameterAssert(touch);
+        id<FRYLookup> lookup = [self singularResult];
+        UIView *view = [[lookup fry_representingView] fry_interactableParent];
+        CGRect frameInView = [lookup fry_frameInView];
+        [view fry_simulateTouch:touch insideRect:frameInView];
+        return self;
+    };
+}
+
+- (FRYDSLTouchesBlock)touches
+{
+    return ^(NSArray *touches) {
+        NSParameterAssert(touches);
+        id<FRYLookup> lookup = [self singularResult];
+        UIView *view = [[lookup fry_representingView] fry_interactableParent];
+        CGRect frameInView = [lookup fry_frameInView];
+        [view fry_simulateTouches:touches insideRect:frameInView];
+        return self;
+    };
+}
+
+- (FRYDSLBlock)selectText
+{
+    return ^() {
+        UIView *view = [self view];
+        while ( view && [view respondsToSelector:@selector(fry_selectAll)] == NO ) {
+            view = [view superview];
+        }
+        self.checkDescription = [NSString stringWithFormat:@"Could not find superview of %@ to select text of.", [self view]];
+        [self check:^BOOL{return view != nil;}];
+        
+        [(UITextField *)view fry_selectAll];
+        return self;
+    };
+}
+
+- (UIView *)view
+{
+    return [[self singularResult] fry_representingView];
+}
+
+- (void)onEach:(FRYMatchBlock)matchBlock
+{
+    NSParameterAssert(matchBlock);
+    for ( id<FRYLookup> lookup in self.results ) {
+        matchBlock([lookup fry_representingView], [lookup fry_frameInView]);
+    }
 }
 
 @end
