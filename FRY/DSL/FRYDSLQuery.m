@@ -183,7 +183,6 @@ typedef NS_ENUM(NSInteger, FRYDSLQueryType) {
 - (FRYDSLBlock)absent
 {
     return ^() {
-        self.queryType = FRYDSLQueryTypeAll;
         return self.count(0);
     };
 }

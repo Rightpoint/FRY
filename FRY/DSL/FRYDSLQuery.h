@@ -22,7 +22,7 @@ typedef FRYDSLQuery *(^FRYDSLPredicateBlock)(NSPredicate *);
 typedef FRYDSLQuery *(^FRYDSLIndexPathBlock)(NSIndexPath *);
 typedef FRYDSLQuery *(^FRYDSLBlock)();
 typedef FRYDSLQuery *(^FRYDSLIntegerBlock)(NSInteger);
-typedef FRYDSLQuery *(^FRYDSLTimeIntervalBlock)();
+typedef FRYDSLQuery *(^FRYDSLTimeIntervalBlock)(NSTimeInterval);
 typedef FRYDSLQuery *(^FRYDSLTouchBlock)(FRYTouch *touch);
 typedef FRYDSLQuery *(^FRYDSLTouchesBlock)(NSArray *touches);
 

@@ -22,13 +22,15 @@ typedef void(^FRYRunLoopObserverBlock)(CFRunLoopObserverRef observer, CFRunLoopA
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.001]];
     
     NSTimeInterval start = [NSDate timeIntervalSinceReferenceDate];
-    while ( checkBlock() == NO &&
+    BOOL checkOK = checkBlock();
+    while ( checkOK == NO &&
            start + timeout > [NSDate timeIntervalSinceReferenceDate] )
     {
         [self runUntilDate:[NSDate dateWithTimeIntervalSinceNow:kFRYEventDispatchInterval]];
+        checkOK = checkBlock();
     }
     
-    return start + timeout > [NSDate timeIntervalSinceReferenceDate];
+    return checkOK;
 }
 
 @end
