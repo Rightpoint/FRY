@@ -19,11 +19,6 @@
 - (UIEvent *)fry_eventWithTouches:(NSArray *)touches;
 
 /**
- *  Return all animating views in all windows.
- */
-- (NSArray *)fry_animatingViews;
-
-/**
  *  Return a helper typing object.
  */
 - (FRYTypist *)fry_typist;

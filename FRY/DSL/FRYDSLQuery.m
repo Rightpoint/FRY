@@ -280,6 +280,17 @@ typedef NS_ENUM(NSInteger, FRYDSLQueryType) {
     return [[self singularResult] fry_representingView];
 }
 
+- (NSArray *)allViews
+{
+    self.queryType = FRYDSLQueryTypeAll;
+    self.results = [self performQuery];
+    NSMutableArray *results = [NSMutableArray array];
+    for ( id<FRYLookup> lookup in self.results ) {
+        [results addObject:[lookup fry_representingView]];
+    }
+    return [results copy];
+}
+
 - (FRYDSLQuery *)subQuery
 {
     return [[FRYDSLQuery alloc] initForLookup:self.view withTestTarget:self.testTarget inFile:self.filename atLine:self.lineNumber];

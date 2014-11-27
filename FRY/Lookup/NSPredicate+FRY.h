@@ -14,6 +14,7 @@
  */
 @interface NSPredicate(FRY)
 
++ (NSPredicate *)fry_animatingView;
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel;
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityValue:(NSString *)accessibilityValue;
 + (NSPredicate *)fry_matchAccessibilityValue:(NSString *)accessibilityValue;
@@ -23,6 +24,7 @@
 + (NSPredicate *)fry_matchContainerIndexPath:(NSIndexPath *)indexPath;
 + (NSPredicate *)fry_matchClass:(Class)klass;
 + (NSPredicate *)fry_parentViewOfClass:(Class)klass;
+
 
 - (NSString *)fry_descriptionOfEvaluationWithObject:(id)object;
 

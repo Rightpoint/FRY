@@ -26,8 +26,3 @@
 #import "FRYDSLQuery.h"
 
 #import "FRYIdleCheck.h"
-#import "FRYTouchDispatchedCheck.h"
-#import "FRYAnimationCompleteCheck.h"
-#import "FRYInteractionsEnabledCheck.h"
-#import "FRYCompoundCheck.h"
-#import "FRYIdleOperationQueueCheck.h"

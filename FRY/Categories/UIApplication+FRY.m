@@ -78,14 +78,4 @@
     return [[[self fry_inputViewWindow] fry_farthestDescendentMatching:[NSPredicate fry_matchClass:klass]] fry_representingView];
 }
 
-- (NSArray *)fry_animatingViews;
-{
-    NSSet *animatingLookups = [self fry_allChildrenMatching:[NSPredicate predicateWithBlock:^BOOL(UIView *viewOrElement, NSDictionary *bindings) {
-        BOOL isView = [viewOrElement isKindOfClass:[UIView class]];
-        BOOL isAnimating = isView ? [viewOrElement fry_isAnimating] : NO;
-        return isAnimating;
-    }]];
-    return [[animatingLookups allObjects] valueForKeyPath:NSStringFromSelector(@selector(fry_representingView))];
-}
-
 @end

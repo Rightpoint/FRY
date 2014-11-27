@@ -11,7 +11,7 @@
 #import "ControlsViewController.h"
 #import "FRY.h"
 
-@interface ControlsViewControllerTests : XCTestCase
+@interface ControlsViewControllerTests : XCTestCase <FRYIdleCheckDelegate>
 
 @property (strong, nonatomic) ControlsViewController *viewController;
 
@@ -26,8 +26,7 @@
     [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.0]];
     
-    // This test does not want to wait for animations under the activity indicator view.
-    [FRYAnimationCompleteCheck addIgnorePredicate:[NSPredicate fry_parentViewOfClass:[UIActivityIndicatorView class]]];
+    [FRYIdleCheck system].delegate = self;
 
 //    [[UIApplication sharedApplication] rotateIfNeeded:UIDeviceOrientationLandscapeLeft];
 }
@@ -41,6 +40,13 @@
     
     [super tearDown];
 }
+
+- (NSArray *)viewsToIgnoreForAnimationComplete:(FRYIdleCheck *)idleCheck
+{
+    // Ignore any activity indicator
+    return FRY.ofClass([UIActivityIndicatorView class]).allViews;
+}
+
 
 - (void)testAccessibilityLabelLookup
 {
@@ -154,8 +160,8 @@
 - (void)testSlider
 {
     FRY_KEY.accessibilityLabel(@"Slider").touch([FRYTouch touchStarting:0.000
-                                                                               points:40
-                                                                            xyoffsets:0.520f,0.645f,0.000, 0.510f,0.645f,0.032, 0.500f,0.645f,0.048, 0.485f,0.645f,0.066, 0.473f,0.645f,0.083, 0.453f,0.645f,0.100, 0.429f,0.645f,0.117, 0.385f,0.645f,0.135, 0.328f,0.645f,0.151, 0.277f,0.645f,0.168, 0.255f,0.645f,0.186, 0.230f,0.645f,0.203, 0.211f,0.645f,0.220, 0.201f,0.645f,0.238, 0.194f,0.645f,0.259, 0.189f,0.645f,0.278, 0.186f,0.645f,0.298, 0.184f,0.645f,0.314, 0.172f,0.645f,0.333, 0.142f,0.645f,0.366, 0.127f,0.645f,0.384, 0.113f,0.629f,0.400, 0.103f,0.597f,0.417, 0.098f,0.548f,0.434, 0.093f,0.548f,0.450, 0.088f,0.548f,0.476, 0.086f,0.548f,0.588, 0.081f,0.548f,0.613, 0.071f,0.548f,0.640, 0.066f,0.548f,0.659, 0.056f,0.548f,0.700, 0.042f,0.516f,0.731, 0.032f,0.484f,0.761, 0.027f,0.484f,0.777, 0.025f,0.484f,0.800, 0.022f,0.484f,0.830, 0.017f,0.484f,0.848, 0.017f,0.452f,0.875, 0.015f,0.452f,0.918, 0.015f,0.452f,1.216]);
+                                                                 points:40
+                                                              xyoffsets:0.520f,0.645f,0.000, 0.510f,0.645f,0.032, 0.500f,0.645f,0.048, 0.485f,0.645f,0.066, 0.473f,0.645f,0.083, 0.453f,0.645f,0.100, 0.429f,0.645f,0.117, 0.385f,0.645f,0.135, 0.328f,0.645f,0.151, 0.277f,0.645f,0.168, 0.255f,0.645f,0.186, 0.230f,0.645f,0.203, 0.211f,0.645f,0.220, 0.201f,0.645f,0.238, 0.194f,0.645f,0.259, 0.189f,0.645f,0.278, 0.186f,0.645f,0.298, 0.184f,0.645f,0.314, 0.172f,0.645f,0.333, 0.142f,0.645f,0.366, 0.127f,0.645f,0.384, 0.113f,0.629f,0.400, 0.103f,0.597f,0.417, 0.098f,0.548f,0.434, 0.093f,0.548f,0.450, 0.088f,0.548f,0.476, 0.086f,0.548f,0.588, 0.081f,0.548f,0.613, 0.071f,0.548f,0.640, 0.066f,0.548f,0.659, 0.056f,0.548f,0.700, 0.042f,0.516f,0.731, 0.032f,0.484f,0.761, 0.027f,0.484f,0.777, 0.025f,0.484f,0.800, 0.022f,0.484f,0.830, 0.017f,0.484f,0.848, 0.017f,0.452f,0.875, 0.015f,0.452f,0.918, 0.015f,0.452f,1.216]);
 
     // Sometimes we get 0, sometimes we get 5.
     FRY_KEY.matching([NSPredicate predicateWithFormat:@"fry_accessibilityLabel = 'Slider=0' || fry_accessibilityLabel = 'Slider=5'"]).count(1);

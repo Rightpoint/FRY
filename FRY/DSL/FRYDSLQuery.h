@@ -61,6 +61,8 @@ typedef FRYDSLQuery *(^FRYDSLTouchesBlock)(NSArray *touches);
 @property (copy, nonatomic, readonly) FRYDSLBlock selectText;
 
 @property (copy, nonatomic, readonly) UIView *view;
+@property (copy, nonatomic, readonly) NSArray *allViews;
+
 @property (copy, nonatomic, readonly) FRYDSLQuery *subQuery;
 - (void)onEach:(FRYMatchBlock)matchBlock;
 

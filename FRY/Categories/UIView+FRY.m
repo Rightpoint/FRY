@@ -102,7 +102,6 @@
 
 - (BOOL)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView
 {
-    [[FRYIdleCheck system] waitForIdle];
     [[FRYTouchDispatch shared] simulateTouches:touches inView:self frame:frameInView];
     return [[FRYIdleCheck system] waitForIdle];
 }

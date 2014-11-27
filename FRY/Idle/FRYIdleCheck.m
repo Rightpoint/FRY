@@ -10,14 +10,10 @@
 #import "FRYTouchDispatch.h"
 #import "UIApplication+FRY.h"
 #import "NSRunLoop+FRY.h"
-
-
-#import "FRYCompoundCheck.h"
-#import "FRYAnimationCompleteCheck.h"
-#import "FRYInteractionsEnabledCheck.h"
-#import "FRYTouchDispatchedCheck.h"
-
-static NSTimeInterval const kFRYIdleCheckDefaultTimeout = 5.0;
+#import "NSObject+FRYLookup.h"
+#import "NSPredicate+FRY.h"
+#import "UIApplication+FRY.h"
+#import "UIView+FRY.h"
 static FRYIdleCheck *systemIdleCheck = nil;
 
 
@@ -27,54 +23,125 @@ static FRYIdleCheck *systemIdleCheck = nil;
 {
     NSAssert([NSThread currentThread] == [NSThread mainThread], @"%@ is not thread safe, call on main thread only", self.class);
     if ( systemIdleCheck == nil ) {
-        [self setupSystemChecks:@[[[FRYAnimationCompleteCheck alloc] init],
-                                  [[FRYInteractionsEnabledCheck alloc] init],
-                                  [[FRYTouchDispatchedCheck alloc] init]
-                                  ]];
+        systemIdleCheck = [[FRYIdleCheck alloc] init];
     }
     return systemIdleCheck;
 }
 
-+ (void)setupSystemChecks:(NSArray *)checks
-{
-    NSAssert([NSThread currentThread] == [NSThread mainThread], @"%@ is not thread safe, call on main thread only", self.class);
-    systemIdleCheck = [[FRYCompoundCheck alloc] initWithChecks:checks];
-}
 
 - (instancetype)init
 {
     self = [super init];
     if ( self ) {
-        self.timeout = kFRYIdleCheckDefaultTimeout;
+        self.timeout = 5.0;
     }
     return self;
 }
 
 - (BOOL)isIdle
 {
-    return YES;
+    return ([self interactionIsComplete] &&
+            [self animationIsComplete] &&
+            [self touchingIsComplete] &&
+            [self delegateIsComplete]);
 }
 
 - (NSString *)busyDescription
 {
-    return @"";
+    NSMutableString *description = [NSMutableString string];
+    if ( [self interactionIsComplete] == NO ) {
+        [description appendFormat:@"%@\n", [self interactionBusyDescription]];
+    }
+    if ( [self animationIsComplete] == NO ) {
+        [description appendFormat:@"%@\n", [self animationActiveDescription]];
+    }
+    if ( [self touchingIsComplete] == NO ) {
+        [description appendFormat:@"%@\n", [self touchActiveDescription]];
+    }
+    if ( [self delegateIsComplete] == NO ) {
+        [description appendFormat:@"%@\n", [self delegateActiveDescription]];
+    }
+    return [description copy];
 }
 
-- (NSTimeInterval)defaultTimeoutForRunloop
+- (BOOL)delegateIsComplete
 {
-    return kFRYIdleCheckDefaultTimeout;
+    if ( self.delegate == nil || [self.delegate respondsToSelector:@selector(isApplicationIdle:)] == NO ) {
+        return YES;
+    }
+    return [self.delegate isApplicationIdle:self];
+}
+
+- (NSString *)delegateActiveDescription
+{
+    if ( self.delegate == nil || [self.delegate respondsToSelector:@selector(applicationBusyDescriptionWithIdle:)] == NO ) {
+        return @"Unknown";
+    }
+    return [self.delegate applicationBusyDescriptionWithIdle:self];
+}
+
+#pragma mark - Interaction
+
+- (BOOL)interactionIsComplete
+{
+    return [[UIApplication sharedApplication] isIgnoringInteractionEvents] == NO;
+}
+
+- (NSString *)interactionBusyDescription
+{
+    return @"UIApplication is ignoring interaction events";
+}
+
+#pragma mark - Animation
+
+- (BOOL)animationIsComplete
+{
+    return [self animatingViews].count == 0;
+}
+
+- (NSString *)animationActiveDescription
+{
+    return [NSString stringWithFormat:@"%@ are still animating", [self animatingViews]];
+}
+
+- (NSArray *)animatingViews
+{
+    NSMutableArray *views = [[[UIApplication sharedApplication] fry_allChildrenViewsMatching:[NSPredicate fry_animatingView]] mutableCopy];
+    if ( self.delegate && [self.delegate respondsToSelector:@selector(viewsToIgnoreForAnimationComplete:)] ) {
+        NSArray *ignoreViews = [self.delegate viewsToIgnoreForAnimationComplete:self];
+        for ( UIView *v in [ignoreViews copy] ) {
+            NSSet *subAnimatingViews = [v fry_allChildrenViewsMatching:[NSPredicate fry_animatingView]];
+            ignoreViews = [ignoreViews arrayByAddingObjectsFromArray:[subAnimatingViews allObjects]];
+        }
+        [views removeObjectsInArray:ignoreViews];
+    }
+    return [views copy];
+}
+
+#pragma mark - Touch Dispatch
+
+- (BOOL)touchingIsComplete
+{
+    return [[FRYTouchDispatch shared] hasActiveTouches] == NO;
+}
+
+- (NSString *)touchActiveDescription
+{
+    return [NSString stringWithFormat:@"Still have active touches: %@\n", [FRYTouchDispatch shared]];
 }
 
 - (BOOL)waitForIdle
 {
-    BOOL isIdle = [[NSRunLoop currentRunLoop] fry_waitWithTimeout:[self defaultTimeoutForRunloop]
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceReferenceDate:0.1]];
+    NSTimeInterval timeout = [[FRYTouchDispatch shared] maxTouchDuration] + self.timeout;
+    BOOL isIdle = [[NSRunLoop currentRunLoop] fry_waitWithTimeout:timeout
                                                          forCheck:^BOOL{
                                                              return [self isIdle];
                                                          }];
     if ( isIdle == NO ) {
         NSLog(@"%@", [self busyDescription]);
     }
-    return isIdle;
+    return NO;
 }
 
 @end

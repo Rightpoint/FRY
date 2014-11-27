@@ -44,7 +44,7 @@
     for ( NSString *label in @[@"One", @"Two", @"Three"] ) {
         FRY.accessibilityLabel(label).tap();
         // The alertview is shown .5 seconds after tap, so wait a second for it to appear.
-        FRY.accessibilityLabel(@"OK").tap();
+        FRY.accessibilityLabel(@"OK").tap().absent();
     }
 }
 
@@ -53,7 +53,7 @@
 
     for ( NSString *response in @[@"Destructive", @"Other", @"OK"] ) {
         FRY.accessibilityLabel(@"Action One").tap();
-        FRY.accessibilityLabel(response).tap();
+        FRY.accessibilityLabel(response).tap().absent();
     }
 }
 

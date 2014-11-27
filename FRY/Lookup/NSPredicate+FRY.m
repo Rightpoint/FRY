@@ -12,6 +12,15 @@
 
 @implementation NSPredicate(FRY)
 
++ (NSPredicate *)fry_animatingView
+{
+    return [NSPredicate predicateWithBlock:^BOOL(UIView *viewOrElement, NSDictionary *bindings) {
+        BOOL isView = [viewOrElement isKindOfClass:[UIView class]];
+        BOOL isAnimating = isView ? [viewOrElement fry_isAnimating] : NO;
+        return isAnimating;
+    }];
+}
+
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel
 {
     NSParameterAssert(accessibilityLabel);

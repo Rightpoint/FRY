@@ -30,5 +30,6 @@
 - (void)fry_enumerateAllChildrenMatching:(NSPredicate *)predicate usingBlock:(FRYMatchBlock)block;
 
 - (NSSet *)fry_allChildrenMatching:(NSPredicate *)predicate;
+- (NSSet *)fry_allChildrenViewsMatching:(NSPredicate *)predicate;
 
 @end
