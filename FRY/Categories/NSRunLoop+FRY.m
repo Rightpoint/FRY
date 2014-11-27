@@ -23,11 +23,14 @@ typedef void(^FRYRunLoopObserverBlock)(CFRunLoopObserverRef observer, CFRunLoopA
     
     NSTimeInterval start = [NSDate timeIntervalSinceReferenceDate];
     BOOL checkOK = checkBlock();
-    while ( checkOK == NO &&
-           start + timeout > [NSDate timeIntervalSinceReferenceDate] )
+    while ( checkOK == NO
+//           && start + timeout > [NSDate timeIntervalSinceReferenceDate]
+           )
     {
-        [self runUntilDate:[NSDate dateWithTimeIntervalSinceNow:kFRYEventDispatchInterval]];
-        checkOK = checkBlock();
+        @autoreleasepool {
+            [self runUntilDate:[NSDate dateWithTimeIntervalSinceNow:kFRYEventDispatchInterval]];
+            checkOK = checkBlock();
+        }
     }
     
     return checkOK;
