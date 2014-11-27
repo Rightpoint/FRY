@@ -293,6 +293,7 @@ typedef NS_ENUM(NSInteger, FRYDSLQueryType) {
 
 - (FRYDSLQuery *)subQuery
 {
+    self.present();
     return [[FRYDSLQuery alloc] initForLookup:self.view withTestTarget:self.testTarget inFile:self.filename atLine:self.lineNumber];
 }
 
