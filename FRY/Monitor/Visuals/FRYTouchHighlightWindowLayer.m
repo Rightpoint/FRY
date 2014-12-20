@@ -22,29 +22,27 @@ static FRYTouchHighlightWindowLayer *fry_touchHighlightWindow = nil;
 
 + (FRYTouchHighlightWindowLayer *)touchHighlightWindow
 {
+    if ( fry_touchHighlightWindow == nil ) {
+        fry_touchHighlightWindow = [[FRYTouchHighlightWindowLayer alloc] init];
+    }
     return fry_touchHighlightWindow;
 }
 
-+ (void)enable
+- (void)enable
 {
-    if ( fry_touchHighlightWindow == nil ) {
-        fry_touchHighlightWindow = [[FRYTouchHighlightWindowLayer alloc] init];
-        [fry_touchHighlightWindow updateLayer];
-        [[NSNotificationCenter defaultCenter] addObserver:fry_touchHighlightWindow
-                                                 selector:@selector(updateLayer)
-                                                     name:UIWindowDidBecomeKeyNotification
-                                                   object:nil];
-    }
+    [self updateLayer];
+    [[NSNotificationCenter defaultCenter] addObserver:fry_touchHighlightWindow
+                                             selector:@selector(updateLayer)
+                                                 name:UIWindowDidBecomeKeyNotification
+                                               object:nil];
 }
 
-+ (void)disable
+- (void)disable
 {
-    if ( fry_touchHighlightWindow != nil ) {
-        [[NSNotificationCenter defaultCenter] removeObserver:fry_touchHighlightWindow
-                                                        name:UIWindowDidBecomeKeyNotification
-                                                      object:nil];
-    }
-    fry_touchHighlightWindow = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:fry_touchHighlightWindow
+                                                    name:UIWindowDidBecomeKeyNotification
+                                                  object:nil];
+    [self removeFromSuperlayer];
 }
 
 - (void)updateLayer
@@ -71,8 +69,10 @@ static FRYTouchHighlightWindowLayer *fry_touchHighlightWindow = nil;
 
 - (void)visualizeEvent:(UIEvent *)event
 {
-    for (UITouch *touch in event.allTouches) {
-        [self updateDisplayForTouch:touch];
+    if ( [self superlayer] != nil ) {
+        for (UITouch *touch in event.allTouches) {
+            [self updateDisplayForTouch:touch];
+        }
     }
 }
 

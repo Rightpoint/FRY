@@ -15,9 +15,9 @@
  */
 @interface FRYTouchHighlightWindowLayer : CALayer
 
-+ (void)enable;
-+ (void)disable;
 + (FRYTouchHighlightWindowLayer *)touchHighlightWindow;
+- (void)enable;
+- (void)disable;
 
 @property (assign, nonatomic) BOOL highlightViewFrames;
 
