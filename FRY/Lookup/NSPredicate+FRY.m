@@ -27,6 +27,19 @@
     return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(fry_accessibilityLabel)), accessibilityLabel];
 }
 
++ (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel comparision:(NSString *)comparision;
+{
+    NSParameterAssert(accessibilityLabel);
+    NSParameterAssert(comparision);
+    return [NSPredicate predicateWithFormat:@"%K %K %@", NSStringFromSelector(@selector(fry_accessibilityLabel)), comparision, accessibilityLabel];
+}
+
++ (NSPredicate *)fry_matchAccessibilityLabelLike:(NSString *)accessibilityLabel;
+{
+    NSParameterAssert(accessibilityLabel);
+    return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(fry_accessibilityLabel)), accessibilityLabel];
+}
+
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityValue:(NSString *)accessibilityValue
 {
     NSParameterAssert(accessibilityLabel);

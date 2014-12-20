@@ -16,6 +16,7 @@
 
 + (NSPredicate *)fry_animatingView;
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel;
++ (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel comparision:(NSString *)comparision;
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityValue:(NSString *)accessibilityValue;
 + (NSPredicate *)fry_matchAccessibilityValue:(NSString *)accessibilityValue;
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityTrait:(UIAccessibilityTraits)traits;
