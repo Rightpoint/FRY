@@ -7,13 +7,10 @@
 //
 
 #import "FRYTouchRecorder.h"
-#import "FRYMethodSwizzling.h"
 #import "UIKit+FRYExposePrivate.h"
 #import "FRYTouchEventLog.h"
 #import "UIView+FRY.h"
 #import "UITouch+FRY.h"
-
-#import "FRYTouchHighlightWindowLayer.h"
 
 @interface FRYTouchRecorder()
 
@@ -29,19 +26,15 @@
 
 + (FRYTouchRecorder *)shared
 {
-    static FRYTouchRecorder *monitor = nil;
-    if ( monitor == nil ) {
-        monitor = [[FRYTouchRecorder alloc] init];
+    static FRYTouchRecorder *recorder = nil;
+    if ( recorder == nil ) {
+        recorder = [[FRYTouchRecorder alloc] init];
     }
-    return monitor;
+    return recorder;
 }
 
 - (void)enable
 {
-    [FRYMethodSwizzling exchangeClass:[UIApplication class]
-                               method:@selector(sendEvent:)
-                            withClass:[self class]
-                               method:@selector(fry_sendEvent:)];
     self.startTime = [[NSProcessInfo processInfo] systemUptime];
     self.touchDefinitions = [NSMutableArray array];
     self.activeTouchLog = [NSMapTable weakToStrongObjectsMapTable];
@@ -51,8 +44,6 @@
                                              selector:@selector(printTouchLogOnResign)
                                                  name:UIApplicationWillResignActiveNotification
                                                object:nil];
-    
-    [FRYTouchHighlightWindowLayer enable];
 }
 
 - (void)disable
@@ -60,22 +51,13 @@
     self.touchDefinitions = nil;
     self.activeTouchLog = nil;
     self.startTime = MAXFLOAT;
-    [FRYMethodSwizzling exchangeClass:[UIApplication class]
-                               method:@selector(sendEvent:)
-                            withClass:[self class]
-                               method:@selector(fry_sendEvent:)];
-    [FRYTouchHighlightWindowLayer disable];
 }
 
-- (void)fry_sendEvent:(UIEvent *)event
+- (void)recordEvent:(UIEvent *)event
 {
-    [self fry_sendEvent:event];
-    [[FRYTouchRecorder shared] monitorEvent:event];
-    [[FRYTouchHighlightWindowLayer touchHighlightWindow] visualizeEvent:event];
-}
-
-- (void)monitorEvent:(UIEvent *)event
-{
+    if ( self.startTime == MAXFLOAT ) {
+        return;
+    }
     for ( UITouch *touch in [event allTouches] ) {
         NSTimeInterval relativeTouchTime = touch.timestamp - self.startTime;
         FRYTouchEventLog *log = nil;

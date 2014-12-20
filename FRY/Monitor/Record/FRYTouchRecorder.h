@@ -17,5 +17,6 @@
 
 - (void)enable;
 - (void)disable;
+- (void)recordEvent:(UIEvent *)event;
 
 @end
