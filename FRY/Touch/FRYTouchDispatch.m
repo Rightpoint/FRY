@@ -12,6 +12,7 @@
 #import "UIApplication+FRY.h"
 #import "UIView+FRY.h"
 #import "UITouch+FRY.h"
+#import "FRYIdleCheck.h"
 
 @interface FRYTouchDispatch()
 
@@ -48,10 +49,8 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
 }
 
-- (void)simulateTouches:(NSArray *)touches inView:(UIView *)view frame:(CGRect)frame
+- (void)asynchronouslySimulateTouches:(NSArray *)touches inView:(UIView *)view frame:(CGRect)frame
 {
-    NSAssert([NSThread currentThread] == [NSThread mainThread], @"");
-
     CGRect touchFrameInWindow = [view.window convertRect:frame fromView:view];
     for ( __strong FRYTouch *touch in touches ) {
         if ( touch.pointsAreAbsolute == NO ) {
@@ -65,11 +64,39 @@
     }
 }
 
+- (void)simulateTouches:(NSArray *)touches inView:(UIView *)view frame:(CGRect)frame
+{
+    NSAssert([NSThread currentThread] == [NSThread mainThread], @"");
+    
+    if ( self.delegate ) {
+        [self.delegate touchDispatch:self willStartSimulationOfTouches:touches];
+    }
+    else {
+        [[FRYIdleCheck system] waitForIdle];
+    }
+    [self asynchronouslySimulateTouches:touches inView:view frame:frame];
+    
+    if ( self.delegate ) {
+        [self.delegate touchDispatch:self didCompleteSimulationOfTouches:touches];
+    }
+    else {
+        [[FRYIdleCheck system] waitForIdle];
+    }
+}
+
+- (void)simulateTouches:(NSArray *)touches inView:(UIView *)view
+{
+    [self simulateTouches:touches inView:view frame:view.bounds];
+}
+
 - (void)pruneCompletedTouchInteractions
 {
+    NSMutableArray *completeTouches = [NSMutableArray array];
     for ( FRYActiveTouch *interaction in [self.activeTouches copy] ) {
         if ( interaction.currentTouchPhase == UITouchPhaseEnded || interaction.currentTouchPhase == UITouchPhaseCancelled ) {
             [self.activeTouches removeObject:interaction];
+            [completeTouches addObject:interaction.touchDefinition];
+            NSLog(@"Completing Touch %@", interaction.touchDefinition);
         }
     }
 }
@@ -96,6 +123,7 @@
     if ( nextEvent ) {
         [[UIApplication sharedApplication] sendEvent:nextEvent];
     }
+    [self pruneCompletedTouchInteractions];
 }
 
 #pragma mark - Private
@@ -112,7 +140,6 @@
             [touches addObject:touch];
         }
     }
-    [self pruneCompletedTouchInteractions];
 
     if ( touches.count > 0 ) {
         return [[UIApplication sharedApplication] fry_eventWithTouches:touches];
@@ -136,6 +163,7 @@
     if ( nextEvent ) {
         [[UIApplication sharedApplication] sendEvent:nextEvent];
     }
+    [self pruneCompletedTouchInteractions];
 }
 
 - (void)setMainThreadDispatchEnabled:(BOOL)enabled

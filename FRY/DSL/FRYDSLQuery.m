@@ -14,6 +14,7 @@
 
 #import "FRYDSLQuery.h"
 #import "NSObject+FRYLookup.h"
+#import "FRYTouchDispatch.h"
 
 @interface NSObject(FRYTestStub)
 
@@ -230,7 +231,7 @@ typedef NS_ENUM(NSInteger, FRYDSLQueryType) {
         id<FRYLookup> lookup = [self singularResult];
         UIView *view = [[lookup fry_representingView] fry_interactableParent];
         CGRect frameInView = [lookup fry_frameInView];
-        [view fry_simulateTouch:[FRYTouch tap] insideRect:frameInView];
+        [[FRYTouchDispatch shared] simulateTouches:@[[FRYTouch tap]] inView:view frame:frameInView];
         return self;
     };
 }
@@ -243,7 +244,7 @@ typedef NS_ENUM(NSInteger, FRYDSLQueryType) {
         id<FRYLookup> lookup = [self singularResult];
         UIView *view = [[lookup fry_representingView] fry_interactableParent];
         CGRect frameInView = [lookup fry_frameInView];
-        [view fry_simulateTouch:touch insideRect:frameInView];
+        [[FRYTouchDispatch shared] simulateTouches:@[touch] inView:view frame:frameInView];
         return self;
     };
 }
@@ -255,7 +256,7 @@ typedef NS_ENUM(NSInteger, FRYDSLQueryType) {
         id<FRYLookup> lookup = [self singularResult];
         UIView *view = [[lookup fry_representingView] fry_interactableParent];
         CGRect frameInView = [lookup fry_frameInView];
-        [view fry_simulateTouches:touches insideRect:frameInView];
+        [[FRYTouchDispatch shared] simulateTouches:touches inView:view frame:frameInView];
         return self;
     };
 }

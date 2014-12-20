@@ -46,11 +46,6 @@
     return event;
 }
 
-- (FRYTypist *)fry_typist
-{
-    return [[FRYTypist alloc] init];
-}
-
 - (UIWindow *)fry_inputViewWindow
 {
     for ( UIWindow *window in self.windows ) {

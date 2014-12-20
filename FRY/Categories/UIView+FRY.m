@@ -100,58 +100,6 @@
     return view != nil;
 }
 
-- (BOOL)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView
-{
-    [[FRYTouchDispatch shared] simulateTouches:touches inView:self frame:frameInView];
-    return [[FRYIdleCheck system] waitForIdle];
-}
-
-- (BOOL)fry_simulateTouches:(NSArray *)touches
-{
-    return [self fry_simulateTouches:touches insideRect:self.bounds];
-}
-
-- (BOOL)fry_simulateTouch:(FRYTouch *)touch insideRect:(CGRect)frameInView
-{
-    return [self fry_simulateTouches:@[touch] insideRect:frameInView];
-}
-
-- (BOOL)fry_simulateTouch:(FRYTouch *)touch
-{
-    return [self fry_simulateTouches:@[touch]];
-}
-
-- (BOOL)fry_simulateTouch:(FRYTouch *)touch onSubviewMatching:(NSPredicate *)predicate
-{
-    return [self fry_simulateTouches:@[touch] onSubviewMatching:predicate];
-}
-
-- (BOOL)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSPredicate *)predicate
-{
-    BOOL touchOk = NO;
-    if ( predicate ) {
-        id <FRYLookup> lookup = [self fry_farthestDescendentMatching:predicate];
-        UIView *view = [lookup fry_representingView];
-        CGRect frameInView = [lookup fry_frameInView];
-        NSAssert(view != nil, @"Unable to find view matching %@", predicate);
-        
-        // This interactable check is not really needed, but will cause some invalid touch events
-        // to fail quicker.   It will also focus touches on views the developer is probably working with
-        // and skip over some private view heirarchies.   This is especially noticible for the visualization
-        // point of view.
-        UIView *interactable = [view fry_interactableParent];
-        NSAssert(interactable, @"No Interactable parent of %@", view);
-        CGRect convertedFrame = [interactable convertRect:frameInView fromView:view];
-        
-        touchOk = [interactable fry_simulateTouches:touches insideRect:convertedFrame];
-    }
-    else {
-        touchOk = [self fry_simulateTouches:touches insideRect:self.bounds];
-    }
-    return touchOk;
-}
-
-
 @end
 
 @implementation UINavigationBar(FRY)

@@ -51,14 +51,13 @@
  */
 - (UIView *)fry_lookupMatchingViewAtPoint:(CGPoint)point;
 
+/**
+ *  A check to determine if this view has a superview of the specified class.
+ *
+ *  @param klass The parent view class to check
+ *
+ *  @return YES if there is a parent view of the specified type.
+ */
 - (BOOL)fry_parentViewOfClass:(Class)klass;
-
-- (BOOL)fry_simulateTouches:(NSArray *)touches insideRect:(CGRect)frameInView;
-- (BOOL)fry_simulateTouches:(NSArray *)touches;
-- (BOOL)fry_simulateTouch:(FRYTouch *)touch insideRect:(CGRect)frameInView;
-- (BOOL)fry_simulateTouch:(FRYTouch *)touch;
-
-- (BOOL)fry_simulateTouch:(FRYTouch *)touch onSubviewMatching:(NSPredicate *)predicate;
-- (BOOL)fry_simulateTouches:(NSArray *)touches onSubviewMatching:(NSPredicate *)predicate;
 
 @end

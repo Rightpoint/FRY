@@ -10,6 +10,7 @@
 #import "UIKit+FRYCastCompanions.h"
 #import "NSObject+FRYLookup.h"
 #import "UIView+FRY.h"
+#import "FRYTouchDispatch.h"
 #import "NSRunLoop+FRY.h"
 #import "FRYIdleCheck.h"
 #import "UIKit+FRYExposePrivate.h"
@@ -21,7 +22,7 @@
 
 @implementation FRYTypist
 
-- (FRYKeyboardLayoutStar *)keyboard
++ (FRYKeyboardLayoutStar *)keyboard
 {
     NSPredicate *privateKeyboardPredicate = [NSPredicate predicateWithFormat:@"class.description = %@", @"UIKeyboardLayoutStar"];   
     UIView *keyboard = [[[UIApplication sharedApplication] fry_farthestDescendentMatching:privateKeyboardPredicate] fry_representingView];
@@ -29,7 +30,7 @@
     return (FRYKeyboardLayoutStar *)keyboard;
 }
 
-- (void)typeString:(NSString *)string
++ (void)typeString:(NSString *)string
 {
     unichar         buffer[string.length+1];
     [string getCharacters:buffer range:NSMakeRange(0, string.length)];
@@ -51,7 +52,7 @@
     }
 }
 
-- (void)tapHardwareKeyWithString:(NSString *)string
++ (void)tapHardwareKeyWithString:(NSString *)string
 {
     if ([string isEqualToString:@"\b"]) {
         [[UIKeyboardImpl sharedInstance] deleteFromInput];
@@ -60,7 +61,7 @@
     }
 }
 
-- (void)tapSoftwareKeyWithRepresentedString:(NSString *)representedString
++ (void)tapSoftwareKeyWithRepresentedString:(NSString *)representedString
 {
     FRYKBKeyTree *key = [self.keyboard baseKeyForString:representedString];
 
@@ -88,13 +89,9 @@
         }
     }
     else {
-        [self.keyboard fry_simulateTouch:[FRYTouch tap]
-                              insideRect:[key frame]];
-        BOOL isOK = [[NSRunLoop currentRunLoop] fry_waitWithTimeout:1
-                                                           forCheck:^BOOL{
-                                                               return self.keyboard.activeKey == nil;
-                                                           }];
-        NSAssert(isOK, @"active key did not go nil.");
+        [[FRYTouchDispatch shared] simulateTouches:@[[FRYTouch tap]]
+                                            inView:self.keyboard
+                                             frame:[key frame]];
     }
 }
 

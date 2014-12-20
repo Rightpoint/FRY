@@ -59,7 +59,6 @@ static NSUInteger const kFRYTouchPhaseUndefined = -1;
     }
     
     CGPoint windowPoint = [self.touchDefinition pointAtRelativeTime:relativeTime];
-    CGPoint viewPoint = [self.view.window convertPoint:windowPoint toView:self.view];
 
     if ( self.currentTouch == nil ) {
         UIWindow *window = [self.view isKindOfClass:[UIWindow class]] ? (id)self.view : self.view.window;
@@ -82,7 +81,6 @@ static NSUInteger const kFRYTouchPhaseUndefined = -1;
         }
         else {
             [self.currentTouch setPhaseAndUpdateTimestamp:UITouchPhaseEnded];
-            viewPoint = CGPointMake(-1.0f, -1.0f);
         }
     }
     

@@ -64,11 +64,6 @@ static const void *FRYUITouchViewWhereTouchBegan = &FRYUITouchViewWhereTouchBega
     return self;
 }
 
-//
-// setLocationInWindow:
-//
-// Setter to allow access to the _locationInWindow member.
-//
 - (void)setLocationInWindow:(CGPoint)location
 {
     [self setTimestamp:[[NSProcessInfo processInfo] systemUptime]];
@@ -79,13 +74,6 @@ static const void *FRYUITouchViewWhereTouchBegan = &FRYUITouchViewWhereTouchBega
 {
     [self setTimestamp:[[NSProcessInfo processInfo] systemUptime]];
     [self setPhase:phase];
-}
-
-- (CGPoint)fry_locationRelativeToView
-{
-    NSParameterAssert(self.view);
-    CGPoint location = [self locationInView:self.view];
-    return CGPointMake(location.x / self.view.frame.size.width, location.y / self.view.frame.size.height);
 }
 
 @end

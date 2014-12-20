@@ -47,6 +47,16 @@ static FRYTouchHighlightWindowLayer *fry_touchHighlightWindow = nil;
     fry_touchHighlightWindow = nil;
 }
 
+- (void)updateLayer
+{
+    // Ensure that this layer is always on top by monitoring key window changes.
+    CALayer *windowSuperLayer = [[[[UIApplication sharedApplication] keyWindow] layer] superlayer];
+    self.bounds = windowSuperLayer.bounds;
+    self.position = CGPointMake(CGRectGetMidX(windowSuperLayer.bounds),
+                                CGRectGetMidY(windowSuperLayer.bounds));
+    [windowSuperLayer insertSublayer:self above:windowSuperLayer];
+}
+
 - (instancetype)init
 {
     self = [super init];
@@ -55,19 +65,8 @@ static FRYTouchHighlightWindowLayer *fry_touchHighlightWindow = nil;
         self.touchLayerByKey = [NSMutableDictionary dictionary];
         self.frameBorderColor = [UIColor colorWithRed:0.329 green:0.329 blue:0.329 alpha:1];
         self.touchColor = [UIColor colorWithRed:0.918 green:0.353 blue:0.322 alpha:1];
-
     }
     return self;
-}
-
-- (void)updateLayer
-{
-    // Ensure that this layer is always on top by monitoring key window changes.
-    CALayer *windowSuperLayer = [[[[UIApplication sharedApplication] keyWindow] layer] superlayer];
-    fry_touchHighlightWindow.bounds = windowSuperLayer.bounds;
-    fry_touchHighlightWindow.position = CGPointMake(CGRectGetMidX(windowSuperLayer.bounds),
-                                                    CGRectGetMidY(windowSuperLayer.bounds));
-    [windowSuperLayer insertSublayer:fry_touchHighlightWindow above:windowSuperLayer];
 }
 
 - (void)visualizeEvent:(UIEvent *)event

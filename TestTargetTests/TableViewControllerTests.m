@@ -120,9 +120,11 @@
 
     // Drag the view down 4 rows
     CGRect originalLocation = [FRY_KEY_WINDOW convertRect:reorderKnobView.bounds fromView:reorderKnobView];
-    [reorderKnobView fry_simulateTouch:[FRYTouch pressAndDragFromPoint:CGPointMake(0.5, 0.5)
-                                                                        toPoint:CGPointMake(0.5, 4.5)
-                                                                    forDuration:1]];
+    FRYTouch *t = [FRYTouch pressAndDragFromPoint:CGPointMake(0.5, 0.5)
+                                          toPoint:CGPointMake(0.5, 4.5)
+                                      forDuration:1];
+    [[FRYTouchDispatch shared] simulateTouches:@[t]
+                                        inView:reorderKnobView];
     
     reorderKnobView = FRY_KEY.accessibilityLabel(TableViewReorderTitleForRow(0)).present().view;
 

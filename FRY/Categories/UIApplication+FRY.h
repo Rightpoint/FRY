@@ -19,16 +19,6 @@
 - (UIEvent *)fry_eventWithTouches:(NSArray *)touches;
 
 /**
- *  Return a helper typing object.
- */
-- (FRYTypist *)fry_typist;
-
-/**
- * Return the window that incapsulates input views
- */
-- (UIWindow *)fry_inputViewWindow;
-
-/**
  *  Return windows and the keyWindow.   keyWindow is not always in the windows array.
  */
 - (NSArray *)fry_allWindows;

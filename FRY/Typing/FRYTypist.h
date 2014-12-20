@@ -10,6 +10,6 @@
 
 @interface FRYTypist : NSObject
 
-- (void)typeString:(NSString *)string;
++ (void)typeString:(NSString *)string;
 
 @end

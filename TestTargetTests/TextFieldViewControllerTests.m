@@ -41,7 +41,7 @@
 {
     FRY_KEY.accessibilityLabel(@"placeholder").tap();
 
-    FRYTypist *typist = [[UIApplication sharedApplication] fry_typist];
+    
     NSArray *stringsToTest = @[
                                @"Tt8/*",
                                @"Thissss is text",
@@ -50,7 +50,7 @@
                                @"VERYLONGTEXTWITHMANYUPPERCASELETTERS",
                                ];
     for ( NSString *string in stringsToTest ) {
-        [typist typeString:string];
+        [FRYTypist typeString:string];
 
         FRY_KEY.accessibilityValue(string).present().selectText();
     }
