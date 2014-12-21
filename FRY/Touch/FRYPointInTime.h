@@ -18,4 +18,6 @@
 @property (assign, nonatomic) CGPoint location;
 @property (assign, nonatomic) NSTimeInterval offset;
 
+- (NSArray *)arrayRepresentation;
+
 @end

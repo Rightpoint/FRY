@@ -47,20 +47,26 @@
     self.translatedIntoView = YES;
 }
 
+- (NSString *)recreationTouchCode
+{
+    if ( self.pointsInTime.count == 2 ) {
+        FRYPointInTime *pit = [self.pointsInTime lastObject];
+        return [NSString stringWithFormat:@"[FRYTouch tapAtPoint:CGPointMake(%.3ff, %.3ff)]", pit.location.x, pit.location.y];
+    }
+    else {
+        return [NSString stringWithFormat:@"[FRYTouch touchStarting:%.3f points:%zd %@:%@]",
+                0.0,
+                self.pointsInTime.count,
+                self.translatedIntoView ? @"xyoffsets" : @"absoluteXyoffsets",
+                [self recreationCodeXyoffsetsArgument]];
+    }
+}
+
 - (NSString *)recreationCode
 {
-    
-    return [NSString stringWithFormat:@"\
-[FRY_KEY_WINDOW fry_simulateTouch:[FRYTouch touchStarting:%.3f\n\
-                                                   points:%zd\n\
-                                                %@:%@]\n\
-         onSubviewMatching:%@];\n",
-            0.0,
-            self.pointsInTime.count,
-            self.translatedIntoView ? @"xyoffsets" : @"absoluteXyoffsets",
-
-            [self recreationCodeXyoffsetsArgument],
-            [self recreationCodeViewMatchingPredicate]];
+    return [NSString stringWithFormat:@"FRY%@.touch(%@);",
+            [self recreationCodeViewMatching],
+            [self recreationTouchCode]];
 }
 
 - (NSString *)recreationCodeXyoffsetsArgument
@@ -72,32 +78,25 @@
     return [xPoints componentsJoinedByString:@", "];
 }
 
-- (NSString *)recreationCodeViewMatchingPredicate
+- (NSString *)recreationCodeViewMatching
 {
-    NSMutableArray *formatPairs = [NSMutableArray array];
-    NSMutableArray *keyValuePairs = [NSMutableArray array];
-    [self.viewLookupVariables enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
-        [formatPairs addObject:@"\%K = \%@"];
-        [keyValuePairs addObject:[NSString stringWithFormat:@"@\"%@\"", key]];
-        if ( [obj isKindOfClass:[NSString class]] ) {
-            [keyValuePairs addObject:[NSString stringWithFormat:@"@\"%@\"", obj]];
-        }
-        else if ( [obj isKindOfClass:[NSNumber class]] ) {
-            [keyValuePairs addObject:[NSString stringWithFormat:@"@(%@)", obj]];
-        }
-        else {
-            [NSException raise:NSInvalidArgumentException format:@"Not sure how to deal with %@", obj];
-        }
-    }];
-    NSString *bareFormatString = [formatPairs componentsJoinedByString:@" && "];
-    NSString *keyValueList = [keyValuePairs componentsJoinedByString:@", "];
-
+    NSMutableString *result = [NSMutableString string];
     if ( self.viewLookupVariables ) {
-        return [NSString stringWithFormat:@"[NSPredicate predicateWithFormat:@\"%@\", %@]", bareFormatString, keyValueList];
+        [self.viewLookupVariables enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
+            NSString *value = nil;
+            if ( [obj isKindOfClass:[NSString class]] ) {
+                value = [NSString stringWithFormat:@"@\"%@\"", obj];
+            }
+            else if ( [obj isKindOfClass:[NSNumber class]] ) {
+                value = [NSString stringWithFormat:@"@(%@)", obj];
+            }
+            else {
+                [NSException raise:NSInvalidArgumentException format:@"Not sure how to deal with %@", obj];
+            }
+            [result appendFormat:@".%@(%@)", [key stringByReplacingOccurrencesOfString:@"fry_" withString:@""], value];
+        }];
     }
-    else {
-        return @"nil";
-    }
+    return [result copy];
 }
 
 - (NSString *)description
@@ -105,5 +104,13 @@
     return [NSString stringWithFormat:@"<%@:%p pointsInTime=%@, startingOffset=%f, viewLookupVariables=%@", self.class, self, self.pointsInTime, self.startingOffset, self.viewLookupVariables];
 }
 
+- (NSDictionary *)dictionaryRepresentation
+{
+    return @{
+             NSStringFromSelector(@selector(startingOffset)) : @(self.startingOffset),
+             NSStringFromSelector(@selector(pointsInTime)) : [self.pointsInTime valueForKeyPath:NSStringFromSelector(@selector(arrayRepresentation))],
+             NSStringFromSelector(@selector(viewLookupVariables)) : self.viewLookupVariables
+             };
+}
 
 @end
