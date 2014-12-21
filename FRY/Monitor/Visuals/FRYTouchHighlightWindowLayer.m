@@ -9,7 +9,7 @@
 #import "FRYTouchHighlightWindowLayer.h"
 #import "FRYTouchLayer.h"
 
-static FRYTouchHighlightWindowLayer *fry_touchHighlightWindow = nil;
+typedef void(^FRYHighlightCompletionBlock)(void);
 
 @interface FRYTouchHighlightWindowLayer()
 
@@ -20,28 +20,22 @@ static FRYTouchHighlightWindowLayer *fry_touchHighlightWindow = nil;
 
 @implementation FRYTouchHighlightWindowLayer
 
-+ (FRYTouchHighlightWindowLayer *)touchHighlightWindow
-{
-    if ( fry_touchHighlightWindow == nil ) {
-        fry_touchHighlightWindow = [[FRYTouchHighlightWindowLayer alloc] init];
-    }
-    return fry_touchHighlightWindow;
-}
-
 - (void)enable
 {
     [self updateLayer];
-    [[NSNotificationCenter defaultCenter] addObserver:fry_touchHighlightWindow
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateLayer)
                                                  name:UIWindowDidBecomeKeyNotification
                                                object:nil];
+    [self showString:@"Recording Enabled"];
 }
 
 - (void)disable
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:fry_touchHighlightWindow
+    [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIWindowDidBecomeKeyNotification
                                                   object:nil];
+    [self showString:@"Recording Complete"];
     [self removeFromSuperlayer];
 }
 
@@ -141,6 +135,25 @@ static FRYTouchHighlightWindowLayer *fry_touchHighlightWindow = nil;
     [layer finishAtPoint:point];
 }
 
+- (void)showString:(NSString *)string
+{
+    CATextLayer *label = [CATextLayer layer];
+    [self.superlayer addSublayer:label];
+    
+    label.string = string;
+    label.alignmentMode = kCAAlignmentCenter;
+    label.fontSize = 18.0f;
+    label.backgroundColor = [[UIColor darkGrayColor] CGColor];
+    label.cornerRadius = 10.0f;
+    label.frame = CGRectMake(0.0f, 0.0f, 180.0f, 24.0f);
+    label.position = CGPointMake(CGRectGetWidth(self.bounds)  / 2, 100.0f);
+    label.opacity = 0.0f;
+    
+    [[NSOperationQueue currentQueue] addOperationWithBlock:^{
+        [self animateInLayerFrame:label animateOutAfter:1.5];
+    }];
+}
+
 - (void)highlightFrame:(CGRect)frame
 {
     CGPoint position = CGPointMake(CGRectGetMinX(frame) + CGRectGetWidth(frame) / 2,
@@ -154,14 +167,17 @@ static FRYTouchHighlightWindowLayer *fry_touchHighlightWindow = nil;
     layer.borderWidth = 2.0f;
     layer.borderColor = self.frameBorderColor.CGColor;
     [self addSublayer:layer];
-    [self performSelector:@selector(animateInLayerFrame:) withObject:layer afterDelay:0.0];
+
+    [[NSOperationQueue currentQueue] addOperationWithBlock:^{
+        [self animateInLayerFrame:layer animateOutAfter:0.3];
+    }];
 }
 
-- (void)animateInLayerFrame:(CALayer *)layer
+- (void)animateInLayerFrame:(CALayer *)layer animateOutAfter:(NSTimeInterval)delay
 {
     [CATransaction begin];
     [CATransaction setCompletionBlock:^{
-        [self performSelector:@selector(animateOutLayerFrame:) withObject:layer afterDelay:0.3];
+        [self performSelector:@selector(animateOutLayerFrame:) withObject:layer afterDelay:delay];
     }];
     layer.opacity = 1.0f;
     [CATransaction commit];

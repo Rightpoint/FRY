@@ -15,7 +15,6 @@
  */
 @interface FRYTouchHighlightWindowLayer : CALayer
 
-+ (FRYTouchHighlightWindowLayer *)touchHighlightWindow;
 - (void)enable;
 - (void)disable;
 

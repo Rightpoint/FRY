@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ControlsViewController.h"
-#import "FRYTouchRecorder.h"
+#import "FRYTouchMonitor.h"
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
 
@@ -18,12 +18,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [[FRYTouchRecorder shared] enable];
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = [[ControlsViewController alloc] initWithNibName:@"ControlsViewController" bundle:nil];
     [self.window makeKeyAndVisible];
 
+    [[FRYTouchMonitor shared] registerGestureEnablingOnView:self.window];
     return YES;
 }
 

@@ -13,10 +13,10 @@
  */
 @interface FRYTouchRecorder : NSObject
 
-+ (FRYTouchRecorder *)shared;
-
 - (void)enable;
 - (void)disable;
 - (void)recordEvent:(UIEvent *)event;
+
+- (void)printTouchLog;
 
 @end

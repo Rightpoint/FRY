@@ -24,26 +24,12 @@
 
 @implementation FRYTouchRecorder
 
-+ (FRYTouchRecorder *)shared
-{
-    static FRYTouchRecorder *recorder = nil;
-    if ( recorder == nil ) {
-        recorder = [[FRYTouchRecorder alloc] init];
-    }
-    return recorder;
-}
-
 - (void)enable
 {
     self.startTime = [[NSProcessInfo processInfo] systemUptime];
     self.touchDefinitions = [NSMutableArray array];
     self.activeTouchLog = [NSMapTable weakToStrongObjectsMapTable];
     self.touchBeganOnViews = [NSMapTable weakToStrongObjectsMapTable];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(printTouchLogOnResign)
-                                                 name:UIApplicationWillResignActiveNotification
-                                               object:nil];
 }
 
 - (void)disable
@@ -97,7 +83,7 @@
     }
 }
 
-- (void)printTouchLogOnResign
+- (void)printTouchLog
 {
     for ( FRYTouchEventLog *log in self.touchDefinitions ) {
         printf("%s", [[log recreationCode] UTF8String]);
