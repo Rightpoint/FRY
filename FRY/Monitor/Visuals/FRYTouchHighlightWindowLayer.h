@@ -25,4 +25,6 @@
 
 - (void)visualizeEvent:(UIEvent *)event;
 
+- (void)showString:(NSString *)string;
+
 @end

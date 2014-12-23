@@ -27,7 +27,6 @@ typedef void(^FRYHighlightCompletionBlock)(void);
                                              selector:@selector(updateLayer)
                                                  name:UIWindowDidBecomeKeyNotification
                                                object:nil];
-    [self showString:@"Recording Enabled"];
 }
 
 - (void)disable
@@ -35,7 +34,6 @@ typedef void(^FRYHighlightCompletionBlock)(void);
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIWindowDidBecomeKeyNotification
                                                   object:nil];
-    [self showString:@"Recording Complete"];
     [self removeFromSuperlayer];
 }
 

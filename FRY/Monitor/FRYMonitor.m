@@ -10,8 +10,12 @@
 #import "FRYMethodSwizzling.h"
 #import "FRYTouchTracker.h"
 #import "FRYTouchHighlightWindowLayer.h"
+#import "FRYEventLog.h"
 
-@interface FRYMonitor() <FRYTrackerDelegate>
+@interface FRYMonitor() <FRYTrackerDelegate, UIAlertViewDelegate>
+
+@property (strong, nonatomic) FRYTouchTracker *tracker;
+@property (strong, nonatomic) FRYTouchHighlightWindowLayer *highlightLayer;
 
 @property (strong, nonatomic) UITapGestureRecognizer *recordGestureRecognizer;
 @property (strong, nonatomic) UITapGestureRecognizer *presentUIGestureRecognizer;
@@ -55,6 +59,7 @@
                                method:@selector(fry_sendEvent:)];
     self.activeEvents = [NSMutableArray array];
     self.enableTime = [[NSProcessInfo processInfo] systemUptime];
+    [self.highlightLayer showString:@"Recording Enabled"];
 }
 
 - (void)disable
@@ -103,7 +108,7 @@
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(completeRecording)
-                                                 name:UIApplicationDidBecomeActiveNotification
+                                                 name:UIApplicationWillEnterForegroundNotification
                                                object:nil];
     self.recordGestureRecognizer.enabled = NO;
     self.presentUIGestureRecognizer.enabled = NO;
@@ -123,13 +128,54 @@
 - (void)completeRecording
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIApplicationDidBecomeActiveNotification
+                                                    name:UIApplicationWillEnterForegroundNotification
                                                   object:nil];
     [self.tracker disable];
     [self.highlightLayer disable];
     [self printTouchLog];
     self.recordGestureRecognizer.enabled = YES;
     self.presentUIGestureRecognizer.enabled = YES;
+    
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Save Event Log"
+                                                 message:@"Enter Log Name"
+                                                delegate:self
+                                       cancelButtonTitle:@"Cancel"
+                                       otherButtonTitles:@"Save", nil];
+    av.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [av show];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if ( buttonIndex != alertView.cancelButtonIndex ) {
+        UITextField *textField = [alertView textFieldAtIndex:0];
+        [self saveEventLogWithName:textField.text];
+    }
+    else {
+        [self clearEventLog];
+    }
+}
+
+- (void)saveEventLogWithName:(NSString *)eventLogName
+{
+    FRYEventLog *log = [[FRYEventLog alloc] init];
+    log.name = eventLogName;
+    log.startingDate = [NSDate date];
+    log.events = self.activeEvents;
+    NSError *error = nil;
+    if ( [log save:&error] == NO ) {
+        [[[UIAlertView alloc] initWithTitle:@"Error Saving Log"
+                                    message:[error localizedDescription]
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    }
+    [self clearEventLog];
+}
+
+- (void)clearEventLog
+{
+    self.activeEvents = nil;
 }
 
 - (void)printTouchLog

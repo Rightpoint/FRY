@@ -23,8 +23,8 @@
 
 + (FRYMonitor *)shared;
 
-@property (strong, nonatomic) FRYTouchTracker *tracker;
-@property (strong, nonatomic) FRYTouchHighlightWindowLayer *highlightLayer;
+@property (strong, nonatomic, readonly) FRYTouchTracker *tracker;
+@property (strong, nonatomic, readonly) FRYTouchHighlightWindowLayer *highlightLayer;
 
 - (void)enable;
 - (void)disable;
