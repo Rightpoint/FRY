@@ -8,14 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-#import "FRYTouchRecorder.h"
+#import "FRYTouchTracker.h"
 #import "FRYTouchHighlightWindowLayer.h"
 
-@interface FRYTouchMonitor : NSObject
+@class FRYMonitor;
 
-+ (FRYTouchMonitor *)shared;
+@protocol FRYMonitorDelegate <NSObject>
 
-@property (strong, nonatomic) FRYTouchRecorder *recorder;
+- (NSURL *)appSchemeURLRepresentingCurrentStateForMonitor:(FRYMonitor *)monitor;
+
+@end
+
+@interface FRYMonitor : NSObject
+
++ (FRYMonitor *)shared;
+
+@property (strong, nonatomic) FRYTouchTracker *tracker;
 @property (strong, nonatomic) FRYTouchHighlightWindowLayer *highlightLayer;
 
 - (void)enable;

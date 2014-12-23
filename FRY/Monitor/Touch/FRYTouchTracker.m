@@ -6,50 +6,47 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "FRYTouchRecorder.h"
+#import "FRYTouchTracker.h"
 #import "UIKit+FRYExposePrivate.h"
-#import "FRYTouchEventLog.h"
+#import "FRYTouchEvent.h"
 #import "UIView+FRY.h"
 #import "UITouch+FRY.h"
+#import "FRYTouchEvent.h"
 
-@interface FRYTouchRecorder()
-
-@property (assign, nonatomic) NSTimeInterval startTime;
-@property (strong, nonatomic) NSMutableArray *touchDefinitions;
+@interface FRYTouchTracker()
 
 @property (strong, nonatomic) NSMapTable *activeTouchLog;
 @property (strong, nonatomic) NSMapTable *touchBeganOnViews;
 
 @end
 
-@implementation FRYTouchRecorder
+@implementation FRYTouchTracker
 
 - (void)enable
 {
-    self.startTime = [[NSProcessInfo processInfo] systemUptime];
-    self.touchDefinitions = [NSMutableArray array];
+    [super enable];
     self.activeTouchLog = [NSMapTable weakToStrongObjectsMapTable];
     self.touchBeganOnViews = [NSMapTable weakToStrongObjectsMapTable];
 }
 
 - (void)disable
 {
-    self.touchDefinitions = nil;
+    [super disable];
     self.activeTouchLog = nil;
-    self.startTime = MAXFLOAT;
+    self.touchBeganOnViews = nil;
 }
 
-- (void)recordEvent:(UIEvent *)event
+- (void)trackEvent:(UIEvent *)event
 {
-    if ( self.startTime == MAXFLOAT ) {
+    if ( self.isEnabled == NO ) {
         return;
     }
     for ( UITouch *touch in [event allTouches] ) {
         NSTimeInterval relativeTouchTime = touch.timestamp - self.startTime;
-        FRYTouchEventLog *log = nil;
+        FRYTouchEvent *log = nil;
 
         if ( touch.phase == UITouchPhaseBegan ) {
-            log = [[FRYTouchEventLog alloc] init];
+            log = [[FRYTouchEvent alloc] init];
             log.startingOffset = relativeTouchTime;
             CGPoint locationInView = [touch locationInView:touch.view];
             UIView *matchingView = [touch.view fry_lookupMatchingViewAtPoint:locationInView];
@@ -76,18 +73,12 @@
             if ( touchedView && log.viewLookupVariables ) {
                 [log translateTouchesIntoViewCoordinates:touchedView];
             }
-            [self.touchDefinitions addObject:[self.activeTouchLog objectForKey:touch]];
+            FRYTouchEvent *event = [self.activeTouchLog objectForKey:touch];
+            
+            [self.delegate tracker:self recordEvent:event];
             [self.activeTouchLog removeObjectForKey:touch];
             [self.touchBeganOnViews removeObjectForKey:touch];
         }
-    }
-}
-
-- (void)printTouchLog
-{
-    for ( FRYTouchEventLog *log in self.touchDefinitions ) {
-        printf("%s", [[log recreationCode] UTF8String]);
-        printf("\n");
     }
 }
 

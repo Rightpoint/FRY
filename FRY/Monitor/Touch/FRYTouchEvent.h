@@ -7,17 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FRYEvent.h"
 
-@interface FRYTouchEventLog : NSObject
+@interface FRYTouchEvent : FRYEvent
 
-@property (assign, nonatomic) NSTimeInterval startingOffset;
 @property (strong, nonatomic) NSDictionary *viewLookupVariables;
 @property (strong, nonatomic, readonly) NSArray *pointsInTime;
 
 - (void)addLocation:(CGPoint)point atRelativeTime:(NSTimeInterval)time;
 
 - (void)translateTouchesIntoViewCoordinates:(UIView *)view;
-
-- (NSString *)recreationCode;
 
 @end

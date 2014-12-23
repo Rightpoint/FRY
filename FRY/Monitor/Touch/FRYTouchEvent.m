@@ -6,17 +6,17 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "FRYTouchEventLog.h"
+#import "FRYTouchEvent.h"
 #import "FRYPointInTime.h"
 
-@interface FRYTouchEventLog()
+@interface FRYTouchEvent()
 
 @property (strong, nonatomic) NSArray *pointsInTime;
 @property (assign, nonatomic) BOOL translatedIntoView;
 
 @end
 
-@implementation FRYTouchEventLog
+@implementation FRYTouchEvent
 
 - (id)init
 {
@@ -47,6 +47,13 @@
     self.translatedIntoView = YES;
 }
 
+- (NSString *)recreationCode
+{
+    return [NSString stringWithFormat:@"FRY%@.touch(%@);",
+            [self recreationCodeViewMatching],
+            [self recreationTouchCode]];
+}
+
 - (NSString *)recreationTouchCode
 {
     if ( self.pointsInTime.count == 2 ) {
@@ -60,13 +67,6 @@
                 self.translatedIntoView ? @"xyoffsets" : @"absoluteXyoffsets",
                 [self recreationCodeXyoffsetsArgument]];
     }
-}
-
-- (NSString *)recreationCode
-{
-    return [NSString stringWithFormat:@"FRY%@.touch(%@);",
-            [self recreationCodeViewMatching],
-            [self recreationTouchCode]];
 }
 
 - (NSString *)recreationCodeXyoffsetsArgument
@@ -104,7 +104,7 @@
     return [NSString stringWithFormat:@"<%@:%p pointsInTime=%@, startingOffset=%f, viewLookupVariables=%@", self.class, self, self.pointsInTime, self.startingOffset, self.viewLookupVariables];
 }
 
-- (NSDictionary *)dictionaryRepresentation
+- (NSDictionary *)representation
 {
     return @{
              NSStringFromSelector(@selector(startingOffset)) : @(self.startingOffset),

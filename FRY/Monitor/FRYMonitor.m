@@ -6,31 +6,33 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "FRYTouchMonitor.h"
+#import "FRYMonitor.h"
 #import "FRYMethodSwizzling.h"
-#import "FRYTouchRecorder.h"
+#import "FRYTouchTracker.h"
 #import "FRYTouchHighlightWindowLayer.h"
 
-@interface FRYTouchMonitor()
+@interface FRYMonitor() <FRYTrackerDelegate>
 
 @property (strong, nonatomic) UITapGestureRecognizer *recordGestureRecognizer;
 @property (strong, nonatomic) UITapGestureRecognizer *presentUIGestureRecognizer;
+@property (strong, nonatomic) NSMutableArray *activeEvents;
+@property (assign, nonatomic) NSTimeInterval enableTime;
 
 @end
 
-@implementation FRYTouchMonitor
+@implementation FRYMonitor
 
 + (void)load
 {
     [self.shared enable];
 }
 
-+ (FRYTouchMonitor *)shared
++ (FRYMonitor *)shared
 {
-    static FRYTouchMonitor *monitor = nil;
+    static FRYMonitor *monitor = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        monitor = [[FRYTouchMonitor alloc] init];
+        monitor = [[FRYMonitor alloc] init];
     });
     return monitor;
 }
@@ -39,7 +41,7 @@
 {
     self = [super init];
     if ( self ) {
-        self.recorder = [[FRYTouchRecorder alloc] init];
+        self.tracker = [[FRYTouchTracker alloc] initWithDelegate:self];
         self.highlightLayer = [[FRYTouchHighlightWindowLayer alloc] init];
     }
     return self;
@@ -51,6 +53,8 @@
                                method:@selector(sendEvent:)
                             withClass:[self class]
                                method:@selector(fry_sendEvent:)];
+    self.activeEvents = [NSMutableArray array];
+    self.enableTime = [[NSProcessInfo processInfo] systemUptime];
 }
 
 - (void)disable
@@ -59,13 +63,25 @@
                                method:@selector(sendEvent:)
                             withClass:[self class]
                                method:@selector(fry_sendEvent:)];
+    self.activeEvents = nil;
+    self.enableTime = MAXFLOAT;
 }
 
 - (void)fry_sendEvent:(UIEvent *)event
 {
     [self fry_sendEvent:event];
-    [FRYTouchMonitor.shared.recorder recordEvent:event];
-    [FRYTouchMonitor.shared.highlightLayer visualizeEvent:event];
+    [FRYMonitor.shared.tracker trackEvent:event];
+    [FRYMonitor.shared.highlightLayer visualizeEvent:event];
+}
+
+- (NSTimeInterval)startTimeForEvents
+{
+    return [[NSProcessInfo processInfo] systemUptime] - self.enableTime;
+}
+
+- (void)tracker:(FRYTracker *)tracker recordEvent:(FRYEvent *)event
+{
+    [self.activeEvents addObject:event];
 }
 
 - (void)registerGestureEnablingOnView:(UIView *)view
@@ -94,7 +110,7 @@
     
     // Touch must finish before starting the recording, so enable in the next runloop
     [[NSOperationQueue currentQueue] addOperationWithBlock:^{
-        [self.recorder enable];
+        [self.tracker enable];
         [self.highlightLayer enable];
     }];
 }
@@ -109,11 +125,19 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIApplicationDidBecomeActiveNotification
                                                   object:nil];
-    [self.recorder printTouchLog];
-    [self.recorder disable];
+    [self.tracker disable];
     [self.highlightLayer disable];
+    [self printTouchLog];
     self.recordGestureRecognizer.enabled = YES;
     self.presentUIGestureRecognizer.enabled = YES;
 }
+
+- (void)printTouchLog
+{
+    for ( FRYEvent *event in self.activeEvents ) {
+        printf("%s\n", [[event recreationCode] UTF8String]);
+    }
+}
+
 
 @end

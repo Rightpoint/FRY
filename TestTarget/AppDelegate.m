@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ControlsViewController.h"
-#import "FRYTouchMonitor.h"
+#import "FRYMonitor.h"
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
 
@@ -23,7 +23,7 @@
     self.window.rootViewController = [[ControlsViewController alloc] initWithNibName:@"ControlsViewController" bundle:nil];
     [self.window makeKeyAndVisible];
 
-    [[FRYTouchMonitor shared] registerGestureEnablingOnView:self.window];
+    [[FRYMonitor shared] registerGestureEnablingOnView:self.window];
     return YES;
 }
 
