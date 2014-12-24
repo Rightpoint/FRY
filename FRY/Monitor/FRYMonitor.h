@@ -14,6 +14,7 @@
 @class FRYMonitor;
 
 @protocol FRYMonitorDelegate <NSObject>
+@optional
 
 - (NSURL *)appSchemeURLRepresentingCurrentStateForMonitor:(FRYMonitor *)monitor;
 
@@ -25,6 +26,7 @@
 
 @property (strong, nonatomic, readonly) FRYTouchTracker *tracker;
 @property (strong, nonatomic, readonly) FRYTouchHighlightWindowLayer *highlightLayer;
+@property (assign, nonatomic) id<FRYMonitorDelegate>delegate;
 
 - (void)enable;
 - (void)disable;

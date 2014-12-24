@@ -59,7 +59,6 @@
                                method:@selector(fry_sendEvent:)];
     self.activeEvents = [NSMutableArray array];
     self.enableTime = [[NSProcessInfo processInfo] systemUptime];
-    [self.highlightLayer showString:@"Recording Enabled"];
 }
 
 - (void)disable
@@ -117,6 +116,7 @@
     [[NSOperationQueue currentQueue] addOperationWithBlock:^{
         [self.tracker enable];
         [self.highlightLayer enable];
+        [self.highlightLayer showString:@"Recording Enabled"];
     }];
 }
 
@@ -160,8 +160,10 @@
 {
     FRYEventLog *log = [[FRYEventLog alloc] init];
     log.name = eventLogName;
-    log.startingDate = [NSDate date];
     log.events = self.activeEvents;
+    if ( [self.delegate respondsToSelector:@selector(appSchemeURLRepresentingCurrentStateForMonitor:)] ) {
+        log.appSchemeURL = [self.delegate appSchemeURLRepresentingCurrentStateForMonitor:self];
+    }
     NSError *error = nil;
     if ( [log save:&error] == NO ) {
         [[[UIAlertView alloc] initWithTitle:@"Error Saving Log"

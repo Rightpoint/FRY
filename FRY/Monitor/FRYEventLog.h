@@ -30,7 +30,7 @@
 /**
  *  The date that the event log was recorded.  This is populated on load
  */
-@property (strong, nonatomic) NSDate *startingDate;
+@property (strong, nonatomic, readonly) NSDate *startingDate;
 
 /**
  *  The app scheme URL that represents the page in the app that the touch

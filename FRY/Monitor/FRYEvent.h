@@ -17,8 +17,11 @@
 
 @property (assign, nonatomic) NSTimeInterval startingOffset;
 
-- (NSDictionary *)representation;
+- (NSDictionary *)plistRepresentation;
 
 - (NSString *)recreationCode;
+
+- (BOOL)saveAuxillaryFilesInDirectory:(NSURL *)directory error:(NSError **)error;
+
 
 @end

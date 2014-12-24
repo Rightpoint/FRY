@@ -104,7 +104,7 @@
     return [NSString stringWithFormat:@"<%@:%p pointsInTime=%@, startingOffset=%f, viewLookupVariables=%@", self.class, self, self.pointsInTime, self.startingOffset, self.viewLookupVariables];
 }
 
-- (NSDictionary *)representation
+- (NSDictionary *)plistRepresentation
 {
     return @{
              NSStringFromSelector(@selector(startingOffset)) : @(self.startingOffset),

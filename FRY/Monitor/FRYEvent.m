@@ -10,7 +10,7 @@
 
 @implementation FRYEvent
 
-- (NSDictionary *)representation
+- (NSDictionary *)plistRepresentation
 {
     return @{};
 }
@@ -20,5 +20,9 @@
     return @"// No Op";
 }
 
+- (BOOL)saveAuxillaryFilesInDirectory:(NSURL *)directory error:(NSError **)error
+{
+    return YES;
+}
 
 @end
