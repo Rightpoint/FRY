@@ -26,11 +26,6 @@
 
 @implementation FRYMonitor
 
-+ (void)load
-{
-    [self.shared enable];
-}
-
 + (FRYMonitor *)shared
 {
     static FRYMonitor *monitor = nil;
@@ -59,6 +54,9 @@
                                method:@selector(fry_sendEvent:)];
     self.activeEvents = [NSMutableArray array];
     self.enableTime = [[NSProcessInfo processInfo] systemUptime];
+    [self.tracker enable];
+    [self.highlightLayer enable];
+    [self.highlightLayer showString:@"Recording Enabled"];
 }
 
 - (void)disable
@@ -67,6 +65,12 @@
                                method:@selector(sendEvent:)
                             withClass:[self class]
                                method:@selector(fry_sendEvent:)];
+    [self.tracker disable];
+    [self.highlightLayer disable];
+}
+
+- (void)clearState
+{
     self.activeEvents = nil;
     self.enableTime = MAXFLOAT;
 }
@@ -114,9 +118,7 @@
     
     // Touch must finish before starting the recording, so enable in the next runloop
     [[NSOperationQueue currentQueue] addOperationWithBlock:^{
-        [self.tracker enable];
-        [self.highlightLayer enable];
-        [self.highlightLayer showString:@"Recording Enabled"];
+        [self enable];
     }];
 }
 
@@ -130,12 +132,10 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIApplicationWillEnterForegroundNotification
                                                   object:nil];
-    [self.tracker disable];
-    [self.highlightLayer disable];
     [self printTouchLog];
     self.recordGestureRecognizer.enabled = YES;
     self.presentUIGestureRecognizer.enabled = YES;
-    
+    [self disable];
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Save Event Log"
                                                  message:@"Enter Log Name"
                                                 delegate:self
@@ -151,13 +151,12 @@
         UITextField *textField = [alertView textFieldAtIndex:0];
         [self saveEventLogWithName:textField.text];
     }
-    else {
-        [self clearEventLog];
-    }
+    [self clearState];
 }
 
 - (void)saveEventLogWithName:(NSString *)eventLogName
 {
+    NSAssert(self.activeEvents, @"No Events");
     FRYEventLog *log = [[FRYEventLog alloc] init];
     log.name = eventLogName;
     log.events = self.activeEvents;
@@ -172,12 +171,6 @@
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil] show];
     }
-    [self clearEventLog];
-}
-
-- (void)clearEventLog
-{
-    self.activeEvents = nil;
 }
 
 - (void)printTouchLog
