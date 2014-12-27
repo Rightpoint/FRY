@@ -12,6 +12,7 @@
 #import "AlertTableViewController.h"
 #import "TextFieldViewController.h"
 #import "PickerViewController.h"
+#import "WebViewController.h"
 
 #import "FRYMonitor.h"
 
@@ -37,6 +38,7 @@
                                       [self navigationControllerContaining:[AlertTableViewController class]],
                                       [self navigationControllerContaining:[TextFieldViewController class]],
                                       [self navigationControllerContaining:[PickerViewController class]],
+                                      [self navigationControllerContaining:[WebViewController class]],
                                       ];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = tabController;
