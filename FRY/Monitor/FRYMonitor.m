@@ -56,7 +56,6 @@
     self.enableTime = [[NSProcessInfo processInfo] systemUptime];
     [self.tracker enable];
     [self.highlightLayer enable];
-    [self.highlightLayer showString:@"Recording Enabled"];
 }
 
 - (void)disable

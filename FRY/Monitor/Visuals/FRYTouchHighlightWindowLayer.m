@@ -27,6 +27,7 @@ typedef void(^FRYHighlightCompletionBlock)(void);
                                              selector:@selector(updateLayer)
                                                  name:UIWindowDidBecomeKeyNotification
                                                object:nil];
+    [self showString:@"Recording Enabled"];
 }
 
 - (void)disable
