@@ -8,6 +8,12 @@
 
 #import "AppDelegate.h"
 #import "ControlsViewController.h"
+#import "TableViewController.h"
+#import "AlertTableViewController.h"
+#import "TextFieldViewController.h"
+#import "PickerViewController.h"
+#import "WebViewController.h"
+
 #import "FRYMonitor.h"
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
@@ -16,11 +22,26 @@
 
 @implementation AppDelegate
 
+- (UIViewController *)navigationControllerContaining:(Class)klass
+{
+    UIViewController *vc = [[klass alloc] initWithNibName:nil bundle:nil];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
+    return navigationController;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    UITabBarController *tabController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];
+    tabController.viewControllers = @[
+                                      [self navigationControllerContaining:[ControlsViewController class]],
+                                      [self navigationControllerContaining:[TableViewController class]],
+                                      [self navigationControllerContaining:[AlertTableViewController class]],
+                                      [self navigationControllerContaining:[TextFieldViewController class]],
+                                      [self navigationControllerContaining:[PickerViewController class]],
+                                      [self navigationControllerContaining:[WebViewController class]],
+                                      ];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.rootViewController = [[ControlsViewController alloc] initWithNibName:@"ControlsViewController" bundle:nil];
+    self.window.rootViewController = tabController;
     [self.window makeKeyAndVisible];
 
     [[FRYMonitor shared] registerGestureEnablingOnView:self.window];

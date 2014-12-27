@@ -65,6 +65,11 @@ typedef NS_ENUM(NSInteger, PickerViewControllerInput) {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"Picker";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                              style:UIBarButtonItemStyleDone
+                                                                             target:self
+                                                                             action:@selector(resignFirstResponder)];
     self.inputType = PickerViewControllerInputDate;
     self.datePicker.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
     self.dateTimePicker.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];

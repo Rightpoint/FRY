@@ -18,6 +18,7 @@
 		AB0A4C541A4E501400387068 /* FRYNetworkTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C531A4E501400387068 /* FRYNetworkTracker.m */; };
 		AB0A4C571A4E516A00387068 /* FRYNetworkEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C561A4E516A00387068 /* FRYNetworkEvent.m */; };
 		AB0A4C5A1A4E5A6600387068 /* FRYNetworkTrackerProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C591A4E5A6600387068 /* FRYNetworkTrackerProtocol.m */; };
+		AB0A4C5D1A4E6E0900387068 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C5C1A4E6E0900387068 /* WebViewController.m */; };
 		AB17BAA51A1C38FA008EC56E /* FRYIdleCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = AB17BAA41A1C38FA008EC56E /* FRYIdleCheck.m */; };
 		AB17BAB71A1C3FDA008EC56E /* Idle.md in Sources */ = {isa = PBXBuildFile; fileRef = AB17BAB51A1C3FDA008EC56E /* Idle.md */; };
 		AB17BABA1A1C4913008EC56E /* UIScrollView+FRYScrollingState.m in Sources */ = {isa = PBXBuildFile; fileRef = AB17BAB91A1C4913008EC56E /* UIScrollView+FRYScrollingState.m */; };
@@ -122,6 +123,8 @@
 		AB0A4C561A4E516A00387068 /* FRYNetworkEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYNetworkEvent.m; sourceTree = "<group>"; };
 		AB0A4C581A4E5A6600387068 /* FRYNetworkTrackerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYNetworkTrackerProtocol.h; sourceTree = "<group>"; };
 		AB0A4C591A4E5A6600387068 /* FRYNetworkTrackerProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYNetworkTrackerProtocol.m; sourceTree = "<group>"; };
+		AB0A4C5B1A4E6E0900387068 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		AB0A4C5C1A4E6E0900387068 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		AB17BAA31A1C38FA008EC56E /* FRYIdleCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYIdleCheck.h; sourceTree = "<group>"; };
 		AB17BAA41A1C38FA008EC56E /* FRYIdleCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYIdleCheck.m; sourceTree = "<group>"; };
 		AB17BAB51A1C3FDA008EC56E /* Idle.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Idle.md; sourceTree = "<group>"; };
@@ -496,6 +499,8 @@
 				AB26597E1A106A4C0074FF2E /* PickerViewController.h */,
 				AB26597F1A106A4C0074FF2E /* PickerViewController.m */,
 				AB2659811A106FB00074FF2E /* PickerViewController.xib */,
+				AB0A4C5B1A4E6E0900387068 /* WebViewController.h */,
+				AB0A4C5C1A4E6E0900387068 /* WebViewController.m */,
 				ABCF04CA1A06AF200000318A /* Images.xcassets */,
 				ABCF04BA1A06AF200000318A /* Supporting Files */,
 				AB24E0061A0C88BF0099231F /* CellItem.h */,
@@ -741,6 +746,7 @@
 				AB24E0081A0C88BF0099231F /* CellItem.m in Sources */,
 				ABCF04BD1A06AF200000318A /* main.m in Sources */,
 				AB2659801A106A4C0074FF2E /* PickerViewController.m in Sources */,
+				AB0A4C5D1A4E6E0900387068 /* WebViewController.m in Sources */,
 				AB2659701A0F2A710074FF2E /* TextFieldViewController.m in Sources */,
 				ABCF04E31A06BE220000318A /* ControlsViewController.m in Sources */,
 				ABCFAC0A1A0E94BA003B91BC /* TableViewController.m in Sources */,

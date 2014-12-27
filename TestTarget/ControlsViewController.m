@@ -29,6 +29,7 @@
  */
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"Controls";
     self.triggeredSelectors = [NSMutableSet set];
 
     self.slider.accessibilityLabel = @"Slider";
