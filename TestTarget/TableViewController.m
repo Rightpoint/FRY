@@ -17,6 +17,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.title = @"Table";
+
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass(self.class)];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;

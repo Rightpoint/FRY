@@ -24,6 +24,7 @@ NS_ENUM(NSUInteger, AlertType) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"Alerts";
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"1"];
     self.alerts = @[
                     [CellItem itemWithTitle:@"One" block:^{
