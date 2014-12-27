@@ -55,12 +55,17 @@ static id<FRYNetworkTrackerProtocolDelegate> s_delegate = nil;
     self.connection = [[NSURLConnection alloc] initWithRequest:self.request
                                                       delegate:self
                                               startImmediately:YES];
-    [s_delegate didStartLoading:self];
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [s_delegate didStartLoading:self];
+    }];
 }
 
 - (void)stopLoading
 {
-    [s_delegate didStopLoading:self];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [s_delegate didStopLoading:self];
+    }];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response

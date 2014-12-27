@@ -74,7 +74,6 @@
                                method:@selector(fry_sendEvent:)];
     [self.touchTracker disable];
     [self.networkTracker disable];
-    
     [self.highlightLayer disable];
 }
 

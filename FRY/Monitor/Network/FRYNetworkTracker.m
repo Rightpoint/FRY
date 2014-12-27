@@ -19,6 +19,7 @@
 - (void)enable
 {
     [super enable];
+    [NSURLProtocol registerClass:[FRYNetworkTrackerProtocol class]];
     [FRYNetworkTrackerProtocol setNetworkMonitorDelegate:self];
 }
 
@@ -26,6 +27,17 @@
 {
     [super disable];
     [FRYNetworkTrackerProtocol setNetworkMonitorDelegate:nil];
+    [NSURLProtocol unregisterClass:[FRYNetworkTrackerProtocol class]];
+}
+
+- (void)didStartLoading:(FRYNetworkTrackerProtocol *)monitor
+{
+    
+}
+
+- (void)didStopLoading:(FRYNetworkTrackerProtocol *)monitor
+{
+    
 }
 
 @end
