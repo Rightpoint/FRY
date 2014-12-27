@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @class FRYNetworkTrackerProtocol;
+@class FRYNetworkEvent;
 
 @protocol FRYNetworkTrackerProtocolDelegate <NSObject>
 
-- (void)didStartLoading:(FRYNetworkTrackerProtocol *)monitor;
-- (void)didStopLoading:(FRYNetworkTrackerProtocol *)monitor;
+- (void)networkTrackerProtocol:(FRYNetworkTrackerProtocol *)monitor didStartEvent:(FRYNetworkEvent *)event;
+- (void)networkTrackerProtocol:(FRYNetworkTrackerProtocol *)monitor didCompleteEvent:(FRYNetworkEvent *)event;
 
 @end
 

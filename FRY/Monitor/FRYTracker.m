@@ -20,6 +20,7 @@
 {
     self = [super init];
     if ( self ) {
+        _delegate = delegate;
     }
     return self;
 }

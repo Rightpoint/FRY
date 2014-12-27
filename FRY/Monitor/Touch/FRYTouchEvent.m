@@ -106,11 +106,14 @@
 
 - (NSDictionary *)plistRepresentation
 {
-    return @{
-             NSStringFromSelector(@selector(startingOffset)) : @(self.startingOffset),
-             NSStringFromSelector(@selector(pointsInTime)) : [self.pointsInTime valueForKeyPath:NSStringFromSelector(@selector(arrayRepresentation))],
-             NSStringFromSelector(@selector(viewLookupVariables)) : self.viewLookupVariables
-             };
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+    
+    dictionary[NSStringFromSelector(@selector(startingOffset))] = @(self.startingOffset);
+    dictionary[NSStringFromSelector(@selector(pointsInTime))] = [self.pointsInTime valueForKeyPath:NSStringFromSelector(@selector(arrayRepresentation))];
+    if ( self.viewLookupVariables ) {
+        dictionary[NSStringFromSelector(@selector(viewLookupVariables))] = self.viewLookupVariables;
+    }
+    return [dictionary copy];
 }
 
 @end

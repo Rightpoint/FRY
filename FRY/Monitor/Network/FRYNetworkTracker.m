@@ -8,6 +8,7 @@
 
 #import "FRYNetworkTracker.h"
 #import "FRYNetworkTrackerProtocol.h"
+#import "FRYNetworkEvent.h"
 
 @interface FRYNetworkTracker() <FRYNetworkTrackerProtocolDelegate>
 
@@ -30,14 +31,13 @@
     [NSURLProtocol unregisterClass:[FRYNetworkTrackerProtocol class]];
 }
 
-- (void)didStartLoading:(FRYNetworkTrackerProtocol *)monitor
+- (void)networkTrackerProtocol:(FRYNetworkTrackerProtocol *)monitor didStartEvent:(FRYNetworkEvent *)event
 {
-    
 }
 
-- (void)didStopLoading:(FRYNetworkTrackerProtocol *)monitor
+- (void)networkTrackerProtocol:(FRYNetworkTrackerProtocol *)monitor didCompleteEvent:(FRYNetworkEvent *)event
 {
-    
+    [self.delegate tracker:self recordEvent:event];
 }
 
 @end

@@ -7,12 +7,16 @@
 //
 
 #import "FRYNetworkTrackerProtocol.h"
+#import "FRYNetworkEvent.h"
 
 static NSString* const FRYNetworkRequestTrackedHeader = @"X-FRY-Track";
 
 static id<FRYNetworkTrackerProtocolDelegate> s_delegate = nil;
 
 @interface FRYNetworkTrackerProtocol() <NSURLConnectionDataDelegate>
+
+@property (strong, nonatomic) NSMutableData *data;
+@property (strong, nonatomic) FRYNetworkEvent *networkEvent;
 
 @end
 
@@ -46,6 +50,10 @@ static id<FRYNetworkTrackerProtocolDelegate> s_delegate = nil;
     self = [super initWithRequest:mutableRequest
                    cachedResponse:cachedResponse
                            client:client];
+    if ( self ) {
+        self.data = [NSMutableData data];
+        self.networkEvent = [[FRYNetworkEvent alloc] init];
+    }
     
     return self;
 }
@@ -55,40 +63,48 @@ static id<FRYNetworkTrackerProtocolDelegate> s_delegate = nil;
     self.connection = [[NSURLConnection alloc] initWithRequest:self.request
                                                       delegate:self
                                               startImmediately:YES];
-    
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [s_delegate didStartLoading:self];
+        self.networkEvent.request = self.request;
+        [s_delegate networkTrackerProtocol:self didStartEvent:self.networkEvent];
     }];
 }
 
 - (void)stopLoading
 {
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [s_delegate didStopLoading:self];
-    }];
+//    [self.connection cancel];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     [self.client URLProtocol:self
           didReceiveResponse:response
-          cacheStoragePolicy:NSURLCacheStorageAllowed];
+          cacheStoragePolicy:NSURLCacheStorageNotAllowed];
+    self.networkEvent.response = response;
 }
-
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     [self.client URLProtocol:self didLoadData:data];
+    [self.data appendData:data];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     [self.client URLProtocol:self didFailWithError:error];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        self.networkEvent.error = error;
+        self.networkEvent.data  = self.data;
+        [s_delegate networkTrackerProtocol:self didCompleteEvent:self.networkEvent];
+    }];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     [self.client URLProtocolDidFinishLoading:self];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        self.networkEvent.data  = self.data;
+        [s_delegate networkTrackerProtocol:self didCompleteEvent:self.networkEvent];
+    }];
 }
 
 - (NSURLRequest *)connection:(NSURLConnection *)connection
