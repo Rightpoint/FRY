@@ -52,7 +52,7 @@
 {
     BOOL ok = YES;
     NSParameterAssert(self.request);
-    ok = [NSKeyedArchiver archiveRootObject:self.request toFile:[self pathInDirectory:directory withExtension:@"requeset"]];
+    ok = [NSKeyedArchiver archiveRootObject:self.request toFile:[self pathInDirectory:directory withExtension:@"request"]];
     if ( ok == NO ) {
         return NO;
     }
