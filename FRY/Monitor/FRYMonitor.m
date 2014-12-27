@@ -8,13 +8,19 @@
 
 #import "FRYMonitor.h"
 #import "FRYMethodSwizzling.h"
-#import "FRYTouchTracker.h"
-#import "FRYTouchHighlightWindowLayer.h"
+
 #import "FRYEventLog.h"
+
+#import "FRYTouchTracker.h"
+#import "FRYNetworkTracker.h"
+
+#import "FRYTouchHighlightWindowLayer.h"
 
 @interface FRYMonitor() <FRYTrackerDelegate, UIAlertViewDelegate>
 
-@property (strong, nonatomic) FRYTouchTracker *tracker;
+@property (strong, nonatomic) FRYTouchTracker *touchTracker;
+@property (strong, nonatomic) FRYNetworkTracker *networkTracker;
+
 @property (strong, nonatomic) FRYTouchHighlightWindowLayer *highlightLayer;
 
 @property (strong, nonatomic) UITapGestureRecognizer *recordGestureRecognizer;
@@ -40,7 +46,8 @@
 {
     self = [super init];
     if ( self ) {
-        self.tracker = [[FRYTouchTracker alloc] initWithDelegate:self];
+        self.touchTracker = [[FRYTouchTracker alloc] initWithDelegate:self];
+        self.networkTracker = [[FRYNetworkTracker alloc] initWithDelegate:self];
         self.highlightLayer = [[FRYTouchHighlightWindowLayer alloc] init];
     }
     return self;
@@ -54,7 +61,8 @@
                                method:@selector(fry_sendEvent:)];
     self.activeEvents = [NSMutableArray array];
     self.enableTime = [[NSProcessInfo processInfo] systemUptime];
-    [self.tracker enable];
+    [self.touchTracker enable];
+    [self.networkTracker enable];
     [self.highlightLayer enable];
 }
 
@@ -64,7 +72,9 @@
                                method:@selector(sendEvent:)
                             withClass:[self class]
                                method:@selector(fry_sendEvent:)];
-    [self.tracker disable];
+    [self.touchTracker disable];
+    [self.networkTracker disable];
+    
     [self.highlightLayer disable];
 }
 
@@ -77,7 +87,7 @@
 - (void)fry_sendEvent:(UIEvent *)event
 {
     [self fry_sendEvent:event];
-    [FRYMonitor.shared.tracker trackEvent:event];
+    [FRYMonitor.shared.touchTracker trackEvent:event];
     [FRYMonitor.shared.highlightLayer visualizeEvent:event];
 }
 
@@ -178,6 +188,5 @@
         printf("%s\n", [[event recreationCode] UTF8String]);
     }
 }
-
 
 @end

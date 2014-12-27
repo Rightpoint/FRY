@@ -24,7 +24,7 @@
 
 + (FRYMonitor *)shared;
 
-@property (strong, nonatomic, readonly) FRYTouchTracker *tracker;
+@property (strong, nonatomic, readonly) FRYTouchTracker *touchTracker;
 @property (strong, nonatomic, readonly) FRYTouchHighlightWindowLayer *highlightLayer;
 @property (assign, nonatomic) id<FRYMonitorDelegate>delegate;
 

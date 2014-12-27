@@ -15,6 +15,9 @@
 		AB0A4C4A1A490A0800387068 /* FRYTouchTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C441A490A0800387068 /* FRYTouchTracker.m */; };
 		AB0A4C4B1A490A0800387068 /* FRYTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C451A490A0800387068 /* FRYTracker.m */; };
 		AB0A4C4C1A490A0800387068 /* FRYEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C481A490A0800387068 /* FRYEvent.m */; };
+		AB0A4C541A4E501400387068 /* FRYNetworkTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C531A4E501400387068 /* FRYNetworkTracker.m */; };
+		AB0A4C571A4E516A00387068 /* FRYNetworkEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C561A4E516A00387068 /* FRYNetworkEvent.m */; };
+		AB0A4C5A1A4E5A6600387068 /* FRYNetworkTrackerProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C591A4E5A6600387068 /* FRYNetworkTrackerProtocol.m */; };
 		AB17BAA51A1C38FA008EC56E /* FRYIdleCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = AB17BAA41A1C38FA008EC56E /* FRYIdleCheck.m */; };
 		AB17BAB71A1C3FDA008EC56E /* Idle.md in Sources */ = {isa = PBXBuildFile; fileRef = AB17BAB51A1C3FDA008EC56E /* Idle.md */; };
 		AB17BABA1A1C4913008EC56E /* UIScrollView+FRYScrollingState.m in Sources */ = {isa = PBXBuildFile; fileRef = AB17BAB91A1C4913008EC56E /* UIScrollView+FRYScrollingState.m */; };
@@ -113,6 +116,12 @@
 		AB0A4C461A490A0800387068 /* FRYTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYTracker.h; sourceTree = "<group>"; };
 		AB0A4C471A490A0800387068 /* FRYEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYEvent.h; sourceTree = "<group>"; };
 		AB0A4C481A490A0800387068 /* FRYEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYEvent.m; sourceTree = "<group>"; };
+		AB0A4C521A4E501400387068 /* FRYNetworkTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYNetworkTracker.h; sourceTree = "<group>"; };
+		AB0A4C531A4E501400387068 /* FRYNetworkTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYNetworkTracker.m; sourceTree = "<group>"; };
+		AB0A4C551A4E516A00387068 /* FRYNetworkEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYNetworkEvent.h; sourceTree = "<group>"; };
+		AB0A4C561A4E516A00387068 /* FRYNetworkEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYNetworkEvent.m; sourceTree = "<group>"; };
+		AB0A4C581A4E5A6600387068 /* FRYNetworkTrackerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYNetworkTrackerProtocol.h; sourceTree = "<group>"; };
+		AB0A4C591A4E5A6600387068 /* FRYNetworkTrackerProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYNetworkTrackerProtocol.m; sourceTree = "<group>"; };
 		AB17BAA31A1C38FA008EC56E /* FRYIdleCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYIdleCheck.h; sourceTree = "<group>"; };
 		AB17BAA41A1C38FA008EC56E /* FRYIdleCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYIdleCheck.m; sourceTree = "<group>"; };
 		AB17BAB51A1C3FDA008EC56E /* Idle.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Idle.md; sourceTree = "<group>"; };
@@ -252,6 +261,7 @@
 				AB0A4C481A490A0800387068 /* FRYEvent.m */,
 				AB0A4C461A490A0800387068 /* FRYTracker.h */,
 				AB0A4C451A490A0800387068 /* FRYTracker.m */,
+				AB0A4C511A4E4FDE00387068 /* Network */,
 				AB0A4C401A490A0800387068 /* Touch */,
 				AB0A4C241A46184700387068 /* Visuals */,
 			);
@@ -279,6 +289,19 @@
 				AB0A4C441A490A0800387068 /* FRYTouchTracker.m */,
 			);
 			path = Touch;
+			sourceTree = "<group>";
+		};
+		AB0A4C511A4E4FDE00387068 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				AB0A4C551A4E516A00387068 /* FRYNetworkEvent.h */,
+				AB0A4C561A4E516A00387068 /* FRYNetworkEvent.m */,
+				AB0A4C521A4E501400387068 /* FRYNetworkTracker.h */,
+				AB0A4C531A4E501400387068 /* FRYNetworkTracker.m */,
+				AB0A4C581A4E5A6600387068 /* FRYNetworkTrackerProtocol.h */,
+				AB0A4C591A4E5A6600387068 /* FRYNetworkTrackerProtocol.m */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		AB17BAA21A1C38FA008EC56E /* Idle */ = {
@@ -676,10 +699,12 @@
 				ABED6EA51A16FC9A0009D44A /* FRYDSLQuery.m in Sources */,
 				AB25C08319DF95ED00038E75 /* UIView+FRY.m in Sources */,
 				ABCFAC051A0E7B79003B91BC /* NSObject+FRYLookup.m in Sources */,
+				AB0A4C571A4E516A00387068 /* FRYNetworkEvent.m in Sources */,
 				AB35FD7A19E58B5C00228531 /* FRYMethodSwizzling.m in Sources */,
 				AB0A4C491A490A0800387068 /* FRYTouchEvent.m in Sources */,
 				AB35FCE119DFA6F200228531 /* FRYEventProxy.m in Sources */,
 				AB26597D1A0FE7430074FF2E /* UITextInput+FRY.m in Sources */,
+				AB0A4C5A1A4E5A6600387068 /* FRYNetworkTrackerProtocol.m in Sources */,
 				AB0A4C2D1A46184700387068 /* FRYTouchLayer.m in Sources */,
 				AB35FCF019DFB49100228531 /* FRYActiveTouch.m in Sources */,
 				AB0A4C4B1A490A0800387068 /* FRYTracker.m in Sources */,
@@ -697,6 +722,7 @@
 				AB35FCE419DFAEB900228531 /* UITouch+FRY.m in Sources */,
 				ABC12EBF1A17E28500BD7556 /* FRYTouch.m in Sources */,
 				AB0A4C301A46185F00387068 /* FRYMonitor.m in Sources */,
+				AB0A4C541A4E501400387068 /* FRYNetworkTracker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
