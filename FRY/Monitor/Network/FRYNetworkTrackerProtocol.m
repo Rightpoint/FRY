@@ -71,6 +71,7 @@ static id<FRYNetworkTrackerProtocolDelegate> s_delegate = nil;
 
 - (void)stopLoading
 {
+#warning Need to investigate this more, stopLoading was causing the cancellation to kill connections.  Or I was tired.
 //    [self.connection cancel];
 }
 
