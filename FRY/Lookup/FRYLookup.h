@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FRYDefines.h"
 #import "FRYLookupSupport.h"
+
+typedef void(^FRYMatchBlock)(UIView *view, CGRect frameInView);
 
 /**
  * This protocol will add support for performing an NSPredicate search over an arbitrary tree structure.
@@ -20,11 +21,6 @@
  * predicate.
  */
 - (id<FRYLookup>)fry_farthestDescendentMatching:(NSPredicate *)predicate;
-
-/**
- * Enumerate the entire tree for objects matching predicate, and trigger the FRYMatchBlock
- */
-- (void)fry_enumerateAllChildrenMatching:(NSPredicate *)predicate usingBlock:(FRYMatchBlock)block;
 
 - (NSSet *)fry_allChildrenMatching:(NSPredicate *)predicate;
 - (NSSet *)fry_allChildrenViewsMatching:(NSPredicate *)predicate;

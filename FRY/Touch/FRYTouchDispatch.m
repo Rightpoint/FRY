@@ -10,9 +10,7 @@
 #import "FRYActiveTouch.h"
 #import "FRYTouch.h"
 #import "UIApplication+FRY.h"
-#import "UIView+FRY.h"
 #import "UITouch+FRY.h"
-#import "FRYIdleCheck.h"
 
 @interface FRYTouchDispatch()
 

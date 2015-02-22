@@ -17,6 +17,7 @@ NSTimeInterval const kFRYEventDispatchInterval = 0.01;
 @end
 
 @implementation FRYCleanupSimulator
+
 + (void)load
 {
     @autoreleasepool {

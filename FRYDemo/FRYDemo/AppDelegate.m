@@ -14,8 +14,6 @@
 #import "PickerViewController.h"
 #import "WebViewController.h"
 
-#import "FRYMonitor.h"
-
 @interface AppDelegate () <UISplitViewControllerDelegate>
 
 @end
@@ -44,7 +42,6 @@
     self.window.rootViewController = tabController;
     [self.window makeKeyAndVisible];
 
-    [[FRYMonitor shared] registerGestureEnablingOnView:self.window];
     return YES;
 }
 

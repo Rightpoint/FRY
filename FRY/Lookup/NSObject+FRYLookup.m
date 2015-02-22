@@ -119,19 +119,6 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
     }
 }
 
-- (void)fry_enumerateAllChildrenMatching:(NSPredicate *)predicate usingBlock:(FRYMatchBlock)block
-{
-    NSParameterAssert(predicate);
-    NSParameterAssert(block);
-    NSMutableSet *results = [NSMutableSet set];
-    
-    [self fry_enumerateAllChildrenMatching:predicate results:results debug:NO];
-    
-    for ( id<FRYLookup> result in results ) {
-        block([result fry_representingView], [result fry_frameInView]);
-    }
-}
-
 - (NSSet *)fry_allChildrenMatching:(NSPredicate *)predicate
 {
     NSMutableSet *results = [NSMutableSet set];

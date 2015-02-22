@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>FRY 2.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>FRY.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,12 +17,12 @@
 		<key>Test Host.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<key>TestTarget.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>3</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -38,6 +43,16 @@
 			<true/>
 		</dict>
 		<key>AB35FD2E19E4E48000228531</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ABBDFB191A999E13008999A1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ABBDFB231A999E14008999A1</key>
 		<dict>
 			<key>primary</key>
 			<true/>

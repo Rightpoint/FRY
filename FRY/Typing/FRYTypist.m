@@ -9,8 +9,8 @@
 #import "FRYTypist.h"
 #import "UIKit+FRYCastCompanions.h"
 #import "NSObject+FRYLookup.h"
-#import "UIView+FRY.h"
 #import "FRYTouchDispatch.h"
+#import "FRYTouch.h"
 #import "UIKit+FRYExposePrivate.h"
 
 @implementation FRYTypist

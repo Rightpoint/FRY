@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+//! Project version number for FRY.
+FOUNDATION_EXPORT double FRYVersionNumber;
+
+//! Project version string for FRY.
+FOUNDATION_EXPORT const unsigned char FRYVersionString[];
+
 #import "FRYTouch.h"
 #import "FRYTouchDispatch.h"
 

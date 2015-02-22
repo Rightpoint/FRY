@@ -7,82 +7,54 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AB0A4C2C1A46184700387068 /* FRYTouchHighlightWindowLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C271A46184700387068 /* FRYTouchHighlightWindowLayer.m */; };
-		AB0A4C2D1A46184700387068 /* FRYTouchLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C291A46184700387068 /* FRYTouchLayer.m */; };
-		AB0A4C301A46185F00387068 /* FRYMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C2F1A46185F00387068 /* FRYMonitor.m */; };
-		AB0A4C3D1A49016300387068 /* FRYEventLog.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C3C1A49016300387068 /* FRYEventLog.m */; };
-		AB0A4C491A490A0800387068 /* FRYTouchEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C421A490A0800387068 /* FRYTouchEvent.m */; };
-		AB0A4C4A1A490A0800387068 /* FRYTouchTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C441A490A0800387068 /* FRYTouchTracker.m */; };
-		AB0A4C4B1A490A0800387068 /* FRYTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C451A490A0800387068 /* FRYTracker.m */; };
-		AB0A4C4C1A490A0800387068 /* FRYEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C481A490A0800387068 /* FRYEvent.m */; };
-		AB0A4C541A4E501400387068 /* FRYNetworkTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C531A4E501400387068 /* FRYNetworkTracker.m */; };
-		AB0A4C571A4E516A00387068 /* FRYNetworkEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C561A4E516A00387068 /* FRYNetworkEvent.m */; };
-		AB0A4C5A1A4E5A6600387068 /* FRYNetworkTrackerProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C591A4E5A6600387068 /* FRYNetworkTrackerProtocol.m */; };
-		AB0A4C5D1A4E6E0900387068 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB0A4C5C1A4E6E0900387068 /* WebViewController.m */; };
 		AB17BAA51A1C38FA008EC56E /* FRYIdleCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = AB17BAA41A1C38FA008EC56E /* FRYIdleCheck.m */; };
 		AB184AD419E85F49007CC9DA /* UIApplication+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCDB19DFA30B00228531 /* UIApplication+FRY.m */; };
 		AB184AEE19E8EEC0007CC9DA /* NSRunLoop+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB184AED19E8EEC0007CC9DA /* NSRunLoop+FRY.m */; };
-		AB24E0041A0C88670099231F /* AlertTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB24E0021A0C88670099231F /* AlertTableViewController.m */; };
-		AB24E0081A0C88BF0099231F /* CellItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AB24E0071A0C88BF0099231F /* CellItem.m */; };
-		AB24E00A1A0C89E20099231F /* AlertTableViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = AB24E0091A0C89E20099231F /* AlertTableViewControllerTest.m */; };
 		AB25C04019DF95AA00038E75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03F19DF95AA00038E75 /* Foundation.framework */; };
-		AB25C04E19DF95AA00038E75 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C04D19DF95AA00038E75 /* XCTest.framework */; };
-		AB25C04F19DF95AA00038E75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03F19DF95AA00038E75 /* Foundation.framework */; };
-		AB25C05119DF95AA00038E75 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C05019DF95AA00038E75 /* UIKit.framework */; };
-		AB25C05419DF95AA00038E75 /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03C19DF95AA00038E75 /* libFRY.a */; };
-		AB25C05A19DF95AA00038E75 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB25C05819DF95AA00038E75 /* InfoPlist.strings */; };
 		AB25C08319DF95ED00038E75 /* UIView+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB25C06919DF95ED00038E75 /* UIView+FRY.m */; };
-		AB2659631A0E96B20074FF2E /* TableViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB2659621A0E96B20074FF2E /* TableViewControllerTests.m */; };
-		AB2659681A0ECE4E0074FF2E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AB2659671A0ECE4E0074FF2E /* Default-568h@2x.png */; };
-		AB2659701A0F2A710074FF2E /* TextFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB26596E1A0F2A710074FF2E /* TextFieldViewController.m */; };
-		AB2659711A0F2A710074FF2E /* TextFieldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB26596F1A0F2A710074FF2E /* TextFieldViewController.xib */; };
-		AB2659731A0F2AE10074FF2E /* TextFieldViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB2659721A0F2AE10074FF2E /* TextFieldViewControllerTests.m */; };
 		AB26597A1A0FBE140074FF2E /* FRYTypist.m in Sources */ = {isa = PBXBuildFile; fileRef = AB2659791A0FBE140074FF2E /* FRYTypist.m */; };
 		AB26597D1A0FE7430074FF2E /* UITextInput+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB26597C1A0FE7430074FF2E /* UITextInput+FRY.m */; };
-		AB2659801A106A4C0074FF2E /* PickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB26597F1A106A4C0074FF2E /* PickerViewController.m */; };
-		AB2659821A106FB00074FF2E /* PickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB2659811A106FB00074FF2E /* PickerViewController.xib */; };
-		AB2659841A10753A0074FF2E /* PickerViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB2659831A10753A0074FF2E /* PickerViewControllerTests.m */; };
 		AB35FCE119DFA6F200228531 /* FRYEventProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCDF19DFA6F200228531 /* FRYEventProxy.m */; };
 		AB35FCE419DFAEB900228531 /* UITouch+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCE319DFAEB900228531 /* UITouch+FRY.m */; };
 		AB35FCF019DFB49100228531 /* FRYActiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCEB19DFB49100228531 /* FRYActiveTouch.m */; };
 		AB35FD7A19E58B5C00228531 /* FRYMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD6819E4ED6100228531 /* FRYMethodSwizzling.m */; };
-		AB5A891B1A07147700E44C89 /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB25C03C19DF95AA00038E75 /* libFRY.a */; };
 		AB5A891E1A07DEC400E44C89 /* NSPredicate+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB5A891D1A07DEC400E44C89 /* NSPredicate+FRY.m */; };
-		AB848EFE1A0BB73E00452E5E /* ControlsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB848EFD1A0BB73E00452E5E /* ControlsViewController.xib */; };
 		ABA5782C19E65D1100D77CDA /* FRYDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5782B19E65D1100D77CDA /* FRYDefines.m */; };
+		ABBDFAF81A9997C5008999A1 /* UIScrollView+FRYScrollingState.m in Sources */ = {isa = PBXBuildFile; fileRef = AB17BAB91A1C4913008EC56E /* UIScrollView+FRYScrollingState.m */; };
+		ABBDFAFA1A9999FC008999A1 /* FRY.h in Headers */ = {isa = PBXBuildFile; fileRef = ABCF04AE1A054F460000318A /* FRY.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFAFB1A9999FC008999A1 /* FRYDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = ABA5782A19E65D1100D77CDA /* FRYDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFAFC1A9999FC008999A1 /* FRYDSLQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = ABED6EA31A16FC9A0009D44A /* FRYDSLQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFAFD1A9999FC008999A1 /* FRYPointInTime.h in Headers */ = {isa = PBXBuildFile; fileRef = ABC12EBA1A17E28500BD7556 /* FRYPointInTime.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFAFE1A9999FC008999A1 /* FRYTouch.h in Headers */ = {isa = PBXBuildFile; fileRef = ABC12EBC1A17E28500BD7556 /* FRYTouch.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFAFF1A9999FC008999A1 /* FRYTouchDispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = ABCF04B11A054F890000318A /* FRYTouchDispatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFB001A9999FC008999A1 /* FRYActiveTouch.h in Headers */ = {isa = PBXBuildFile; fileRef = AB35FCEA19DFB49100228531 /* FRYActiveTouch.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFB011A9999FC008999A1 /* FRYTypist.h in Headers */ = {isa = PBXBuildFile; fileRef = AB2659781A0FBE140074FF2E /* FRYTypist.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFB021A9999FC008999A1 /* FRYLookup.h in Headers */ = {isa = PBXBuildFile; fileRef = ABCFAC061A0E7CF4003B91BC /* FRYLookup.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFB031A9999FC008999A1 /* FRYLookupSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD0269C1A1562D4006EA757 /* FRYLookupSupport.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFB041A9999FC008999A1 /* NSObject+FRYLookup.h in Headers */ = {isa = PBXBuildFile; fileRef = ABCFAC031A0E7B79003B91BC /* NSObject+FRYLookup.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFB051A9999FC008999A1 /* NSPredicate+FRY.h in Headers */ = {isa = PBXBuildFile; fileRef = AB5A891C1A07DEC400E44C89 /* NSPredicate+FRY.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFB061A9999FC008999A1 /* FRYMethodSwizzling.h in Headers */ = {isa = PBXBuildFile; fileRef = AB35FD6719E4ED6100228531 /* FRYMethodSwizzling.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFB071A9999FC008999A1 /* FRYIdleCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = AB17BAA31A1C38FA008EC56E /* FRYIdleCheck.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFB081A9999FC008999A1 /* FRYEventProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = AB35FCDE19DFA6F200228531 /* FRYEventProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFB091A9999FD008999A1 /* UIKit+FRYExposePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = AB35FCE019DFA6F200228531 /* UIKit+FRYExposePrivate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFB0A1A9999FD008999A1 /* UITextInput+FRY.h in Headers */ = {isa = PBXBuildFile; fileRef = AB26597B1A0FE7430074FF2E /* UITextInput+FRY.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFB0B1A9999FD008999A1 /* UIApplication+FRY.h in Headers */ = {isa = PBXBuildFile; fileRef = AB35FCDA19DFA30B00228531 /* UIApplication+FRY.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFB0C1A9999FD008999A1 /* UIView+FRY.h in Headers */ = {isa = PBXBuildFile; fileRef = AB25C06819DF95ED00038E75 /* UIView+FRY.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFB0D1A9999FD008999A1 /* UIPickerView+FRY.h in Headers */ = {isa = PBXBuildFile; fileRef = ABDABF0F1A11820B004FF038 /* UIPickerView+FRY.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFB0E1A9999FD008999A1 /* UITouch+FRY.h in Headers */ = {isa = PBXBuildFile; fileRef = AB35FCE219DFAEB900228531 /* UITouch+FRY.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFB0F1A9999FD008999A1 /* UIAccessibility+FRY.h in Headers */ = {isa = PBXBuildFile; fileRef = AB35FD0D19E4DE3500228531 /* UIAccessibility+FRY.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFB101A9999FD008999A1 /* NSRunLoop+FRY.h in Headers */ = {isa = PBXBuildFile; fileRef = AB184AEC19E8EEC0007CC9DA /* NSRunLoop+FRY.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFB111A9999FD008999A1 /* UIScrollView+FRY.h in Headers */ = {isa = PBXBuildFile; fileRef = ABC12EC71A192FC900BD7556 /* UIScrollView+FRY.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBDFB121A9999FD008999A1 /* UIScrollView+FRYScrollingState.h in Headers */ = {isa = PBXBuildFile; fileRef = AB17BAB81A1C4913008EC56E /* UIScrollView+FRYScrollingState.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ABC12EBE1A17E28500BD7556 /* FRYPointInTime.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC12EBB1A17E28500BD7556 /* FRYPointInTime.m */; };
 		ABC12EBF1A17E28500BD7556 /* FRYTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC12EBD1A17E28500BD7556 /* FRYTouch.m */; };
 		ABC12EC91A192FC900BD7556 /* UIScrollView+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC12EC81A192FC900BD7556 /* UIScrollView+FRY.m */; };
 		ABCF04B31A054F890000318A /* FRYTouchDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04B21A054F890000318A /* FRYTouchDispatch.m */; };
-		ABCF04BD1A06AF200000318A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04BC1A06AF200000318A /* main.m */; };
-		ABCF04C01A06AF200000318A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04BF1A06AF200000318A /* AppDelegate.m */; };
-		ABCF04CB1A06AF200000318A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABCF04CA1A06AF200000318A /* Images.xcassets */; };
-		ABCF04DA1A06AF210000318A /* ControlsViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04D91A06AF210000318A /* ControlsViewControllerTests.m */; };
-		ABCF04E31A06BE220000318A /* ControlsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCF04E21A06BE220000318A /* ControlsViewController.m */; };
-		ABCF04E51A06E75D0000318A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB35FD6119E4E54F00228531 /* UIKit.framework */; };
 		ABCF04E71A06F2630000318A /* UIAccessibility+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD0E19E4DE3500228531 /* UIAccessibility+FRY.m */; };
 		ABCFAC051A0E7B79003B91BC /* NSObject+FRYLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCFAC041A0E7B79003B91BC /* NSObject+FRYLookup.m */; };
-		ABCFAC0A1A0E94BA003B91BC /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABCFAC081A0E94BA003B91BC /* TableViewController.m */; };
 		ABDABF111A11820B004FF038 /* UIPickerView+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = ABDABF101A11820B004FF038 /* UIPickerView+FRY.m */; };
 		ABED6EA51A16FC9A0009D44A /* FRYDSLQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = ABED6EA41A16FC9A0009D44A /* FRYDSLQuery.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		AB25C05219DF95AA00038E75 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AB25C03419DF95AA00038E75 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AB25C03B19DF95AA00038E75;
-			remoteInfo = FRY;
-		};
-		ABCF04D41A06AF200000318A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AB25C03419DF95AA00038E75 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = ABCF04B71A06AF200000318A;
-			remoteInfo = TestTarget;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		AB25C03A19DF95AA00038E75 /* CopyFiles */ = {
@@ -98,31 +70,6 @@
 
 /* Begin PBXFileReference section */
 		89238CE01CB344F78A59E9AE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB0A4C251A46184700387068 /* FRYSpark.png.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYSpark.png.h; sourceTree = "<group>"; };
-		AB0A4C261A46184700387068 /* FRYTouchHighlightWindowLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYTouchHighlightWindowLayer.h; sourceTree = "<group>"; };
-		AB0A4C271A46184700387068 /* FRYTouchHighlightWindowLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYTouchHighlightWindowLayer.m; sourceTree = "<group>"; };
-		AB0A4C281A46184700387068 /* FRYTouchLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYTouchLayer.h; sourceTree = "<group>"; };
-		AB0A4C291A46184700387068 /* FRYTouchLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYTouchLayer.m; sourceTree = "<group>"; };
-		AB0A4C2E1A46185F00387068 /* FRYMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYMonitor.h; sourceTree = "<group>"; };
-		AB0A4C2F1A46185F00387068 /* FRYMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYMonitor.m; sourceTree = "<group>"; };
-		AB0A4C3B1A49016300387068 /* FRYEventLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYEventLog.h; sourceTree = "<group>"; };
-		AB0A4C3C1A49016300387068 /* FRYEventLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYEventLog.m; sourceTree = "<group>"; };
-		AB0A4C411A490A0800387068 /* FRYTouchEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYTouchEvent.h; sourceTree = "<group>"; };
-		AB0A4C421A490A0800387068 /* FRYTouchEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYTouchEvent.m; sourceTree = "<group>"; };
-		AB0A4C431A490A0800387068 /* FRYTouchTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYTouchTracker.h; sourceTree = "<group>"; };
-		AB0A4C441A490A0800387068 /* FRYTouchTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYTouchTracker.m; sourceTree = "<group>"; };
-		AB0A4C451A490A0800387068 /* FRYTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYTracker.m; sourceTree = "<group>"; };
-		AB0A4C461A490A0800387068 /* FRYTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYTracker.h; sourceTree = "<group>"; };
-		AB0A4C471A490A0800387068 /* FRYEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYEvent.h; sourceTree = "<group>"; };
-		AB0A4C481A490A0800387068 /* FRYEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYEvent.m; sourceTree = "<group>"; };
-		AB0A4C521A4E501400387068 /* FRYNetworkTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYNetworkTracker.h; sourceTree = "<group>"; };
-		AB0A4C531A4E501400387068 /* FRYNetworkTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYNetworkTracker.m; sourceTree = "<group>"; };
-		AB0A4C551A4E516A00387068 /* FRYNetworkEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYNetworkEvent.h; sourceTree = "<group>"; };
-		AB0A4C561A4E516A00387068 /* FRYNetworkEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYNetworkEvent.m; sourceTree = "<group>"; };
-		AB0A4C581A4E5A6600387068 /* FRYNetworkTrackerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYNetworkTrackerProtocol.h; sourceTree = "<group>"; };
-		AB0A4C591A4E5A6600387068 /* FRYNetworkTrackerProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYNetworkTrackerProtocol.m; sourceTree = "<group>"; };
-		AB0A4C5B1A4E6E0900387068 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
-		AB0A4C5C1A4E6E0900387068 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		AB17BAA31A1C38FA008EC56E /* FRYIdleCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYIdleCheck.h; sourceTree = "<group>"; };
 		AB17BAA41A1C38FA008EC56E /* FRYIdleCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYIdleCheck.m; sourceTree = "<group>"; };
 		AB17BAB81A1C4913008EC56E /* UIScrollView+FRYScrollingState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+FRYScrollingState.h"; sourceTree = "<group>"; };
@@ -130,36 +77,19 @@
 		AB17BABB1A1C800F008EC56E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		AB184AEC19E8EEC0007CC9DA /* NSRunLoop+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSRunLoop+FRY.h"; sourceTree = "<group>"; };
 		AB184AED19E8EEC0007CC9DA /* NSRunLoop+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSRunLoop+FRY.m"; sourceTree = "<group>"; };
-		AB24E0011A0C88670099231F /* AlertTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertTableViewController.h; sourceTree = "<group>"; };
-		AB24E0021A0C88670099231F /* AlertTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertTableViewController.m; sourceTree = "<group>"; };
-		AB24E0061A0C88BF0099231F /* CellItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellItem.h; sourceTree = "<group>"; };
-		AB24E0071A0C88BF0099231F /* CellItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellItem.m; sourceTree = "<group>"; };
-		AB24E0091A0C89E20099231F /* AlertTableViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertTableViewControllerTest.m; sourceTree = "<group>"; };
 		AB25C03C19DF95AA00038E75 /* libFRY.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFRY.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB25C03F19DF95AA00038E75 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AB25C04319DF95AA00038E75 /* FRY-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FRY-Prefix.pch"; sourceTree = "<group>"; };
-		AB25C04C19DF95AA00038E75 /* FRYTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FRYTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB25C04D19DF95AA00038E75 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		AB25C05019DF95AA00038E75 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		AB25C05719DF95AA00038E75 /* FRYTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FRYTests-Info.plist"; sourceTree = "<group>"; };
-		AB25C05919DF95AA00038E75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AB25C06819DF95ED00038E75 /* UIView+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FRY.h"; sourceTree = "<group>"; };
 		AB25C06919DF95ED00038E75 /* UIView+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FRY.m"; sourceTree = "<group>"; };
-		AB2659621A0E96B20074FF2E /* TableViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewControllerTests.m; sourceTree = "<group>"; };
 		AB2659671A0ECE4E0074FF2E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		AB26596D1A0F2A710074FF2E /* TextFieldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldViewController.h; sourceTree = "<group>"; };
-		AB26596E1A0F2A710074FF2E /* TextFieldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldViewController.m; sourceTree = "<group>"; };
-		AB26596F1A0F2A710074FF2E /* TextFieldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldViewController.xib; sourceTree = "<group>"; };
-		AB2659721A0F2AE10074FF2E /* TextFieldViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldViewControllerTests.m; sourceTree = "<group>"; };
 		AB2659771A0F37630074FF2E /* UIKit+FRYCastCompanions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIKit+FRYCastCompanions.h"; sourceTree = "<group>"; };
 		AB2659781A0FBE140074FF2E /* FRYTypist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYTypist.h; sourceTree = "<group>"; };
 		AB2659791A0FBE140074FF2E /* FRYTypist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYTypist.m; sourceTree = "<group>"; };
 		AB26597B1A0FE7430074FF2E /* UITextInput+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextInput+FRY.h"; sourceTree = "<group>"; };
 		AB26597C1A0FE7430074FF2E /* UITextInput+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextInput+FRY.m"; sourceTree = "<group>"; };
-		AB26597E1A106A4C0074FF2E /* PickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerViewController.h; sourceTree = "<group>"; };
-		AB26597F1A106A4C0074FF2E /* PickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerViewController.m; sourceTree = "<group>"; };
-		AB2659811A106FB00074FF2E /* PickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PickerViewController.xib; sourceTree = "<group>"; };
-		AB2659831A10753A0074FF2E /* PickerViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PickerViewControllerTests.m; sourceTree = "<group>"; };
 		AB35FCDA19DFA30B00228531 /* UIApplication+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+FRY.h"; sourceTree = "<group>"; };
 		AB35FCDB19DFA30B00228531 /* UIApplication+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+FRY.m"; sourceTree = "<group>"; };
 		AB35FCDE19DFA6F200228531 /* FRYEventProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYEventProxy.h; sourceTree = "<group>"; };
@@ -176,9 +106,9 @@
 		AB35FD6819E4ED6100228531 /* FRYMethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYMethodSwizzling.m; sourceTree = "<group>"; };
 		AB5A891C1A07DEC400E44C89 /* NSPredicate+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPredicate+FRY.h"; sourceTree = "<group>"; };
 		AB5A891D1A07DEC400E44C89 /* NSPredicate+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPredicate+FRY.m"; sourceTree = "<group>"; };
-		AB848EFD1A0BB73E00452E5E /* ControlsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ControlsViewController.xib; sourceTree = "<group>"; };
 		ABA5782A19E65D1100D77CDA /* FRYDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYDefines.h; sourceTree = "<group>"; };
 		ABA5782B19E65D1100D77CDA /* FRYDefines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYDefines.m; sourceTree = "<group>"; };
+		ABBDFB2C1A999E14008999A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABC12EBA1A17E28500BD7556 /* FRYPointInTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYPointInTime.h; sourceTree = "<group>"; };
 		ABC12EBB1A17E28500BD7556 /* FRYPointInTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYPointInTime.m; sourceTree = "<group>"; };
 		ABC12EBC1A17E28500BD7556 /* FRYTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYTouch.h; sourceTree = "<group>"; };
@@ -188,22 +118,9 @@
 		ABCF04AE1A054F460000318A /* FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRY.h; sourceTree = "<group>"; };
 		ABCF04B11A054F890000318A /* FRYTouchDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYTouchDispatch.h; sourceTree = "<group>"; };
 		ABCF04B21A054F890000318A /* FRYTouchDispatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYTouchDispatch.m; sourceTree = "<group>"; };
-		ABCF04B81A06AF200000318A /* TestTarget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestTarget.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		ABCF04BB1A06AF200000318A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ABCF04BC1A06AF200000318A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		ABCF04BE1A06AF200000318A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		ABCF04BF1A06AF200000318A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		ABCF04CA1A06AF200000318A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		ABCF04D31A06AF200000318A /* TestTargetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestTargetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		ABCF04D81A06AF210000318A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ABCF04D91A06AF210000318A /* ControlsViewControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ControlsViewControllerTests.m; sourceTree = "<group>"; };
-		ABCF04E11A06BE220000318A /* ControlsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlsViewController.h; sourceTree = "<group>"; };
-		ABCF04E21A06BE220000318A /* ControlsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlsViewController.m; sourceTree = "<group>"; };
 		ABCFAC031A0E7B79003B91BC /* NSObject+FRYLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+FRYLookup.h"; sourceTree = "<group>"; };
 		ABCFAC041A0E7B79003B91BC /* NSObject+FRYLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+FRYLookup.m"; sourceTree = "<group>"; };
 		ABCFAC061A0E7CF4003B91BC /* FRYLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYLookup.h; sourceTree = "<group>"; };
-		ABCFAC071A0E94BA003B91BC /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
-		ABCFAC081A0E94BA003B91BC /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		ABD0269C1A1562D4006EA757 /* FRYLookupSupport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRYLookupSupport.h; sourceTree = "<group>"; };
 		ABDABF0F1A11820B004FF038 /* UIPickerView+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPickerView+FRY.h"; sourceTree = "<group>"; };
 		ABDABF101A11820B004FF038 /* UIPickerView+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPickerView+FRY.m"; sourceTree = "<group>"; };
@@ -220,90 +137,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AB25C04919DF95AA00038E75 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AB25C04E19DF95AA00038E75 /* XCTest.framework in Frameworks */,
-				AB25C05119DF95AA00038E75 /* UIKit.framework in Frameworks */,
-				AB25C04F19DF95AA00038E75 /* Foundation.framework in Frameworks */,
-				AB25C05419DF95AA00038E75 /* libFRY.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		ABCF04B51A06AF200000318A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AB5A891B1A07147700E44C89 /* libFRY.a in Frameworks */,
-				ABCF04E51A06E75D0000318A /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		ABCF04D01A06AF200000318A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AB0A4C1E1A46184700387068 /* Monitor */ = {
-			isa = PBXGroup;
-			children = (
-				AB0A4C2E1A46185F00387068 /* FRYMonitor.h */,
-				AB0A4C2F1A46185F00387068 /* FRYMonitor.m */,
-				AB0A4C3B1A49016300387068 /* FRYEventLog.h */,
-				AB0A4C3C1A49016300387068 /* FRYEventLog.m */,
-				AB0A4C471A490A0800387068 /* FRYEvent.h */,
-				AB0A4C481A490A0800387068 /* FRYEvent.m */,
-				AB0A4C461A490A0800387068 /* FRYTracker.h */,
-				AB0A4C451A490A0800387068 /* FRYTracker.m */,
-				AB0A4C511A4E4FDE00387068 /* Network */,
-				AB0A4C401A490A0800387068 /* Touch */,
-				AB0A4C241A46184700387068 /* Visuals */,
-			);
-			path = Monitor;
-			sourceTree = "<group>";
-		};
-		AB0A4C241A46184700387068 /* Visuals */ = {
-			isa = PBXGroup;
-			children = (
-				AB0A4C251A46184700387068 /* FRYSpark.png.h */,
-				AB0A4C261A46184700387068 /* FRYTouchHighlightWindowLayer.h */,
-				AB0A4C271A46184700387068 /* FRYTouchHighlightWindowLayer.m */,
-				AB0A4C281A46184700387068 /* FRYTouchLayer.h */,
-				AB0A4C291A46184700387068 /* FRYTouchLayer.m */,
-			);
-			path = Visuals;
-			sourceTree = "<group>";
-		};
-		AB0A4C401A490A0800387068 /* Touch */ = {
-			isa = PBXGroup;
-			children = (
-				AB0A4C411A490A0800387068 /* FRYTouchEvent.h */,
-				AB0A4C421A490A0800387068 /* FRYTouchEvent.m */,
-				AB0A4C431A490A0800387068 /* FRYTouchTracker.h */,
-				AB0A4C441A490A0800387068 /* FRYTouchTracker.m */,
-			);
-			path = Touch;
-			sourceTree = "<group>";
-		};
-		AB0A4C511A4E4FDE00387068 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				AB0A4C551A4E516A00387068 /* FRYNetworkEvent.h */,
-				AB0A4C561A4E516A00387068 /* FRYNetworkEvent.m */,
-				AB0A4C521A4E501400387068 /* FRYNetworkTracker.h */,
-				AB0A4C531A4E501400387068 /* FRYNetworkTracker.m */,
-				AB0A4C581A4E5A6600387068 /* FRYNetworkTrackerProtocol.h */,
-				AB0A4C591A4E5A6600387068 /* FRYNetworkTrackerProtocol.m */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
 		AB17BAA21A1C38FA008EC56E /* Idle */ = {
 			isa = PBXGroup;
 			children = (
@@ -318,9 +154,7 @@
 			children = (
 				AB2659671A0ECE4E0074FF2E /* Default-568h@2x.png */,
 				AB25C04119DF95AA00038E75 /* FRY */,
-				AB25C05519DF95AA00038E75 /* FRYTests */,
-				ABCF04B91A06AF200000318A /* TestTarget */,
-				ABCF04D61A06AF200000318A /* TestTargetTests */,
+				ABBDFB2A1A999E14008999A1 /* FRYTests */,
 				AB25C03E19DF95AA00038E75 /* Frameworks */,
 				AB25C03D19DF95AA00038E75 /* Products */,
 			);
@@ -330,9 +164,6 @@
 			isa = PBXGroup;
 			children = (
 				AB25C03C19DF95AA00038E75 /* libFRY.a */,
-				AB25C04C19DF95AA00038E75 /* FRYTests.xctest */,
-				ABCF04B81A06AF200000318A /* TestTarget.app */,
-				ABCF04D31A06AF200000318A /* TestTargetTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -362,7 +193,6 @@
 				ABA5780F19E64AE600D77CDA /* Lookup */,
 				AB35FD6619E4ED5100228531 /* Utilities */,
 				AB17BAA21A1C38FA008EC56E /* Idle */,
-				AB0A4C1E1A46184700387068 /* Monitor */,
 				AB35FCDD19DFA6F200228531 /* Private */,
 				AB25C06519DF95ED00038E75 /* Categories */,
 				AB25C04219DF95AA00038E75 /* Supporting Files */,
@@ -374,23 +204,6 @@
 			isa = PBXGroup;
 			children = (
 				AB25C04319DF95AA00038E75 /* FRY-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		AB25C05519DF95AA00038E75 /* FRYTests */ = {
-			isa = PBXGroup;
-			children = (
-				AB25C05619DF95AA00038E75 /* Supporting Files */,
-			);
-			path = FRYTests;
-			sourceTree = "<group>";
-		};
-		AB25C05619DF95AA00038E75 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				AB25C05719DF95AA00038E75 /* FRYTests-Info.plist */,
-				AB25C05819DF95AA00038E75 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -477,60 +290,18 @@
 			path = Lookup;
 			sourceTree = "<group>";
 		};
-		ABCF04B91A06AF200000318A /* TestTarget */ = {
+		ABBDFB2A1A999E14008999A1 /* FRYTests */ = {
 			isa = PBXGroup;
 			children = (
-				ABCF04BE1A06AF200000318A /* AppDelegate.h */,
-				ABCF04BF1A06AF200000318A /* AppDelegate.m */,
-				ABCF04E11A06BE220000318A /* ControlsViewController.h */,
-				ABCF04E21A06BE220000318A /* ControlsViewController.m */,
-				AB848EFD1A0BB73E00452E5E /* ControlsViewController.xib */,
-				ABCFAC071A0E94BA003B91BC /* TableViewController.h */,
-				ABCFAC081A0E94BA003B91BC /* TableViewController.m */,
-				AB24E0011A0C88670099231F /* AlertTableViewController.h */,
-				AB24E0021A0C88670099231F /* AlertTableViewController.m */,
-				AB26596D1A0F2A710074FF2E /* TextFieldViewController.h */,
-				AB26596E1A0F2A710074FF2E /* TextFieldViewController.m */,
-				AB26596F1A0F2A710074FF2E /* TextFieldViewController.xib */,
-				AB26597E1A106A4C0074FF2E /* PickerViewController.h */,
-				AB26597F1A106A4C0074FF2E /* PickerViewController.m */,
-				AB2659811A106FB00074FF2E /* PickerViewController.xib */,
-				AB0A4C5B1A4E6E0900387068 /* WebViewController.h */,
-				AB0A4C5C1A4E6E0900387068 /* WebViewController.m */,
-				ABCF04CA1A06AF200000318A /* Images.xcassets */,
-				ABCF04BA1A06AF200000318A /* Supporting Files */,
-				AB24E0061A0C88BF0099231F /* CellItem.h */,
-				AB24E0071A0C88BF0099231F /* CellItem.m */,
+				ABBDFB2B1A999E14008999A1 /* Supporting Files */,
 			);
-			path = TestTarget;
+			path = FRYTests;
 			sourceTree = "<group>";
 		};
-		ABCF04BA1A06AF200000318A /* Supporting Files */ = {
+		ABBDFB2B1A999E14008999A1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				ABCF04BB1A06AF200000318A /* Info.plist */,
-				ABCF04BC1A06AF200000318A /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		ABCF04D61A06AF200000318A /* TestTargetTests */ = {
-			isa = PBXGroup;
-			children = (
-				ABCF04D91A06AF210000318A /* ControlsViewControllerTests.m */,
-				AB24E0091A0C89E20099231F /* AlertTableViewControllerTest.m */,
-				AB2659621A0E96B20074FF2E /* TableViewControllerTests.m */,
-				AB2659721A0F2AE10074FF2E /* TextFieldViewControllerTests.m */,
-				AB2659831A10753A0074FF2E /* PickerViewControllerTests.m */,
-				ABCF04D71A06AF210000318A /* Supporting Files */,
-			);
-			path = TestTargetTests;
-			sourceTree = "<group>";
-		};
-		ABCF04D71A06AF210000318A /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				ABCF04D81A06AF210000318A /* Info.plist */,
+				ABBDFB2C1A999E14008999A1 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -546,6 +317,41 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		ABBDFAF91A9999B7008999A1 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABBDFAFA1A9999FC008999A1 /* FRY.h in Headers */,
+				ABBDFAFB1A9999FC008999A1 /* FRYDefines.h in Headers */,
+				ABBDFAFC1A9999FC008999A1 /* FRYDSLQuery.h in Headers */,
+				ABBDFAFD1A9999FC008999A1 /* FRYPointInTime.h in Headers */,
+				ABBDFAFE1A9999FC008999A1 /* FRYTouch.h in Headers */,
+				ABBDFAFF1A9999FC008999A1 /* FRYTouchDispatch.h in Headers */,
+				ABBDFB001A9999FC008999A1 /* FRYActiveTouch.h in Headers */,
+				ABBDFB011A9999FC008999A1 /* FRYTypist.h in Headers */,
+				ABBDFB021A9999FC008999A1 /* FRYLookup.h in Headers */,
+				ABBDFB031A9999FC008999A1 /* FRYLookupSupport.h in Headers */,
+				ABBDFB041A9999FC008999A1 /* NSObject+FRYLookup.h in Headers */,
+				ABBDFB051A9999FC008999A1 /* NSPredicate+FRY.h in Headers */,
+				ABBDFB061A9999FC008999A1 /* FRYMethodSwizzling.h in Headers */,
+				ABBDFB071A9999FC008999A1 /* FRYIdleCheck.h in Headers */,
+				ABBDFB081A9999FC008999A1 /* FRYEventProxy.h in Headers */,
+				ABBDFB091A9999FD008999A1 /* UIKit+FRYExposePrivate.h in Headers */,
+				ABBDFB0A1A9999FD008999A1 /* UITextInput+FRY.h in Headers */,
+				ABBDFB0B1A9999FD008999A1 /* UIApplication+FRY.h in Headers */,
+				ABBDFB0C1A9999FD008999A1 /* UIView+FRY.h in Headers */,
+				ABBDFB0D1A9999FD008999A1 /* UIPickerView+FRY.h in Headers */,
+				ABBDFB0E1A9999FD008999A1 /* UITouch+FRY.h in Headers */,
+				ABBDFB0F1A9999FD008999A1 /* UIAccessibility+FRY.h in Headers */,
+				ABBDFB101A9999FD008999A1 /* NSRunLoop+FRY.h in Headers */,
+				ABBDFB111A9999FD008999A1 /* UIScrollView+FRY.h in Headers */,
+				ABBDFB121A9999FD008999A1 /* UIScrollView+FRYScrollingState.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		AB25C03B19DF95AA00038E75 /* FRY */ = {
 			isa = PBXNativeTarget;
@@ -554,6 +360,7 @@
 				AB25C03819DF95AA00038E75 /* Sources */,
 				AB25C03919DF95AA00038E75 /* Frameworks */,
 				AB25C03A19DF95AA00038E75 /* CopyFiles */,
+				ABBDFAF91A9999B7008999A1 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -564,59 +371,6 @@
 			productReference = AB25C03C19DF95AA00038E75 /* libFRY.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		AB25C04B19DF95AA00038E75 /* FRYTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AB25C06219DF95AA00038E75 /* Build configuration list for PBXNativeTarget "FRYTests" */;
-			buildPhases = (
-				AB25C04819DF95AA00038E75 /* Sources */,
-				AB25C04919DF95AA00038E75 /* Frameworks */,
-				AB25C04A19DF95AA00038E75 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AB25C05319DF95AA00038E75 /* PBXTargetDependency */,
-			);
-			name = FRYTests;
-			productName = FRYTests;
-			productReference = AB25C04C19DF95AA00038E75 /* FRYTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		ABCF04B71A06AF200000318A /* TestTarget */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = ABCF04DB1A06AF210000318A /* Build configuration list for PBXNativeTarget "TestTarget" */;
-			buildPhases = (
-				ABCF04B41A06AF200000318A /* Sources */,
-				ABCF04B51A06AF200000318A /* Frameworks */,
-				ABCF04B61A06AF200000318A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = TestTarget;
-			productName = TestTarget;
-			productReference = ABCF04B81A06AF200000318A /* TestTarget.app */;
-			productType = "com.apple.product-type.application";
-		};
-		ABCF04D21A06AF200000318A /* TestTargetTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = ABCF04DE1A06AF210000318A /* Build configuration list for PBXNativeTarget "TestTargetTests" */;
-			buildPhases = (
-				ABCF04CF1A06AF200000318A /* Sources */,
-				ABCF04D01A06AF200000318A /* Frameworks */,
-				ABCF04D11A06AF200000318A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				ABCF04D51A06AF200000318A /* PBXTargetDependency */,
-			);
-			name = TestTargetTests;
-			productName = TestTargetTests;
-			productReference = ABCF04D31A06AF200000318A /* TestTargetTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -625,15 +379,6 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Raizlabs;
-				TargetAttributes = {
-					ABCF04B71A06AF200000318A = {
-						CreatedOnToolsVersion = 6.0.1;
-					};
-					ABCF04D21A06AF200000318A = {
-						CreatedOnToolsVersion = 6.0.1;
-						TestTargetID = ABCF04B71A06AF200000318A;
-					};
-				};
 			};
 			buildConfigurationList = AB25C03719DF95AA00038E75 /* Build configuration list for PBXProject "FRY" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -649,42 +394,9 @@
 			projectRoot = "";
 			targets = (
 				AB25C03B19DF95AA00038E75 /* FRY */,
-				AB25C04B19DF95AA00038E75 /* FRYTests */,
-				ABCF04B71A06AF200000318A /* TestTarget */,
-				ABCF04D21A06AF200000318A /* TestTargetTests */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		AB25C04A19DF95AA00038E75 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AB25C05A19DF95AA00038E75 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		ABCF04B61A06AF200000318A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AB2659711A0F2A710074FF2E /* TextFieldViewController.xib in Resources */,
-				AB848EFE1A0BB73E00452E5E /* ControlsViewController.xib in Resources */,
-				ABCF04CB1A06AF200000318A /* Images.xcassets in Resources */,
-				AB2659821A106FB00074FF2E /* PickerViewController.xib in Resources */,
-				AB2659681A0ECE4E0074FF2E /* Default-568h@2x.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		ABCF04D11A06AF200000318A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AB25C03819DF95AA00038E75 /* Sources */ = {
@@ -694,97 +406,28 @@
 				AB184AD419E85F49007CC9DA /* UIApplication+FRY.m in Sources */,
 				ABA5782C19E65D1100D77CDA /* FRYDefines.m in Sources */,
 				ABDABF111A11820B004FF038 /* UIPickerView+FRY.m in Sources */,
-				AB0A4C2C1A46184700387068 /* FRYTouchHighlightWindowLayer.m in Sources */,
 				AB17BAA51A1C38FA008EC56E /* FRYIdleCheck.m in Sources */,
+				ABBDFAF81A9997C5008999A1 /* UIScrollView+FRYScrollingState.m in Sources */,
 				ABCF04B31A054F890000318A /* FRYTouchDispatch.m in Sources */,
 				ABED6EA51A16FC9A0009D44A /* FRYDSLQuery.m in Sources */,
 				AB25C08319DF95ED00038E75 /* UIView+FRY.m in Sources */,
 				ABCFAC051A0E7B79003B91BC /* NSObject+FRYLookup.m in Sources */,
-				AB0A4C571A4E516A00387068 /* FRYNetworkEvent.m in Sources */,
 				AB35FD7A19E58B5C00228531 /* FRYMethodSwizzling.m in Sources */,
-				AB0A4C491A490A0800387068 /* FRYTouchEvent.m in Sources */,
 				AB35FCE119DFA6F200228531 /* FRYEventProxy.m in Sources */,
 				AB26597D1A0FE7430074FF2E /* UITextInput+FRY.m in Sources */,
-				AB0A4C5A1A4E5A6600387068 /* FRYNetworkTrackerProtocol.m in Sources */,
-				AB0A4C2D1A46184700387068 /* FRYTouchLayer.m in Sources */,
 				AB35FCF019DFB49100228531 /* FRYActiveTouch.m in Sources */,
-				AB0A4C4B1A490A0800387068 /* FRYTracker.m in Sources */,
 				AB184AEE19E8EEC0007CC9DA /* NSRunLoop+FRY.m in Sources */,
 				ABC12EBE1A17E28500BD7556 /* FRYPointInTime.m in Sources */,
-				AB0A4C4C1A490A0800387068 /* FRYEvent.m in Sources */,
 				ABCF04E71A06F2630000318A /* UIAccessibility+FRY.m in Sources */,
 				AB5A891E1A07DEC400E44C89 /* NSPredicate+FRY.m in Sources */,
 				ABC12EC91A192FC900BD7556 /* UIScrollView+FRY.m in Sources */,
-				AB0A4C4A1A490A0800387068 /* FRYTouchTracker.m in Sources */,
-				AB0A4C3D1A49016300387068 /* FRYEventLog.m in Sources */,
 				AB26597A1A0FBE140074FF2E /* FRYTypist.m in Sources */,
 				AB35FCE419DFAEB900228531 /* UITouch+FRY.m in Sources */,
 				ABC12EBF1A17E28500BD7556 /* FRYTouch.m in Sources */,
-				AB0A4C301A46185F00387068 /* FRYMonitor.m in Sources */,
-				AB0A4C541A4E501400387068 /* FRYNetworkTracker.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AB25C04819DF95AA00038E75 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		ABCF04B41A06AF200000318A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				ABCF04C01A06AF200000318A /* AppDelegate.m in Sources */,
-				AB24E0081A0C88BF0099231F /* CellItem.m in Sources */,
-				ABCF04BD1A06AF200000318A /* main.m in Sources */,
-				AB2659801A106A4C0074FF2E /* PickerViewController.m in Sources */,
-				AB0A4C5D1A4E6E0900387068 /* WebViewController.m in Sources */,
-				AB2659701A0F2A710074FF2E /* TextFieldViewController.m in Sources */,
-				ABCF04E31A06BE220000318A /* ControlsViewController.m in Sources */,
-				ABCFAC0A1A0E94BA003B91BC /* TableViewController.m in Sources */,
-				AB24E0041A0C88670099231F /* AlertTableViewController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		ABCF04CF1A06AF200000318A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AB2659841A10753A0074FF2E /* PickerViewControllerTests.m in Sources */,
-				AB24E00A1A0C89E20099231F /* AlertTableViewControllerTest.m in Sources */,
-				ABCF04DA1A06AF210000318A /* ControlsViewControllerTests.m in Sources */,
-				AB2659631A0E96B20074FF2E /* TableViewControllerTests.m in Sources */,
-				AB2659731A0F2AE10074FF2E /* TextFieldViewControllerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		AB25C05319DF95AA00038E75 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AB25C03B19DF95AA00038E75 /* FRY */;
-			targetProxy = AB25C05219DF95AA00038E75 /* PBXContainerItemProxy */;
-		};
-		ABCF04D51A06AF200000318A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = ABCF04B71A06AF200000318A /* TestTarget */;
-			targetProxy = ABCF04D41A06AF200000318A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		AB25C05819DF95AA00038E75 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AB25C05919DF95AA00038E75 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		AB25C05D19DF95AA00038E75 /* Debug */ = {
@@ -879,134 +522,6 @@
 			};
 			name = Release;
 		};
-		AB25C06319DF95AA00038E75 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FRY/FRY-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "FRYTests/FRYTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		AB25C06419DF95AA00038E75 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "FRY/FRY-Prefix.pch";
-				INFOPLIST_FILE = "FRYTests/FRYTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
-		ABCF04DC1A06AF210000318A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = TestTarget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		ABCF04DD1A06AF210000318A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				INFOPLIST_FILE = TestTarget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		ABCF04DF1A06AF210000318A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = TestTargetTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					XCTest,
-					"-ObjC",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestTarget.app/TestTarget";
-			};
-			name = Debug;
-		};
-		ABCF04E01A06AF210000318A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = TestTargetTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-framework",
-					XCTest,
-					"-ObjC",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestTarget.app/TestTarget";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1024,33 +539,6 @@
 			buildConfigurations = (
 				AB25C06019DF95AA00038E75 /* Debug */,
 				AB25C06119DF95AA00038E75 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AB25C06219DF95AA00038E75 /* Build configuration list for PBXNativeTarget "FRYTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AB25C06319DF95AA00038E75 /* Debug */,
-				AB25C06419DF95AA00038E75 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		ABCF04DB1A06AF210000318A /* Build configuration list for PBXNativeTarget "TestTarget" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				ABCF04DC1A06AF210000318A /* Debug */,
-				ABCF04DD1A06AF210000318A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		ABCF04DE1A06AF210000318A /* Build configuration list for PBXNativeTarget "TestTargetTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				ABCF04DF1A06AF210000318A /* Debug */,
-				ABCF04E01A06AF210000318A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

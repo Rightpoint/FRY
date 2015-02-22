@@ -1,0 +1,20 @@
+PODS:
+  - FRY (0.3)
+  - FRYolator (0.3):
+    - FRY (~> 0.3)
+
+DEPENDENCIES:
+  - FRY (from `../`)
+  - FRYolator (from `../FRYolator/`)
+
+EXTERNAL SOURCES:
+  FRY:
+    :path: ../
+  FRYolator:
+    :path: ../FRYolator/
+
+SPEC CHECKSUMS:
+  FRY: de1fb0abca071c14a1ef7c567ab189a8bc977298
+  FRYolator: 8089b37b1abd91c0dcefdfaf399f006e1f10300b
+
+COCOAPODS: 0.35.0

@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^FRYMatchBlock)(UIView *view, CGRect frameInView);
-
 typedef BOOL(^FRYCheckBlock)();
 
 OBJC_EXTERN NSTimeInterval const kFRYEventDispatchInterval;
