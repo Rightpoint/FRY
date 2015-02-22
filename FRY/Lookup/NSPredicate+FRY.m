@@ -24,7 +24,9 @@
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel
 {
     NSParameterAssert(accessibilityLabel);
-    return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(fry_accessibilityLabel)), accessibilityLabel];
+    return [NSPredicate predicateWithFormat:@"%K = %@ && %K = %@",
+            NSStringFromSelector(@selector(fry_accessibilityLabel)), accessibilityLabel,
+            NSStringFromSelector(@selector(isAccessibilityElement)), @(YES)];
 }
 
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel comparision:(NSString *)comparision;
@@ -44,8 +46,9 @@
 {
     NSParameterAssert(accessibilityLabel);
     NSParameterAssert(accessibilityValue);
-    return [NSPredicate predicateWithFormat:@"%K = %@ && %K = %@",
+    return [NSPredicate predicateWithFormat:@"%K = %@ && %K = %@ && %K = %@",
             NSStringFromSelector(@selector(fry_accessibilityLabel)), accessibilityLabel,
+            NSStringFromSelector(@selector(isAccessibilityElement)), @(YES),
             NSStringFromSelector(@selector(fry_accessibilityValue)), accessibilityValue];
 }
 
@@ -57,8 +60,9 @@
 
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityTrait:(UIAccessibilityTraits)traits
 {
-    return [NSPredicate predicateWithFormat:@"%K = %@ && (%K & %@) = %@",
+    return [NSPredicate predicateWithFormat:@"%K = %@ && %K = %@ && (%K & %@) = %@",
             NSStringFromSelector(@selector(fry_accessibilityLabel)), accessibilityLabel,
+            NSStringFromSelector(@selector(isAccessibilityElement)), @(YES),
             NSStringFromSelector(@selector(accessibilityTraits)), @(traits), @(traits)];
 }
 
