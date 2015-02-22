@@ -63,18 +63,20 @@ static void *FRYScrollingStateScrollingKey = &FRYScrollingStateScrollingKey;
 
 + (void)load
 {
-    [FRYMethodSwizzling exchangeClass:[UIScrollView class]
-                               method:@selector(_scrollViewDidEndDecelerating)
-                            withClass:[UIScrollView class]
-                               method:@selector(fry_scrollViewDidEndDecelerating)];
-    [FRYMethodSwizzling exchangeClass:[UIScrollView class]
-                               method:@selector(setContentOffset:animated:)
-                            withClass:[UIScrollView class]
-                               method:@selector(fry_setContentOffset:animated:)];
-    [FRYMethodSwizzling exchangeClass:[UIScrollView class]
-                               method:@selector(_startTimer:)
-                            withClass:[UIScrollView class]
-                               method:@selector(fry_startTimer:)];
+    @autoreleasepool {
+        [FRYMethodSwizzling exchangeClass:[UIScrollView class]
+                                   method:@selector(_scrollViewDidEndDecelerating)
+                                withClass:[UIScrollView class]
+                                   method:@selector(fry_scrollViewDidEndDecelerating)];
+        [FRYMethodSwizzling exchangeClass:[UIScrollView class]
+                                   method:@selector(setContentOffset:animated:)
+                                withClass:[UIScrollView class]
+                                   method:@selector(fry_setContentOffset:animated:)];
+        [FRYMethodSwizzling exchangeClass:[UIScrollView class]
+                                   method:@selector(_startTimer:)
+                                withClass:[UIScrollView class]
+                                   method:@selector(fry_startTimer:)];
+    }
 }
 
 @end
