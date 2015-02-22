@@ -13,7 +13,6 @@
 
 #import "NSObject+FRYLookup.h"
 #import "NSRunLoop+FRY.h"
-#import "FRYIdleCheck.h"
 #import "UIView+FRY.h"
 #import "UIApplication+FRY.h"
 #import "FRYTypist.h"

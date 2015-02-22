@@ -40,7 +40,6 @@ typedef FRYDSLQuery *(^FRYDSLTouchesBlock)(NSArray *touches);
 - (NSPredicate *)predicate;
 - (NSSet *)performQuery;
 
-
 @property (copy, nonatomic, readonly) FRYDSLStringBlock accessibilityLabel;
 @property (copy, nonatomic, readonly) FRYDSLStringBlock accessibilityValue;
 @property (copy, nonatomic, readonly) FRYDSLTraitsBlock accessibilityTraits;

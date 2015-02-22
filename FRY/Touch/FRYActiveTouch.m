@@ -34,6 +34,8 @@ static NSUInteger const kFRYTouchPhaseUndefined = -1;
 
 - (id)initWithSimulatedTouch:(FRYTouch *)touch inView:(UIView *)view startTime:(NSTimeInterval)startTime;
 {
+    NSParameterAssert(touch);
+    NSParameterAssert(view);
     self = [super init];
     if ( self ) {
         _touchDefinition = touch;

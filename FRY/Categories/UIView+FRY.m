@@ -10,7 +10,6 @@
 #import "NSObject+FRYLookup.h"
 #import "FRYTouchDispatch.h"
 #import "UIAccessibility+FRY.h"
-#import "FRYIdleCheck.h"
 
 @implementation UIView (FRY)
 

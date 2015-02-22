@@ -17,11 +17,8 @@
 
 /**
  * A depth first traversal, similar to hitTest:event:, to return the deepest object in the tree matching the
- * predicate.   The block is always triggered before the method is returned.  If nothing is found, view will be nil.
- * This allows us to hide FRYLookup from API clients.
+ * predicate.
  */
-- (void)fry_farthestDescendentMatching:(NSPredicate *)predicate usingBlock:(FRYMatchBlock)block;
-
 - (id<FRYLookup>)fry_farthestDescendentMatching:(NSPredicate *)predicate;
 
 /**

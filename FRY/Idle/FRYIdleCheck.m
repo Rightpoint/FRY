@@ -16,8 +16,19 @@
 #import "UIView+FRY.h"
 static FRYIdleCheck *systemIdleCheck = nil;
 
+@interface FRYIdleCheck () <FRYTouchDispatchDelegate>
+
+@end
 
 @implementation FRYIdleCheck
+
++ (void)load
+{
+    // Take over the delegate of the touch dispatch if nil.
+    if ( [FRYTouchDispatch shared].delegate == nil ) {
+        [FRYTouchDispatch shared].delegate = [self system];
+    }
+}
 
 + (FRYIdleCheck *)system
 {
@@ -142,6 +153,18 @@ static FRYIdleCheck *systemIdleCheck = nil;
         NSLog(@"%@", [self busyDescription]);
     }
     return NO;
+}
+
+#pragma mark - Touch Dispatch Delegate
+
+- (void)touchDispatch:(FRYTouchDispatch *)touchDispatch willStartSimulationOfTouches:(NSArray *)touches
+{
+    [self waitForIdle];
+}
+
+- (void)touchDispatch:(FRYTouchDispatch *)touchDispatch didCompleteSimulationOfTouches:(NSArray *)touches
+{
+    [self waitForIdle];
 }
 
 @end

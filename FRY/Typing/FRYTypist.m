@@ -11,14 +11,7 @@
 #import "NSObject+FRYLookup.h"
 #import "UIView+FRY.h"
 #import "FRYTouchDispatch.h"
-#import "NSRunLoop+FRY.h"
-#import "FRYIdleCheck.h"
 #import "UIKit+FRYExposePrivate.h"
-
-@interface FRYTypist()
-
-
-@end
 
 @implementation FRYTypist
 
@@ -94,6 +87,5 @@
                                              frame:[key frame]];
     }
 }
-
 
 @end

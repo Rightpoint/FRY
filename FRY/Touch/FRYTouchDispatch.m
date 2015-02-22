@@ -68,20 +68,11 @@
 {
     NSAssert([NSThread currentThread] == [NSThread mainThread], @"");
     
-    if ( self.delegate ) {
-        [self.delegate touchDispatch:self willStartSimulationOfTouches:touches];
-    }
-    else {
-        [[FRYIdleCheck system] waitForIdle];
-    }
+    [self.delegate touchDispatch:self willStartSimulationOfTouches:touches];
+
     [self asynchronouslySimulateTouches:touches inView:view frame:frame];
     
-    if ( self.delegate ) {
-        [self.delegate touchDispatch:self didCompleteSimulationOfTouches:touches];
-    }
-    else {
-        [[FRYIdleCheck system] waitForIdle];
-    }
+    [self.delegate touchDispatch:self didCompleteSimulationOfTouches:touches];
 }
 
 - (void)simulateTouches:(NSArray *)touches inView:(UIView *)view
