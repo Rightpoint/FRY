@@ -7,7 +7,6 @@
 //
 
 #import "FRYTouchTracker.h"
-#import "UIKit+FRYExposePrivate.h"
 #import "FRYTouchEvent.h"
 #import "UIView+FRY.h"
 #import "UITouch+FRY.h"

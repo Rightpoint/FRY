@@ -9,7 +9,6 @@
 #import "UIScrollView+FRYScrollingState.h"
 #import "FRYMethodSwizzling.h"
 #import <objc/runtime.h>
-#import "UIKit+FRYExposePrivate.h"
 #import "UIView+FRY.h"
 
 static void *FRYScrollingStateScrollingKey = &FRYScrollingStateScrollingKey;

@@ -7,14 +7,12 @@
 //
 
 #import "UIApplication+FRY.h"
-#import "UIKit+FRYExposePrivate.h"
 #import "FRYEventProxy.h"
 
 #import "UIView+FRY.h"
 #import "UIKit+FRYExposePrivate.h"
 #import "NSObject+FRYLookup.h"
 #import "NSPredicate+FRY.h"
-#import "NSRunLoop+FRY.h"
 
 @implementation UIApplication(FRY)
 
