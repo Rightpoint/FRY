@@ -9,7 +9,6 @@
 #import "UIScrollView+FRY.h"
 #import "NSObject+FRYLookup.h"
 #import "FRYTouch.h"
-#import "FRYIdleCheck.h"
 
 @implementation UIScrollView(FRY)
 
@@ -17,8 +16,10 @@
 {
     NSSet *results = [self fry_allChildrenMatching:predicate];
     while ( results.count == 0 && [self fry_moreSpaceInSearchDirection:direction] ) {
-        [self fry_scrollInDirection:direction];
-        results = [self fry_allChildrenMatching:predicate];
+        @autoreleasepool {
+            [self fry_scrollInDirection:direction];
+            results = [self fry_allChildrenMatching:predicate];
+        }
     }
     
     return [self fry_scrollToLookupResultMatching:predicate];
@@ -78,12 +79,10 @@
     [self fry_scrollAndWaitToContentOffset:offset];
 }
 
-- (BOOL)fry_scrollAndWaitToContentOffset:(CGPoint)offset
+- (void)fry_scrollAndWaitToContentOffset:(CGPoint)offset
 {
     [self setContentOffset:offset animated:YES];
-    [[NSRunLoop currentRunLoop] runMode:NSRunLoopCommonModes beforeDate:[NSDate dateWithTimeIntervalSinceNow:1]];
-    return [[FRYIdleCheck system] waitForIdle];
+    [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:1]];
 }
 
 @end
-

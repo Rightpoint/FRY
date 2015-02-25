@@ -9,8 +9,8 @@
 #import "FRYTouchTracker.h"
 #import "FRYTouchEvent.h"
 
-#import "UIView+FRY.h"
-#import "UITouch+FRY.h"
+#import "UIView+FRYLookup.h"
+
 #import "FRYTouchEvent.h"
 
 @interface FRYTouchTracker()

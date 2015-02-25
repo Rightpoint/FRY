@@ -29,6 +29,6 @@
  *
  *  NOTE: The name of this method is not good.
  */
-- (BOOL)fry_scrollAndWaitToContentOffset:(CGPoint)offset;
+- (void)fry_scrollAndWaitToContentOffset:(CGPoint)offset;
 
 @end

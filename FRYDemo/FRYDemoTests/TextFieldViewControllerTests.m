@@ -7,7 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "FRY.h"
+#import <FRY/FRY.h>
+
 #import "TextFieldViewController.h"
 
 @interface TextFieldViewControllerTests : XCTestCase

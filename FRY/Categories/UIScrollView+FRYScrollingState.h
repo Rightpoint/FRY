@@ -23,6 +23,8 @@
  */
 @interface UIScrollView(FRYScrollingState) <UIScrollViewDelegate>
 
++ (void)fry_swizzleProgramaticScrollDetection;
+
 - (BOOL)fry_isScrolling;
 
 @end

@@ -16,6 +16,29 @@ static void *FRYScrollingStateScrollingKey = &FRYScrollingStateScrollingKey;
 
 @implementation UIScrollView(FRYScrollingState)
 
+/**
+ *  Swizzle out the methods when requested.  This is not invoked in the `+ (void)load` function 
+ *  in the category like usual because the FRY symbol table can easily be loaded twice, once 
+ *  inside the Application, and once via the Test Loader.
+ *
+ *  To avoid issues, this is not done automatically.   It is up to the client to enable this (for now)
+ */
++ (void)fry_swizzleProgramaticScrollDetection
+{
+    [FRYMethodSwizzling exchangeClass:[UIScrollView class]
+                               method:@selector(_scrollViewDidEndDecelerating)
+                            withClass:[UIScrollView class]
+                               method:@selector(fry_scrollViewDidEndDecelerating)];
+    [FRYMethodSwizzling exchangeClass:[UIScrollView class]
+                               method:@selector(setContentOffset:animated:)
+                            withClass:[UIScrollView class]
+                               method:@selector(fry_setContentOffset:animated:)];
+    [FRYMethodSwizzling exchangeClass:[UIScrollView class]
+                               method:@selector(_startTimer:)
+                            withClass:[UIScrollView class]
+                               method:@selector(fry_startTimer:)];
+}
+
 - (BOOL)fry_isAnimating
 {
     if ( self.fry_isScrolling || self.tracking || self.dragging ) {
@@ -59,24 +82,6 @@ static void *FRYScrollingStateScrollingKey = &FRYScrollingStateScrollingKey;
 - (void)fry_setIsScrolling:(BOOL)scrolling
 {
     objc_setAssociatedObject(self, FRYScrollingStateScrollingKey, [NSNumber numberWithBool:scrolling], OBJC_ASSOCIATION_RETAIN);
-}
-
-+ (void)load
-{
-    @autoreleasepool {
-        [FRYMethodSwizzling exchangeClass:[UIScrollView class]
-                                   method:@selector(_scrollViewDidEndDecelerating)
-                                withClass:[UIScrollView class]
-                                   method:@selector(fry_scrollViewDidEndDecelerating)];
-        [FRYMethodSwizzling exchangeClass:[UIScrollView class]
-                                   method:@selector(setContentOffset:animated:)
-                                withClass:[UIScrollView class]
-                                   method:@selector(fry_setContentOffset:animated:)];
-        [FRYMethodSwizzling exchangeClass:[UIScrollView class]
-                                   method:@selector(_startTimer:)
-                                withClass:[UIScrollView class]
-                                   method:@selector(fry_startTimer:)];
-    }
 }
 
 @end

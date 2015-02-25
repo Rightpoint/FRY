@@ -7,7 +7,6 @@
 //
 
 #import "FRYMonitor.h"
-#import "FRYMethodSwizzling.h"
 
 #import "FRYEventLog.h"
 
@@ -15,6 +14,7 @@
 #import "FRYNetworkTracker.h"
 
 #import "FRYTouchHighlightWindowLayer.h"
+#import "FRYMethodSwizzling.h"
 
 @interface FRYMonitor() <FRYTrackerDelegate, UIAlertViewDelegate>
 
@@ -37,6 +37,11 @@
     static FRYMonitor *monitor = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        [FRYMethodSwizzling exchangeClass:[UIApplication class]
+                                   method:@selector(sendEvent:)
+                                withClass:[self class]
+                                   method:@selector(fry_sendEvent:)];
+
         monitor = [[FRYMonitor alloc] init];
     });
     return monitor;
@@ -55,10 +60,6 @@
 
 - (void)enable
 {
-    [FRYMethodSwizzling exchangeClass:[UIApplication class]
-                               method:@selector(sendEvent:)
-                            withClass:[self class]
-                               method:@selector(fry_sendEvent:)];
     self.activeEvents = [NSMutableArray array];
     self.enableTime = [[NSProcessInfo processInfo] systemUptime];
     [self.touchTracker enable];
@@ -68,26 +69,25 @@
 
 - (void)disable
 {
-    [FRYMethodSwizzling exchangeClass:[UIApplication class]
-                               method:@selector(sendEvent:)
-                            withClass:[self class]
-                               method:@selector(fry_sendEvent:)];
     [self.touchTracker disable];
     [self.networkTracker disable];
     [self.highlightLayer disable];
+    self.activeEvents = nil;
 }
 
 - (void)clearState
 {
-    self.activeEvents = nil;
+    self.activeEvents = [NSMutableArray array];
     self.enableTime = MAXFLOAT;
 }
 
 - (void)fry_sendEvent:(UIEvent *)event
 {
     [self fry_sendEvent:event];
-    [FRYMonitor.shared.touchTracker trackEvent:event];
-    [FRYMonitor.shared.highlightLayer visualizeEvent:event];
+    if ( FRYMonitor.shared.activeEvents ) {
+        [FRYMonitor.shared.touchTracker trackEvent:event];
+        [FRYMonitor.shared.highlightLayer visualizeEvent:event];
+    }
 }
 
 - (NSTimeInterval)startTimeForEvents

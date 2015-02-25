@@ -1,6 +1,6 @@
 
+pod 'FRY', :path => "../"
+pod 'FRYolator', :path => "../FRYolator/"
 
-target :FRYDemoTests do
-  pod 'FRY', :path => "../"
-  pod 'FRYolator', :path => "../FRYolator/"
+target :FRYDemoTests, :exclusive => true do
 end

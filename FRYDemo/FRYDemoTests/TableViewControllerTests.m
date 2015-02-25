@@ -7,7 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "FRY.h"
+#import <FRY/FRY.h>
+
 #import "TableViewController.h"
 
 #define TableViewReorderTitleForRow(i) [NSString stringWithFormat:@"Reorder Item %zd", i]

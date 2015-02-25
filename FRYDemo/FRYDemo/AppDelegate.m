@@ -14,6 +14,9 @@
 #import "PickerViewController.h"
 #import "WebViewController.h"
 
+#import <FRYolator/FRYMonitor.h>
+#import <FRY/FRY.h>
+
 @interface AppDelegate () <UISplitViewControllerDelegate>
 
 @end
@@ -28,6 +31,7 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [[FRYMonitor shared] enable];
     // Override point for customization after application launch.
     UITabBarController *tabController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];
     tabController.viewControllers = @[

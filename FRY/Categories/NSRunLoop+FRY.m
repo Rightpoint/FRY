@@ -11,6 +11,9 @@
 #import "UIApplication+FRY.h"
 #import "FRYDefines.h"
 
+NSTimeInterval const kFRYRunLoopSpinInterval = 0.05;
+
+
 typedef void(^FRYRunLoopObserverBlock)(CFRunLoopObserverRef observer, CFRunLoopActivity activity);
 
 @implementation NSRunLoop(FRY)
@@ -19,18 +22,16 @@ typedef void(^FRYRunLoopObserverBlock)(CFRunLoopObserverRef observer, CFRunLoopA
 {
     // Spin the runloop for a tad, incase some action initiated a performSelector:withObject:afterDelay:
     // which will cause some state change very soon.
-    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.001]];
-    
+    [self runMode:self.currentMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.001]];
+
     NSTimeInterval start = [NSDate timeIntervalSinceReferenceDate];
     BOOL checkOK = checkBlock();
-    while ( checkOK == NO
-           && start + timeout > [NSDate timeIntervalSinceReferenceDate]
-           )
+    while ( checkOK == NO && start + timeout > [NSDate timeIntervalSinceReferenceDate] )
     {
-        @autoreleasepool {
-            [self runUntilDate:[NSDate dateWithTimeIntervalSinceNow:kFRYEventDispatchInterval]];
-            checkOK = checkBlock();
-        }
+        NSDate *date = [NSDate dateWithTimeIntervalSinceNow:kFRYEventDispatchInterval];
+        [self runMode:self.currentMode beforeDate:date];
+
+        checkOK = checkBlock();
     }
     
     return checkOK;

@@ -31,12 +31,13 @@
 		AB283B871A9A1BE90058C222 /* FRYTouchHighlightWindowLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AB283B701A9A1BE90058C222 /* FRYTouchHighlightWindowLayer.m */; };
 		AB283B881A9A1BE90058C222 /* FRYTouchLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = AB283B711A9A1BE90058C222 /* FRYTouchLayer.h */; };
 		AB283B891A9A1BE90058C222 /* FRYTouchLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AB283B721A9A1BE90058C222 /* FRYTouchLayer.m */; };
-		B63BF5BFA7B9213F36C4CC7A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7608F7FD991339FEF88D90B0 /* libPods.a */; };
+		ABEB01111A9BE48500D703D4 /* UIView+FRYLookup.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEB010F1A9BE48500D703D4 /* UIView+FRYLookup.h */; };
+		ABEB01121A9BE48500D703D4 /* UIView+FRYLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = ABEB01101A9BE48500D703D4 /* UIView+FRYLookup.m */; };
+		ABEB011A1A9D71D000D703D4 /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABEB01191A9D71D000D703D4 /* libFRY.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		510C68CAF42F55B9DEB197D7 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		7608F7FD991339FEF88D90B0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB283B561A99A05C0058C222 /* FRYolator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYolator.h; sourceTree = SOURCE_ROOT; };
 		AB283B591A9A1BE90058C222 /* FRYEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYEvent.h; sourceTree = "<group>"; };
 		AB283B5A1A9A1BE90058C222 /* FRYEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYEvent.m; sourceTree = "<group>"; };
@@ -63,6 +64,9 @@
 		AB283B721A9A1BE90058C222 /* FRYTouchLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYTouchLayer.m; sourceTree = "<group>"; };
 		ABBDFAAA1A999669008999A1 /* FRYolator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FRYolator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABBDFAAE1A999669008999A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABEB010F1A9BE48500D703D4 /* UIView+FRYLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FRYLookup.h"; sourceTree = "<group>"; };
+		ABEB01101A9BE48500D703D4 /* UIView+FRYLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FRYLookup.m"; sourceTree = "<group>"; };
+		ABEB01191A9D71D000D703D4 /* libFRY.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFRY.a; path = "../build/Debug-iphoneos/libFRY.a"; sourceTree = "<group>"; };
 		C3414AA590DE41145F311AB9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,7 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B63BF5BFA7B9213F36C4CC7A /* libPods.a in Frameworks */,
+				ABEB011A1A9D71D000D703D4 /* libFRY.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,7 +85,7 @@
 		78C1E055B6E3CE9D9AA12723 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7608F7FD991339FEF88D90B0 /* libPods.a */,
+				ABEB01191A9D71D000D703D4 /* libFRY.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -124,6 +128,8 @@
 				AB283B6A1A9A1BE90058C222 /* FRYTouchEvent.m */,
 				AB283B6B1A9A1BE90058C222 /* FRYTouchTracker.h */,
 				AB283B6C1A9A1BE90058C222 /* FRYTouchTracker.m */,
+				ABEB010F1A9BE48500D703D4 /* UIView+FRYLookup.h */,
+				ABEB01101A9BE48500D703D4 /* UIView+FRYLookup.m */,
 			);
 			path = Touch;
 			sourceTree = "<group>";
@@ -205,6 +211,7 @@
 				AB283B831A9A1BE90058C222 /* FRYTouchTracker.h in Headers */,
 				AB283B751A9A1BE90058C222 /* FRYEventLog.h in Headers */,
 				AB283B771A9A1BE90058C222 /* FRYMonitor.h in Headers */,
+				ABEB01111A9BE48500D703D4 /* UIView+FRYLookup.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,12 +222,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ABBDFAC01A999669008999A1 /* Build configuration list for PBXNativeTarget "FRYolator" */;
 			buildPhases = (
-				6990E50CCE7D742AF30B7B79 /* Check Pods Manifest.lock */,
 				ABBDFAA51A999669008999A1 /* Sources */,
 				ABBDFAA61A999669008999A1 /* Frameworks */,
 				ABBDFAA71A999669008999A1 /* Headers */,
 				ABBDFAA81A999669008999A1 /* Resources */,
-				F759AE4771E8EDACDCCDB7B9 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -272,39 +277,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		6990E50CCE7D742AF30B7B79 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		F759AE4771E8EDACDCCDB7B9 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		ABBDFAA51A999669008999A1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -312,6 +284,7 @@
 			files = (
 				AB283B821A9A1BE90058C222 /* FRYTouchEvent.m in Sources */,
 				AB283B7A1A9A1BE90058C222 /* FRYTracker.m in Sources */,
+				ABEB01121A9BE48500D703D4 /* UIView+FRYLookup.m in Sources */,
 				AB283B741A9A1BE90058C222 /* FRYEvent.m in Sources */,
 				AB283B761A9A1BE90058C222 /* FRYEventLog.m in Sources */,
 				AB283B7E1A9A1BE90058C222 /* FRYNetworkTracker.m in Sources */,
@@ -413,18 +386,23 @@
 		};
 		ABBDFAC11A999669008999A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C3414AA590DE41145F311AB9 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"../FRY/**",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"/Users/brianking/sandbox/FRY/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -433,18 +411,23 @@
 		};
 		ABBDFAC21A999669008999A1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 510C68CAF42F55B9DEB197D7 /* Pods.release.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"../FRY/**",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"/Users/brianking/sandbox/FRY/build/Debug-iphoneos",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

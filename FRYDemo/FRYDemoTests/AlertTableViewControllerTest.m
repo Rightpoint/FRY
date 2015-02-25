@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import <FRY/FRY.h>
+
 #import "AlertTableViewController.h"
-#import "FRY.h"
 
 @interface AlertTableViewControllerTest : XCTestCase
 

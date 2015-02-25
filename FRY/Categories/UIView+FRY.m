@@ -37,24 +37,6 @@
     return [[self.subviews reverseObjectEnumerator] allObjects];
 }
 
-- (NSDictionary *)fry_matchingLookupVariables
-{
-    NSMutableDictionary *variables = [NSMutableDictionary dictionary];
-    if ( self.fry_accessibilityLabel && self.accessibilityLabel.length > 0 ) {
-        variables[NSStringFromSelector(@selector(fry_accessibilityLabel))] = self.fry_accessibilityLabel;
-    }
-    if ( self.accessibilityIdentifier && self.accessibilityIdentifier.length > 0 ) {
-        variables[NSStringFromSelector(@selector(accessibilityIdentifier))] = self.accessibilityIdentifier;
-    }
-
-    if ( variables.count > 0 ) {
-        return [variables copy];
-    }
-    else {
-        return nil;
-    }
-}
-
 - (NSIndexPath *)fry_indexPathInContainer
 {
     UIView *container = [self superview];
@@ -67,11 +49,6 @@
     else {
         return nil;
     }
-}
-
-- (UIView *)fry_lookupMatchingViewAtPoint:(CGPoint)point
-{
-    return [self hitTest:point withEvent:nil];
 }
 
 - (UIView *)fry_interactableParent
@@ -97,42 +74,6 @@
         view = [view superview];
     }
     return view != nil;
-}
-
-@end
-
-@implementation UINavigationBar(FRY)
-
-- (UIView *)fry_lookupMatchingViewAtPoint:(CGPoint)point
-{
-    if ([self pointInside:point withEvent:nil]) {
-        for (UIView *subview in [self.subviews reverseObjectEnumerator]) {
-            CGPoint convertedPoint = [subview convertPoint:point fromView:self];
-            if ( [subview pointInside:convertedPoint withEvent:nil] ) {
-                return subview;
-            }
-        }
-        return self;
-    }
-    return nil;
-}
-
-@end
-
-@implementation UISegmentedControl(FRY)
-
-- (UIView *)fry_lookupMatchingViewAtPoint:(CGPoint)point
-{
-    if ([self pointInside:point withEvent:nil]) {
-        for (UIView *subview in [self.subviews reverseObjectEnumerator]) {
-            CGPoint convertedPoint = [subview convertPoint:point fromView:self];
-            if ( [subview pointInside:convertedPoint withEvent:nil] ) {
-                return subview;
-            }
-        }
-        return self;
-    }
-    return nil;
 }
 
 @end

@@ -84,7 +84,6 @@
 		AB25C05019DF95AA00038E75 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		AB25C06819DF95ED00038E75 /* UIView+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FRY.h"; sourceTree = "<group>"; };
 		AB25C06919DF95ED00038E75 /* UIView+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FRY.m"; sourceTree = "<group>"; };
-		AB2659671A0ECE4E0074FF2E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		AB2659771A0F37630074FF2E /* UIKit+FRYCastCompanions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIKit+FRYCastCompanions.h"; sourceTree = "<group>"; };
 		AB2659781A0FBE140074FF2E /* FRYTypist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYTypist.h; sourceTree = "<group>"; };
 		AB2659791A0FBE140074FF2E /* FRYTypist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYTypist.m; sourceTree = "<group>"; };
@@ -152,7 +151,6 @@
 		AB25C03319DF95AA00038E75 = {
 			isa = PBXGroup;
 			children = (
-				AB2659671A0ECE4E0074FF2E /* Default-568h@2x.png */,
 				AB25C04119DF95AA00038E75 /* FRY */,
 				ABBDFB2A1A999E14008999A1 /* FRYTests */,
 				AB25C03E19DF95AA00038E75 /* Frameworks */,
