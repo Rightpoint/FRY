@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
-#import "FRYMonitor.h"
+#import "FRYolator.h"
 
 #import "FRYEventLog.h"
 
@@ -16,7 +16,7 @@
 #import "FRYTouchHighlightWindowLayer.h"
 #import "FRYMethodSwizzling.h"
 
-@interface FRYMonitor() <FRYTrackerDelegate, UIAlertViewDelegate>
+@interface FRYolator() <FRYTrackerDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) FRYTouchTracker *touchTracker;
 @property (strong, nonatomic) FRYNetworkTracker *networkTracker;
@@ -25,16 +25,17 @@
 
 @property (strong, nonatomic) UITapGestureRecognizer *recordGestureRecognizer;
 @property (strong, nonatomic) UITapGestureRecognizer *presentUIGestureRecognizer;
-@property (strong, nonatomic) NSMutableArray *activeEvents;
-@property (assign, nonatomic) NSTimeInterval enableTime;
+
+@property (assign, nonatomic) BOOL enabled;
+@property (strong, nonatomic) FRYEventLog *eventLog;
 
 @end
 
-@implementation FRYMonitor
+@implementation FRYolator
 
-+ (FRYMonitor *)shared
++ (FRYolator *)shared
 {
-    static FRYMonitor *monitor = nil;
+    static FRYolator *monitor = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         [FRYMethodSwizzling exchangeClass:[UIApplication class]
@@ -42,7 +43,7 @@
                                 withClass:[self class]
                                    method:@selector(fry_sendEvent:)];
 
-        monitor = [[FRYMonitor alloc] init];
+        monitor = [[FRYolator alloc] init];
     });
     return monitor;
 }
@@ -60,11 +61,15 @@
 
 - (void)enable
 {
-    self.activeEvents = [NSMutableArray array];
-    self.enableTime = [[NSProcessInfo processInfo] systemUptime];
+    self.eventLog = [[FRYEventLog alloc] init];
+    if ( [self.delegate respondsToSelector:@selector(appSchemeURLRepresentingCurrentStateForFryolator:)] ) {
+        self.eventLog.appSchemeURL = [self.delegate appSchemeURLRepresentingCurrentStateForFryolator:self];
+    }
+
     [self.touchTracker enable];
     [self.networkTracker enable];
     [self.highlightLayer enable];
+    self.enabled = YES;
 }
 
 - (void)disable
@@ -72,32 +77,26 @@
     [self.touchTracker disable];
     [self.networkTracker disable];
     [self.highlightLayer disable];
-    self.activeEvents = nil;
+    self.enabled = NO;
 }
 
 - (void)clearState
 {
-    self.activeEvents = [NSMutableArray array];
-    self.enableTime = MAXFLOAT;
+    self.eventLog = nil;
 }
 
 - (void)fry_sendEvent:(UIEvent *)event
 {
     [self fry_sendEvent:event];
-    if ( FRYMonitor.shared.activeEvents ) {
-        [FRYMonitor.shared.touchTracker trackEvent:event];
-        [FRYMonitor.shared.highlightLayer visualizeEvent:event];
+    if ( FRYolator.shared.enabled ) {
+        [FRYolator.shared.touchTracker trackEvent:event];
+        [FRYolator.shared.highlightLayer visualizeEvent:event];
     }
-}
-
-- (NSTimeInterval)startTimeForEvents
-{
-    return [[NSProcessInfo processInfo] systemUptime] - self.enableTime;
 }
 
 - (void)tracker:(FRYTracker *)tracker recordEvent:(FRYEvent *)event
 {
-    [self.activeEvents addObject:event];
+    [self.eventLog addEvent:event];
 }
 
 - (void)registerGestureEnablingOnView:(UIView *)view
@@ -140,9 +139,10 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIApplicationWillEnterForegroundNotification
                                                   object:nil];
-    [self printTouchLog];
+    NSLog(@"\n%@", [self.eventLog commandsToReproduce]);
     self.recordGestureRecognizer.enabled = YES;
     self.presentUIGestureRecognizer.enabled = YES;
+
     [self disable];
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Save Event Log"
                                                  message:@"Enter Log Name"
@@ -164,27 +164,14 @@
 
 - (void)saveEventLogWithName:(NSString *)eventLogName
 {
-    NSAssert(self.activeEvents, @"No Events");
-    FRYEventLog *log = [[FRYEventLog alloc] init];
-    log.name = eventLogName;
-    log.events = self.activeEvents;
-    if ( [self.delegate respondsToSelector:@selector(appSchemeURLRepresentingCurrentStateForMonitor:)] ) {
-        log.appSchemeURL = [self.delegate appSchemeURLRepresentingCurrentStateForMonitor:self];
-    }
+    self.eventLog.name = eventLogName;
     NSError *error = nil;
-    if ( [log save:&error] == NO ) {
+    if ( [self.eventLog save:&error] == NO ) {
         [[[UIAlertView alloc] initWithTitle:@"Error Saving Log"
                                     message:[error localizedDescription]
                                    delegate:nil
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil] show];
-    }
-}
-
-- (void)printTouchLog
-{
-    for ( FRYEvent *event in self.activeEvents ) {
-        printf("%s\n", [[event recreationCode] UTF8String]);
     }
 }
 

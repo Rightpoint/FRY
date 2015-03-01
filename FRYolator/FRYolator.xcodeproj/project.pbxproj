@@ -12,8 +12,8 @@
 		AB283B741A9A1BE90058C222 /* FRYEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = AB283B5A1A9A1BE90058C222 /* FRYEvent.m */; };
 		AB283B751A9A1BE90058C222 /* FRYEventLog.h in Headers */ = {isa = PBXBuildFile; fileRef = AB283B5B1A9A1BE90058C222 /* FRYEventLog.h */; };
 		AB283B761A9A1BE90058C222 /* FRYEventLog.m in Sources */ = {isa = PBXBuildFile; fileRef = AB283B5C1A9A1BE90058C222 /* FRYEventLog.m */; };
-		AB283B771A9A1BE90058C222 /* FRYMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = AB283B5D1A9A1BE90058C222 /* FRYMonitor.h */; };
-		AB283B781A9A1BE90058C222 /* FRYMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AB283B5E1A9A1BE90058C222 /* FRYMonitor.m */; };
+		AB283B771A9A1BE90058C222 /* FRYolator.h in Headers */ = {isa = PBXBuildFile; fileRef = AB283B5D1A9A1BE90058C222 /* FRYolator.h */; };
+		AB283B781A9A1BE90058C222 /* FRYolator.m in Sources */ = {isa = PBXBuildFile; fileRef = AB283B5E1A9A1BE90058C222 /* FRYolator.m */; };
 		AB283B791A9A1BE90058C222 /* FRYTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = AB283B5F1A9A1BE90058C222 /* FRYTracker.h */; };
 		AB283B7A1A9A1BE90058C222 /* FRYTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = AB283B601A9A1BE90058C222 /* FRYTracker.m */; };
 		AB283B7B1A9A1BE90058C222 /* FRYNetworkEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = AB283B621A9A1BE90058C222 /* FRYNetworkEvent.h */; };
@@ -43,8 +43,8 @@
 		AB283B5A1A9A1BE90058C222 /* FRYEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYEvent.m; sourceTree = "<group>"; };
 		AB283B5B1A9A1BE90058C222 /* FRYEventLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYEventLog.h; sourceTree = "<group>"; };
 		AB283B5C1A9A1BE90058C222 /* FRYEventLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYEventLog.m; sourceTree = "<group>"; };
-		AB283B5D1A9A1BE90058C222 /* FRYMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYMonitor.h; sourceTree = "<group>"; };
-		AB283B5E1A9A1BE90058C222 /* FRYMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYMonitor.m; sourceTree = "<group>"; };
+		AB283B5D1A9A1BE90058C222 /* FRYolator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYolator.h; sourceTree = "<group>"; };
+		AB283B5E1A9A1BE90058C222 /* FRYolator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYolator.m; sourceTree = "<group>"; };
 		AB283B5F1A9A1BE90058C222 /* FRYTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYTracker.h; sourceTree = "<group>"; };
 		AB283B601A9A1BE90058C222 /* FRYTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYTracker.m; sourceTree = "<group>"; };
 		AB283B621A9A1BE90058C222 /* FRYNetworkEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYNetworkEvent.h; sourceTree = "<group>"; };
@@ -93,8 +93,8 @@
 		AB283B581A9A1BE90058C222 /* FRYolator */ = {
 			isa = PBXGroup;
 			children = (
-				AB283B5D1A9A1BE90058C222 /* FRYMonitor.h */,
-				AB283B5E1A9A1BE90058C222 /* FRYMonitor.m */,
+				AB283B5D1A9A1BE90058C222 /* FRYolator.h */,
+				AB283B5E1A9A1BE90058C222 /* FRYolator.m */,
 				AB283B591A9A1BE90058C222 /* FRYEvent.h */,
 				AB283B5A1A9A1BE90058C222 /* FRYEvent.m */,
 				AB283B5B1A9A1BE90058C222 /* FRYEventLog.h */,
@@ -210,7 +210,7 @@
 				AB283B791A9A1BE90058C222 /* FRYTracker.h in Headers */,
 				AB283B831A9A1BE90058C222 /* FRYTouchTracker.h in Headers */,
 				AB283B751A9A1BE90058C222 /* FRYEventLog.h in Headers */,
-				AB283B771A9A1BE90058C222 /* FRYMonitor.h in Headers */,
+				AB283B771A9A1BE90058C222 /* FRYolator.h in Headers */,
 				ABEB01111A9BE48500D703D4 /* UIView+FRYLookup.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,7 +293,7 @@
 				AB283B801A9A1BE90058C222 /* FRYNetworkTrackerProtocol.m in Sources */,
 				AB283B841A9A1BE90058C222 /* FRYTouchTracker.m in Sources */,
 				AB283B871A9A1BE90058C222 /* FRYTouchHighlightWindowLayer.m in Sources */,
-				AB283B781A9A1BE90058C222 /* FRYMonitor.m in Sources */,
+				AB283B781A9A1BE90058C222 /* FRYolator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

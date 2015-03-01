@@ -9,6 +9,13 @@
 #import "FRYEventLog.h"
 #import "FRYEvent.h"
 
+@interface FRYEventLog ()
+
+@property (strong, nonatomic) NSMutableArray *events;
+@property (assign, nonatomic) NSTimeInterval enableTime;
+
+@end
+
 @implementation FRYEventLog
 
 + (NSURL *)eventLogDirectory
@@ -38,8 +45,16 @@
     self = [super init];
     if ( self ) {
         _startingDate = [NSDate date];
+        _enableTime = [[NSProcessInfo processInfo] systemUptime];
+        _events = [NSMutableArray array];
     }
     return self;
+}
+
+- (void)addEvent:(FRYEvent *)event
+{
+    event.startingOffset -= self.enableTime;
+    [self.events addObject:event];
 }
 
 - (NSString *)eventLogNameForPath
@@ -73,9 +88,15 @@
              };
 }
 
+- (NSString *)commandsToReproduce;
+{
+    NSString *recreationCommandKey = NSStringFromSelector(@selector(recreationCode));
+    return [[self.events valueForKey:recreationCommandKey] componentsJoinedByString:@"\n"];
+}
 
 - (BOOL)save:(NSError **)error
 {
+    NSLog(@"Saving to %@", [self eventBundlePath]);
     // FIXME: Strip non A-Za-z0-9 chars from name
     BOOL ok = [[NSFileManager defaultManager] createDirectoryAtURL:[self eventBundlePath]
                                        withIntermediateDirectories:YES
@@ -89,7 +110,7 @@
     if ( ok == NO ) {
         *error = [NSError errorWithDomain:NSXMLParserErrorDomain
                                      code:-1
-                                 userInfo:@{NSLocalizedDescriptionKey: @"Invalid Plist Format"}];
+                                 userInfo:@{NSLocalizedDescriptionKey: @"Generated invalid plist representation"}];
     }
     // Give every event log a chance to save it's own event state
     for ( FRYEvent *event in self.events ) {

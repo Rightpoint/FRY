@@ -10,8 +10,6 @@
 
 @interface FRYTracker()
 
-@property (assign, nonatomic) NSTimeInterval startTime;
-
 @end
 
 @implementation FRYTracker
@@ -27,18 +25,10 @@
 
 - (void)enable
 {
-    self.startTime = [self.delegate startTimeForEvents];
 }
 
 - (void)disable
 {
-    self.startTime = MAXFLOAT;
 }
-
-- (BOOL)isEnabled
-{
-    return self.startTime != MAXFLOAT;
-}
-
 
 @end

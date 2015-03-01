@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class FRYEvent;
 /**
  * An event log representing one recording.
  */
@@ -38,10 +39,12 @@
  */
 @property (copy, nonatomic) NSURL *appSchemeURL;
 
+- (void)addEvent:(FRYEvent *)event;
+
 /**
- *  An array of events.
+ *  Return a string containing all the commands to reproduce the event log.
  */
-@property (copy, nonatomic) NSArray *events;
+- (NSString *)commandsToReproduce;
 
 /**
  *  Load the detailed information from disk.

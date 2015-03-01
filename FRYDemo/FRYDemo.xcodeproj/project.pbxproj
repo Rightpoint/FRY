@@ -454,6 +454,7 @@
 		};
 		AB283BBA1A9A1D490058C222 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4D9EF2BADC4664E27BCE0517 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FRYDemo/Info.plist;
@@ -464,6 +465,7 @@
 		};
 		AB283BBB1A9A1D490058C222 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F5A380D6C26827CA82133F0 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FRYDemo/Info.plist;

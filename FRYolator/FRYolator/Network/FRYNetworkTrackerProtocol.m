@@ -79,7 +79,8 @@ static id<FRYNetworkTrackerProtocolDelegate> s_delegate = nil;
     [self.client URLProtocol:self
           didReceiveResponse:response
           cacheStoragePolicy:NSURLCacheStorageNotAllowed];
-    self.networkEvent.response = response;
+    NSAssert([response isKindOfClass:[NSHTTPURLResponse class]], @"Invalid response");
+    self.networkEvent.response = (NSHTTPURLResponse *)response;
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data

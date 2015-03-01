@@ -38,16 +38,12 @@
 
 - (void)trackEvent:(UIEvent *)event
 {
-    if ( self.isEnabled == NO ) {
-        return;
-    }
     for ( UITouch *touch in [event allTouches] ) {
-        NSTimeInterval relativeTouchTime = touch.timestamp - self.startTime;
         FRYTouchEvent *log = nil;
 
         if ( touch.phase == UITouchPhaseBegan ) {
             log = [[FRYTouchEvent alloc] init];
-            log.startingOffset = relativeTouchTime;
+            log.startingOffset = touch.timestamp;
             CGPoint locationInView = [touch locationInView:touch.view];
             UIView *matchingView = [touch.view fry_lookupMatchingViewAtPoint:locationInView];
             while ( matchingView && [matchingView fry_matchingLookupVariables] == nil ) {
@@ -61,7 +57,7 @@
             log = [self.activeTouchLog objectForKey:touch];
         }
         CGPoint location = [touch locationInView:nil];
-        [log addLocation:location atRelativeTime:relativeTouchTime];
+        [log addLocation:location atRelativeTime:touch.timestamp];
         
         if ( touch.phase == UITouchPhaseEnded || touch.phase == UITouchPhaseCancelled ) {
             UIView *touchedView = [self.touchBeganOnViews objectForKey:touch];

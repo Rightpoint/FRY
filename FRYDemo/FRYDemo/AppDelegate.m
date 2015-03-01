@@ -14,7 +14,7 @@
 #import "PickerViewController.h"
 #import "WebViewController.h"
 
-#import <FRYolator/FRYMonitor.h>
+#import <FRYolator/FRYolator.h>
 #import <FRY/FRY.h>
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
@@ -31,7 +31,6 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [[FRYMonitor shared] enable];
     // Override point for customization after application launch.
     UITabBarController *tabController = [[UITabBarController alloc] initWithNibName:nil bundle:nil];
     tabController.viewControllers = @[
@@ -45,7 +44,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = tabController;
     [self.window makeKeyAndVisible];
-
+    [[FRYolator shared] registerGestureEnablingOnView:self.window];
+    
     return YES;
 }
 

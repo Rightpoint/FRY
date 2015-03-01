@@ -13,8 +13,6 @@
 
 @protocol FRYTrackerDelegate <NSObject>
 
-- (NSTimeInterval)startTimeForEvents;
-
 - (void)tracker:(FRYTracker *)tracker recordEvent:(FRYEvent *)event;
 
 @end
@@ -28,10 +26,7 @@
 
 - (void)enable;
 - (void)disable;
-- (BOOL)isEnabled;
 
 @property (assign, nonatomic, readonly) id<FRYTrackerDelegate>delegate;
-
-@property (assign, nonatomic, readonly) NSTimeInterval startTime;
 
 @end
