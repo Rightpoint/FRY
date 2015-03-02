@@ -5,7 +5,7 @@ FRY is an iOS Library inspired by KIF.  The purpose is to simplify iteractions w
 NOTE: Everything is still in alpha, and is subject to change before the 1.0 release.
 
 ## Overview
-FRY consists of two core features to implement touch driven integration tests:
+FRY consists of three core features to implement touch driven integration tests:
 
 - View Lookup
 - Touch Modeling
@@ -14,7 +14,7 @@ FRY consists of two core features to implement touch driven integration tests:
 FRY also includes a helper library, `FRYolator`, which helps create integration tests when it is included in your target.   The goal of FRYolator is to record all input to the target, for later recreation.   FRYolator will currently record and generate unit test commands to playback the following:
 
 - Touch
-- Network (Recording only)
+- Network (Nocilla)
 
 In the future, I hope to include
 
