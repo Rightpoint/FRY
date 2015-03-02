@@ -78,6 +78,11 @@
     return [[self eventBundlePath] URLByAppendingPathComponent:@"EventLog.plist"];
 }
 
+- (NSURL *)unitTestCommandsPath
+{
+    return [[self eventBundlePath] URLByAppendingPathComponent:@"UnitTestCommands.m"];
+}
+
 - (NSDictionary *)plistRepresentation
 {
     return @{
@@ -97,30 +102,40 @@
 - (BOOL)save:(NSError **)error
 {
     NSLog(@"Saving to %@", [self eventBundlePath]);
+    NSString *commandsToReproduce = [self commandsToReproduce];
+    NSLog(@"%@", commandsToReproduce);
+
     // FIXME: Strip non A-Za-z0-9 chars from name
-    BOOL ok = [[NSFileManager defaultManager] createDirectoryAtURL:[self eventBundlePath]
+    BOOL status = [[NSFileManager defaultManager] createDirectoryAtURL:[self eventBundlePath]
                                        withIntermediateDirectories:YES
                                                         attributes:nil
                                                              error:error];
-    if ( ok == NO ) {
-        return NO;
-    }
-    ok = [[self plistRepresentation] writeToFile:[[self eventLogPath] path]
-                                      atomically:YES];
-    if ( ok == NO ) {
-        *error = [NSError errorWithDomain:NSXMLParserErrorDomain
-                                     code:-1
-                                 userInfo:@{NSLocalizedDescriptionKey: @"Generated invalid plist representation"}];
-    }
-    // Give every event log a chance to save it's own event state
-    for ( FRYEvent *event in self.events ) {
-        ok = [event saveAuxillaryFilesInDirectory:[self eventBundlePath]
-                                            error:error];
-        if ( ok == NO ) {
-            return NO;
+    if ( status ) {
+        status = [[self plistRepresentation] writeToFile:[[self eventLogPath] path]
+                                              atomically:YES];
+        if ( status == NO ) {
+            *error = [NSError errorWithDomain:NSXMLParserErrorDomain
+                                         code:-1
+                                     userInfo:@{NSLocalizedDescriptionKey: @"Generated invalid plist representation"}];
+        }
+        else {
+            status = [commandsToReproduce writeToFile:[[self unitTestCommandsPath] path]
+                                           atomically:YES
+                                             encoding:NSUTF8StringEncoding
+                                                error:error];
+            if ( status ) {
+                // Give every event log a chance to save it's own event state
+                for ( FRYEvent *event in self.events ) {
+                    status = [event saveAuxillaryFilesInDirectory:[self eventBundlePath]
+                                                            error:error];
+                    if ( status == NO ) {
+                        break;
+                    }
+                }
+            }
         }
     }
-    return YES;
+    return status;
 }
 
 - (BOOL)load:(NSError **)error

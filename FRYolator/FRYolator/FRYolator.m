@@ -139,7 +139,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIApplicationWillEnterForegroundNotification
                                                   object:nil];
-    NSLog(@"\n%@", [self.eventLog commandsToReproduce]);
     self.recordGestureRecognizer.enabled = YES;
     self.presentUIGestureRecognizer.enabled = YES;
 

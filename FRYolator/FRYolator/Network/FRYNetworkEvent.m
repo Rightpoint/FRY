@@ -87,9 +87,43 @@
     return [representation copy];
 }
 
+- (NSString *)nocillaRecreationHeadersForDictionary:(NSDictionary *)dictionary
+{
+    NSMutableString *headerStubs = [NSMutableString string];
+    [headerStubs appendString:@".withHeaders(@{\n"];
+    NSMutableArray *headerStrings = [NSMutableArray array];
+    [dictionary enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
+        NSString *match = [NSString stringWithFormat:@"@\"%@\": @\"%@\"", key, value];
+        [headerStrings addObject:match];
+    }];
+    [headerStubs appendString:[headerStrings componentsJoinedByString:@",\n"]];
+    [headerStubs appendString:@"})\n"];
+    return [headerStubs copy];
+}
+
+- (NSString *)nocillaRecreationCode
+{
+    NSMutableString *stub = [NSMutableString stringWithFormat:@"stubRequest(@\"%@\", @\"%@\")\n",
+                             self.request.HTTPMethod, self.request.URL];
+    if ( self.request.allHTTPHeaderFields.count > 0 ) {
+        [stub appendString:[self nocillaRecreationHeadersForDictionary:self.request.allHTTPHeaderFields]];
+    }
+    if ( self.request.HTTPBody ) {
+        [stub appendFormat:@".withBody([NSData dataWithContentsOfFile:@\"%@\"])\n", [self requestBodyFilename]];
+    }
+    [stub appendFormat:@".andReturn(%zd)\n", self.response.statusCode];
+    if ( self.response.allHeaderFields ) {
+        [stub appendString:[self nocillaRecreationHeadersForDictionary:self.response.allHeaderFields]];
+    }
+    if ( self.data.length > 0 ) {
+        [stub appendFormat:@".withBody([NSData dataWithContentsOfFile:@\"%@\"])\n", [self responseBodyFilename]];
+    }
+    return [stub copy];
+}
+
 - (NSString *)recreationCode
 {
-    return @"// Add code for re-creation with Nocella";
+    return [self nocillaRecreationCode];
 }
 
 - (NSString *)pathForFilename:(NSString *)filename inDirectory:(NSURL *)directory
