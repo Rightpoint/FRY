@@ -16,6 +16,8 @@
 #import "FRYTouchHighlightWindowLayer.h"
 #import "FRYMethodSwizzling.h"
 
+NSString *FRYolatorEnabledUserPreferencesKeyPath = @"FRYolatorEnabled";
+
 @interface FRYolator() <FRYTrackerDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) FRYTouchTracker *touchTracker;
@@ -55,8 +57,41 @@
         self.touchTracker = [[FRYTouchTracker alloc] initWithDelegate:self];
         self.networkTracker = [[FRYNetworkTracker alloc] initWithDelegate:self];
         self.highlightLayer = [[FRYTouchHighlightWindowLayer alloc] init];
+
+        [[NSUserDefaults standardUserDefaults] addObserver:self
+                                                forKeyPath:FRYolatorEnabledUserPreferencesKeyPath
+                                                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
+                                                   context:NULL];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSUserDefaults standardUserDefaults] removeObserver:self
+                                               forKeyPath:FRYolatorEnabledUserPreferencesKeyPath
+                                                  context:NULL];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ( [keyPath isEqualToString:FRYolatorEnabledUserPreferencesKeyPath] ) {
+        id value = [change objectForKey:NSKeyValueChangeNewKey];
+        if ( [value isEqual:[NSNull null]] == NO ) {
+            BOOL enabled = [value boolValue];
+            [[NSOperationQueue currentQueue] addOperationWithBlock:^{
+                if ( enabled && self.enabled == NO ) {
+                    [self enable];
+                }
+                else if ( enabled == NO && self.enabled ) {
+                    [self disable];
+                }
+            }];
+        }
+    }
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
 }
 
 - (void)enable
@@ -80,7 +115,15 @@
     self.enabled = NO;
 }
 
-- (void)clearState
+- (BOOL)saveEventLogNamed:(NSString *)eventLogName error:(NSError **)error
+{
+    self.eventLog.name = eventLogName;
+    BOOL status = [self.eventLog save:error];
+    [self clearEventLog];
+    return status;
+}
+
+- (void)clearEventLog
 {
     self.eventLog = nil;
 }
@@ -97,81 +140,6 @@
 - (void)tracker:(FRYTracker *)tracker recordEvent:(FRYEvent *)event
 {
     [self.eventLog addEvent:event];
-}
-
-- (void)registerGestureEnablingOnView:(UIView *)view
-{
-    UITapGestureRecognizer *recordGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(enableTouchRecordingUIAction:)];
-    recordGR.numberOfTouchesRequired = 2;
-    recordGR.numberOfTapsRequired = 3;
-    [view addGestureRecognizer:recordGR];
-    self.recordGestureRecognizer = recordGR;
-    
-    UITapGestureRecognizer *presentUIGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(presentTouchRecordingUI:)];
-    presentUIGR.numberOfTouchesRequired = 2;
-    presentUIGR.numberOfTapsRequired = 4;
-    [view addGestureRecognizer:presentUIGR];
-    self.presentUIGestureRecognizer = presentUIGR;
-}
-
-- (void)enableTouchRecordingUIAction:(UIGestureRecognizer *)gr
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(completeRecording)
-                                                 name:UIApplicationWillEnterForegroundNotification
-                                               object:nil];
-    self.recordGestureRecognizer.enabled = NO;
-    self.presentUIGestureRecognizer.enabled = NO;
-    
-    // Touch must finish before starting the recording, so enable in the next runloop
-    [[NSOperationQueue currentQueue] addOperationWithBlock:^{
-        [self enable];
-    }];
-}
-
-- (void)presentTouchRecordingUI:(UIGestureRecognizer *)gr
-{
-    // TBD
-}
-
-- (void)completeRecording
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIApplicationWillEnterForegroundNotification
-                                                  object:nil];
-    self.recordGestureRecognizer.enabled = YES;
-    self.presentUIGestureRecognizer.enabled = YES;
-
-    [self disable];
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Save Event Log"
-                                                 message:@"Enter Log Name"
-                                                delegate:self
-                                       cancelButtonTitle:@"Cancel"
-                                       otherButtonTitles:@"Save", nil];
-    av.alertViewStyle = UIAlertViewStylePlainTextInput;
-    [av show];
-}
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if ( buttonIndex != alertView.cancelButtonIndex ) {
-        UITextField *textField = [alertView textFieldAtIndex:0];
-        [self saveEventLogWithName:textField.text];
-    }
-    [self clearState];
-}
-
-- (void)saveEventLogWithName:(NSString *)eventLogName
-{
-    self.eventLog.name = eventLogName;
-    NSError *error = nil;
-    if ( [self.eventLog save:&error] == NO ) {
-        [[[UIAlertView alloc] initWithTitle:@"Error Saving Log"
-                                    message:[error localizedDescription]
-                                   delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil] show];
-    }
 }
 
 @end

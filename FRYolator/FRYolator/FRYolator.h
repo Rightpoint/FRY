@@ -16,6 +16,7 @@ FOUNDATION_EXPORT const unsigned char FRYolatorVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <FRYolator/PublicHeader.h>
 
+#import "FRYolatorUI.h"
 #import "FRYTouchTracker.h"
 #import "FRYTouchHighlightWindowLayer.h"
 
@@ -26,16 +27,18 @@ FOUNDATION_EXPORT const unsigned char FRYolatorVersionString[];
 
 /**
  *  When the FRYolator begins recording, it will ask the delegate for an in-app URL to represent
- *  this location.   It can use this information to assist in re-creating application state later.
+ *  this location. It can use this information to assist in re-creating application state later.
  */
 - (NSURL *)appSchemeURLRepresentingCurrentStateForFryolator:(FRYolator *)monitor;
 
-/**
- *  Returns an array of keypaths to match for the URL Request
- */
-- (NSString *)fryolator:(FRYolator *)fryolator filenamePrefixForRequest:(NSURLRequest *)request;
-
 @end
+
+/**
+ *  FRY can be enabled by setting the following keypath to @(YES) in `NSUserDefaults.standardUserDefaults`
+ *  FRYolator will observe changes to that value and enable and disable in response to this.   This
+ *  is helpful for recording startup events.
+ */
+OBJC_EXTERN NSString *FRYolatorEnabledUserPreferencesKeyPath;
 
 @interface FRYolator : NSObject
 
@@ -48,11 +51,10 @@ FOUNDATION_EXPORT const unsigned char FRYolatorVersionString[];
 - (void)enable;
 - (void)disable;
 
-/**
- *  Add a gesture recognizer to the view to start recording when a 2 finger triple tap
- *  is detected.   Once the touch sequence occurs, the monitor will record touches  until the
- *  app resigns and becomes active again.   The gesture recognizer is disabled while recording.
- */
-- (void)registerGestureEnablingOnView:(UIView *)view;
+@property (assign, nonatomic, readonly) BOOL enabled;
+
+- (void)clearEventLog;
+
+- (BOOL)saveEventLogNamed:(NSString *)eventLogName error:(NSError **)error;
 
 @end

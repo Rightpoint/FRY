@@ -77,10 +77,11 @@
         representation[@"request.HTTPBody"] = [self requestBodyFilename];
     }
 
-    representation[@"response.MIMEType"] = self.response.MIMEType;
-    representation[@"response.allHeaderFields"] = self.response.allHeaderFields;
-    representation[@"response.statusCode"] = @(self.response.statusCode);
-
+    if ( self.response ) {
+        representation[@"response.MIMEType"] = self.response.MIMEType;
+        representation[@"response.allHeaderFields"] = self.response.allHeaderFields;
+        representation[@"response.statusCode"] = @(self.response.statusCode);
+    }
     if ( self.data.length > 0 ) {
         representation[@"data"] = [self responseBodyFilename];
     }

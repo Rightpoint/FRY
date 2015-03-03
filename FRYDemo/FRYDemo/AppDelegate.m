@@ -44,7 +44,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = tabController;
     [self.window makeKeyAndVisible];
-    [[FRYolator shared] registerGestureEnablingOnView:self.window];
+    [[FRYolatorUI shared] registerGestureEnablingOnView:self.window];
     
     return YES;
 }
