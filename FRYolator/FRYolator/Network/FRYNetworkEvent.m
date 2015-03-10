@@ -12,7 +12,14 @@
 
 @end
 
+static FRYNetworkEventCodeGenerationStyle s_codeGenerationStyle;
+
 @implementation FRYNetworkEvent
+
++ (void)setCodeGenerationStyle:(FRYNetworkEventCodeGenerationStyle)codeGenerationStyle
+{
+    s_codeGenerationStyle = codeGenerationStyle;
+}
 
 - (id)init
 {
@@ -88,18 +95,23 @@
     return [representation copy];
 }
 
-- (NSString *)nocillaRecreationHeadersForDictionary:(NSDictionary *)dictionary
+- (NSString *)representationForHeaderDictionary:(NSDictionary *)dictionary
 {
     NSMutableString *headerStubs = [NSMutableString string];
-    [headerStubs appendString:@".withHeaders(@{\n"];
+    [headerStubs appendString:@"@{\n"];
     NSMutableArray *headerStrings = [NSMutableArray array];
     [dictionary enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
         NSString *match = [NSString stringWithFormat:@"@\"%@\": @\"%@\"", key, value];
         [headerStrings addObject:match];
     }];
     [headerStubs appendString:[headerStrings componentsJoinedByString:@",\n"]];
-    [headerStubs appendString:@"})\n"];
+    [headerStubs appendString:@"}\n"];
     return [headerStubs copy];
+}
+
+- (NSString *)nocillaRecreationHeadersForDictionary:(NSDictionary *)dictionary
+{
+    return [NSString stringWithFormat:@".withHeaders(%@)\n", [self representationForHeaderDictionary:dictionary]];
 }
 
 - (NSString *)nocillaRecreationCode
@@ -122,9 +134,41 @@
     return [stub copy];
 }
 
+- (NSString *)ohhttpStubsRecreationCode
+{
+    NSArray *matches = @[[NSString stringWithFormat:@"[request.URL.resourceSpecifier isEqual:@\"%@\"]", self.request.URL.resourceSpecifier],
+                         [NSString stringWithFormat:@"[request.URL.scheme isEqual:@\"%@\"]", self.request.URL.scheme],
+                         ];
+
+    NSString *response = [NSString stringWithFormat:@"\
+return [OHHTTPStubsResponse responseWithFileAtPath:@\"%@\"\n\
+                                            statusCode:%zd\n\
+                                               headers:%@]",
+                          [self responseBodyFilename],
+                          self.response.statusCode,
+                          [self representationForHeaderDictionary:self.request.allHTTPHeaderFields]];
+
+    NSString *stub = [NSString stringWithFormat:@"\
+[OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {\n\
+    return %@;\n\
+} withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {\n\
+    %@;\n\
+}];\n\n", [matches componentsJoinedByString:@" && "], response];
+    return stub;
+}
+
 - (NSString *)recreationCode
 {
-    return [self nocillaRecreationCode];
+    NSString *recreationCode = nil;
+    if ( s_codeGenerationStyle == FRYNetworkEventCodeGenerationStyleNocilla ) {
+        recreationCode = [self nocillaRecreationCode];
+    }
+    else if ( s_codeGenerationStyle == FRYNetworkEventCodeGenerationStyleOHHTTPStubs ) {
+        recreationCode = [self ohhttpStubsRecreationCode];
+    }
+    NSString *comment = [NSString stringWithFormat:@"// Ensure the file '%@' is added to your test target\n", [self responseBodyFilename]];
+    recreationCode = [comment stringByAppendingString:recreationCode];
+    return recreationCode;
 }
 
 - (NSString *)pathForFilename:(NSString *)filename inDirectory:(NSURL *)directory

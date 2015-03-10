@@ -8,7 +8,14 @@
 
 #import "FRYEvent.h"
 
+typedef NS_ENUM(NSUInteger, FRYNetworkEventCodeGenerationStyle) {
+    FRYNetworkEventCodeGenerationStyleOHHTTPStubs,
+    FRYNetworkEventCodeGenerationStyleNocilla,
+};
+
 @interface FRYNetworkEvent : FRYEvent
+
++ (void)setCodeGenerationStyle:(FRYNetworkEventCodeGenerationStyle)codeStyle;
 
 @property (strong, nonatomic) NSURLRequest *request;
 @property (strong, nonatomic) NSHTTPURLResponse *response;
