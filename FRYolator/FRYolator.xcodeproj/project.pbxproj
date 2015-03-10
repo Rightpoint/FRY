@@ -33,6 +33,8 @@
 		AB283B891A9A1BE90058C222 /* FRYTouchLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AB283B721A9A1BE90058C222 /* FRYTouchLayer.m */; };
 		ABD2E84B1AA51FA500BCC005 /* FRYolatorUI.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD2E8491AA51FA500BCC005 /* FRYolatorUI.h */; };
 		ABD2E84C1AA51FA500BCC005 /* FRYolatorUI.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD2E84A1AA51FA500BCC005 /* FRYolatorUI.m */; };
+		ABD2E8711AAE6BC400BCC005 /* NSURLSessionConfiguration+FRYNetworkTrackerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD2E86F1AAE6BC400BCC005 /* NSURLSessionConfiguration+FRYNetworkTrackerProtocol.h */; };
+		ABD2E8721AAE6BC400BCC005 /* NSURLSessionConfiguration+FRYNetworkTrackerProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD2E8701AAE6BC400BCC005 /* NSURLSessionConfiguration+FRYNetworkTrackerProtocol.m */; };
 		ABEB01111A9BE48500D703D4 /* UIView+FRYLookup.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEB010F1A9BE48500D703D4 /* UIView+FRYLookup.h */; };
 		ABEB01121A9BE48500D703D4 /* UIView+FRYLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = ABEB01101A9BE48500D703D4 /* UIView+FRYLookup.m */; };
 		ABEB011A1A9D71D000D703D4 /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABEB01191A9D71D000D703D4 /* libFRY.a */; };
@@ -68,6 +70,8 @@
 		ABBDFAAE1A999669008999A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABD2E8491AA51FA500BCC005 /* FRYolatorUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYolatorUI.h; sourceTree = "<group>"; };
 		ABD2E84A1AA51FA500BCC005 /* FRYolatorUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYolatorUI.m; sourceTree = "<group>"; };
+		ABD2E86F1AAE6BC400BCC005 /* NSURLSessionConfiguration+FRYNetworkTrackerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSessionConfiguration+FRYNetworkTrackerProtocol.h"; sourceTree = "<group>"; };
+		ABD2E8701AAE6BC400BCC005 /* NSURLSessionConfiguration+FRYNetworkTrackerProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLSessionConfiguration+FRYNetworkTrackerProtocol.m"; sourceTree = "<group>"; };
 		ABEB010F1A9BE48500D703D4 /* UIView+FRYLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FRYLookup.h"; sourceTree = "<group>"; };
 		ABEB01101A9BE48500D703D4 /* UIView+FRYLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FRYLookup.m"; sourceTree = "<group>"; };
 		ABEB01191A9D71D000D703D4 /* libFRY.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFRY.a; path = "../build/Debug-iphoneos/libFRY.a"; sourceTree = "<group>"; };
@@ -123,6 +127,8 @@
 				AB283B651A9A1BE90058C222 /* FRYNetworkTracker.m */,
 				AB283B661A9A1BE90058C222 /* FRYNetworkTrackerProtocol.h */,
 				AB283B671A9A1BE90058C222 /* FRYNetworkTrackerProtocol.m */,
+				ABD2E86F1AAE6BC400BCC005 /* NSURLSessionConfiguration+FRYNetworkTrackerProtocol.h */,
+				ABD2E8701AAE6BC400BCC005 /* NSURLSessionConfiguration+FRYNetworkTrackerProtocol.m */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -219,6 +225,7 @@
 				AB283B751A9A1BE90058C222 /* FRYEventLog.h in Headers */,
 				AB283B771A9A1BE90058C222 /* FRYolator.h in Headers */,
 				ABEB01111A9BE48500D703D4 /* UIView+FRYLookup.h in Headers */,
+				ABD2E8711AAE6BC400BCC005 /* NSURLSessionConfiguration+FRYNetworkTrackerProtocol.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +304,7 @@
 				ABD2E84C1AA51FA500BCC005 /* FRYolatorUI.m in Sources */,
 				AB283B7E1A9A1BE90058C222 /* FRYNetworkTracker.m in Sources */,
 				AB283B7C1A9A1BE90058C222 /* FRYNetworkEvent.m in Sources */,
+				ABD2E8721AAE6BC400BCC005 /* NSURLSessionConfiguration+FRYNetworkTrackerProtocol.m in Sources */,
 				AB283B891A9A1BE90058C222 /* FRYTouchLayer.m in Sources */,
 				AB283B801A9A1BE90058C222 /* FRYNetworkTrackerProtocol.m in Sources */,
 				AB283B841A9A1BE90058C222 /* FRYTouchTracker.m in Sources */,
