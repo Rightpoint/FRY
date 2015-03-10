@@ -61,7 +61,7 @@ FRYolator will be enabled when a special tap sequence is performed.   Once enabl
 
 *To Enable Monitoring*
 ```obj-c
-[[FRYolator shared] registerGestureEnablingOnView:self.window];
+[[FRYolatorUI shared] registerGestureEnablingOnView:self.window];
 ```
 
 FRY will attempt to use relative coordinates with accessibility lookup information for the view that was touched.  This will maximize the reliability of these commands when UI changes occur.  If no accessibility information can be found, absoulte screen coordinates will be used.

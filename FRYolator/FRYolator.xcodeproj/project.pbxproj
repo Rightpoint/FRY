@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AB283B571A99A05C0058C222 /* FRYolator.h in Headers */ = {isa = PBXBuildFile; fileRef = AB283B561A99A05C0058C222 /* FRYolator.h */; };
 		AB283B731A9A1BE90058C222 /* FRYEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = AB283B591A9A1BE90058C222 /* FRYEvent.h */; };
 		AB283B741A9A1BE90058C222 /* FRYEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = AB283B5A1A9A1BE90058C222 /* FRYEvent.m */; };
 		AB283B751A9A1BE90058C222 /* FRYEventLog.h in Headers */ = {isa = PBXBuildFile; fileRef = AB283B5B1A9A1BE90058C222 /* FRYEventLog.h */; };
@@ -51,7 +50,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AB283B561A99A05C0058C222 /* FRYolator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYolator.h; sourceTree = SOURCE_ROOT; };
 		AB283B591A9A1BE90058C222 /* FRYEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYEvent.h; sourceTree = "<group>"; };
 		AB283B5A1A9A1BE90058C222 /* FRYEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYEvent.m; sourceTree = "<group>"; };
 		AB283B5B1A9A1BE90058C222 /* FRYEventLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYEventLog.h; sourceTree = "<group>"; };
@@ -187,7 +185,6 @@
 		ABBDFAAC1A999669008999A1 /* FRYolator */ = {
 			isa = PBXGroup;
 			children = (
-				AB283B561A99A05C0058C222 /* FRYolator.h */,
 				AB283B581A9A1BE90058C222 /* FRYolator */,
 				ABBDFAAD1A999669008999A1 /* Supporting Files */,
 			);
@@ -224,7 +221,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB283B571A99A05C0058C222 /* FRYolator.h in Headers */,
 				AB283B861A9A1BE90058C222 /* FRYTouchHighlightWindowLayer.h in Headers */,
 				AB283B811A9A1BE90058C222 /* FRYTouchEvent.h in Headers */,
 				AB283B731A9A1BE90058C222 /* FRYEvent.h in Headers */,
