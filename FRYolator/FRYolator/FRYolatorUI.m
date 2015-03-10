@@ -46,6 +46,7 @@
         if ( FRYolator.shared.enabled ) {
             NSError *error = nil;
             if ( [FRYolator.shared saveEventLogNamed:@"LastFryLog" error:&error] == NO ) {
+                NSLog(@"Error: %@", error);
                 [[[UIAlertView alloc] initWithTitle:@"Error Saving Log"
                                             message:[error localizedDescription]
                                            delegate:nil
