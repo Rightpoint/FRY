@@ -35,8 +35,6 @@
     recordGR.numberOfTapsRequired = 3;
     [view addGestureRecognizer:recordGR];
     self.recordGestureRecognizer = recordGR;
-
-    FRYolator.shared.delegate = self;
 }
 
 - (void)toggleRecording:(UIGestureRecognizer *)gr
