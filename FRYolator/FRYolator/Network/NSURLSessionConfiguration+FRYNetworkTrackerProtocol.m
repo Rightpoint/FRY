@@ -6,9 +6,6 @@
 //  Copyright (c) 2015 Raizlabs. All rights reserved.
 //
 
-// OHHTPStubs doesn't provide a friendly way of re-using this with our own class, so
-// this is a clone of their insertion into NSURLSessionConfiguration.
-
 #import <Foundation/Foundation.h>
 
 #if defined(__IPHONE_7_0) || defined(__MAC_10_9)
@@ -20,10 +17,11 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- *  This helper is used to swizzle NSURLSessionConfiguration constructor methods
- *  defaultSessionConfiguration and ephemeralSessionConfiguration to insert the private
- *  OHHTTPStubsProtocol into their protocolClasses array so that OHHTTPStubs is automagically
- *  supported when you create a new NSURLSession based on one of there configurations.
+ * Swizzle a private method that constructs an array of
+ * default protocol handlers.   This will allow insertion
+ * of the monitor to all sessions, including AVFoundation on iOS 8.0.
+ *
+ * This does not work on iOS 7.x :(
  */
 
 typedef NSArray*(*DefaultProtocolMethod)(id,SEL);
