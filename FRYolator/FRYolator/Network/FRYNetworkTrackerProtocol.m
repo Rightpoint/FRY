@@ -112,7 +112,9 @@ static id<FRYNetworkTrackerProtocolDelegate> s_delegate = nil;
              willSendRequest:(NSURLRequest *)request
             redirectResponse:(NSURLResponse *)response
 {
-    [self.client URLProtocol:self wasRedirectedToRequest:request redirectResponse:response];
+    if ( response ) {
+        [self.client URLProtocol:self wasRedirectedToRequest:request redirectResponse:response];
+    }
     return request;
 }
 
