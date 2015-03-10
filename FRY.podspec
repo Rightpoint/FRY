@@ -13,9 +13,20 @@ Pod::Spec.new do |s|
   s.author       = { "Brian King" => "brianaking@gmail.com" }
   s.platform     = :ios, 7.0
   s.source       = { :git => "https://github.com/Raizlabs/FRY.git", :tag => "0.3" }
-
-  s.source_files  = "FRY", "FRY/**/*.{h,m}"
-  s.public_header_files = "FRY/**/*.h"
   s.requires_arc = true
+
+  s.default_subspec = 'Core'
+
+  s.subspec "Core" do |core|
+    core.source_files = "FRY/**/*.{h,m}"
+    core.public_header_files = "FRY/**/*.h"
+  end
+
+  s.subspec "FRYolator" do |fryolator|
+    fryolator.dependency "FRY/Core"
+    fryolator.source_files = "FRYolator/**/*.{h,m}"
+    fryolator.public_header_files = "FRYolator/**/*.h"
+  end
+
 
 end

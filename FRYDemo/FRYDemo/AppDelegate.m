@@ -14,8 +14,9 @@
 #import "PickerViewController.h"
 #import "WebViewController.h"
 
-#import <FRYolator/FRYolator.h>
-#import <FRY/FRY.h>
+#ifdef DEBUG
+#import <FRY/FRYolatorUI.h>
+#endif
 
 @interface AppDelegate () <UISplitViewControllerDelegate>
 
@@ -44,7 +45,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = tabController;
     [self.window makeKeyAndVisible];
+
+#ifdef DEBUG
     [[FRYolatorUI shared] registerGestureEnablingOnView:self.window];
+#endif
     
     return YES;
 }

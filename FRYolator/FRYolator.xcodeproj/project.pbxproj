@@ -35,13 +35,22 @@
 		ABD2E84C1AA51FA500BCC005 /* FRYolatorUI.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD2E84A1AA51FA500BCC005 /* FRYolatorUI.m */; };
 		ABD2E8711AAE6BC400BCC005 /* NSURLSessionConfiguration+FRYNetworkTrackerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = ABD2E86F1AAE6BC400BCC005 /* NSURLSessionConfiguration+FRYNetworkTrackerProtocol.h */; };
 		ABD2E8721AAE6BC400BCC005 /* NSURLSessionConfiguration+FRYNetworkTrackerProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD2E8701AAE6BC400BCC005 /* NSURLSessionConfiguration+FRYNetworkTrackerProtocol.m */; };
+		ABD2E8791AAF765D00BCC005 /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD2E8781AAF764A00BCC005 /* libFRY.a */; };
 		ABEB01111A9BE48500D703D4 /* UIView+FRYLookup.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEB010F1A9BE48500D703D4 /* UIView+FRYLookup.h */; };
 		ABEB01121A9BE48500D703D4 /* UIView+FRYLookup.m in Sources */ = {isa = PBXBuildFile; fileRef = ABEB01101A9BE48500D703D4 /* UIView+FRYLookup.m */; };
-		ABEB011A1A9D71D000D703D4 /* libFRY.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABEB01191A9D71D000D703D4 /* libFRY.a */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		ABD2E8771AAF764A00BCC005 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ABD2E8731AAF764A00BCC005 /* FRY.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AB25C03C19DF95AA00038E75;
+			remoteInfo = FRY;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		510C68CAF42F55B9DEB197D7 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		AB283B561A99A05C0058C222 /* FRYolator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYolator.h; sourceTree = SOURCE_ROOT; };
 		AB283B591A9A1BE90058C222 /* FRYEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYEvent.h; sourceTree = "<group>"; };
 		AB283B5A1A9A1BE90058C222 /* FRYEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYEvent.m; sourceTree = "<group>"; };
@@ -72,10 +81,9 @@
 		ABD2E84A1AA51FA500BCC005 /* FRYolatorUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYolatorUI.m; sourceTree = "<group>"; };
 		ABD2E86F1AAE6BC400BCC005 /* NSURLSessionConfiguration+FRYNetworkTrackerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLSessionConfiguration+FRYNetworkTrackerProtocol.h"; sourceTree = "<group>"; };
 		ABD2E8701AAE6BC400BCC005 /* NSURLSessionConfiguration+FRYNetworkTrackerProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLSessionConfiguration+FRYNetworkTrackerProtocol.m"; sourceTree = "<group>"; };
+		ABD2E8731AAF764A00BCC005 /* FRY.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FRY.xcodeproj; path = ../FRY.xcodeproj; sourceTree = "<group>"; };
 		ABEB010F1A9BE48500D703D4 /* UIView+FRYLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FRYLookup.h"; sourceTree = "<group>"; };
 		ABEB01101A9BE48500D703D4 /* UIView+FRYLookup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FRYLookup.m"; sourceTree = "<group>"; };
-		ABEB01191A9D71D000D703D4 /* libFRY.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFRY.a; path = "../build/Debug-iphoneos/libFRY.a"; sourceTree = "<group>"; };
-		C3414AA590DE41145F311AB9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABEB011A1A9D71D000D703D4 /* libFRY.a in Frameworks */,
+				ABD2E8791AAF765D00BCC005 /* libFRY.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,7 +101,7 @@
 		78C1E055B6E3CE9D9AA12723 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				ABEB01191A9D71D000D703D4 /* libFRY.a */,
+				ABD2E8731AAF764A00BCC005 /* FRY.xcodeproj */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -194,11 +202,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		ABD2E8741AAF764A00BCC005 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ABD2E8781AAF764A00BCC005 /* libFRY.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		DC22CFE5B301A783576ECAB7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C3414AA590DE41145F311AB9 /* Pods.debug.xcconfig */,
-				510C68CAF42F55B9DEB197D7 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -274,12 +288,28 @@
 			mainGroup = ABBDFAA01A999669008999A1;
 			productRefGroup = ABBDFAAB1A999669008999A1 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = ABD2E8741AAF764A00BCC005 /* Products */;
+					ProjectRef = ABD2E8731AAF764A00BCC005 /* FRY.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				ABBDFAA91A999669008999A1 /* FRYolator */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		ABD2E8781AAF764A00BCC005 /* libFRY.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libFRY.a;
+			remoteRef = ABD2E8771AAF764A00BCC005 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		ABBDFAA81A999669008999A1 /* Resources */ = {

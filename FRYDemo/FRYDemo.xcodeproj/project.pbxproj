@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9CCBED3F53560F4163682274 /* libPods-FRYDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4505607A28448D3721F7533 /* libPods-FRYDemo.a */; };
 		AB283BFE1A9A1E380058C222 /* AlertTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB283BE71A9A1E380058C222 /* AlertTableViewController.m */; };
 		AB283BFF1A9A1E380058C222 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AB283BE91A9A1E380058C222 /* AppDelegate.m */; };
 		AB283C001A9A1E380058C222 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB283BEA1A9A1E380058C222 /* LaunchScreen.xib */; };
@@ -27,12 +26,12 @@
 		AB283C181A9A1EB70058C222 /* PickerViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB283C121A9A1EB70058C222 /* PickerViewControllerTests.m */; };
 		AB283C191A9A1EB70058C222 /* TableViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB283C131A9A1EB70058C222 /* TableViewControllerTests.m */; };
 		AB283C1A1A9A1EB70058C222 /* TextFieldViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AB283C141A9A1EB70058C222 /* TextFieldViewControllerTests.m */; };
+		F92DA17C105C4145A12549EC /* libPods-FRYDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4505607A28448D3721F7533 /* libPods-FRYDemo.a */; };
 		FDC716B97AA751C39029A741 /* libPods-FRYDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12E3698E16C829CE7E22BEE2 /* libPods-FRYDemoTests.a */; };
-		FF2F9926F04967FD07A2593C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6F0A7E48B8F0451D4871D9C /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		AB283BB01A9A1D490058C222 /* PBXContainerItemProxy */ = {
+		ABD2E87A1AAF7B4C00BCC005 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AB283B8B1A9A1D490058C222 /* Project object */;
 			proxyType = 1;
@@ -43,8 +42,9 @@
 
 /* Begin PBXFileReference section */
 		12E3698E16C829CE7E22BEE2 /* libPods-FRYDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FRYDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D9EF2BADC4664E27BCE0517 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		5F5A380D6C26827CA82133F0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		51849A8EE55FB6D97DA6212B /* Pods-FRYDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FRYDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FRYDemo/Pods-FRYDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		93D60A469E48E875C54E93F1 /* Pods-FRYDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FRYDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FRYDemoTests/Pods-FRYDemoTests.release.xcconfig"; sourceTree = "<group>"; };
+		951F0EF0B09253BACB8AEFCD /* Pods-FRYDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FRYDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FRYDemoTests/Pods-FRYDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A4505607A28448D3721F7533 /* libPods-FRYDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FRYDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB283B931A9A1D490058C222 /* FRYDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FRYDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB283BAF1A9A1D490058C222 /* FRYDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FRYDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +78,7 @@
 		AB283C131A9A1EB70058C222 /* TableViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewControllerTests.m; sourceTree = "<group>"; };
 		AB283C141A9A1EB70058C222 /* TextFieldViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldViewControllerTests.m; sourceTree = "<group>"; };
 		E6F0A7E48B8F0451D4871D9C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD2913117A5B501C9BF07B3F /* Pods-FRYDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FRYDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-FRYDemo/Pods-FRYDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,8 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF2F9926F04967FD07A2593C /* libPods.a in Frameworks */,
-				9CCBED3F53560F4163682274 /* libPods-FRYDemo.a in Frameworks */,
+				F92DA17C105C4145A12549EC /* libPods-FRYDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,8 +104,10 @@
 		94AB5C28DEB15563CDBB24AF /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4D9EF2BADC4664E27BCE0517 /* Pods.debug.xcconfig */,
-				5F5A380D6C26827CA82133F0 /* Pods.release.xcconfig */,
+				951F0EF0B09253BACB8AEFCD /* Pods-FRYDemoTests.debug.xcconfig */,
+				93D60A469E48E875C54E93F1 /* Pods-FRYDemoTests.release.xcconfig */,
+				51849A8EE55FB6D97DA6212B /* Pods-FRYDemo.debug.xcconfig */,
+				FD2913117A5B501C9BF07B3F /* Pods-FRYDemo.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -224,7 +226,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				AB283BB11A9A1D490058C222 /* PBXTargetDependency */,
+				ABD2E87B1AAF7B4C00BCC005 /* PBXTargetDependency */,
 			);
 			name = FRYDemoTests;
 			productName = FRYDemoTests;
@@ -303,7 +305,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FRYDemo/Pods-FRYDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B2C7E0CD9848CE28B73EC421 /* Check Pods Manifest.lock */ = {
@@ -355,10 +357,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		AB283BB11A9A1D490058C222 /* PBXTargetDependency */ = {
+		ABD2E87B1AAF7B4C00BCC005 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AB283B921A9A1D490058C222 /* FRYDemo */;
-			targetProxy = AB283BB01A9A1D490058C222 /* PBXContainerItemProxy */;
+			targetProxy = ABD2E87A1AAF7B4C00BCC005 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -376,7 +378,6 @@
 /* Begin XCBuildConfiguration section */
 		AB283BB71A9A1D490058C222 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4D9EF2BADC4664E27BCE0517 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -418,7 +419,6 @@
 		};
 		AB283BB81A9A1D490058C222 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5F5A380D6C26827CA82133F0 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -454,7 +454,7 @@
 		};
 		AB283BBA1A9A1D490058C222 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4D9EF2BADC4664E27BCE0517 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 51849A8EE55FB6D97DA6212B /* Pods-FRYDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FRYDemo/Info.plist;
@@ -465,7 +465,7 @@
 		};
 		AB283BBB1A9A1D490058C222 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5F5A380D6C26827CA82133F0 /* Pods.release.xcconfig */;
+			baseConfigurationReference = FD2913117A5B501C9BF07B3F /* Pods-FRYDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FRYDemo/Info.plist;
@@ -476,6 +476,7 @@
 		};
 		AB283BBD1A9A1D490058C222 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 951F0EF0B09253BACB8AEFCD /* Pods-FRYDemoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -495,6 +496,7 @@
 		};
 		AB283BBE1A9A1D490058C222 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 93D60A469E48E875C54E93F1 /* Pods-FRYDemoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

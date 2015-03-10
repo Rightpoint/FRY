@@ -1,6 +1,8 @@
 
-pod 'FRY', :path => "../"
-pod 'FRYolator', :path => "../FRYolator/"
+target :FRYDemo do
+  pod 'FRY/FRYolator', :path => "../", :configuration => "Debug"
+end
 
 target :FRYDemoTests, :exclusive => true do
+  pod 'FRY', :path => "../"
 end
