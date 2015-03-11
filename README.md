@@ -1,6 +1,6 @@
 # FRY: A UIKit Interaction Library
 
-FRY is an iOS Library inspired by KIF.  The purpose is to simplify iteractions with UIKit and make writing UI tests simple.
+FRY is an iOS Test Driver.  The purpose of this library is to simplify iteractions with UIKit and make writing UI tests simple.
 
 NOTE: Everything is still in alpha, and is subject to change before the 1.0 release.
 
@@ -11,7 +11,7 @@ FRY consists of three core features to implement touch driven integration tests:
 - Touch Modeling
 - Idle Detection
 
-FRY also includes a helper library, `FRYolator`, which helps create integration tests when it is included in your target.   The goal of FRYolator is to record all input to the target, for later recreation.   FRYolator will currently record and generate unit test commands to playback the following:
+FRY also includes a library, `FRYolator`, which helps create integration tests when it is included in your target.   The goal of FRYolator is to record all input to the target for later recreation. FRYolator will currently record and generate unit test commands to playback the following:
 
 - Touch
 - Network (Nocilla)
@@ -74,8 +74,12 @@ Add FRY to your Podfile to install.   If you want to use touch recording, add FR
 pod 'FRY'
 ```
 
-## Why Not KIF?
-KIF is amazing framework that has pushed forward UI testing on iOS.  However, I was unable to completely understand or trust the code base.  There are tons of work arounds for UIKit issues spread around the code, without a clear understanding of why, or if they're still applicable to current versions of iOS.  The core design difference with KIF that pushed me to write FRY without looking to maintain compatibility is that looking up a view can modify the view heirarchy to find it.   This causes a lot of bizarre issues, and it is not usually what I want from a testing perspective.
+## Influences
+### KIF
+KIF is amazing framework that basically started UI testing on iOS.  The core design difference with KIF that pushed me to write FRY without looking to maintain compatibility is that looking up a view can modify the view heirarchy to find it.   This causes a lot of bizarre issues, and it is not usually what I want from a testing perspective.
+
+### Robot
+Robot is a newer contender in the UI Testing world, and is very interesting, but it's primary goal is speed, not accuracy of environment.
 
 ## Design Goals
 - Complete Code Coverage and UIKit functionality.
