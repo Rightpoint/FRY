@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 /**
- *  This is a very, very ugly collection of hacks.  However, it is the only way to determine, with some accuracy
+ *  This is a very, very ugly collection of hacks. However, it is the only way to determine
  *  if the scroll view is 'idle', without requiring the modification of application code.
  *
  *  This category swizzles internal methods and turns on a flag when a momentum animation starts, and stops.
@@ -19,7 +19,8 @@
  *  This in combination with self.tracking and self.dragging provides a consistent state of when the scroll view
  *  is not idle.
  *
- *  Never do this in a shipping app.
+ *  Never do this in a shipping app. This is acceptable for testing because it's accurate, but if you find that this
+ *  is not accurate, please log a bug.
  */
 @interface UIScrollView(FRYScrollingState) <UIScrollViewDelegate>
 

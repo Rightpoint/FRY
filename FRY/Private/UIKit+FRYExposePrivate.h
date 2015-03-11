@@ -10,6 +10,10 @@
 
 typedef struct __GSEvent * GSEventRef;
 
+@interface UIView (FRYExposePrivate)
+- (void)_accessibilityElementsInContainer:(id)obj;
+@end
+
 @interface UIEvent (FRYExposePrivate)
 
 - (id)_initWithEvent:(GSEventRef)event touches:(id)touches;
@@ -21,10 +25,10 @@ typedef struct __GSEvent * GSEventRef;
 @end
 
 @interface UIApplication (FRYExposePrivate)
--(BOOL)handleEvent:(GSEventRef)event withNewEvent:(id)newEvent;
+- (BOOL)handleEvent:(GSEventRef)event withNewEvent:(id)newEvent;
 
 - (UIEvent *)_touchesEvent;
-
+- (id)_accessibilityBundlePrincipalClass;
 - (BOOL)rotateIfNeeded:(UIDeviceOrientation)orientation;
 - (void)rotateIfNeeded:(UIDeviceOrientation)orientation completion:(void (^)(void))completion;
 
@@ -43,4 +47,8 @@ typedef struct __GSEvent * GSEventRef;
 - (void)deleteFromInput;
 @property(getter=isInHardwareKeyboardMode) BOOL inHardwareKeyboardMode;
 @property(retain) UIResponder<UIKeyInput> * delegate;
+@end
+
+@interface FRYPrivateSelectors : NSObject
+- (void)_accessibilityStartServer;
 @end

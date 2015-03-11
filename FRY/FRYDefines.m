@@ -7,44 +7,35 @@
 //
 
 #import "FRYDefines.h"
-#import <CommonCrypto/CommonCrypto.h>
-#import <dlfcn.h>
-#import <objc/runtime.h>
+#import "UIKit+FRYExposePrivate.h"
 
 NSTimeInterval const kFRYEventDispatchInterval = 0.01;
 
-@interface FRYCleanupSimulator : NSObject
-@end
-
-@implementation FRYCleanupSimulator
+@interface FRYAccessibilityEnabler : NSObject @end
+@implementation FRYAccessibilityEnabler
 
 + (void)load
 {
     @autoreleasepool {
-        [self enableAccessibility];
+        // The enableAccessibility command must be ran after UIApplicationMain has been started,
+        // so wait for the notification
+        __block id observer = nil;
+        observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+            [[NSNotificationCenter defaultCenter] removeObserver:observer];
+            [self enableAccessibility];
+            observer = nil;
+        }];
     }
 }
 
 + (void)enableAccessibility;
 {
-    NSString *appSupportLocation =  @"/System/Library/PrivateFrameworks/AppSupport.framework/AppSupport";
-    
-    NSDictionary *environment = [[NSProcessInfo processInfo] environment];
-    NSString *simulatorRoot = [environment objectForKey:@"IPHONE_SIMULATOR_ROOT"];
-    if (simulatorRoot) {
-        appSupportLocation = [simulatorRoot stringByAppendingString:appSupportLocation];
-    }
-    
-    void *appSupportLibrary = dlopen([appSupportLocation fileSystemRepresentation], RTLD_LAZY);
-    
-    CFStringRef (*copySharedResourcesPreferencesDomainForDomain)(CFStringRef domain) = dlsym(appSupportLibrary, "CPCopySharedResourcesPreferencesDomainForDomain");
-    
-    if (copySharedResourcesPreferencesDomainForDomain) {
-        CFStringRef accessibilityDomain = copySharedResourcesPreferencesDomainForDomain(CFSTR("com.apple.Accessibility"));
-        
-        if (accessibilityDomain) {
-            CFPreferencesSetValue(CFSTR("ApplicationAccessibilityEnabled"), kCFBooleanTrue, accessibilityDomain, kCFPreferencesAnyUser, kCFPreferencesAnyHost);
-            CFRelease(accessibilityDomain);
+    if ( ![UIView instancesRespondToSelector:@selector(_accessibilityElementsInContainer:)] ) {
+        if ( [[[UIDevice currentDevice] model] rangeOfString:@"simulator"].location != NSNotFound ) {
+            [[[UIApplication sharedApplication] _accessibilityBundlePrincipalClass] _accessibilityStartServer];
+        }
+        else {
+            [[UIApplication sharedApplication] accessibilityActivate];
         }
     }
 }

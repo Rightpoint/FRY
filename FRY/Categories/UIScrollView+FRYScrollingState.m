@@ -16,13 +16,21 @@ static void *FRYScrollingStateScrollingKey = &FRYScrollingStateScrollingKey;
 
 @implementation UIScrollView(FRYScrollingState)
 
-/**
- *  Swizzle out the methods when requested.  This is not invoked in the `+ (void)load` function 
- *  in the category like usual because the FRY symbol table can easily be loaded twice, once 
- *  inside the Application, and once via the Test Loader.
- *
- *  To avoid issues, this is not done automatically.   It is up to the client to enable this (for now)
- */
++ (void)load
+{
+    @autoreleasepool {
+        __block id observer = nil;
+        // Using TEST_HOST, it is common for the FRY .a to be loaded twice, and for two separate symbol spaces of
+        // this .m file to be executed, and this load to be triggered twice. This will swizzle in and out the methods
+        // below. Only swizzle when the app did finish launching.
+        observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+            [[NSNotificationCenter defaultCenter] removeObserver:observer];
+            [self fry_swizzleProgramaticScrollDetection];
+            observer = nil;
+        }];
+    }
+}
+
 + (void)fry_swizzleProgramaticScrollDetection
 {
     [FRYMethodSwizzling exchangeClass:[UIScrollView class]
