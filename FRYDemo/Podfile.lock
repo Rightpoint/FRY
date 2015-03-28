@@ -1,8 +1,8 @@
 PODS:
-  - FRY (0.3):
-    - FRY/Core (= 0.3)
-  - FRY/Core (0.3)
-  - FRY/FRYolator (0.3):
+  - FRY (0.4):
+    - FRY/Core (= 0.4)
+  - FRY/Core (0.4)
+  - FRY/FRYolator (0.4):
     - FRY/Core
 
 DEPENDENCIES:
@@ -14,6 +14,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  FRY: 57c62c49847c432eb784fd254c8d9b45bc3f1262
+  FRY: 5f55dfaeb82eb4cbb335340281741314c2e61d2f
 
 COCOAPODS: 0.35.0

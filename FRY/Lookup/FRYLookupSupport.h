@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @protocol FRYLookupSupport <NSObject>
-
+@optional
 /**
  * The keypaths that should be traversed.
  */

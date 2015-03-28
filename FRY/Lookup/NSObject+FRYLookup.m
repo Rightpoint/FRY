@@ -134,8 +134,6 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
     return [lookups valueForKeyPath:NSStringFromSelector(@selector(fry_representingView))];
 }
 
-
-
 @end
 
 

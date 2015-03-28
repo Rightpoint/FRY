@@ -15,7 +15,7 @@ typedef void(^FRYMatchBlock)(UIView *view, CGRect frameInView);
  * This protocol will add support for performing an NSPredicate search over an arbitrary tree structure.
  */
 @protocol FRYLookup <FRYLookupSupport>
-
+@optional
 /**
  * A depth first traversal, similar to hitTest:event:, to return the deepest object in the tree matching the
  * predicate.
