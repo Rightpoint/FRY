@@ -1,5 +1,5 @@
 //
-//  FRYActionContext.h
+//  FRYQueryContext.h
 //  FRY
 //
 //  Created by Brian King on 3/29/15.
@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-#define FRY_ACTION_CONTEXT ({[[FRYActionContext alloc] initWithTestTarget:self inFile:[NSString stringWithUTF8String:__FILE__] atLine:__LINE__];})
+#define FRY_ACTION_CONTEXT ({[[FRYQueryContext alloc] initWithTestTarget:self inFile:[NSString stringWithUTF8String:__FILE__] atLine:__LINE__];})
 
-@class FRYAction;
+@class FRYQuery;
 
-@interface FRYActionContext : NSObject
+@interface FRYQueryContext : NSObject
 
 - (id)initWithTestTarget:(id)target inFile:(NSString *)filename atLine:(NSUInteger)lineNumber;
 
@@ -20,6 +20,6 @@
 @property (copy, nonatomic) NSString *filename;
 @property (assign, nonatomic) NSUInteger lineNumber;
 
-- (void)recordFailureWithMessage:(NSString *)message action:(FRYAction *)action results:(NSSet *)results;
+- (void)recordFailureWithMessage:(NSString *)message action:(FRYQuery *)action results:(NSSet *)results;
 
 @end

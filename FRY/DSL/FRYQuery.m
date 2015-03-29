@@ -1,12 +1,12 @@
 //
-//  FRYActionBuilder.m
+//  FRYQueryBuilder.m
 //  FRY
 //
 //  Created by Brian King on 3/23/15.
 //  Copyright (c) 2015 Raizlabs. All rights reserved.
 //
 
-#import "FRYAction.h"
+#import "FRYQuery.h"
 #import "NSRunLoop+FRY.h"
 #import "FRYTouch.h"
 #import "FRYTouchDispatch.h"
@@ -18,31 +18,31 @@
 - (void) recordFailureWithDescription:(NSString *) description inFile:(NSString *) filename atLine:(NSUInteger) lineNumber expected:(BOOL) expected;
 @end
 
-static NSTimeInterval FRYActionDefaultTimeout = 1.0;
+static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 
-@interface FRYAction () <FRYLookup>
+@interface FRYQuery () <FRYLookup>
 
 @property (assign, nonatomic) BOOL firstOnly;
 @property (strong, nonatomic) id<FRYLookup> lookupOrigin;
-@property (strong, nonatomic) FRYActionContext *context;
+@property (strong, nonatomic) FRYQueryContext *context;
 
 @property (strong, nonatomic) NSPredicate *predicate;
 @property (assign, nonatomic) NSTimeInterval timeout;
 
 @end
 
-@implementation FRYAction
+@implementation FRYQuery
 
 + (void)setDefaultTimeout:(NSTimeInterval)timeout
 {
-    FRYActionDefaultTimeout = timeout;
+    FRYQueryDefaultTimeout = timeout;
 }
 
-+ (FRYAction *)actionFrom:(id<FRYLookup>)lookupRoot context:(FRYActionContext *)context
++ (FRYQuery *)actionFrom:(id<FRYLookup>)lookupRoot context:(FRYQueryContext *)context
 {
-    FRYAction *action = [[FRYAction alloc] init];
+    FRYQuery *action = [[FRYQuery alloc] init];
     action.lookupOrigin = lookupRoot;
-    action.timeout = FRYActionDefaultTimeout;
+    action.timeout = FRYQueryDefaultTimeout;
     action.context = context;
     return action;
 }
@@ -69,11 +69,11 @@ static NSTimeInterval FRYActionDefaultTimeout = 1.0;
     return results;
 }
 
-- (FRYAction *)actionByAddingPredicate:(NSPredicate *)predicate
+- (FRYQuery *)actionByAddingPredicate:(NSPredicate *)predicate
 {
-    FRYAction *action = self;
+    FRYQuery *action = self;
     if ( action.predicate != nil ) {
-        action = [FRYAction actionFrom:self context:self.context];
+        action = [FRYQuery actionFrom:self context:self.context];
     }
     action.predicate = predicate;
     return action;
@@ -208,7 +208,7 @@ static NSTimeInterval FRYActionDefaultTimeout = 1.0;
 - (FRYDirectionBlock)searchFor
 {
     return ^(FRYDirection direction, NSPredicate *scrollToVisible) {
-        FRYAction *action = [self actionByAddingPredicate:[NSPredicate fry_matchClass:[UIScrollView class]]];
+        FRYQuery *action = [self actionByAddingPredicate:[NSPredicate fry_matchClass:[UIScrollView class]]];
         action.firstOnly = YES;
         BOOL success = action.check(@"Looking for the a UIScrollView subclass", ^(NSSet *results) {
             BOOL ok = results.count == 1;
@@ -225,7 +225,7 @@ static NSTimeInterval FRYActionDefaultTimeout = 1.0;
 - (FRYSearchBlock)scrollTo
 {
     return ^(NSPredicate *scrollToVisible) {
-        FRYAction *action = [self actionByAddingPredicate:[NSPredicate fry_matchClass:[UIScrollView class]]];
+        FRYQuery *action = [self actionByAddingPredicate:[NSPredicate fry_matchClass:[UIScrollView class]]];
         action.firstOnly = YES;
         BOOL success = action.check(@"Looking for the a UIScrollView subclass", ^(NSSet *results) {
             BOOL ok = results.count == 1;
@@ -245,7 +245,7 @@ static NSTimeInterval FRYActionDefaultTimeout = 1.0;
         NSArray *subPredicates = @[[NSPredicate fry_matchClass:[UITextField class]],
                                    [NSPredicate fry_matchClass:[UITextView class]]];
         NSPredicate *textClass = [NSCompoundPredicate orPredicateWithSubpredicates:subPredicates];
-        FRYAction *action = [self actionByAddingPredicate:textClass];
+        FRYQuery *action = [self actionByAddingPredicate:textClass];
         action.firstOnly = YES;
         BOOL success = action.check(@"Looking for a text field", ^(NSSet *results) {
             BOOL ok = results.count == 1;

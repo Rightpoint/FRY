@@ -28,8 +28,8 @@ FOUNDATION_EXPORT const unsigned char FRYVersionString[];
 #import "NSPredicate+FRY.h"
 #import "UIScrollView+FRY.h"
 
-#import "FRYAction.h"
+#import "FRYQuery.h"
 
 #import "FRYIdleCheck.h"
 
-#define FRY ({[FRYAction actionFrom:[UIApplication sharedApplication] context:FRY_ACTION_CONTEXT];})
+#define FRY ({[FRYQuery actionFrom:[UIApplication sharedApplication] context:FRY_ACTION_CONTEXT];})

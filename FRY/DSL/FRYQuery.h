@@ -1,5 +1,5 @@
 //
-//  FRYActionBuilder.h
+//  FRYQueryBuilder.h
 //  FRY
 //
 //  Created by Brian King on 3/23/15.
@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "NSObject+FRYLookup.h"
-#import "FRYActionContext.h"
+#import "FRYQueryContext.h"
 
-@class FRYAction;
-@class FRYActionContext;
+@class FRYQuery;
+@class FRYQueryContext;
 
-typedef FRYAction *(^FRYChainBlock)(id predicateOrArrayOfPredicates);
-typedef FRYAction *(^FRYChainStringBlock)(NSString *string);
+typedef FRYQuery *(^FRYChainBlock)(id predicateOrArrayOfPredicates);
+typedef FRYQuery *(^FRYChainStringBlock)(NSString *string);
 typedef BOOL(^FRYTouchBlock)(id touchOrArrayOfTouches);
 typedef BOOL(^FRYDirectionBlock)(NSInteger FRYDirection, NSPredicate *content);
 typedef BOOL(^FRYSearchBlock)(NSPredicate *content);
@@ -25,10 +25,10 @@ typedef BOOL(^FRYBoolResultsBlock)(NSSet *);
 typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check);
 
 
-@interface FRYAction : NSObject
+@interface FRYQuery : NSObject
 
 + (void)setDefaultTimeout:(NSTimeInterval)timeout;
-+ (FRYAction *)actionFrom:(id<FRYLookup>)lookupRoot context:(FRYActionContext *)context;
++ (FRYQuery *)actionFrom:(id<FRYLookup>)lookupRoot context:(FRYQueryContext *)context;
 
 @property (copy, nonatomic, readonly) FRYChainBlock lookup;
 @property (copy, nonatomic, readonly) FRYChainBlock lookupFirst;

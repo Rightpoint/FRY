@@ -1,12 +1,12 @@
 //
-//  FRYActionContext.m
+//  FRYQueryContext.m
 //  FRY
 //
 //  Created by Brian King on 3/29/15.
 //  Copyright (c) 2015 Raizlabs. All rights reserved.
 //
 
-#import "FRYActionContext.h"
+#import "FRYQueryContext.h"
 
 @interface NSException (SenTestStub)
 + (NSException *)failureInFile:(NSString *)filename atLine:(int)lineNumber withDescription:(NSString *)formatString, ...;
@@ -20,9 +20,9 @@
 - (void)recordFailureWithDescription:(NSString *)description inFile:(NSString *)filename atLine:(NSUInteger)lineNumber expected:(BOOL)expected;
 @end
 
-static NSString *const FRYActionContextError = @"FRY Error";
+static NSString *const FRYQueryContextError = @"FRY Error";
 
-@implementation FRYActionContext
+@implementation FRYQueryContext
 
 - (id)initWithTestTarget:(id)testTarget inFile:(NSString *)filename atLine:(NSUInteger)lineNumber;
 {
@@ -35,7 +35,7 @@ static NSString *const FRYActionContextError = @"FRY Error";
     return self;
 }
 
-- (void)recordFailureWithMessage:(NSString *)message action:(FRYAction *)action results:(NSSet *)results;
+- (void)recordFailureWithMessage:(NSString *)message action:(FRYQuery *)action results:(NSSet *)results;
 {
     NSString *description = [NSString stringWithFormat:@"\nMessage:%@\nAction:%@\nResults:%@\n", message, action, results];
     if ( self.testTarget && [self.testTarget respondsToSelector:@selector(recordFailureWithDescription:inFile:atLine:expected:)] ) {
@@ -47,7 +47,7 @@ static NSString *const FRYActionContextError = @"FRY Error";
     }
     else {
         NSString *reason = [NSString stringWithFormat:@"%@:%zd %@", self.filename, self.lineNumber, description];
-        NSException *exception = [NSException exceptionWithName:FRYActionContextError reason:reason userInfo:nil];
+        NSException *exception = [NSException exceptionWithName:FRYQueryContextError reason:reason userInfo:nil];
         [exception raise];
     }
 }
