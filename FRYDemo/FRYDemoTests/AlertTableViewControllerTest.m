@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import <FRY/FRY.h>
+#import <FRY/FRYolator.h>
 
 #import "AlertTableViewController.h"
 
@@ -19,6 +20,11 @@
 @end
 
 @implementation AlertTableViewControllerTest
+
++ (void)load
+{
+    [[FRYTouchHighlightWindowLayer shared] enable];
+}
 
 - (void)setUp {
     [super setUp];

@@ -15,6 +15,8 @@
  */
 @interface FRYTouchHighlightWindowLayer : CALayer
 
++ (FRYTouchHighlightWindowLayer *)shared;
+
 - (void)enable;
 - (void)disable;
 
@@ -22,8 +24,6 @@
 
 @property (strong, nonatomic) UIColor *touchColor;
 @property (strong, nonatomic) UIColor *frameBorderColor;
-
-- (void)visualizeEvent:(UIEvent *)event;
 
 - (void)showString:(NSString *)string;
 

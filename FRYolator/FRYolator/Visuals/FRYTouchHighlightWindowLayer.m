@@ -8,6 +8,7 @@
 
 #import "FRYTouchHighlightWindowLayer.h"
 #import "FRYTouchLayer.h"
+#import "FRYMethodSwizzling.h"
 
 typedef void(^FRYHighlightCompletionBlock)(void);
 
@@ -20,6 +21,21 @@ typedef void(^FRYHighlightCompletionBlock)(void);
 
 @implementation FRYTouchHighlightWindowLayer
 
++ (FRYTouchHighlightWindowLayer *)shared
+{
+    static FRYTouchHighlightWindowLayer *shared = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [FRYMethodSwizzling exchangeClass:[UIApplication class]
+                                   method:@selector(sendEvent:)
+                                withClass:[self class]
+                                   method:@selector(fry_visualizeEvent:)];
+
+        shared = [[FRYTouchHighlightWindowLayer alloc] init];
+    });
+    return shared;
+}
+
 - (void)enable
 {
     [self updateLayer];
@@ -27,7 +43,6 @@ typedef void(^FRYHighlightCompletionBlock)(void);
                                              selector:@selector(updateLayer)
                                                  name:UIWindowDidBecomeKeyNotification
                                                object:nil];
-    [self showString:@"Recording Enabled"];
 }
 
 - (void)disable
@@ -60,11 +75,13 @@ typedef void(^FRYHighlightCompletionBlock)(void);
     return self;
 }
 
-- (void)visualizeEvent:(UIEvent *)event
+- (void)fry_visualizeEvent:(UIEvent *)event
 {
-    if ( [self superlayer] != nil ) {
+    [self fry_visualizeEvent:event];
+    
+    if ( FRYTouchHighlightWindowLayer.shared.superlayer != nil ) {
         for (UITouch *touch in event.allTouches) {
-            [self updateDisplayForTouch:touch];
+            [FRYTouchHighlightWindowLayer.shared updateDisplayForTouch:touch];
         }
     }
 }
