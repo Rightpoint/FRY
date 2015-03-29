@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import <FRY/FRY.h>
+#import <FRY/FRYolator.h>
 
 typedef void(^Foo)(NSString *name, ...);
 
@@ -22,24 +23,18 @@ typedef void(^Foo)(NSString *name, ...);
 
 @implementation AlertTableViewControllerTest
 
-- (void)setUp {
++ (void)load
+{
+    [[FRYTouchHighlightWindowLayer shared] enable];
+}
+
+- (void)setUp
+{
     [super setUp];
     self.viewController = [[AlertTableViewController alloc] initWithNibName:nil bundle:nil];
     [UIApplication sharedApplication].keyWindow.rootViewController = self.viewController;
     [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
-    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.0]];
-//    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:450000]];
 }
-
-- (void)tearDown {
-    if ([[FRYTouchDispatch shared] hasActiveTouches]) {
-        [[FRYTouchDispatch shared] clearInteractionsAndTouches];
-        XCTAssertFalse(YES);
-    }
-    
-    [super tearDown];
-}
-
 
 
 - (void)testBasic

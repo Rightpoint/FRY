@@ -15,6 +15,8 @@
 @interface NSPredicate(FRY)
 
 + (NSPredicate *)fry_animatingView;
++ (NSPredicate *)fry_isOnScreen;
++ (NSPredicate *)fry_isVisible;
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel;
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel comparision:(NSString *)comparision;
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityValue:(NSString *)accessibilityValue;

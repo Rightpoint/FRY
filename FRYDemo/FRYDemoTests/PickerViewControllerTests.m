@@ -19,23 +19,12 @@
 
 @implementation PickerViewControllerTests
 
-- (void)setUp {
+- (void)setUp
+{
     [super setUp];
     self.viewController = [[PickerViewController alloc] initWithNibName:nil bundle:nil];
     [UIApplication sharedApplication].keyWindow.rootViewController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
     [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
-    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.0]];
-
-//    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:450000]];
-}
-
-- (void)tearDown {
-    if ([[FRYTouchDispatch shared] hasActiveTouches]) {
-        [[FRYTouchDispatch shared] clearInteractionsAndTouches];
-        XCTAssertFalse(YES);
-    }
-    
-    [super tearDown];
 }
 
 - (void)testPickerOne

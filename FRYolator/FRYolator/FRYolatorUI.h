@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Raizlabs. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+
 @interface FRYolatorUI : NSObject
 
 + (FRYolatorUI *)shared;

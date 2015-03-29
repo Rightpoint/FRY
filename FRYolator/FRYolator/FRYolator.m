@@ -13,7 +13,6 @@
 #import "FRYTouchTracker.h"
 #import "FRYNetworkTracker.h"
 
-#import "FRYTouchHighlightWindowLayer.h"
 #import "FRYMethodSwizzling.h"
 
 NSString *FRYolatorEnabledUserPreferencesKeyPath = @"FRYolatorEnabled";
@@ -22,8 +21,6 @@ NSString *FRYolatorEnabledUserPreferencesKeyPath = @"FRYolatorEnabled";
 
 @property (strong, nonatomic) FRYTouchTracker *touchTracker;
 @property (strong, nonatomic) FRYNetworkTracker *networkTracker;
-
-@property (strong, nonatomic) FRYTouchHighlightWindowLayer *highlightLayer;
 
 @property (strong, nonatomic) UITapGestureRecognizer *recordGestureRecognizer;
 @property (strong, nonatomic) UITapGestureRecognizer *presentUIGestureRecognizer;
@@ -56,7 +53,6 @@ NSString *FRYolatorEnabledUserPreferencesKeyPath = @"FRYolatorEnabled";
     if ( self ) {
         self.touchTracker = [[FRYTouchTracker alloc] initWithDelegate:self];
         self.networkTracker = [[FRYNetworkTracker alloc] initWithDelegate:self];
-        self.highlightLayer = [[FRYTouchHighlightWindowLayer alloc] init];
 
         [[NSUserDefaults standardUserDefaults] addObserver:self
                                                 forKeyPath:FRYolatorEnabledUserPreferencesKeyPath
@@ -101,9 +97,11 @@ NSString *FRYolatorEnabledUserPreferencesKeyPath = @"FRYolatorEnabled";
         self.eventLog.appSchemeURL = [self.delegate appSchemeURLRepresentingCurrentStateForFryolator:self];
     }
 
+    [[FRYTouchHighlightWindowLayer shared] enable];
+    [[FRYTouchHighlightWindowLayer shared] showString:@"Recording Enabled"];
+
     [self.touchTracker enable];
     [self.networkTracker enable];
-    [self.highlightLayer enable];
     self.enabled = YES;
 }
 
@@ -111,7 +109,7 @@ NSString *FRYolatorEnabledUserPreferencesKeyPath = @"FRYolatorEnabled";
 {
     [self.touchTracker disable];
     [self.networkTracker disable];
-    [self.highlightLayer disable];
+    [[FRYTouchHighlightWindowLayer shared] disable];
     self.enabled = NO;
 }
 
@@ -133,7 +131,6 @@ NSString *FRYolatorEnabledUserPreferencesKeyPath = @"FRYolatorEnabled";
     [self fry_sendEvent:event];
     if ( FRYolator.shared.enabled ) {
         [FRYolator.shared.touchTracker trackEvent:event];
-        [FRYolator.shared.highlightLayer visualizeEvent:event];
     }
 }
 

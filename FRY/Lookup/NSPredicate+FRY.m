@@ -14,11 +14,23 @@
 
 + (NSPredicate *)fry_animatingView
 {
-    return [NSPredicate predicateWithBlock:^BOOL(UIView *viewOrElement, NSDictionary *bindings) {
-        BOOL isView = [viewOrElement isKindOfClass:[UIView class]];
-        BOOL isAnimating = isView ? [viewOrElement fry_isAnimating] : NO;
-        return isAnimating;
-    }];
+    return [NSCompoundPredicate andPredicateWithSubpredicates:@[[NSPredicate fry_matchClass:[UIView class]],
+                                                                [NSPredicate predicateWithFormat:@"%K = YES", NSStringFromSelector(@selector(fry_isAnimating))]
+                                                                ]];
+}
+
++ (NSPredicate *)fry_isOnScreen
+{
+    return [NSCompoundPredicate andPredicateWithSubpredicates:@[[NSPredicate fry_matchClass:[UIView class]],
+                                                                [NSPredicate predicateWithFormat:@"%K = YES", NSStringFromSelector(@selector(fry_isOnScreen))]
+                                                                ]];
+}
+
++ (NSPredicate *)fry_isVisible
+{
+    return [NSCompoundPredicate andPredicateWithSubpredicates:@[[NSPredicate fry_matchClass:[UIView class]],
+                                                                [NSPredicate predicateWithFormat:@"%K = YES", NSStringFromSelector(@selector(fry_isVisible))]
+                                                                ]];
 }
 
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel

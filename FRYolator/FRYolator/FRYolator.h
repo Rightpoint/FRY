@@ -45,7 +45,6 @@ OBJC_EXTERN NSString *FRYolatorEnabledUserPreferencesKeyPath;
 + (FRYolator *)shared;
 
 @property (strong, nonatomic, readonly) FRYTouchTracker *touchTracker;
-@property (strong, nonatomic, readonly) FRYTouchHighlightWindowLayer *highlightLayer;
 @property (assign, nonatomic) id<FRYolatorDelegate>delegate;
 
 - (void)enable;

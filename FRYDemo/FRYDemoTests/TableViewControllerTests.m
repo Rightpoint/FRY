@@ -25,26 +25,15 @@
 
 @implementation TableViewControllerTests
 
-- (void)setUp {
+- (void)setUp
+{
     [super setUp];
     self.viewController = [[TableViewController alloc] initWithNibName:nil bundle:nil];
     [UIApplication sharedApplication].keyWindow.rootViewController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
     [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
-    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.0]];
 
 // Enable this to aide in lookup failures.
 //    [NSObject fry_enableLookupDebugForObjects:@[self.viewController.tableView]];
-//    [FRYDSLResult setPauseForeverOnFailure:YES];
-//    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:450000]];
-}
-
-- (void)tearDown {
-    if ([[FRYTouchDispatch shared] hasActiveTouches]) {
-        [[FRYTouchDispatch shared] clearInteractionsAndTouches];
-        XCTAssertFalse(YES);
-    }
-    
-    [super tearDown];
 }
 
 - (void)populateTable

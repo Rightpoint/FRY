@@ -32,6 +32,23 @@
     return isAnimating;
 }
 
+- (BOOL)fry_isOnScreen
+{
+    CGRect frameInWindow = [self.window convertRect:self.frame fromView:self.superview];
+    return self.window && CGRectIntersectsRect(self.window.bounds, frameInWindow);
+}
+
+- (BOOL)fry_isVisible
+{
+    UIView *view = self;
+    BOOL visible = NO;
+    do {
+        visible = view.alpha > 0.1 && view.hidden == NO;
+        view = view.superview;
+    } while ( view != nil && visible );
+    return visible;
+}
+
 - (NSArray *)fry_reverseSubviews
 {
     return [[self.subviews reverseObjectEnumerator] allObjects];

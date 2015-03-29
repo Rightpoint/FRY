@@ -18,6 +18,16 @@
 - (BOOL)fry_isAnimating;
 
 /**
+ * Check to see if the view is inside of the window bounds
+ */
+- (BOOL)fry_isOnScreen;
+
+/**
+ * Check to see if the alpha and hidden values of this view and super views make the view 'visible'
+ */
+- (BOOL)fry_isVisible;
+
+/**
  *  Find the superview that has more interactability than this view.
  *  This is not needed for any reason, but often chooses a view that is
  *  more interesting in case of tapping private subviews.

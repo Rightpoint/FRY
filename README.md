@@ -14,7 +14,7 @@ FRY consists of three core features to implement touch driven integration tests:
 FRY also includes a library, `FRYolator`, which helps create integration tests when it is included in your target.   The goal of FRYolator is to record all input to the target for later recreation. FRYolator will currently record and generate unit test commands to playback the following:
 
 - Touch
-- Network (Nocilla)
+- Network (Nocilla + OHHTTPStubs)
 
 In the future, I hope to include
 
@@ -66,15 +66,29 @@ FRYolator will be enabled when a special tap sequence is performed.   Once enabl
 
 FRY will attempt to use relative coordinates with accessibility lookup information for the view that was touched.  This will maximize the reliability of these commands when UI changes occur.  If no accessibility information can be found, absoulte screen coordinates will be used.
 
+### Touch Visualization
+FRYolator can also visualize touch events. This is used by FRYolator to indicate that recording is active, but can also be easily enabled in the automated tests to aid in writing tests.
+
+*To Enable Touch Visualization*
+```obj-c
+[[FRYTouchHighlightWindowLayer shared] enable];
+```
+
 ## Installation
 
-Add FRY to your Podfile to install.   If you want to use touch recording, add FRYolator to your application target
+Add FRY to your Podfile to install. If you want to use touch recording, add FRYolator to your application target. Only add it to the 'Debug' configuration to ensure it is not submitted to the app store, or add it to a debug target.
 
+*Podfile with Debug configuration*
 ```
 pod 'FRY'
+
+target :YourApplication do
+  pod 'FRY/FRYolator', :configuration => "Debug"
+end
 ```
 
 ## Influences
+
 ### KIF
 KIF is amazing framework that basically started UI testing on iOS.  The core design difference with KIF that pushed me to write FRY without looking to maintain compatibility is that looking up a view can modify the view heirarchy to find it.   This causes a lot of bizarre issues, and it is not usually what I want from a testing perspective.
 
@@ -87,8 +101,5 @@ Robot is a newer contender in the UI Testing world, and is very interesting, but
 - Use simple logic to implement behavior, and categories to hide complex UIKit implementation details.
 - Minimize knowledge of and checks against UIKit private classes.
 - Isolate runloop spinning.
-
-### Design Questions
-- I've never used so many categories, and I'm not sure how to best organize them.
 
 

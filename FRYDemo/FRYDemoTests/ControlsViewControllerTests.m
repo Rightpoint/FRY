@@ -20,26 +20,14 @@
 
 @implementation ControlsViewControllerTests
 
-- (void)setUp {
+- (void)setUp
+{
     [super setUp];
     self.viewController = [[ControlsViewController alloc] initWithNibName:nil bundle:nil];
     [UIApplication sharedApplication].keyWindow.rootViewController = self.viewController;
     [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
-    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.0]];
     
     [FRYIdleCheck system].delegate = self;
-
-//    [[UIApplication sharedApplication] rotateIfNeeded:UIDeviceOrientationLandscapeLeft];
-}
-
-- (void)tearDown
-{
-    if ([[FRYTouchDispatch shared] hasActiveTouches]) {
-        [[FRYTouchDispatch shared] clearInteractionsAndTouches];
-        XCTAssertFalse(YES);
-    }
-    
-    [super tearDown];
 }
 
 - (NSArray *)viewsToIgnoreForAnimationComplete:(FRYIdleCheck *)idleCheck
@@ -47,7 +35,6 @@
     // Ignore any activity indicator
     return FRY2.lookupFirst([NSPredicate fry_matchClass:[UIActivityIndicatorView class]]).views;
 }
-
 
 - (void)testAccessibilityLabelLookup
 {
@@ -202,6 +189,29 @@
     
     FRY2.lookupFirstByAccessibilityLabel(@"Switch").tap();
     FRY2.lookupFirstByAccessibilityLabel(@"In progress").count(1);
+}
+
+- (void)testOnScreen
+{
+    UIView *s = FRY_KEY.accessibilityLabel(@"Switch").present().view;
+    s.frame = CGRectMake(3000, 0, CGRectGetWidth(s.frame), CGRectGetHeight(s.frame));
+
+    FRY_KEY.accessibilityLabel(@"Switch").matching([NSPredicate fry_isOnScreen]).absent();
+}
+
+- (void)testVisible
+{
+    UIView *s = FRY_KEY.accessibilityLabel(@"Switch").present().view;
+    s.alpha = 0.0f;
+    FRY_KEY.accessibilityLabel(@"Switch").matching([NSPredicate fry_isVisible]).absent();
+    s.alpha = 0.1f;
+    FRY_KEY.accessibilityLabel(@"Switch").matching([NSPredicate fry_isVisible]).present();
+    s.hidden = YES;
+    FRY_KEY.accessibilityLabel(@"Switch").matching([NSPredicate fry_isVisible]).absent();
+    s.hidden = NO;
+    FRY_KEY.accessibilityLabel(@"Switch").matching([NSPredicate fry_isVisible]).present();
+    s.superview.alpha = 0.0f;
+    FRY_KEY.accessibilityLabel(@"Switch").matching([NSPredicate fry_isVisible]).absent();
 }
 
 @end
