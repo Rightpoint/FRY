@@ -24,7 +24,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 
 @property (assign, nonatomic) BOOL firstOnly;
 @property (strong, nonatomic) id<FRYLookup> lookupOrigin;
-@property (strong, nonatomic) FRYQueryContext *context;
+@property (strong, nonatomic) FRYTestContext *context;
 
 @property (strong, nonatomic) NSPredicate *predicate;
 @property (assign, nonatomic) NSTimeInterval timeout;
@@ -38,7 +38,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
     FRYQueryDefaultTimeout = timeout;
 }
 
-+ (FRYQuery *)actionFrom:(id<FRYLookup>)lookupRoot context:(FRYQueryContext *)context
++ (FRYQuery *)queryFrom:(id<FRYLookup>)lookupRoot context:(FRYTestContext *)context
 {
     FRYQuery *action = [[FRYQuery alloc] init];
     action.lookupOrigin = lookupRoot;
@@ -73,7 +73,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 {
     FRYQuery *action = self;
     if ( action.predicate != nil ) {
-        action = [FRYQuery actionFrom:self context:self.context];
+        action = [FRYQuery queryFrom:self context:self.context];
     }
     action.predicate = predicate;
     return action;

@@ -12,7 +12,10 @@
 
 @class FRYQuery;
 
-@interface FRYQueryContext : NSObject
+/**
+ * Manage interactions with the test frameworks.
+ */
+@interface FRYTestContext : NSObject
 
 - (id)initWithTestTarget:(id)target inFile:(NSString *)filename atLine:(NSUInteger)lineNumber;
 

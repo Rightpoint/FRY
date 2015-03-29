@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Raizlabs. All rights reserved.
 //
 
-#import "FRYQueryContext.h"
+#import "FRYTestContext.h"
 
 @interface NSException (SenTestStub)
 + (NSException *)failureInFile:(NSString *)filename atLine:(int)lineNumber withDescription:(NSString *)formatString, ...;
@@ -22,7 +22,7 @@
 
 static NSString *const FRYQueryContextError = @"FRY Error";
 
-@implementation FRYQueryContext
+@implementation FRYTestContext
 
 - (id)initWithTestTarget:(id)testTarget inFile:(NSString *)filename atLine:(NSUInteger)lineNumber;
 {

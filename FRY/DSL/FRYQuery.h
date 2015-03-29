@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "NSObject+FRYLookup.h"
-#import "FRYQueryContext.h"
+#import "FRYTestContext.h"
 
 @class FRYQuery;
-@class FRYQueryContext;
+@class FRYTestContext;
 
 typedef FRYQuery *(^FRYChainBlock)(id predicateOrArrayOfPredicates);
 typedef FRYQuery *(^FRYChainStringBlock)(NSString *string);
@@ -28,7 +28,7 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
 @interface FRYQuery : NSObject
 
 + (void)setDefaultTimeout:(NSTimeInterval)timeout;
-+ (FRYQuery *)actionFrom:(id<FRYLookup>)lookupRoot context:(FRYQueryContext *)context;
++ (FRYQuery *)queryFrom:(id<FRYLookup>)lookupRoot context:(FRYTestContext *)context;
 
 @property (copy, nonatomic, readonly) FRYChainBlock lookup;
 @property (copy, nonatomic, readonly) FRYChainBlock lookupFirst;
