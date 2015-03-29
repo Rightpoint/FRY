@@ -115,7 +115,9 @@ static NSTimeInterval FRYActionDefaultTimeout = 1.0;
     return ^(NSString *accessibilityLabel) {
         self.firstOnly = YES;
         NSArray *subPredicates = @[[NSPredicate fry_matchAccessibilityLabel:accessibilityLabel],
-                                   ];
+                                   [NSPredicate fry_isVisible],
+                                   [NSPredicate fry_isOnScreen]];
+
         NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:subPredicates];
         return [self actionByAddingPredicate:predicate];
     };

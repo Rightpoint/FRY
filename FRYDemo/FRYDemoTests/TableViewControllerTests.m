@@ -66,7 +66,7 @@
 
     [self populateTable];
     for ( NSUInteger i = 0; i < ROW_COUNT; i++ ) {
-        FRY2.lookupFirst(FRY_atIndexPath([NSIndexPath indexPathForRow:i inSection:0])).tap();
+        FRY2.lookupFirst(FRY_atSectionAndRow(0, i)).tap();
         FRY2.lookup(@[FRY_accessibilityLabel(TableViewTitleForRow(i)),
                       FRY_accessibilityTrait(UIAccessibilityTraitSelected)]).present();
     }
