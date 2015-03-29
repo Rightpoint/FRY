@@ -145,7 +145,7 @@ static NSTimeInterval FRYActionDefaultTimeout = 1.0;
     return ^(NSUInteger count) {
         NSString *message = [NSString stringWithFormat:@"Looking for %zd items", count];
         return self.check(message, ^(NSSet *results) {
-            BOOL ok = (BOOL)results.count == count;
+            BOOL ok = results.count == count;
             return ok;
         });
     };

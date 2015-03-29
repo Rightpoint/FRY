@@ -40,16 +40,16 @@ typedef void(^Foo)(NSString *name, ...);
 - (void)testBasic
 {
     for ( NSString *label in @[@"One", @"Two", @"Three"] ) {
-        FRY2.lookupFirstByAccessibilityLabel(label).tap();
-        FRY2.lookupFirstByAccessibilityLabel(@"OK").tap();
+        FRY.lookupFirstByAccessibilityLabel(label).tap();
+        FRY.lookupFirstByAccessibilityLabel(@"OK").tap();
     }
 }
 
 - (void)testBasicActions
 {
     for ( NSString *response in @[@"Destructive", @"Other", @"OK"] ) {
-        FRY2.lookupFirstByAccessibilityLabel(@"Action One").tap();
-        FRY2.lookupFirstByAccessibilityLabel(response).tap();
+        FRY.lookupFirstByAccessibilityLabel(@"Action One").tap();
+        FRY.lookupFirstByAccessibilityLabel(response).tap();
     }
 }
 

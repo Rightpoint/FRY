@@ -25,8 +25,6 @@ typedef BOOL(^FRYBoolResultsBlock)(NSSet *);
 typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check);
 
 
-#define FRY2 ({[FRYAction actionFrom:[UIApplication sharedApplication] context:FRY_ACTION_CONTEXT];})
-
 @interface FRYAction : NSObject
 
 + (void)setDefaultTimeout:(NSTimeInterval)timeout;
