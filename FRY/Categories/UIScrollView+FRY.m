@@ -9,6 +9,7 @@
 #import "UIScrollView+FRY.h"
 #import "NSObject+FRYLookup.h"
 #import "FRYTouch.h"
+#import "FRYIdleCheck.h"
 
 @implementation UIScrollView(FRY)
 
@@ -28,11 +29,14 @@
 - (BOOL)fry_scrollToLookupResultMatching:(NSPredicate *)predicate
 {
     id<FRYLookup> result = [self fry_farthestDescendentMatching:predicate];
+    BOOL ok = result != nil;
     if ( result ) {
         CGRect viewFrame = [self convertRect:[result fry_frameInView] fromView:[result fry_representingView]];
         viewFrame.origin.x -= self.contentInset.left;
         viewFrame.origin.y -= self.contentInset.top;
-        [self fry_scrollAndWaitToContentOffset:viewFrame.origin];
+
+        [self setContentOffset:viewFrame.origin animated:YES];
+        ok = [[FRYIdleCheck system] waitForIdle] == NO;
     }
     return result != nil;
 }
@@ -76,13 +80,8 @@
     }
     offset.x = MIN(offset.x, self.contentSize.width - self.bounds.size.width);
     offset.y = MIN(offset.y, self.contentSize.height - self.bounds.size.height);
-    [self fry_scrollAndWaitToContentOffset:offset];
-}
-
-- (void)fry_scrollAndWaitToContentOffset:(CGPoint)offset
-{
     [self setContentOffset:offset animated:YES];
-    [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:1]];
+    [[FRYIdleCheck system] waitForIdle];
 }
 
 @end
