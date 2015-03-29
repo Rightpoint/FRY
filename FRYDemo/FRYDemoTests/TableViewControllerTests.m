@@ -139,11 +139,10 @@
     }
     // This is not a good test of fry_searchForViewsMatching:lookInDirection: as UITableView returns accessibility elements for the entire data set, visible
     // or not.   But lets ensure that it works anyway, because I don't have any other tests.
-    XCTAssert([self.viewController.tableView fry_searchForViewsMatching:[NSPredicate fry_matchAccessibilityLabel:@"Item 9"] lookInDirection:FRYDirectionDown]);
-    XCTAssert([self.viewController.tableView fry_searchForViewsMatching:[NSPredicate fry_matchAccessibilityLabel:@"Item 9"] lookInDirection:FRYDirectionDown]);
-    XCTAssert([self.viewController.tableView fry_searchForViewsMatching:[NSPredicate fry_matchAccessibilityLabel:@"Item 0"] lookInDirection:FRYDirectionDown]);
-    XCTAssert([self.viewController.tableView fry_searchForViewsMatching:[NSPredicate fry_matchAccessibilityLabel:@"Item 9"] lookInDirection:FRYDirectionDown]);
-    
+    XCTAssertTrue(FRY2.scrollTo(FRY_accessibilityLabel(@"Item 9")));
+    XCTAssertTrue(FRY2.scrollTo(FRY_accessibilityLabel(@"Item 9")));
+    XCTAssertTrue(FRY2.scrollTo(FRY_accessibilityLabel(@"Item 0")));
+    XCTAssertTrue(FRY2.scrollTo(FRY_accessibilityLabel(@"Item 9")));
 }
 
 - (void)testScrollingByIndexPath
@@ -154,11 +153,12 @@
     for ( NSUInteger i = 0; i < 10; i++ ) {
         FRY2.lookupFirstByAccessibilityLabel(@"Add").tap();
     }
+
     // This is a better test, as the containerIndexPath is not returned by accessibilityElements.
-    XCTAssert([self.viewController.tableView fry_searchForViewsMatching:[NSPredicate fry_matchContainerIndexPath:[NSIndexPath indexPathForRow:9 inSection:0]] lookInDirection:FRYDirectionDown]);
+    XCTAssertTrue(FRY2.searchFor(FRYDirectionDown, FRY_atSectionAndRow(0, 9)));
     // Looking down should not work.
-    XCTAssertFalse([self.viewController.tableView fry_searchForViewsMatching:[NSPredicate fry_matchContainerIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] lookInDirection:FRYDirectionDown]);
-    XCTAssert([self.viewController.tableView fry_searchForViewsMatching:[NSPredicate fry_matchContainerIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] lookInDirection:FRYDirectionUp]);
+    XCTAssertFalse(FRY2.searchFor(FRYDirectionDown, FRY_atSectionAndRow(0, 0)));
+    XCTAssertTrue(FRY2.searchFor(FRYDirectionUp, FRY_atSectionAndRow(0, 0)));
 }
 
 @end

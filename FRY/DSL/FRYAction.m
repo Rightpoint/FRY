@@ -205,7 +205,7 @@ static NSTimeInterval FRYActionDefaultTimeout = 1.0;
     };
 }
 
-- (FRYDirectionBlock)scrollTo
+- (FRYDirectionBlock)searchFor
 {
     return ^(FRYDirection direction, NSPredicate *scrollToVisible) {
         FRYAction *action = [self actionByAddingPredicate:[NSPredicate fry_matchClass:[UIScrollView class]]];
@@ -217,6 +217,23 @@ static NSTimeInterval FRYActionDefaultTimeout = 1.0;
         if ( success ) {
             UIScrollView *scrollView = [[action results] anyObject];
             success = [scrollView fry_searchForViewsMatching:scrollToVisible lookInDirection:direction];
+        }
+        return success;
+    };
+}
+
+- (FRYSearchBlock)scrollTo
+{
+    return ^(NSPredicate *scrollToVisible) {
+        FRYAction *action = [self actionByAddingPredicate:[NSPredicate fry_matchClass:[UIScrollView class]]];
+        action.firstOnly = YES;
+        BOOL success = action.check(@"Looking for the a UIScrollView subclass", ^(NSSet *results) {
+            BOOL ok = results.count == 1;
+            return ok;
+        });
+        if ( success ) {
+            UIScrollView *scrollView = [[action results] anyObject];
+            success = [scrollView fry_scrollToLookupResultMatching:scrollToVisible];
         }
         return success;
     };

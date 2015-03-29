@@ -17,6 +17,7 @@ typedef FRYAction *(^FRYChainBlock)(id predicateOrArrayOfPredicates);
 typedef FRYAction *(^FRYChainStringBlock)(NSString *string);
 typedef BOOL(^FRYTouchBlock)(id touchOrArrayOfTouches);
 typedef BOOL(^FRYDirectionBlock)(NSInteger FRYDirection, NSPredicate *content);
+typedef BOOL(^FRYSearchBlock)(NSPredicate *content);
 typedef BOOL(^FRYBoolCheckBlock)();
 typedef BOOL(^FRYIntCheckBlock)(NSUInteger count);
 
@@ -37,7 +38,8 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
 
 @property (copy, nonatomic, readonly) FRYBoolCheckBlock tap;
 @property (copy, nonatomic, readonly) FRYTouchBlock touch;
-@property (copy, nonatomic, readonly) FRYDirectionBlock scrollTo;
+@property (copy, nonatomic, readonly) FRYSearchBlock scrollTo;
+@property (copy, nonatomic, readonly) FRYDirectionBlock searchFor;
 @property (copy, nonatomic, readonly) FRYBoolCheckBlock selectText;
 
 @property (copy, nonatomic, readonly) FRYBoolCallbackBlock check;
