@@ -26,24 +26,13 @@
     [[FRYTouchHighlightWindowLayer shared] enable];
 }
 
-- (void)setUp {
+- (void)setUp
+{
     [super setUp];
     self.viewController = [[AlertTableViewController alloc] initWithNibName:nil bundle:nil];
     [UIApplication sharedApplication].keyWindow.rootViewController = self.viewController;
     [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
-    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.0]];
-//    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:450000]];
 }
-
-- (void)tearDown {
-    if ([[FRYTouchDispatch shared] hasActiveTouches]) {
-        [[FRYTouchDispatch shared] clearInteractionsAndTouches];
-        XCTAssertFalse(YES);
-    }
-    
-    [super tearDown];
-}
-
 
 
 - (void)testBasic
@@ -57,7 +46,6 @@
 
 - (void)testBasicActions
 {
-
     for ( NSString *response in @[@"Destructive", @"Other", @"OK"] ) {
         FRY.accessibilityLabel(@"Action One").tap();
         FRY.accessibilityLabel(response).tap().absent();

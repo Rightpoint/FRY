@@ -20,26 +20,14 @@
 
 @implementation ControlsViewControllerTests
 
-- (void)setUp {
+- (void)setUp
+{
     [super setUp];
     self.viewController = [[ControlsViewController alloc] initWithNibName:nil bundle:nil];
     [UIApplication sharedApplication].keyWindow.rootViewController = self.viewController;
     [[UIApplication sharedApplication].keyWindow makeKeyAndVisible];
-    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.0]];
     
     [FRYIdleCheck system].delegate = self;
-
-//    [[UIApplication sharedApplication] rotateIfNeeded:UIDeviceOrientationLandscapeLeft];
-}
-
-- (void)tearDown
-{
-    if ([[FRYTouchDispatch shared] hasActiveTouches]) {
-        [[FRYTouchDispatch shared] clearInteractionsAndTouches];
-        XCTAssertFalse(YES);
-    }
-    
-    [super tearDown];
 }
 
 - (NSArray *)viewsToIgnoreForAnimationComplete:(FRYIdleCheck *)idleCheck
@@ -47,7 +35,6 @@
     // Ignore any activity indicator
     return FRY.ofClass([UIActivityIndicatorView class]).allViews;
 }
-
 
 - (void)testAccessibilityLabelLookup
 {
