@@ -24,11 +24,4 @@
  */
 - (BOOL)fry_scrollToLookupResultMatching:(NSPredicate *)predicate;
 
-/**
- *  Scroll to the specified content offset, and spin the runloop until the scroll has completed.
- *
- *  NOTE: The name of this method is not good.
- */
-- (void)fry_scrollAndWaitToContentOffset:(CGPoint)offset;
-
 @end

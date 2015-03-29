@@ -19,15 +19,16 @@ static void *FRYScrollingStateScrollingKey = &FRYScrollingStateScrollingKey;
 + (void)load
 {
     @autoreleasepool {
-        __block id observer = nil;
-        // Using TEST_HOST, it is common for the FRY .a to be loaded twice, and for two separate symbol spaces of
-        // this .m file to be executed, and this load to be triggered twice. This will swizzle in and out the methods
-        // below. Only swizzle when the app did finish launching.
-        observer = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidFinishLaunchingNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
-            [[NSNotificationCenter defaultCenter] removeObserver:observer];
+        // Using TEST_HOST, it is common for the FRY .a to be loaded twice, and for
+        // two separate symbol spaces of this .m file to be executed, and this load
+        // to be triggered twice. All static variables in this space are duplicated
+        // so it is very painful to control in state that's isolated in this file,
+        // so hold a flag in NSThread until I can figure out a better way...
+        NSMutableDictionary *threadDictionary = [[NSThread currentThread] threadDictionary];
+        if ( threadDictionary[@"FRYScrollingState"] == nil ) {
+            threadDictionary[@"FRYScrollingState"] = @(YES);
             [self fry_swizzleProgramaticScrollDetection];
-            observer = nil;
-        }];
+        }
     }
 }
 
