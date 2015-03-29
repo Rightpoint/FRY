@@ -228,7 +228,14 @@ static const NSTimeInterval kFRYSwipeLocationEnd   = 0.7f;
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@:%p pointsInTime.count=%zd, startingOffset=%f", self.class, self, self.pointsInTime.count, self.startingOffset];
+    NSString *description = nil;
+    if ( self.pointsInTime.count == 2 ) {
+        FRYPointInTime *pointInTime = self.pointsInTime[0];
+        description = [NSString stringWithFormat:@"<%@:%p @ %0.1f x %0.1f, startingOffset=%0.1f", self.class, self, pointInTime.location.x, pointInTime.location.y, self.startingOffset];
+    } else {
+        description = [NSString stringWithFormat:@"<%@:%p pointsInTime.count=%zd, startingOffset=%0.1f", self.class, self, self.pointsInTime.count, self.startingOffset];
+    }
+    return description;
 }
 
 @end
