@@ -12,6 +12,11 @@ typedef BOOL(^FRYCheckBlock)();
 
 OBJC_EXTERN NSTimeInterval const kFRYEventDispatchInterval;
 
+#define FRY_KEYPATH(c, p) ({\
+c *object __unused; \
+typeof(obj.p) property __unused; \
+@#p; \
+})
 
 #define FRY_APP [UIApplication sharedApplication]
 #define FRY_KEY_WINDOW [[UIApplication sharedApplication] keyWindow]

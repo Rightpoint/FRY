@@ -10,17 +10,21 @@
 #import "NSRunLoop+FRY.h"
 #import "FRYTouch.h"
 #import "FRYTouchDispatch.h"
-
+#import "NSPredicate+FRY.h"
+#import "UIScrollView+FRY.h"
+#import "UITextInput+FRY.h"
 
 @interface NSObject(FRYTestStub)
 - (void) recordFailureWithDescription:(NSString *) description inFile:(NSString *) filename atLine:(NSUInteger) lineNumber expected:(BOOL) expected;
 @end
 
+static NSTimeInterval FRYActionDefaultTimeout = 1.0;
 
 @interface FRYAction () <FRYLookup>
 
 @property (assign, nonatomic) BOOL firstOnly;
 @property (strong, nonatomic) id<FRYLookup> lookupOrigin;
+@property (strong, nonatomic) FRYActionContext *context;
 
 @property (strong, nonatomic) NSPredicate *predicate;
 @property (assign, nonatomic) NSTimeInterval timeout;
@@ -29,11 +33,17 @@
 
 @implementation FRYAction
 
-+ (FRYAction *)actionFrom:(id<FRYLookup>)lookupRoot
++ (void)setDefaultTimeout:(NSTimeInterval)timeout
+{
+    FRYActionDefaultTimeout = timeout;
+}
+
++ (FRYAction *)actionFrom:(id<FRYLookup>)lookupRoot context:(FRYActionContext *)context
 {
     FRYAction *action = [[FRYAction alloc] init];
     action.lookupOrigin = lookupRoot;
-    action.timeout = 1.0;
+    action.timeout = FRYActionDefaultTimeout;
+    action.context = context;
     return action;
 }
 
@@ -48,13 +58,13 @@
 {
     NSSet *results = nil;
     if ( self.firstOnly ) {
-        results = [self.lookupOrigin fry_allChildrenMatching:self.predicate];
-    }
-    else {
-        id result = [self.lookupOrigin fry_farthestDescendentMatching:self.predicate];
+        id result = [self.lookupOrigin fry_firstDescendentMatching:self.predicate];
         if ( result ) {
             results = [NSSet setWithObject:result];
         }
+    }
+    else {
+        results = [self.lookupOrigin fry_allChildrenMatching:self.predicate];
     }
     return results;
 }
@@ -63,53 +73,90 @@
 {
     FRYAction *action = self;
     if ( action.predicate != nil ) {
-        action = [FRYAction actionFrom:self];
+        action = [FRYAction actionFrom:self context:self.context];
     }
     action.predicate = predicate;
     return action;
 }
 
+- (NSPredicate *)predicateFromPredicateOrArray:(id)predicateOrArray
+{
+    NSPredicate *predicate = nil;
+    if ( [predicateOrArray isKindOfClass:[NSArray class]] ) {
+        predicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicateOrArray];
+    }
+    else if ( [predicateOrArray isKindOfClass:[NSPredicate class]] ) {
+        predicate = predicateOrArray;
+    }
+    else {
+        [NSException raise:NSInvalidArgumentException format:@"Invalid argument '%@', must be a predicate or array", predicateOrArray];
+    }
+    return predicate;
+}
+
 - (FRYChainBlock)lookup
 {
-    return ^(NSPredicate *predicate) {
+    return ^(id predicateOrArray) {
         self.firstOnly = NO;
-        return [self actionByAddingPredicate:predicate];
+        return [self actionByAddingPredicate:[self predicateFromPredicateOrArray:predicateOrArray]];
     };
 }
 
 - (FRYChainBlock)lookupFirst
 {
-    return ^(NSPredicate *predicate) {
+    return ^(id predicateOrArray) {
         self.firstOnly = YES;
+        return [self actionByAddingPredicate:[self predicateFromPredicateOrArray:predicateOrArray]];
+    };
+}
+
+- (FRYChainStringBlock)lookupFirstByAccessibilityLabel
+{
+    return ^(NSString *accessibilityLabel) {
+        self.firstOnly = YES;
+        NSArray *subPredicates = @[[NSPredicate fry_matchAccessibilityLabel:accessibilityLabel],
+                                   ];
+        NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:subPredicates];
         return [self actionByAddingPredicate:predicate];
     };
 }
 
 #pragma mark - Check
 
-- (FRYCountBlock)count
+- (FRYBoolCallbackBlock)check
 {
-    return ^(NSUInteger count) {
+    return ^(NSString *message, FRYBoolResultsBlock check) {
         __block NSSet *results = nil;
         BOOL isOK = [[NSRunLoop currentRunLoop] fry_waitWithTimeout:self.timeout forCheck:^BOOL{
             results = [self results];
-            return results.count == count;
+            return check(results);
         }];
         if ( isOK == NO ) {
-            [self failWithMessage:[NSString stringWithFormat:@"Looking for %zd elements, found %zd", count, results.count] results:results];
+            [self.context recordFailureWithMessage:message action:self results:results];
         }
         return isOK;
     };
 }
 
-- (FRYCheckBlock)absent
+- (FRYIntCheckBlock)count
+{
+    return ^(NSUInteger count) {
+        NSString *message = [NSString stringWithFormat:@"Looking for %zd items", count];
+        return self.check(message, ^(NSSet *results) {
+            BOOL ok = (BOOL)results.count == count;
+            return ok;
+        });
+    };
+}
+
+- (FRYBoolCheckBlock)absent
 {
     return ^() {
         return self.count(0);
     };
 }
 
-- (FRYCheckBlock)present
+- (FRYBoolCheckBlock)present
 {
     return ^() {
         return self.count(1);
@@ -121,18 +168,29 @@
     return [[self results] allObjects];
 }
 
+- (NSArray *)view
+{
+    return self.views.firstObject;
+}
+
+- (FRYBoolCheckBlock)tap
+{
+    return ^() {
+        return self.touch([FRYTouch tap]);
+    };
+}
+
 - (FRYTouchBlock)touch
 {
     return ^(id touchOrArrayOfTouches) {
         self.firstOnly = YES;
-        __block NSSet *results = nil;
-        BOOL isOK = [[NSRunLoop currentRunLoop] fry_waitWithTimeout:self.timeout forCheck:^BOOL{
-            results = [self results];
-            return results.count == 1;
-        }];
+        BOOL isOK = self.check(@"Looking up view to tap", ^(NSSet *results) {
+            BOOL ok = results.count == 1;
+            return ok;
+        });
 
         if ( isOK ) {
-            id<FRYLookup> result = [results anyObject];
+            id<FRYLookup> result = [[self results] anyObject];
 
             if ( [touchOrArrayOfTouches isKindOfClass:[FRYTouch class]] ) {
                 touchOrArrayOfTouches = @[touchOrArrayOfTouches];
@@ -145,9 +203,46 @@
     };
 }
 
+- (FRYDirectionBlock)scrollTo
+{
+    return ^(FRYDirection direction, NSPredicate *scrollToVisible) {
+        FRYAction *action = [self actionByAddingPredicate:[NSPredicate fry_matchClass:[UIScrollView class]]];
+        action.firstOnly = YES;
+        BOOL success = action.check(@"Looking for the a UIScrollView subclass", ^(NSSet *results) {
+            BOOL ok = results.count == 1;
+            return ok;
+        });
+        if ( success ) {
+            UIScrollView *scrollView = [[action results] anyObject];
+            success = [scrollView fry_searchForViewsMatching:scrollToVisible lookInDirection:direction];
+        }
+        return success;
+    };
+}
+
+- (FRYBoolCheckBlock)selectText
+{
+    return ^() {
+        NSArray *subPredicates = @[[NSPredicate fry_matchClass:[UITextField class]],
+                                   [NSPredicate fry_matchClass:[UITextView class]]];
+        NSPredicate *textClass = [NSCompoundPredicate orPredicateWithSubpredicates:subPredicates];
+        FRYAction *action = [self actionByAddingPredicate:textClass];
+        action.firstOnly = YES;
+        BOOL success = action.check(@"Looking for a text field", ^(NSSet *results) {
+            BOOL ok = results.count == 1;
+            return ok;
+        });
+        if ( success ) {
+            UITextField *textInput = [[action results] anyObject];
+            [textInput fry_selectAll];
+        }
+        return success;
+    };
+}
+
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@:%p origin=%@, predicate=%@", self.class, self, self.lookupOrigin, self.predicate];
+    return [NSString stringWithFormat:@"<%@:%p predicate='%@', origin=%@>", self.class, self, self.lookupOrigin, self.predicate];
 }
 
 @end

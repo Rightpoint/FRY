@@ -45,28 +45,16 @@ typedef void(^Foo)(NSString *name, ...);
 - (void)testBasic
 {
     for ( NSString *label in @[@"One", @"Two", @"Three"] ) {
-        allViews(where.a11yLabel(@"Foo")).views.count;
-        firstView(where.a11yLabel(@"Foo")).tap();
-        allViews(where.a11yLabel(@"Foo")).allViews(where.a11yLabel(bar))
-        FRY2.where(a11yLabel(@"Foo"));
-        FRY2.lookup(where(a11yLabel(label)))
-        .touch([FRYTouch tap]);
-        FRY2.lookup(where(a11yLabel(@"OK")))
-        .touch([FRYTouch tap]);
-
-        FRY2.lookup(where(a11yLabel(label))).touch([FRYTouch tap]);
-//        FRY.accessibilityLabel(label).tap();
-//        // The alertview is shown .5 seconds after tap, so wait a second for it to appear.
-//        FRY.accessibilityLabel(@"OK").tap().absent();
+        FRY2.lookupFirstByAccessibilityLabel(label).tap();
+        FRY2.lookupFirstByAccessibilityLabel(@"OK").tap();
     }
 }
 
 - (void)testBasicActions
 {
-
     for ( NSString *response in @[@"Destructive", @"Other", @"OK"] ) {
-//        FRY.accessibilityLabel(@"Action One").tap();
-//        FRY.accessibilityLabel(response).tap().absent();
+        FRY2.lookupFirstByAccessibilityLabel(@"Action One").tap();
+        FRY2.lookupFirstByAccessibilityLabel(response).tap();
     }
 }
 

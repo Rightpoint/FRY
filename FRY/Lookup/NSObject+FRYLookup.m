@@ -75,6 +75,27 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
     return nil;
 }
 
+- (id<FRYLookup>)fry_firstDescendentMatching:(NSPredicate *)predicate;
+{
+    NSParameterAssert(predicate);
+
+    if ( [predicate evaluateWithObject:self substitutionVariables:nil] ) {
+        NSAssert([self conformsToProtocol:@protocol(FRYLookup)], @"%@ does not conform to %@", self, @protocol(FRYLookup));
+        return (id<FRYLookup>)self;
+    }
+
+    for ( NSString *childKeyPath in [self.class fry_childKeyPaths] ) {
+        NSArray *children = [self valueForKeyPath:childKeyPath];
+        for ( NSObject *child in children) {
+            id<FRYLookup> result = [child fry_firstDescendentMatching:predicate];
+            if ( result ) {
+                return result;
+            }
+        }
+    }
+    return nil;
+}
+
 - (void)fry_enumerateAllChildrenMatching:(NSPredicate *)predicate results:(NSMutableSet *)results debug:(BOOL)debug
 {
     NSParameterAssert(predicate);

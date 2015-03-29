@@ -8,43 +8,35 @@
 
 #import <UIKit/UIKit.h>
 
-@class FRYPredicateBuilder;
+#import "FRYDefines.h"
 
-typedef FRYPredicateBuilder *(^FRYDSLStringBlock)(NSString *);
-typedef FRYPredicateBuilder *(^FRYDSLTraitsBlock)(UIAccessibilityTraits);
-typedef FRYPredicateBuilder *(^FRYDSLClassBlock)(Class);
-typedef FRYPredicateBuilder *(^FRYDSLPredicateBlock)(NSPredicate *);
-typedef FRYPredicateBuilder *(^FRYDSLIndexPathBlock)(NSIndexPath *);
+#define FRY_PREDICATE_PART(c, p) [FRYPredicatePart partForKeyPath:FRY_KEYPATH(c,p)]
 
-@protocol FRYPredicate <NSObject>
 
-- (BOOL)evaluateWithObject:(id)object;
+@class FRYPredicatePart;
 
-@end
+typedef NSPredicate*(^FRYPredicateObjectComparison)(id);
+typedef NSPredicate*(^FRYPredicateIntComparison)(NSUInteger);
+typedef FRYPredicatePart*(^FRYPredicateFlip)();
 
-#define where(cmd) ({\
-FRYPredicateBuilder *builder = [FRYPredicateBuilder builder];\
-builder.cmd;\
-[builder predicate];\
-})
+@interface FRYPredicatePart : NSObject
 
-@interface FRYPredicateBuilder : NSObject
-+ (FRYPredicateBuilder *)builder;
-@property (copy, nonatomic, readonly) FRYDSLStringBlock a11yLabel;
-@property (copy, nonatomic, readonly) FRYDSLStringBlock a11yValue;
-@property (copy, nonatomic, readonly) FRYDSLTraitsBlock a11yTraits;
-@property (copy, nonatomic, readonly) FRYDSLClassBlock ofClass;
-@property (copy, nonatomic, readonly) FRYDSLIndexPathBlock atIndexPath;
-@property (copy, nonatomic, readonly) FRYDSLIndexPathBlock rowAtIndexPath;
-@property (copy, nonatomic, readonly) FRYDSLIndexPathBlock itemAtIndexPath;
-@property (copy, nonatomic, readonly) FRYDSLPredicateBlock matching;
++ (FRYPredicatePart *)partForKeyPath:(NSString *)keypath;
 
-- (NSPredicate *)predicate;
+@property (copy, nonatomic) FRYPredicateObjectComparison equalTo;
+@property (copy, nonatomic) FRYPredicateObjectComparison like;
+@property (copy, nonatomic) FRYPredicateObjectComparison matches;
+@property (copy, nonatomic) FRYPredicateObjectComparison beginsWith;
+@property (copy, nonatomic) FRYPredicateObjectComparison endsWith;
 
-- (BOOL)evaluateWithObject:(id)object;
+@property (copy, nonatomic) FRYPredicateFlip not;
+@property (copy, nonatomic) FRYPredicateFlip caseSensitive;
 
-@end
+@property (copy, nonatomic) FRYPredicateObjectComparison lt;
+@property (copy, nonatomic) FRYPredicateObjectComparison lte;
+@property (copy, nonatomic) FRYPredicateObjectComparison gt;
+@property (copy, nonatomic) FRYPredicateObjectComparison gte;
 
-@interface NSPredicate(FRYPredicateBuilder) <FRYPredicate>
+@property (copy, nonatomic) FRYPredicateIntComparison withFlags;
 
 @end

@@ -9,88 +9,126 @@
 #import "FRYPredicateBuilder.h"
 #import "NSPredicate+FRY.h"
 
-@interface FRYPredicateBuilder ()
+@interface FRYPredicatePart ()
 
-@property (strong, nonatomic) NSMutableArray *subPredicates;
+@property (copy, nonatomic) NSString *keyPath;
+@property (assign, nonatomic) BOOL notFlag;
+@property (assign, nonatomic) BOOL caseSensitiveFlag;
 
 @end
 
-@implementation FRYPredicateBuilder
+@implementation FRYPredicatePart
 
-- (NSPredicate *)predicate
++ (FRYPredicatePart *)partForKeyPath:(NSString *)keypath
 {
-    return [NSCompoundPredicate andPredicateWithSubpredicates:self.subPredicates];
+    FRYPredicatePart *part = [[FRYPredicatePart alloc] init];
+    part.keyPath = keypath;
+    return part;
 }
 
-- (FRYDSLStringBlock)a11yLabel
+
+- (FRYPredicateObjectComparison)equalTo
 {
-    return ^(NSString *accessibilityLabel) {
-        [self.subPredicates addObject:[NSPredicate fry_matchAccessibilityLabel:accessibilityLabel]];
+    return ^(id value) {
+        return [NSPredicate predicateWithFormat:@"%K = %@", self.keyPath, value];
+    };
+}
+
+- (FRYPredicateFlip)not
+{
+    return ^() {
+        self.notFlag = YES;
         return self;
     };
 }
 
-- (FRYDSLStringBlock)a11yValue
+- (FRYPredicateFlip)caseSensitive
 {
-    return ^(NSString *accessibilityValue) {
-        [self.subPredicates addObject:[NSPredicate fry_matchAccessibilityValue:accessibilityValue]];
+    return ^() {
+        self.caseSensitiveFlag = YES;
         return self;
     };
 }
 
-- (FRYDSLTraitsBlock)a11yTraits
+- (NSString *)caseSensitiveString
 {
-    return ^(UIAccessibilityTraits traits) {
-        [self.subPredicates addObject:[NSPredicate fry_matchAccessibilityTrait:traits]];
-        return self;
+    return self.caseSensitive ? @"" : @"[cd]";
+}
+
+- (NSPredicate *)predicateWithFormat:(NSString *)format values:(NSArray *)values
+{
+    if ( self.notFlag ) {
+        format = [NSString stringWithFormat:@"!(%@)", format];
+    }
+    return [NSPredicate predicateWithFormat:format argumentArray:values];
+}
+
+- (FRYPredicateObjectComparison)like
+{
+    return ^(id value) {
+        return [self predicateWithFormat:@"%K LIKE%@ %@" values:@[self.keyPath, self.caseSensitiveString, value]];
     };
 }
 
-- (FRYDSLClassBlock)ofClass
+- (FRYPredicateObjectComparison)matches
 {
-    return ^(Class klass) {
-        [self.subPredicates addObject:[NSPredicate fry_matchClass:klass]];
-        return self;
+    return ^(id value) {
+        return [self predicateWithFormat:@"%K MATCHES%@ %@" values:@[self.keyPath, self.caseSensitiveString, value]];
     };
 }
 
-- (FRYDSLIndexPathBlock)atIndexPath
+- (FRYPredicateObjectComparison)beginsWith
 {
-    return ^(NSIndexPath *indexPath) {
-        [self.subPredicates addObject:[NSPredicate fry_matchContainerIndexPath:indexPath]];
-        return self;
+    return ^(id value) {
+        return [self predicateWithFormat:@"%K BEGINSWITH%@ %@" values:@[self.keyPath, self.caseSensitiveString, value]];
     };
 }
 
-- (FRYDSLIndexPathBlock)rowAtIndexPath
+- (FRYPredicateObjectComparison)endsWith
 {
-    return ^(NSIndexPath *indexPath) {
-        [self.subPredicates addObject:[NSPredicate fry_matchClass:[UITableViewCell class]]];
-        [self.subPredicates addObject:[NSPredicate fry_matchContainerIndexPath:indexPath]];
-        return self;
+    return ^(id value) {
+        return [self predicateWithFormat:@"%K ENDSWITH%@ %@" values:@[self.keyPath, self.caseSensitiveString, value]];
     };
 }
 
-- (FRYDSLIndexPathBlock)itemAtIndexPath
+- (FRYPredicateObjectComparison)lt
 {
-    return ^(NSIndexPath *indexPath) {
-        [self.subPredicates addObject:[NSPredicate fry_matchClass:[UICollectionViewCell class]]];
-        [self.subPredicates addObject:[NSPredicate fry_matchContainerIndexPath:indexPath]];
-        return self;
+    return ^(id value) {
+        NSAssert(self.caseSensitiveFlag == NO, @"Comparison does not support case");
+        return [self predicateWithFormat:@"%K < %@" values:@[self.keyPath, value]];
     };
 }
 
-- (FRYDSLPredicateBlock)matching
+- (FRYPredicateObjectComparison)lte
 {
-    return ^(NSPredicate *predicate) {
-        [self.subPredicates addObject:predicate];
-        return self;
+    return ^(id value) {
+        NSAssert(self.caseSensitiveFlag == NO, @"Comparison does not support case");
+        return [self predicateWithFormat:@"%K <= %@" values:@[self.keyPath, value]];
     };
 }
 
-- (BOOL)evaluateWithObject:(id)object
+- (FRYPredicateObjectComparison)gt
 {
-    return [self.predicate evaluateWithObject:object];
+    return ^(id value) {
+        NSAssert(self.caseSensitiveFlag == NO, @"Comparison does not support case");
+        return [self predicateWithFormat:@"%K > %@" values:@[self.keyPath, value]];
+    };
+}
+
+- (FRYPredicateObjectComparison)gte
+{
+    return ^(id value) {
+        NSAssert(self.caseSensitiveFlag == NO, @"Comparison does not support case");
+        return [self predicateWithFormat:@"%K >= %@" values:@[self.keyPath, value]];
+    };
+}
+
+- (FRYPredicateIntComparison)withFlags
+{
+    return ^(NSUInteger flags) {
+        NSAssert(self.caseSensitiveFlag == NO, @"Comparison does not support case");
+        return [self predicateWithFormat:@"(%K & %@) = &@" values:@[self.keyPath, @(flags), @(flags)]];
+    };
 }
 
 @end

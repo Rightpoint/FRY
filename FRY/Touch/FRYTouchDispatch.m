@@ -57,7 +57,7 @@
         NSTimeInterval startTime = [NSDate timeIntervalSinceReferenceDate];
         FRYActiveTouch *touchInteraction = [[FRYActiveTouch alloc] initWithSimulatedTouch:touch inView:view startTime:startTime];
         
-        NSLog(@"Performing Touch %@ on %@", touch, view);
+        NSLog(@"Performing Touch:%@\n View:%@", touch, view);
         [self.activeTouches addObject:touchInteraction];
     }
 }
@@ -85,7 +85,6 @@
         if ( interaction.currentTouchPhase == UITouchPhaseEnded || interaction.currentTouchPhase == UITouchPhaseCancelled ) {
             [self.activeTouches removeObject:interaction];
             [completeTouches addObject:interaction.touchDefinition];
-            NSLog(@"Completing Touch %@", interaction.touchDefinition);
         }
     }
 }

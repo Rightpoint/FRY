@@ -50,6 +50,8 @@
 		ABBDFB101A9999FD008999A1 /* NSRunLoop+FRY.h in Headers */ = {isa = PBXBuildFile; fileRef = AB184AEC19E8EEC0007CC9DA /* NSRunLoop+FRY.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ABBDFB111A9999FD008999A1 /* UIScrollView+FRY.h in Headers */ = {isa = PBXBuildFile; fileRef = ABC12EC71A192FC900BD7556 /* UIScrollView+FRY.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ABBDFB121A9999FD008999A1 /* UIScrollView+FRYScrollingState.h in Headers */ = {isa = PBXBuildFile; fileRef = AB17BAB81A1C4913008EC56E /* UIScrollView+FRYScrollingState.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ABBEA39F1AC878B900290479 /* FRYActionContext.h in Headers */ = {isa = PBXBuildFile; fileRef = ABBEA39D1AC878B900290479 /* FRYActionContext.h */; };
+		ABBEA3A01AC878B900290479 /* FRYActionContext.m in Sources */ = {isa = PBXBuildFile; fileRef = ABBEA39E1AC878B900290479 /* FRYActionContext.m */; };
 		ABC12EBE1A17E28500BD7556 /* FRYPointInTime.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC12EBB1A17E28500BD7556 /* FRYPointInTime.m */; };
 		ABC12EBF1A17E28500BD7556 /* FRYTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC12EBD1A17E28500BD7556 /* FRYTouch.m */; };
 		ABC12EC91A192FC900BD7556 /* UIScrollView+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = ABC12EC81A192FC900BD7556 /* UIScrollView+FRY.m */; };
@@ -116,6 +118,8 @@
 		ABB5E4611AC0C4E100A37788 /* FRYAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYAction.h; sourceTree = "<group>"; };
 		ABB5E4621AC0C4E100A37788 /* FRYAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYAction.m; sourceTree = "<group>"; };
 		ABBDFB2C1A999E14008999A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABBEA39D1AC878B900290479 /* FRYActionContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYActionContext.h; sourceTree = "<group>"; };
+		ABBEA39E1AC878B900290479 /* FRYActionContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYActionContext.m; sourceTree = "<group>"; };
 		ABC12EBA1A17E28500BD7556 /* FRYPointInTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYPointInTime.h; sourceTree = "<group>"; };
 		ABC12EBB1A17E28500BD7556 /* FRYPointInTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYPointInTime.m; sourceTree = "<group>"; };
 		ABC12EBC1A17E28500BD7556 /* FRYTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYTouch.h; sourceTree = "<group>"; };
@@ -321,6 +325,8 @@
 				ABB5E45E1AC0C2AC00A37788 /* FRYPredicateBuilder.m */,
 				ABB5E4611AC0C4E100A37788 /* FRYAction.h */,
 				ABB5E4621AC0C4E100A37788 /* FRYAction.m */,
+				ABBEA39D1AC878B900290479 /* FRYActionContext.h */,
+				ABBEA39E1AC878B900290479 /* FRYActionContext.m */,
 			);
 			path = DSL;
 			sourceTree = "<group>";
@@ -332,6 +338,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABBEA39F1AC878B900290479 /* FRYActionContext.h in Headers */,
 				ABBDFAFA1A9999FC008999A1 /* FRY.h in Headers */,
 				ABBDFAFB1A9999FC008999A1 /* FRYDefines.h in Headers */,
 				ABBDFAFC1A9999FC008999A1 /* FRYDSLQuery.h in Headers */,
@@ -424,6 +431,7 @@
 				ABED6EA51A16FC9A0009D44A /* FRYDSLQuery.m in Sources */,
 				ABB5E4641AC0C4E100A37788 /* FRYAction.m in Sources */,
 				AB25C08319DF95ED00038E75 /* UIView+FRY.m in Sources */,
+				ABBEA3A01AC878B900290479 /* FRYActionContext.m in Sources */,
 				ABCFAC051A0E7B79003B91BC /* NSObject+FRYLookup.m in Sources */,
 				AB35FD7A19E58B5C00228531 /* FRYMethodSwizzling.m in Sources */,
 				AB35FCE119DFA6F200228531 /* FRYEventProxy.m in Sources */,

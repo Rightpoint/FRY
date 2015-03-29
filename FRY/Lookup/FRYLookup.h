@@ -22,6 +22,11 @@ typedef void(^FRYMatchBlock)(UIView *view, CGRect frameInView);
  */
 - (id<FRYLookup>)fry_farthestDescendentMatching:(NSPredicate *)predicate;
 
+/**
+ *  A shallow traversal, returns the first view that matches the predicate.
+ */
+- (id<FRYLookup>)fry_firstDescendentMatching:(NSPredicate *)predicate;
+
 - (NSSet *)fry_allChildrenMatching:(NSPredicate *)predicate;
 - (NSSet *)fry_allChildrenViewsMatching:(NSPredicate *)predicate;
 
