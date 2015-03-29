@@ -102,7 +102,4 @@ Robot is a newer contender in the UI Testing world, and is very interesting, but
 - Minimize knowledge of and checks against UIKit private classes.
 - Isolate runloop spinning.
 
-### Design Questions
-- I've never used so many categories, and I'm not sure how to best organize them.
-
 

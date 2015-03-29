@@ -191,4 +191,27 @@
     FRY_KEY.accessibilityLabel(@"In progress").count(1);
 }
 
+- (void)testOnScreen
+{
+    UIView *s = FRY_KEY.accessibilityLabel(@"Switch").present().view;
+    s.frame = CGRectMake(3000, 0, CGRectGetWidth(s.frame), CGRectGetHeight(s.frame));
+
+    FRY_KEY.accessibilityLabel(@"Switch").matching([NSPredicate fry_isOnScreen]).absent();
+}
+
+- (void)testVisible
+{
+    UIView *s = FRY_KEY.accessibilityLabel(@"Switch").present().view;
+    s.alpha = 0.0f;
+    FRY_KEY.accessibilityLabel(@"Switch").matching([NSPredicate fry_isVisible]).absent();
+    s.alpha = 0.1f;
+    FRY_KEY.accessibilityLabel(@"Switch").matching([NSPredicate fry_isVisible]).present();
+    s.hidden = YES;
+    FRY_KEY.accessibilityLabel(@"Switch").matching([NSPredicate fry_isVisible]).absent();
+    s.hidden = NO;
+    FRY_KEY.accessibilityLabel(@"Switch").matching([NSPredicate fry_isVisible]).present();
+    s.superview.alpha = 0.0f;
+    FRY_KEY.accessibilityLabel(@"Switch").matching([NSPredicate fry_isVisible]).absent();
+}
+
 @end

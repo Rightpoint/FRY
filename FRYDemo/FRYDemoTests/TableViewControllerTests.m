@@ -34,7 +34,6 @@
 
 // Enable this to aide in lookup failures.
 //    [NSObject fry_enableLookupDebugForObjects:@[self.viewController.tableView]];
-//    [FRYDSLResult setPauseForeverOnFailure:YES];
 }
 
 - (void)populateTable
