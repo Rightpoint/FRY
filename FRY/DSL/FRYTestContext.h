@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define FRY_ACTION_CONTEXT ({[[FRYQueryContext alloc] initWithTestTarget:self inFile:[NSString stringWithUTF8String:__FILE__] atLine:__LINE__];})
+#define FRY_TEST_CONTEXT ({[[FRYTestContext alloc] initWithTestTarget:self inFile:[NSString stringWithUTF8String:__FILE__] atLine:__LINE__];})
 
 @class FRYQuery;
 

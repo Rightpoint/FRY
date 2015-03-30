@@ -32,4 +32,4 @@ FOUNDATION_EXPORT const unsigned char FRYVersionString[];
 
 #import "FRYIdleCheck.h"
 
-#define FRY ({[FRYQuery actionFrom:[UIApplication sharedApplication] context:FRY_ACTION_CONTEXT];})
+#define FRY ({[FRYQuery queryFrom:[UIApplication sharedApplication] context:FRY_TEST_CONTEXT];})

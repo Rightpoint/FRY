@@ -51,6 +51,7 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
 @end
 
 
+// A few predicate helpers
 #ifdef FRY_SHORTHAND
 #define ofKind(c) [NSPredicate fry_matchClass:c]
 #define accessibilityLabel(v) [NSPredicate fry_matchAccessibilityLabel:v]
