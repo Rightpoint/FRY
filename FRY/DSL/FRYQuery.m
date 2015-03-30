@@ -151,14 +151,14 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
     };
 }
 
-- (FRYBoolCheckBlock)absent
+- (FRYCheckBlock)absent
 {
     return ^() {
         return self.count(0);
     };
 }
 
-- (FRYBoolCheckBlock)present
+- (FRYCheckBlock)present
 {
     return ^() {
         return self.count(1);
@@ -175,7 +175,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
     return self.views.firstObject;
 }
 
-- (FRYBoolCheckBlock)tap
+- (FRYCheckBlock)tap
 {
     return ^() {
         return self.touch([FRYTouch tap]);
@@ -205,7 +205,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
     };
 }
 
-- (FRYDirectionBlock)searchFor
+- (FRYSearchBlock)searchFor
 {
     return ^(FRYDirection direction, NSPredicate *scrollToVisible) {
         FRYQuery *action = [self actionByAddingPredicate:[NSPredicate fry_matchClass:[UIScrollView class]]];
@@ -222,7 +222,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
     };
 }
 
-- (FRYSearchBlock)scrollTo
+- (FRYLookupBlock)scrollTo
 {
     return ^(NSPredicate *scrollToVisible) {
         FRYQuery *action = [self actionByAddingPredicate:[NSPredicate fry_matchClass:[UIScrollView class]]];
@@ -239,7 +239,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
     };
 }
 
-- (FRYBoolCheckBlock)selectText
+- (FRYCheckBlock)selectText
 {
     return ^() {
         NSArray *subPredicates = @[[NSPredicate fry_matchClass:[UITextField class]],

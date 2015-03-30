@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "NSObject+FRYLookup.h"
 #import "FRYTestContext.h"
+#import "FRYDefines.h"
 
 @class FRYQuery;
 @class FRYTestContext;
@@ -16,9 +17,8 @@
 typedef FRYQuery *(^FRYChainBlock)(id predicateOrArrayOfPredicates);
 typedef FRYQuery *(^FRYChainStringBlock)(NSString *string);
 typedef BOOL(^FRYTouchBlock)(id touchOrArrayOfTouches);
-typedef BOOL(^FRYDirectionBlock)(NSInteger FRYDirection, NSPredicate *content);
-typedef BOOL(^FRYSearchBlock)(NSPredicate *content);
-typedef BOOL(^FRYBoolCheckBlock)();
+typedef BOOL(^FRYSearchBlock)(NSInteger FRYDirection, NSPredicate *content);
+typedef BOOL(^FRYLookupBlock)(NSPredicate *content);
 typedef BOOL(^FRYIntCheckBlock)(NSUInteger count);
 
 typedef BOOL(^FRYBoolResultsBlock)(NSSet *);
@@ -34,15 +34,15 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
 @property (copy, nonatomic, readonly) FRYChainBlock lookupFirst;
 @property (copy, nonatomic, readonly) FRYChainStringBlock lookupFirstByAccessibilityLabel;
 
-@property (copy, nonatomic, readonly) FRYBoolCheckBlock tap;
+@property (copy, nonatomic, readonly) FRYCheckBlock tap;
 @property (copy, nonatomic, readonly) FRYTouchBlock touch;
-@property (copy, nonatomic, readonly) FRYSearchBlock scrollTo;
-@property (copy, nonatomic, readonly) FRYDirectionBlock searchFor;
-@property (copy, nonatomic, readonly) FRYBoolCheckBlock selectText;
+@property (copy, nonatomic, readonly) FRYLookupBlock scrollTo;
+@property (copy, nonatomic, readonly) FRYSearchBlock searchFor;
+@property (copy, nonatomic, readonly) FRYCheckBlock selectText;
 
 @property (copy, nonatomic, readonly) FRYBoolCallbackBlock check;
-@property (copy, nonatomic, readonly) FRYBoolCheckBlock present;
-@property (copy, nonatomic, readonly) FRYBoolCheckBlock absent;
+@property (copy, nonatomic, readonly) FRYCheckBlock present;
+@property (copy, nonatomic, readonly) FRYCheckBlock absent;
 @property (copy, nonatomic, readonly) FRYIntCheckBlock count;
 
 @property (copy, nonatomic, readonly) NSArray *views;
