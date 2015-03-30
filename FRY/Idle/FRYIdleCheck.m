@@ -117,11 +117,14 @@ static FRYIdleCheck *systemIdleCheck = nil;
 
 - (NSArray *)animatingViews
 {
-    NSMutableArray *views = [[[UIApplication sharedApplication] fry_allChildrenViewsMatching:[NSPredicate fry_animatingView]] mutableCopy];
+    NSSet *elements = [[UIApplication sharedApplication] fry_allChildrenMatching:[NSPredicate fry_animatingView]];
+    
+    NSMutableArray *views = [[elements valueForKey:FRY_KEYPATH(UIView, fry_representingView)] mutableCopy];
     if ( self.delegate && [self.delegate respondsToSelector:@selector(viewsToIgnoreForAnimationComplete:)] ) {
         NSArray *ignoreViews = [self.delegate viewsToIgnoreForAnimationComplete:self];
         for ( UIView *v in [ignoreViews copy] ) {
-            NSSet *subAnimatingViews = [v fry_allChildrenViewsMatching:[NSPredicate fry_animatingView]];
+            NSSet *elements = [v fry_allChildrenMatching:[NSPredicate fry_animatingView]];
+            NSSet *subAnimatingViews = [elements valueForKey:FRY_KEYPATH(UIView, fry_representingView)];
             ignoreViews = [ignoreViews arrayByAddingObjectsFromArray:[subAnimatingViews allObjects]];
         }
         [views removeObjectsInArray:ignoreViews];

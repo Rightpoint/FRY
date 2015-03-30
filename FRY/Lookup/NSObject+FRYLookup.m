@@ -149,12 +149,6 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
     return [results copy];
 }
 
-- (NSSet *)fry_allChildrenViewsMatching:(NSPredicate *)predicate
-{
-    NSSet *lookups = [self fry_allChildrenMatching:predicate];
-    return [lookups valueForKeyPath:NSStringFromSelector(@selector(fry_representingView))];
-}
-
 @end
 
 

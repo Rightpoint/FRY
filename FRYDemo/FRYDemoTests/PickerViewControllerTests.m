@@ -29,35 +29,35 @@
 
 - (void)testPickerOne
 {
-    FRY.lookupFirstByAccessibilityLabel(@"One").tap();
-    FRY.lookupFirstByAccessibilityLabel(@"Select = One").present();
+    FRY.lookupByAccessibilityLabel(@"One").tap();
+    FRY.lookupByAccessibilityLabel(@"Select = One").present();
 
     UIPickerView *inputPicker = (id)[FRY_APP fry_inputViewOfClass:[UIPickerView class]];
     XCTAssertNotNil(inputPicker);
     
     XCTAssertTrue([inputPicker fry_selectTitle:@"44" inComponent:0 animated:YES]);
     
-    FRY.lookupFirstByAccessibilityLabel(@"Picker = 44 / 0").present();
+    FRY.lookupByAccessibilityLabel(@"Picker = 44 / 0").present();
 
     XCTAssertTrue([inputPicker fry_selectTitle:@"99" inComponent:0 animated:YES]);
-    FRY.lookupFirstByAccessibilityLabel(@"Picker = 99 / 0").present();
+    FRY.lookupByAccessibilityLabel(@"Picker = 99 / 0").present();
 }
 
 - (void)testPickerTwo
 {
-    FRY.lookupFirstByAccessibilityLabel(@"Two").tap();
-    FRY.lookupFirstByAccessibilityLabel(@"Select = Two").present();
+    FRY.lookupByAccessibilityLabel(@"Two").tap();
+    FRY.lookupByAccessibilityLabel(@"Select = Two").present();
    
     UIPickerView *inputPicker = (id)[FRY_APP fry_inputViewOfClass:[UIPickerView class]];
     XCTAssertNotNil(inputPicker);
     
     XCTAssertTrue([inputPicker fry_selectTitle:@"44" inComponent:0 animated:YES]);
     
-    FRY.lookupFirstByAccessibilityLabel(@"Picker = 44 / 0").present();
+    FRY.lookupByAccessibilityLabel(@"Picker = 44 / 0").present();
 
     XCTAssertTrue([inputPicker fry_selectTitle:@"99" inComponent:1 animated:YES]);
     
-    FRY.lookupFirstByAccessibilityLabel(@"Picker = 99 / 1").present();
+    FRY.lookupByAccessibilityLabel(@"Picker = 99 / 1").present();
 }
 
 @end

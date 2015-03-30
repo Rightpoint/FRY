@@ -102,15 +102,15 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
     };
 }
 
-- (FRYChainBlock)lookupFirst
+- (FRYChainVoidBlock)shallow
 {
-    return ^(id predicateOrArray) {
+    return ^() {
         self.firstOnly = YES;
-        return [self actionByAddingPredicate:[self predicateFromPredicateOrArray:predicateOrArray]];
+        return self;
     };
 }
 
-- (FRYChainStringBlock)lookupFirstByAccessibilityLabel
+- (FRYChainStringBlock)lookupByAccessibilityLabel
 {
     return ^(NSString *accessibilityLabel) {
         self.firstOnly = YES;

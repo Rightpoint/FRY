@@ -14,7 +14,7 @@ OBJC_EXTERN NSTimeInterval const kFRYEventDispatchInterval;
 
 #define FRY_KEYPATH(c, p) ({\
 c *object __unused; \
-typeof(obj.p) property __unused; \
+typeof(object.p) property __unused; \
 @#p; \
 })
 
@@ -28,3 +28,15 @@ typedef NS_ENUM(NSInteger, FRYDirection) {
     FRYDirectionLeft
 };
 
+@class FRYQuery;
+
+typedef FRYQuery *(^FRYChainBlock)(id predicateOrArrayOfPredicates);
+typedef FRYQuery *(^FRYChainStringBlock)(NSString *string);
+typedef FRYQuery *(^FRYChainVoidBlock)();
+typedef BOOL(^FRYTouchBlock)(id touchOrArrayOfTouches);
+typedef BOOL(^FRYSearchBlock)(NSInteger FRYDirection, NSPredicate *content);
+typedef BOOL(^FRYLookupBlock)(NSPredicate *content);
+typedef BOOL(^FRYIntCheckBlock)(NSUInteger count);
+
+typedef BOOL(^FRYBoolResultsBlock)(NSSet *);
+typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check);

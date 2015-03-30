@@ -27,7 +27,9 @@ typedef void(^FRYMatchBlock)(UIView *view, CGRect frameInView);
  */
 - (id<FRYLookup>)fry_firstDescendentMatching:(NSPredicate *)predicate;
 
+/**
+ * Query all elements matching the predicate.
+ */
 - (NSSet *)fry_allChildrenMatching:(NSPredicate *)predicate;
-- (NSSet *)fry_allChildrenViewsMatching:(NSPredicate *)predicate;
 
 @end

@@ -11,18 +11,7 @@
 #import "FRYTestContext.h"
 #import "FRYDefines.h"
 
-@class FRYQuery;
 @class FRYTestContext;
-
-typedef FRYQuery *(^FRYChainBlock)(id predicateOrArrayOfPredicates);
-typedef FRYQuery *(^FRYChainStringBlock)(NSString *string);
-typedef BOOL(^FRYTouchBlock)(id touchOrArrayOfTouches);
-typedef BOOL(^FRYSearchBlock)(NSInteger FRYDirection, NSPredicate *content);
-typedef BOOL(^FRYLookupBlock)(NSPredicate *content);
-typedef BOOL(^FRYIntCheckBlock)(NSUInteger count);
-
-typedef BOOL(^FRYBoolResultsBlock)(NSSet *);
-typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check);
 
 /**
  *  FRYQuery provides a consistent DSL to lookup and interact with UI components, as well
@@ -37,14 +26,12 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
  *
  *  FRYQuery can perform two kinds of lookup. A query of everything matching a predicate,
  *  or the most shallow element that matches the predicate. For actions involving interaction,
- *  the shallow query `lookupFirst` should be used. This allows the user to ignore many private
- *  implementation subviews. For queries that check the state of the view hierarchy, the full
- *  query may be desired.
+ *  the query is turned shallow, so only the first matching view is used.  For queries that 
+ *  check the state of the view hierarchy, all views are returned, unless `shallow()` is called.
  *
- *  There is one lookup helper, `lookupFirstByAccessibilityLabel`, which will perform a shallow
- *  search for the first element that matches the accessibilityLabel, is on the screen, and is not
- *  hidden. This is provided as a convienence, and is the most common lookup to use in the majority of
- *  cases.
+ *  There is one lookup helper, `lookupByAccessibilityLabel`, which will perform a search that 
+ *  matches the accessibilityLabel, is on the screen, and is not hidden. This is provided as a
+ *  convienence, and is the most common lookup to use in the majority of cases.
  */
 @interface FRYQuery : NSObject
 
@@ -67,17 +54,18 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
 @property (copy, nonatomic, readonly) FRYChainBlock lookup;
 
 /**
- *  Same as the lookup function, except only the first, most shallow result will be
- *  used.
+ *  Convert the query to a shallow search. This will cause only the first matching
+ *  result to be returned. This is performed implicitly by all of the interaction
+ *  functions (touch, scroll, select, etc)
  */
-@property (copy, nonatomic, readonly) FRYChainBlock lookupFirst;
+@property (copy, nonatomic, readonly) FRYChainVoidBlock shallow;
 
 /**
- *  This will call `lookupFirst` with the most common predicate settings: matching
+ *  This will call `lookup` with the most common predicate settings: matching
  *  the specified accessibility label, that the element is on screen, and that the
  *  element is visible (All parent views have 'hidden != YES && alpha > 0.1').
  */
-@property (copy, nonatomic, readonly) FRYChainStringBlock lookupFirstByAccessibilityLabel;
+@property (copy, nonatomic, readonly) FRYChainStringBlock lookupByAccessibilityLabel;
 
 /**
  *  Find the first view that matches the current lookup filter and perform a tap on it.
@@ -94,18 +82,21 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
 /**
  *  Find the first UIScrollView below the current lookup filter. Lookup the subview that matches
  *  the specified predicate and scroll such that it is visible.
+ *  This will modify the query to perform a shallow search.
  */
 @property (copy, nonatomic, readonly) FRYLookupBlock scrollTo;
 
 /**
  *  Find the first UIScrollView below the current lookup filter, and look in the specified direction
  *  for a subview that matches the specified predicate.
+ *  This will modify the query to perform a shallow search.
  */
 @property (copy, nonatomic, readonly) FRYSearchBlock searchFor;
 
 /**
  *  Find the first UITextField or UITextView below the current lookup filter, and select all of the
  *  entered text.
+ *  This will modify the query to perform a shallow search.
  */
 @property (copy, nonatomic, readonly) FRYCheckBlock selectText;
 
@@ -150,6 +141,7 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
 #define accessibilityValue(v) [NSPredicate fry_matchAccessibilityValue:v]
 #define accessibilityTrait(v) [NSPredicate fry_matchAccessibilityTrait:v]
 #define atIndexPath(v) [NSPredicate fry_matchContainerIndexPath:indexPath]
+#define atSectionAndRow(s, r) [NSPredicate fry_matchContainerIndexPath:[NSIndexPath indexPathForRow:r inSection:s]]
 #else
 #define FRY_ofKind(c) [NSPredicate fry_matchClass:c]
 #define FRY_accessibilityLabel(v) [NSPredicate fry_matchAccessibilityLabel:v]

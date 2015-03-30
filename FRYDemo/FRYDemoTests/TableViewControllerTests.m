@@ -39,7 +39,7 @@
 - (void)populateTable
 {
     for ( NSUInteger i = 0; i < ROW_COUNT; i++ ) {
-        FRY.lookupFirstByAccessibilityLabel(@"Add").tap();
+        FRY.lookupByAccessibilityLabel(@"Add").tap();
     }
 }
 
@@ -47,7 +47,7 @@
 {
     [self populateTable];
     for ( NSUInteger i = 0; i < ROW_COUNT; i++ ) {
-        FRY.lookupFirstByAccessibilityLabel(TableViewTitleForRow(i)).present();
+        FRY.lookupByAccessibilityLabel(TableViewTitleForRow(i)).present();
     }
 }
 
@@ -55,7 +55,7 @@
 {
     [self populateTable];
     for ( NSUInteger i = 0; i < ROW_COUNT; i++ ) {
-        FRY.lookupFirstByAccessibilityLabel(TableViewTitleForRow(i)).tap();
+        FRY.lookupByAccessibilityLabel(TableViewTitleForRow(i)).tap();
         FRY.lookup(@[FRY_accessibilityLabel(TableViewTitleForRow(i)),
                       FRY_accessibilityTrait(UIAccessibilityTraitSelected)]).present();
     }
@@ -66,7 +66,7 @@
 
     [self populateTable];
     for ( NSUInteger i = 0; i < ROW_COUNT; i++ ) {
-        FRY.lookupFirst(FRY_atSectionAndRow(0, i)).tap();
+        FRY.lookup(FRY_atSectionAndRow(0, i)).tap();
         FRY.lookup(@[FRY_accessibilityLabel(TableViewTitleForRow(i)),
                       FRY_accessibilityTrait(UIAccessibilityTraitSelected)]).present();
     }
@@ -75,22 +75,22 @@
 - (void)testEditLabels
 {
     [self populateTable];
-    FRY.lookupFirstByAccessibilityLabel(@"Edit").tap();
+    FRY.lookupByAccessibilityLabel(@"Edit").tap();
 
     for ( NSUInteger i = 1; i < ROW_COUNT; i++ ) {
-        FRY.lookupFirstByAccessibilityLabel(TableViewReorderTitleForRow(i)).present();
-        FRY.lookupFirstByAccessibilityLabel(TableViewDeleteTitleForRow(i)).present();
+        FRY.lookupByAccessibilityLabel(TableViewReorderTitleForRow(i)).present();
+        FRY.lookupByAccessibilityLabel(TableViewDeleteTitleForRow(i)).present();
     }
 }
 
 - (void)testDeleteTap
 {
     [self populateTable];
-    FRY.lookupFirstByAccessibilityLabel(@"Edit").tap();
+    FRY.lookupByAccessibilityLabel(@"Edit").tap();
 
     for ( NSUInteger i = 0; i < ROW_COUNT; i++ ) {
-        FRY.lookupFirstByAccessibilityLabel(TableViewDeleteTitleForRow(i)).tap();
-        FRY.lookupFirstByAccessibilityLabel(TableViewDeleteConfirmTitleForRow(i)).tap();
+        FRY.lookupByAccessibilityLabel(TableViewDeleteTitleForRow(i)).tap();
+        FRY.lookupByAccessibilityLabel(TableViewDeleteConfirmTitleForRow(i)).tap();
     }
 }
 
@@ -99,18 +99,18 @@
     [self populateTable];
 
     for ( NSUInteger i = 0; i < ROW_COUNT; i++ ) {
-        FRY.lookupFirstByAccessibilityLabel(TableViewTitleForRow(i)).touch([FRYTouch swipeInDirection:FRYDirectionLeft]);
-        FRY.lookupFirstByAccessibilityLabel(TableViewDeleteConfirmTitleForRow(i)).tap();
+        FRY.lookupByAccessibilityLabel(TableViewTitleForRow(i)).touch([FRYTouch swipeInDirection:FRYDirectionLeft]);
+        FRY.lookupByAccessibilityLabel(TableViewDeleteConfirmTitleForRow(i)).tap();
     }
 }
 
 - (void)testReorder
 {
     [self populateTable];
-    FRY.lookupFirstByAccessibilityLabel(@"Edit").tap();
+    FRY.lookupByAccessibilityLabel(@"Edit").tap();
 
-    FRY.lookupFirstByAccessibilityLabel(TableViewReorderTitleForRow(0)).present();
-    UIView *reorderKnobView = FRY.lookupFirstByAccessibilityLabel(TableViewReorderTitleForRow(0)).view;
+    FRY.lookupByAccessibilityLabel(TableViewReorderTitleForRow(0)).present();
+    UIView *reorderKnobView = FRY.lookupByAccessibilityLabel(TableViewReorderTitleForRow(0)).view;
 
     // Drag the view down 4 rows
     CGRect originalLocation = [FRY_KEY_WINDOW convertRect:reorderKnobView.bounds fromView:reorderKnobView];
@@ -120,9 +120,9 @@
     [[FRYTouchDispatch shared] simulateTouches:@[t]
                                         inView:reorderKnobView];
 
-    FRY.lookupFirstByAccessibilityLabel(TableViewReorderTitleForRow(0)).present();
+    FRY.lookupByAccessibilityLabel(TableViewReorderTitleForRow(0)).present();
 
-    reorderKnobView = FRY.lookupFirstByAccessibilityLabel(TableViewReorderTitleForRow(0)).view;
+    reorderKnobView = FRY.lookupByAccessibilityLabel(TableViewReorderTitleForRow(0)).view;
 
     CGRect newLocation = [FRY_KEY_WINDOW convertRect:reorderKnobView.bounds fromView:reorderKnobView];
     
@@ -135,7 +135,7 @@
     [self.viewController.tableView reloadData];
     [[FRYIdleCheck system] waitForIdle];
     for ( NSUInteger i = 0; i < 10; i++ ) {
-        FRY.lookupFirstByAccessibilityLabel(@"Add").tap();
+        FRY.lookupByAccessibilityLabel(@"Add").tap();
     }
     // This is not a good test of fry_searchForViewsMatching:lookInDirection: as UITableView returns accessibility elements for the entire data set, visible
     // or not.   But lets ensure that it works anyway, because I don't have any other tests.
@@ -151,7 +151,7 @@
     [self.viewController.tableView reloadData];
     [[FRYIdleCheck system] waitForIdle];
     for ( NSUInteger i = 0; i < 10; i++ ) {
-        FRY.lookupFirstByAccessibilityLabel(@"Add").tap();
+        FRY.lookupByAccessibilityLabel(@"Add").tap();
     }
 
     // This is a better test, as the containerIndexPath is not returned by accessibilityElements.
