@@ -29,11 +29,11 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
  *  as mechanisms to retry queries until they are satisfied, and report failures to test 
  *  frameworks.
  * 
- *  A FRYQuery object has a focus, which by default points to `[UIApplication sharedApplication]`.
- *  This causes call actions to query all subviews on all windows. The lookup methods provide
- *  predicates which focus the query onto specific subviews. Lookup methods can be chained
- *  together to continue to focus on more specific views. Once the query is specific enough
- *  an action can be performed to simulate a touch, scroll a scrollview, or select entered text.
+ *  A FRYQuery object has a focus, which by default points to `[UIApplication sharedApplication]`,
+ *  which will query all subviews on all windows. The lookup methods provide predicates which 
+ *  further focus the query onto specific elements, and multiple lookup methods can be chained
+ *  together to further focus the lookup. Once the query is specific enough, an action can be 
+ *  performed to simulate a touch, scroll a scrollview, or select entered text.
  *
  *  FRYQuery can perform two kinds of lookup. A query of everything matching a predicate,
  *  or the most shallow element that matches the predicate. For actions involving interaction,
@@ -41,9 +41,9 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
  *  implementation subviews. For queries that check the state of the view hierarchy, the full
  *  query may be desired.
  *
- *  There is also one lookup helper, `lookupFirstByAccessibilityLabel`, which will perform a shallow
+ *  There is one lookup helper, `lookupFirstByAccessibilityLabel`, which will perform a shallow
  *  search for the first element that matches the accessibilityLabel, is on the screen, and is not
- *  hidden. This is provided as a convienence, and is the best lookup to use in the majority of
+ *  hidden. This is provided as a convienence, and is the most common lookup to use in the majority of
  *  cases.
  */
 @interface FRYQuery : NSObject
@@ -60,28 +60,34 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
 
 /**
  *  Perform a new lookup with the specified predicate. This will query all views
- *  that match the specified predicate.
+ *  that match the specified predicate. If this method is called multiple times,
+ *  a new query object will be returned that will restart the query starting with
+ *  the results of the previous query.
  */
 @property (copy, nonatomic, readonly) FRYChainBlock lookup;
 
 /**
- *  Perform a new lookup for the top most view that matches the specified predicate.
+ *  Same as the lookup function, except only the first, most shallow result will be
+ *  used.
  */
 @property (copy, nonatomic, readonly) FRYChainBlock lookupFirst;
 
 /**
- *  Perform a new lookup for a matching accessibilityLabel, whose frame is on the screen
- *  and who's superviews have 'hidden != YES && alpha > 0.1'.
+ *  This will call `lookupFirst` with the most common predicate settings: matching
+ *  the specified accessibility label, that the element is on screen, and that the
+ *  element is visible (All parent views have 'hidden != YES && alpha > 0.1').
  */
 @property (copy, nonatomic, readonly) FRYChainStringBlock lookupFirstByAccessibilityLabel;
 
 /**
  *  Find the first view that matches the current lookup filter and perform a tap on it.
+ *  This will modify the query to perform a shallow search.
  */
 @property (copy, nonatomic, readonly) FRYCheckBlock tap;
 
 /**
  *  Find the first view that matches the current lookup filter and perform the touches on it.
+ *  This will modify the query to perform a shallow search.
  */
 @property (copy, nonatomic, readonly) FRYTouchBlock touch;
 
@@ -129,7 +135,8 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
 @property (copy, nonatomic, readonly) NSArray *views;
 
 /**
- *  Return the first view specified by the query.
+ *  Return the first view specified by the query. This will not retry or modify the lookup type.
+ *  If the query is returning all matching elements, the first of those elements will be returned.
  */
 @property (strong, nonatomic, readonly) UIView *view;
 
