@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 Pod::Spec.new do |s|
   s.name         = "FRY"
-  s.version      = "0.4"
+  s.version      = "0.4.1"
   s.summary      = "An iOS integration library."
 
   s.description  = <<-DESC
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author       = { "Brian King" => "brianaking@gmail.com" }
   s.platform     = :ios, 7.0
-  s.source       = { :git => "https://github.com/Raizlabs/FRY.git", :tag => "0.4" }
+  s.source       = { :git => "https://github.com/Raizlabs/FRY.git", :tag => "0.4.1" }
   s.requires_arc = true
 
   s.default_subspec = 'Core'
@@ -27,6 +27,4 @@ Pod::Spec.new do |s|
     fryolator.source_files = "FRYolator/**/*.{h,m}"
     fryolator.public_header_files = "FRYolator/**/*.h"
   end
-
-
 end
