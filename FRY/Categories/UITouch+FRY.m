@@ -43,7 +43,7 @@ static const void *FRYUITouchViewWhereTouchBegan = &FRYUITouchViewWhereTouchBega
     NSParameterAssert(window);
     self = [super init];
     if ( self ) {
-        // Wipes out some values.  Needs to be first.
+        // Wipes out some values. Needs to be first.
         [self setWindow:window];
         
         [self setTapCount:1];

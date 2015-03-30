@@ -18,7 +18,7 @@
 - (UIEvent *)fry_eventWithTouches:(NSArray *)touches;
 
 /**
- *  Return windows and the keyWindow.   keyWindow is not always in the windows array.
+ *  Return windows and the keyWindow. keyWindow is not always in the windows array.
  */
 - (NSArray *)fry_allWindows;
 

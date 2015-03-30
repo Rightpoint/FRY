@@ -121,8 +121,8 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
 }
 
 /**
- *  We have to perform some special duplicate checking durring all enumeration.   While traversing the entire tree,
- *  views and accessibilityElements can match the same logical result in different objects.   This method 
+ *  We have to perform some special duplicate checking durring all enumeration. While traversing the entire tree,
+ *  views and accessibilityElements can match the same logical result in different objects. This method 
  *  will compaire the results of fry_representingView and fry_frameInView to determine duplicates.
  */
 - (void)fry_addNonDuplicateObject:(NSObject<FRYLookup> *)object toResults:(NSMutableSet *)results

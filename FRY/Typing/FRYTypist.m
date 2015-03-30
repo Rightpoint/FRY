@@ -14,7 +14,7 @@
 
 
 /**
- * It's a pain to bring "type safety" to private classes.  These are the private classes, with the FRY prefix instead of UI.
+ * It's a pain to bring "type safety" to private classes. These are the private classes, with the FRY prefix instead of UI.
  * These classes never actually exist, but we cast to them to get some help from the compiler.
  */
 @interface FRYKBKeyTree : NSObject
@@ -42,7 +42,7 @@
 {
     NSPredicate *privateKeyboardPredicate = [NSPredicate predicateWithFormat:@"class.description = %@", @"UIKeyboardLayoutStar"];   
     UIView *keyboard = [[[UIApplication sharedApplication] fry_farthestDescendentMatching:privateKeyboardPredicate] fry_representingView];
-    NSAssert(keyboard != nil, @"Could not find the keyboard.  Wait till it appears, or try command-k to reveal the keyboard.");
+    NSAssert(keyboard != nil, @"Could not find the keyboard. Wait till it appears, or try command-k to reveal the keyboard.");
     return (FRYKeyboardLayoutStar *)keyboard;
 }
 

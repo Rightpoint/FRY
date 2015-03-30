@@ -123,7 +123,7 @@
 
     for ( FRYActiveTouch *interaction in self.activeTouches ) {
         UITouch *touch = [interaction touchAtTime:time];
-        // Some active touches are delayed.   Ignore those here.
+        // Some active touches are delayed. Ignore those here.
         if ( touch ) {
             [touches addObject:touch];
         }

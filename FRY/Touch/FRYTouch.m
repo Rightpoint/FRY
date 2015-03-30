@@ -43,7 +43,7 @@ static const NSTimeInterval kFRYSwipeLocationEnd   = 0.7f;
 
 + (FRYTouch *)touchStarting:(NSTimeInterval)startingOffset points:(NSUInteger)points absoluteXyoffsets:(double)xYorOffset, ...
 {
-    // Not sure how to chain in va_args.  Dup code above.
+    // Not sure how to chain in va_args. Dup code above.
     FRYTouch *touch = [[self alloc] init];
     touch.startingOffset = startingOffset;
     va_list args;

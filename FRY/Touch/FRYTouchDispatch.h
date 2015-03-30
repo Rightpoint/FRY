@@ -17,13 +17,13 @@
 + (FRYTouchDispatch *)shared;
 
 /**
- *  The delegate to inform of synchronous touch operations.  This will defer the waiting
+ *  The delegate to inform of synchronous touch operations. This will defer the waiting
  *  behavior to the delegate, rather than just waiting for the touches to complete.
  */
 @property (weak, nonatomic) id<FRYTouchDispatchDelegate>delegate;
 
 /**
- *  Synchronously dispatch the specified touches.  This will block as described in the delegate.
+ *  Synchronously dispatch the specified touches. This will block as described in the delegate.
  *
  *  @param touches An array of touch objects to dispatch
  *  @param view    The view to dispatch the touches in
@@ -32,7 +32,7 @@
 - (void)simulateTouches:(NSArray *)touches inView:(UIView *)view frame:(CGRect)frame;
 
 /**
- *  Synchronously dispatch the specified touches.  This will block as described in the delegate.
+ *  Synchronously dispatch the specified touches. This will block as described in the delegate.
  *  This will specify the views bounds as the rect to translate the touches to.
  *
  *  @param touches An array of touch objects to dispatch
@@ -41,7 +41,7 @@
 - (void)simulateTouches:(NSArray *)touches inView:(UIView *)view;
 
 /**
- *  Dispatch the touches and return immediately.   This API should be used with care as managing the timing
+ *  Dispatch the touches and return immediately. This API should be used with care as managing the timing
  *  of a lot of touch dispatches can be complicated.
  *
  *  @param touches An array of touch objects to dispatch
@@ -61,7 +61,7 @@
 - (NSTimeInterval)maxTouchDuration;
 
 /**
- * Clear out any touches and lookups.  This will send cancel events for any active touches to ensure that
+ * Clear out any touches and lookups. This will send cancel events for any active touches to ensure that
  * the application state doesn't get munged.
  */
 - (void)clearInteractionsAndTouches;

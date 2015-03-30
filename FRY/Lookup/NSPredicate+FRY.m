@@ -204,7 +204,7 @@ NSString *FRYStringFromPredicateOperatorType(NSPredicateOperatorType operator) {
             result = [self fry_descriptionOfDirectEvaluationWithObject:object];
             break;
         default:
-            result = @"Unsupported to-many description.  FIXME!";
+            result = @"Unsupported to-many description. FIXME!";
             break;
     }
     return result;
