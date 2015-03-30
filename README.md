@@ -29,7 +29,7 @@ FRY.lookup(FRY_accessibilityTraits(UIAccessibilityTraitButton)).count(14);
 FRY.lookupFirst(@"My Label").present();
 ```
 
-More Information on [Lookup Behavior](FRY/Lookup/Lookup.md) i
+More Information on [Lookup Behavior](FRY/Lookup/Lookup.md)
 
 ### Touch Synthesis
 FRY uses strongly modeled touches to generate UIKit touch events.  This allows for simple arbitrary touch re-creation, and clear API's for creating common touch sequences.
@@ -40,9 +40,7 @@ FRY.lookup(@"My Label").touch([FRYTouch doubleTap]);
 FRY.lookup(@"My Label").touch([FRYTouch dragFromPoint:p1 toPoint:p2 forDuration:1]);
 ```
 
-More Information on [Lookup Behavior](FRY/Touch/Touch.md) i
-
-Points and touches are specified as multiples of the frame they are dispatched in.   A tap at point 0.5 0.5 will touch in the center of the view, regardless of the views frame.
+More Information on [Touch Synthesis](FRY/Touch/Touch.md)
 
 ### Idle Detection
 There is a helper `FRYIdleCheck` that will spin the runloop until all touches are finished and all UI Animations have completed. This greatly simplifies flow-control, and eliminiates the vast majority of `CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.5, false)`. If you find yourself wanting to add these to your tests, consider adding an animation to your UI instead.  

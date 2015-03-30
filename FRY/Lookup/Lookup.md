@@ -10,7 +10,7 @@ Query objects traverse all of the focused objects children, and return the match
 ### Sub Query
 Sub-Queries are a way of starting a new query starting with the results from the previous query. For Example:
 
-* Return all of the `UIImageView` objects that are subviews of `UITableView` *
+*Return all of the UIImageView objects that are subviews of UITableView*
 ```obj-c
 FRY.lookup(FRY_ofKind([UITableViewCell class])).lookup(FRY_ofKind([UIImageView class]));
 ```
