@@ -17,33 +17,8 @@
  *  FRYQuery provides a consistent DSL to lookup and interact with UI components, as well
  *  as mechanisms to retry queries until they are satisfied, and report failures to test 
  *  frameworks.
- * 
- *  A FRYQuery object has a focus, which by default points to `[UIApplication sharedApplication]`,
- *  which will query all subviews on all windows. The lookup methods provide predicates which 
- *  further focus the query onto specific elements, and multiple lookup methods can be chained
- *  together to further focus the lookup. Once the query is specific enough, an action can be 
- *  performed to simulate a touch, scroll a scrollview, or select entered text.
- *
- *  FRYQuery can perform two kinds of lookup. A query of everything matching a predicate,
- *  or the most shallow element that matches the predicate. For actions involving interaction,
- *  the query is turned shallow, so only the first matching view is used.  For queries that 
- *  check the state of the view hierarchy, all views are returned, unless `shallow()` is called.
- *
- *  There is one lookup helper, `lookupByAccessibilityLabel`, which will perform a search that 
- *  matches the accessibilityLabel, is on the screen, and is not hidden. This is provided as a
- *  convienence, and is the most common lookup to use in the majority of cases.
  */
 @interface FRYQuery : NSObject
-
-/**
- *  Specify the default timeout to use
- */
-+ (void)setDefaultTimeout:(NSTimeInterval)timeout;
-
-/**
- *  This is the constructor for new queries, used by the FRY macro.
- */
-+ (FRYQuery *)queryFrom:(id<FRYLookup>)lookupRoot context:(FRYTestContext *)context;
 
 /**
  *  Perform a new lookup with the specified predicate. This will query all views
@@ -51,14 +26,14 @@
  *  a new query object will be returned that will restart the query starting with
  *  the results of the previous query.
  */
-@property (copy, nonatomic, readonly) FRYChainBlock lookup;
+@property (copy, nonatomic, readonly) FRYChainPredicateBlock lookup;
 
 /**
  *  Convert the query to a shallow search. This will cause only the first matching
  *  result to be returned. This is performed implicitly by all of the interaction
  *  functions (touch, scroll, select, etc)
  */
-@property (copy, nonatomic, readonly) FRYChainVoidBlock shallow;
+@property (copy, nonatomic, readonly) FRYChainBlock shallow;
 
 /**
  *  This will call `lookup` with the most common predicate settings: matching
@@ -81,14 +56,18 @@
 
 /**
  *  Find the first UIScrollView below the current lookup filter. Lookup the subview that matches
- *  the specified predicate and scroll such that it is visible.
+ *  the specified predicate and scroll such that it is visible.  The view must be installed
+ *  in the view hierarchy to work.
+ *
  *  This will modify the query to perform a shallow search.
  */
 @property (copy, nonatomic, readonly) FRYLookupBlock scrollTo;
 
 /**
  *  Find the first UIScrollView below the current lookup filter, and look in the specified direction
- *  for a subview that matches the specified predicate.
+ *  for a subview that matches the specified predicate.  This will scroll the scroll view and allow
+ *  the view to load any cells that may be present.
+ *
  *  This will modify the query to perform a shallow search.
  */
 @property (copy, nonatomic, readonly) FRYSearchBlock searchFor;
@@ -117,6 +96,8 @@
 
 /**
  *  Block and retry the query until the specified check block returns YES.
+ *
+ *  NOTE: If you are getting compile errors, cast the return excessively, ie: return (BOOL)(count == 1);
  */
 @property (copy, nonatomic, readonly) FRYBoolCallbackBlock check;
 
@@ -130,6 +111,16 @@
  *  If the query is returning all matching elements, the first of those elements will be returned.
  */
 @property (strong, nonatomic, readonly) UIView *view;
+
+/**
+ *  Specify the default timeout to use
+ */
++ (void)setDefaultTimeout:(NSTimeInterval)timeout;
+
+/**
+ *  This is the constructor for new queries, used by the FRY macro.
+ */
++ (FRYQuery *)queryFrom:(id<FRYLookup>)lookupRoot context:(FRYTestContext *)context;
 
 @end
 

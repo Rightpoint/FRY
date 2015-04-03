@@ -51,7 +51,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 
 + (NSSet *)fry_childKeyPaths
 {
-    return [NSSet setWithObject:NSStringFromSelector(@selector(results))];
+    return [NSSet setWithObject:FRY_KEYPATH(FRYQuery, results)];
 }
 
 - (NSSet *)results
@@ -94,7 +94,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
     return predicate;
 }
 
-- (FRYChainBlock)lookup
+- (FRYChainPredicateBlock)lookup
 {
     return ^(id predicateOrArray) {
         self.firstOnly = NO;
@@ -102,7 +102,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
     };
 }
 
-- (FRYChainVoidBlock)shallow
+- (FRYChainBlock)shallow
 {
     return ^() {
         self.firstOnly = YES;
@@ -211,8 +211,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
         FRYQuery *action = [self actionByAddingPredicate:[NSPredicate fry_matchClass:[UIScrollView class]]];
         action.firstOnly = YES;
         BOOL success = action.check(@"Looking for the a UIScrollView subclass", ^(NSSet *results) {
-            BOOL ok = results.count == 1;
-            return ok;
+            return (BOOL)(results.count == 1);
         });
         if ( success ) {
             UIScrollView *scrollView = [[action results] anyObject];
@@ -228,8 +227,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
         FRYQuery *action = [self actionByAddingPredicate:[NSPredicate fry_matchClass:[UIScrollView class]]];
         action.firstOnly = YES;
         BOOL success = action.check(@"Looking for the a UIScrollView subclass", ^(NSSet *results) {
-            BOOL ok = results.count == 1;
-            return ok;
+            return (BOOL)(results.count == 1);
         });
         if ( success ) {
             UIScrollView *scrollView = [[action results] anyObject];
@@ -248,8 +246,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
         FRYQuery *action = [self actionByAddingPredicate:textClass];
         action.firstOnly = YES;
         BOOL success = action.check(@"Looking for a text field", ^(NSSet *results) {
-            BOOL ok = results.count == 1;
-            return ok;
+            return (BOOL)(results.count == 1);
         });
         if ( success ) {
             UITextField *textInput = [[action results] anyObject];
