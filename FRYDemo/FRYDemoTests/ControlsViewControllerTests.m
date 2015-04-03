@@ -88,7 +88,7 @@
 
 - (void)testAccessibilityTraits
 {
-    FRY.lookup(FRY_accessibilityTrait(UIAccessibilityTraitButton)).count(14);
+    FRY.lookup(FRY_accessibilityTrait(UIAccessibilityTraitButton)).count(13);
 }
 
 - (void)testTapping
