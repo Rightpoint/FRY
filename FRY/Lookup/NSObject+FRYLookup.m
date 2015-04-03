@@ -32,7 +32,7 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
     return nil;
 }
 
-- (CGRect)fry_frameInView
+- (CGRect)fry_frameInWindow
 {
     [NSException raise:NSInvalidArgumentException format:@"%@ does not support being a result", self.class];
     return CGRectZero;
@@ -44,8 +44,7 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
     UIWindow *window = [view window];
     BOOL onScreen = NO;
     if ( window ) {
-        CGRect frameInWindow = [window convertRect:[self fry_frameInView] fromView:view.superview];
-        onScreen = window && CGRectIntersectsRect(window.bounds, frameInWindow);
+        onScreen = window && CGRectIntersectsRect(window.bounds, [self fry_frameInWindow]);
     }
     return onScreen;
 }
@@ -124,14 +123,14 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
 /**
  *  We have to perform some special duplicate checking durring all enumeration. While traversing the entire tree,
  *  views and accessibilityElements can match the same logical result in different objects. This method 
- *  will compaire the results of fry_representingView and fry_frameInView to determine duplicates.
+ *  will compaire the results of fry_representingView and fry_frameInWindow to determine duplicates.
  */
 - (void)fry_addNonDuplicateObject:(NSObject<FRYLookup> *)object toResults:(NSMutableSet *)results
 {
     BOOL duplicate = NO;
     for ( NSObject<FRYLookup> *result in results ) {
         if ( [[object fry_representingView] isEqual:[result fry_representingView]] &&
-            CGRectEqualToRect([object fry_frameInView], [result fry_frameInView]) ) {
+            CGRectEqualToRect([object fry_frameInWindow], [result fry_frameInWindow]) ) {
             duplicate = YES;
             break;
         }
@@ -165,7 +164,7 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
     return nil;
 }
 
-- (CGRect)fry_frameInView
+- (CGRect)fry_frameInWindow
 {
     [NSException raise:NSInvalidArgumentException format:@"%@ does not support being a result", self.class];
     return CGRectZero;
@@ -193,11 +192,9 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
     return (UIView *)element;
 }
 
-- (CGRect)fry_frameInView
+- (CGRect)fry_frameInWindow
 {
-    UIView *view = [self fry_representingView];
-    CGRect frame = [view convertRect:[self accessibilityFrame] fromView:[view window]];
-    return frame;
+    return [self accessibilityFrame];
 }
 
 @end
@@ -239,9 +236,10 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
     return self;
 }
 
-- (CGRect)fry_frameInView
+- (CGRect)fry_frameInWindow
 {
-    return self.frame;
+    CGRect frameInWindow = [self convertRect:self.bounds toView:self.window];
+    return frameInWindow;
 }
 
 - (BOOL)fry_isAnimating

@@ -39,7 +39,7 @@ static NSString *const FRYQueryContextError = @"FRY Error";
 {
     NSString *description = [NSString stringWithFormat:@"\nMessage:%@\nAction:%@\nResults:%@\n", message, action, results];
     if ( self.testTarget && [self.testTarget respondsToSelector:@selector(recordFailureWithDescription:inFile:atLine:expected:)] ) {
-        [self.testTarget recordFailureWithDescription:description inFile:self.filename atLine:self.lineNumber expected:YES];
+        [self.testTarget recordFailureWithDescription:description inFile:self.filename atLine:self.lineNumber expected:NO];
     }
     else if ( self.testTarget && [self.testTarget respondsToSelector:@selector(failWithException:)]) {
         NSException *exception = [NSException failureInFile:self.filename atLine:(int)self.lineNumber withDescription:description];

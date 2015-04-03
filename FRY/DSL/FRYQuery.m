@@ -168,9 +168,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 
 - (NSArray *)views
 {
-    NSSortDescriptor *originSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:(NSString *) ascending:<#(BOOL)#> comparator:<#^NSComparisonResult(id obj1, id obj2)cmptr#>]
-    NSSet *results = [self results];
-    return [[self results] sortedArrayUsingDescriptors:@[]];
+    return [[self results] allObjects];
 }
 
 - (NSArray *)view

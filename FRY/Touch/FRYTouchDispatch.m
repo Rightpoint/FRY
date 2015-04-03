@@ -11,6 +11,7 @@
 #import "FRYTouch.h"
 #import "UIApplication+FRY.h"
 #import "UITouch+FRY.h"
+#import "NSObject+FRYLookup.h"
 
 @interface FRYTouchDispatch()
 
@@ -49,10 +50,9 @@
 
 - (void)asynchronouslySimulateTouches:(NSArray *)touches inView:(UIView *)view frame:(CGRect)frame
 {
-    CGRect touchFrameInWindow = [view.window convertRect:frame fromView:view.superview];
     for ( __strong FRYTouch *touch in touches ) {
         if ( touch.pointsAreAbsolute == NO ) {
-            touch = [touch touchInFrame:touchFrameInWindow];
+            touch = [touch touchInFrame:frame];
         }
         NSTimeInterval startTime = [NSDate timeIntervalSinceReferenceDate];
         FRYActiveTouch *touchInteraction = [[FRYActiveTouch alloc] initWithSimulatedTouch:touch inView:view startTime:startTime];
@@ -75,7 +75,7 @@
 
 - (void)simulateTouches:(NSArray *)touches inView:(UIView *)view
 {
-    [self simulateTouches:touches inView:view frame:view.frame];
+    [self simulateTouches:touches inView:view frame:[view fry_frameInWindow]];
 }
 
 - (void)pruneCompletedTouchInteractions

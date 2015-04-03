@@ -27,7 +27,7 @@
 /**
  * The location inside the frame where this object exists.
  */
-- (CGRect)fry_frameInView;
+- (CGRect)fry_frameInWindow;
 
 /**
  *  Check to see if the view has any active CAAnimation objects.
