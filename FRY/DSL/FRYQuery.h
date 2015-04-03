@@ -115,7 +115,7 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
 @property (copy, nonatomic, readonly) FRYBoolCallbackBlock check;
 
 /**
- *  Return all current views specified by the query. This will not retry
+ *  Return all current views specified by the query. This will not retry.
  */
 @property (copy, nonatomic, readonly) NSArray *views;
 

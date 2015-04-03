@@ -168,7 +168,9 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 
 - (NSArray *)views
 {
-    return [[self results] allObjects];
+    NSSortDescriptor *originSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:(NSString *) ascending:<#(BOOL)#> comparator:<#^NSComparisonResult(id obj1, id obj2)cmptr#>]
+    NSSet *results = [self results];
+    return [[self results] sortedArrayUsingDescriptors:@[]];
 }
 
 - (NSArray *)view
@@ -200,7 +202,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
             }
             [[FRYTouchDispatch shared] simulateTouches:touchOrArrayOfTouches
                                                 inView:[result fry_representingView]
-                                                 frame:[result fry_frameInView]];
+                                                 frame:[result fry_frameInWindow]];
         }
         return isOK;
     };
