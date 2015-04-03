@@ -12,6 +12,8 @@
 #import "NSPredicate+FRY.h"
 #import "UIApplication+FRY.h"
 
+typedef void(^FRYMatchBlock)(UIView *view, CGRect frameInView);
+
 @interface NSObject(FRYLookup)<FRYLookup>
 @end
 
@@ -30,7 +32,7 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
 
 + (NSSet *)fry_childKeyPaths
 {
-    return [NSSet setWithObject:NSStringFromSelector(@selector(fry_accessibilityElements))];
+    return [NSSet setWithObject:FRY_KEYPATH(NSObject, fry_accessibilityElements)];
 }
 
 - (UIView *)fry_representingView
@@ -45,13 +47,21 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
     return CGRectZero;
 }
 
-- (void)fry_farthestDescendentMatching:(NSPredicate *)predicate usingBlock:(FRYMatchBlock)block;
+- (BOOL)fry_isOnScreen
 {
-    NSParameterAssert(predicate);
-    NSParameterAssert(block);
-    
-    id<FRYLookup> result = [self fry_farthestDescendentMatching:predicate];
-    block([result fry_representingView], [result fry_frameInView]);
+    UIView *view = [self fry_representingView];
+    UIWindow *window = [view window];
+    BOOL onScreen = NO;
+    if ( window ) {
+        CGRect frameInWindow = [window convertRect:[self fry_frameInView] fromView:view.superview];
+        onScreen = window && CGRectIntersectsRect(window.bounds, frameInWindow);
+    }
+    return onScreen;
+}
+
+- (BOOL)fry_isAnimating
+{
+    return NO;
 }
 
 - (id<FRYLookup>)fry_farthestDescendentMatching:(NSPredicate *)predicate
@@ -156,7 +166,7 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
 
 + (NSSet *)fry_childKeyPaths
 {
-    return [NSSet setWithObject:NSStringFromSelector(@selector(fry_allWindows))];
+    return [NSSet setWithObject:FRY_KEYPATH(UIApplication, fry_allWindows)];
 }
 
 - (UIView *)fry_representingView
@@ -202,12 +212,22 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
 
 @end
 
+static BOOL FRYViewLookupAccessibilityChildren = YES;
 
 @implementation UIView(FRYLookup)
 
++ (void)setLookupAccessibilityChildren:(BOOL)lookupAccessibilityChildren
+{
+    FRYViewLookupAccessibilityChildren = lookupAccessibilityChildren;
+}
+
 + (NSSet *)fry_childKeyPaths
 {
-    return [NSSet setWithObjects:NSStringFromSelector(@selector(fry_accessibilityElements)), NSStringFromSelector(@selector(fry_reverseSubviews)), nil];
+    NSSet *children = [NSSet setWithObject:FRY_KEYPATH(UIView, fry_reverseSubviews)];
+    if ( FRYViewLookupAccessibilityChildren ) {
+        children = [children setByAddingObject:FRY_KEYPATH(UIView, fry_accessibilityElements)];
+    }
+    return children;
 }
 
 - (UIView *)fry_representingView
@@ -217,7 +237,7 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
 
 - (CGRect)fry_frameInView
 {
-    return self.bounds;
+    return self.frame;
 }
 
 @end

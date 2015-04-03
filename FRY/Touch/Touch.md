@@ -17,7 +17,7 @@ Touch Examples:
 ```
 
 ## Relative Coordinates
-Points and touches can be specified as multiples of the frame they are dispatched in. A tap at point 0.5 0.5 will touch in the center of the view, regardless of the views frame. This allows specified touch sequences to have as much durability as possible in response to view layout changes. This is especially important for custom recorded gestures.
+Points and touches are specified as multiples of the frame they are dispatched in. A tap at point 0.5 0.5 will touch in the center of the view, regardless of the views frame. This allows specified touch sequences to have as much durability as possible in response to view layout changes. This is especially important for custom recorded gestures.
 
 For More touch declarations, see [FRYTouch.h](FRYTouch.h)
 

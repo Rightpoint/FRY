@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "FRYLookupSupport.h"
 
-typedef void(^FRYMatchBlock)(UIView *view, CGRect frameInView);
-
 /**
  * This protocol will add support for performing an NSPredicate search over an arbitrary tree structure.
  */

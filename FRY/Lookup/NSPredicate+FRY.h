@@ -18,15 +18,12 @@
 + (NSPredicate *)fry_isOnScreen;
 + (NSPredicate *)fry_isVisible;
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel;
-+ (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel comparision:(NSString *)comparision;
-+ (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityValue:(NSString *)accessibilityValue;
 + (NSPredicate *)fry_matchAccessibilityValue:(NSString *)accessibilityValue;
-+ (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityTrait:(UIAccessibilityTraits)traits;
 + (NSPredicate *)fry_matchAccessibilityTrait:(UIAccessibilityTraits)traits;
 + (NSPredicate *)fry_matchAccessibilityIdentifier:(NSString *)accessibilityIdentifier;
 + (NSPredicate *)fry_matchContainerIndexPath:(NSIndexPath *)indexPath;
-+ (NSPredicate *)fry_matchClass:(Class)klass;
-+ (NSPredicate *)fry_parentViewOfClass:(Class)klass;
++ (NSPredicate *)fry_matchClass:(Class)cls;
++ (NSPredicate *)fry_parentViewOfClass:(Class)cls;
 
 
 - (NSString *)fry_descriptionOfEvaluationWithObject:(id)object;

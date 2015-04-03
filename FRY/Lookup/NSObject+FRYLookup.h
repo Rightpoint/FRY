@@ -11,9 +11,10 @@
 
 @interface UIApplication(FRYLookup) <FRYLookup>
 @end
-@interface UIView(FRYLookup) <FRYLookup>
-@end
 @interface UIAccessibilityElement(FRYLookup) <FRYLookup>
+@end
+@interface UIView(FRYLookup) <FRYLookup>
++ (void)setLookupAccessibilityChildren:(BOOL)lookupAccessibilityChildren;
 @end
 
 

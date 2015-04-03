@@ -49,7 +49,7 @@
 
 - (void)asynchronouslySimulateTouches:(NSArray *)touches inView:(UIView *)view frame:(CGRect)frame
 {
-    CGRect touchFrameInWindow = [view.window convertRect:frame fromView:view];
+    CGRect touchFrameInWindow = [view.window convertRect:frame fromView:view.superview];
     for ( __strong FRYTouch *touch in touches ) {
         if ( touch.pointsAreAbsolute == NO ) {
             touch = [touch touchInFrame:touchFrameInWindow];

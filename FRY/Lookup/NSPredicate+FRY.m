@@ -14,94 +14,63 @@
 
 + (NSPredicate *)fry_animatingView
 {
-    return [NSCompoundPredicate andPredicateWithSubpredicates:@[[NSPredicate fry_matchClass:[UIView class]],
-                                                                [NSPredicate predicateWithFormat:@"%K = YES", NSStringFromSelector(@selector(fry_isAnimating))]
-                                                                ]];
+    return FRY_PREDICATE_KEYPATH(UIView, fry_isAnimating, ==, @(YES));
 }
 
 + (NSPredicate *)fry_isOnScreen
 {
-    return [NSCompoundPredicate andPredicateWithSubpredicates:@[[NSPredicate fry_matchClass:[UIView class]],
-                                                                [NSPredicate predicateWithFormat:@"%K = YES", NSStringFromSelector(@selector(fry_isOnScreen))]
-                                                                ]];
+    return FRY_PREDICATE_KEYPATH(UIView, fry_isOnScreen, ==, @(YES));
 }
 
 + (NSPredicate *)fry_isVisible
 {
-    return [NSCompoundPredicate andPredicateWithSubpredicates:@[[NSPredicate fry_matchClass:[UIView class]],
-                                                                [NSPredicate predicateWithFormat:@"%K = YES", NSStringFromSelector(@selector(fry_isVisible))]
-                                                                ]];
+    return FRY_PREDICATE_KEYPATH(UIView, fry_isVisible, ==, @(YES));
 }
 
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel
 {
     NSParameterAssert(accessibilityLabel);
-    return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(fry_accessibilityLabel)), accessibilityLabel];
-}
-
-+ (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel comparision:(NSString *)comparision;
-{
-    NSParameterAssert(accessibilityLabel);
-    NSParameterAssert(comparision);
-    return [NSPredicate predicateWithFormat:@"%K %K %@", NSStringFromSelector(@selector(fry_accessibilityLabel)), comparision, accessibilityLabel];
-}
-
-+ (NSPredicate *)fry_matchAccessibilityLabelLike:(NSString *)accessibilityLabel;
-{
-    NSParameterAssert(accessibilityLabel);
-    return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(fry_accessibilityLabel)), accessibilityLabel];
-}
-
-+ (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityValue:(NSString *)accessibilityValue
-{
-    NSParameterAssert(accessibilityLabel);
-    NSParameterAssert(accessibilityValue);
-    return [NSPredicate predicateWithFormat:@"%K = %@ && %K = %@",
-            NSStringFromSelector(@selector(fry_accessibilityLabel)), accessibilityLabel,
-            NSStringFromSelector(@selector(fry_accessibilityValue)), accessibilityValue];
+    return FRY_PREDICATE_KEYPATH(NSObject, fry_accessibilityLabel, ==, accessibilityLabel);
 }
 
 + (NSPredicate *)fry_matchAccessibilityValue:(NSString *)accessibilityValue;
 {
     NSParameterAssert(accessibilityValue);
-    return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(fry_accessibilityValue)), accessibilityValue];
+
+    return FRY_PREDICATE_KEYPATH(NSObject, fry_accessibilityValue, ==, accessibilityValue);
 }
 
 + (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityTrait:(UIAccessibilityTraits)traits
 {
-    return [NSPredicate predicateWithFormat:@"%K = %@ && (%K & %@) = %@",
-            NSStringFromSelector(@selector(fry_accessibilityLabel)), accessibilityLabel,
-            NSStringFromSelector(@selector(accessibilityTraits)), @(traits), @(traits)];
+    return [NSCompoundPredicate andPredicateWithSubpredicates:
+            @[FRY_PREDICATE_KEYPATH(NSObject, fry_accessibilityLabel, ==, accessibilityLabel),
+              [self fry_matchAccessibilityTrait:traits]]];
 }
 
 + (NSPredicate *)fry_matchAccessibilityTrait:(UIAccessibilityTraits)traits
 {
     return [NSPredicate predicateWithFormat:@"(%K & %@) = %@",
-            NSStringFromSelector(@selector(accessibilityTraits)), @(traits), @(traits)];
+            FRY_KEYPATH(NSObject, accessibilityTraits), @(traits), @(traits)];
 }
 
 + (NSPredicate *)fry_matchAccessibilityIdentifier:(NSString *)accessibilityIdentifier
 {
-    return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(accessibilityIdentifier)), accessibilityIdentifier];
+    return FRY_PREDICATE_KEYPATH(NSObject, accessibilityTraits, ==, accessibilityIdentifier);
 }
 
 + (NSPredicate *)fry_matchContainerIndexPath:(NSIndexPath *)indexPath
 {
-    return [NSCompoundPredicate andPredicateWithSubpredicates:@[[NSPredicate fry_matchClass:[UIView class]],
-                                                                [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(fry_indexPathInContainer)), indexPath]
-                                                                ]];
-    
+    return FRY_PREDICATE_KEYPATH(UIView, fry_indexPathInContainer, ==, indexPath);
 }
 
-+ (NSPredicate *)fry_matchClass:(Class)klass
++ (NSPredicate *)fry_matchClass:(Class)cls
 {
-    return [NSPredicate predicateWithFormat:@"SELF isKindOfClass:%@", klass];
+    return FRY_PREDICATE_SELECTOR_ONLY(NSObject, isKindOfClass:, cls);
 }
 
-+ (NSPredicate *)fry_parentViewOfClass:(Class)klass
++ (NSPredicate *)fry_parentViewOfClass:(Class)cls
 {
-    return [NSCompoundPredicate andPredicateWithSubpredicates:@[[NSPredicate fry_matchClass:[UIView class]],
-                                                                [NSPredicate predicateWithFormat:@"SELF fry_parentViewOfClass:%@", klass]]];
+    return FRY_PREDICATE_SELECTOR(UIView, fry_parentViewOfClass:, cls);
 }
 
 - (NSString *)fry_descriptionOfEvaluationWithObject:(id)object
