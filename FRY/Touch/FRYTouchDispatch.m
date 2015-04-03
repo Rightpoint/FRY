@@ -75,7 +75,7 @@
 
 - (void)simulateTouches:(NSArray *)touches inView:(UIView *)view
 {
-    [self simulateTouches:touches inView:view frame:view.bounds];
+    [self simulateTouches:touches inView:view frame:view.frame];
 }
 
 - (void)pruneCompletedTouchInteractions

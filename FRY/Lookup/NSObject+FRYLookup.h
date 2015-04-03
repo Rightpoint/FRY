@@ -9,17 +9,21 @@
 #import <Foundation/Foundation.h>
 #import "FRYLookup.h"
 
-@interface UIApplication(FRYLookup) <FRYLookup>
+/**
+ *  Since all of NSObject "supports" accessibility, FRYLookup is supported
+ *  by every object too. It may not actually work on all objects.
+ */
+@interface NSObject(FRYLookup) <FRYLookup>
 @end
-@interface UIAccessibilityElement(FRYLookup) <FRYLookup>
-@end
-@interface UIView(FRYLookup) <FRYLookup>
-+ (void)setLookupAccessibilityChildren:(BOOL)lookupAccessibilityChildren;
-@end
-
 
 @interface NSObject(FRYLookupDebug)
 
 + (void)fry_enableLookupDebugForObjects:(NSArray *)objects;
+
+@end
+
+@interface UIView(FRYLookup)
+
++ (void)fry_setLookupAccessibilityChildren:(BOOL)lookupAccessibilityChildren;
 
 @end

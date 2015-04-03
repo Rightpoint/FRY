@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define TableViewTitleForRow(i) [NSString stringWithFormat:@"Item %zd", i]
+#define TableViewTitleForRow(i) ({[NSString stringWithFormat:@"Item %zd", i];})
 
 @interface TableViewController : UITableViewController
 

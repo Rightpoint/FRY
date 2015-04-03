@@ -12,11 +12,6 @@
 #import "NSPredicate+FRY.h"
 #import "UIApplication+FRY.h"
 
-typedef void(^FRYMatchBlock)(UIView *view, CGRect frameInView);
-
-@interface NSObject(FRYLookup)<FRYLookup>
-@end
-
 static NSArray *__fry_enableLookupDebugForObjects = nil;
 
 @implementation NSObject(FRYLookupDebug)
@@ -212,19 +207,34 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
 
 @end
 
-static BOOL FRYViewLookupAccessibilityChildren = YES;
+static NSMutableDictionary *FRYDisableAccessibilityLookupByClass = nil;
 
 @implementation UIView(FRYLookup)
 
-+ (void)setLookupAccessibilityChildren:(BOOL)lookupAccessibilityChildren
++ (NSMutableDictionary *)fry_disabledAccessibilityLookupByClass
 {
-    FRYViewLookupAccessibilityChildren = lookupAccessibilityChildren;
+    __block NSMutableDictionary *dictionary = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        dictionary = [NSMutableDictionary dictionary];
+    });
+    return dictionary;
+}
+
++ (void)fry_setLookupAccessibilityChildren:(BOOL)lookupAccessibilityChildren
+{
+    self.fry_disabledAccessibilityLookupByClass[NSStringFromClass(self)] = @(lookupAccessibilityChildren);
+}
+
++ (BOOL)fry_lookupAccessibilityChildren
+{
+    return [self.fry_disabledAccessibilityLookupByClass[NSStringFromClass(self)] boolValue];
 }
 
 + (NSSet *)fry_childKeyPaths
 {
     NSSet *children = [NSSet setWithObject:FRY_KEYPATH(UIView, fry_reverseSubviews)];
-    if ( FRYViewLookupAccessibilityChildren ) {
+    if ( [self fry_lookupAccessibilityChildren] ) {
         children = [children setByAddingObject:FRY_KEYPATH(UIView, fry_accessibilityElements)];
     }
     return children;
@@ -238,6 +248,30 @@ static BOOL FRYViewLookupAccessibilityChildren = YES;
 - (CGRect)fry_frameInView
 {
     return self.frame;
+}
+
+- (BOOL)fry_isAnimating
+{
+    NSTimeInterval uptime = [[NSProcessInfo processInfo] systemUptime];
+    BOOL isAnimating = NO;
+
+    for (NSString *animationKey in self.layer.animationKeys ) {
+        CAAnimation *animation = [self.layer animationForKey:animationKey];
+        NSTimeInterval animationEnd = animation.beginTime + animation.duration + animation.timeOffset;
+
+        if ( [animation.fillMode isEqualToString:kCAFillModeRemoved] ) {
+            isAnimating = YES;
+        }
+        else if ( animationEnd > uptime ) {
+            isAnimating = YES;
+        }
+    }
+    return isAnimating;
+}
+
+- (BOOL)fry_isOnScreen
+{
+    return [super fry_isOnScreen] && [self fry_isVisible];
 }
 
 @end

@@ -33,7 +33,7 @@
 - (NSArray *)viewsToIgnoreForAnimationComplete:(FRYIdleCheck *)idleCheck
 {
     // Ignore any activity indicator
-    return FRY.lookup([NSPredicate fry_matchClass:[UIActivityIndicatorView class]]).views;
+    return FRY.lookup(FRY_ofKind([UIActivityIndicatorView class])).views;
 }
 
 - (void)testAccessibilityLabelLookup
@@ -196,23 +196,22 @@
     UIView *s = FRY.lookup(FRY_accessibilityLabel(@"Switch")).view;
     s.frame = CGRectMake(3000, 0, CGRectGetWidth(s.frame), CGRectGetHeight(s.frame));
 
-    FRY.lookup(@[FRY_accessibilityLabel(@"Switch"),
-                       [NSPredicate fry_isOnScreen]]).absent();
+    FRY.lookup(@[FRY_accessibilityLabel(@"Switch"), FRY_isOnScreen(YES)]).absent();
 }
 
 - (void)testVisible
 {
     UIView *s = FRY.lookup(FRY_accessibilityLabel(@"Switch")).view;
     s.alpha = 0.0f;
-    FRY.lookup(@[FRY_accessibilityLabel(@"Switch"), [NSPredicate fry_isVisible]]).absent();
+    FRY.lookup(@[FRY_accessibilityLabel(@"Switch"), FRY_PREDICATE_KEYPATH(UIView, fry_isVisible, ==, @YES)]).absent();
     s.alpha = 0.1f;
-    FRY.lookup(@[FRY_accessibilityLabel(@"Switch"), [NSPredicate fry_isVisible]]).present();
+    FRY.lookup(@[FRY_accessibilityLabel(@"Switch"), FRY_PREDICATE_KEYPATH(UIView, fry_isVisible, ==, @YES)]).present();
     s.hidden = YES;
-    FRY.lookup(@[FRY_accessibilityLabel(@"Switch"), [NSPredicate fry_isVisible]]).absent();
+    FRY.lookup(@[FRY_accessibilityLabel(@"Switch"), FRY_PREDICATE_KEYPATH(UIView, fry_isVisible, ==, @YES)]).absent();
     s.hidden = NO;
-    FRY.lookup(@[FRY_accessibilityLabel(@"Switch"), [NSPredicate fry_isVisible]]).present();
+    FRY.lookup(@[FRY_accessibilityLabel(@"Switch"), FRY_PREDICATE_KEYPATH(UIView, fry_isVisible, ==, @YES)]).present();
     s.superview.alpha = 0.0f;
-    FRY.lookup(@[FRY_accessibilityLabel(@"Switch"), [NSPredicate fry_isVisible]]).absent();
+    FRY.lookup(@[FRY_accessibilityLabel(@"Switch"), FRY_PREDICATE_KEYPATH(UIView, fry_isVisible, ==, @YES)]).absent();
 }
 
 @end

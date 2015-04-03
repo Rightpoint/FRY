@@ -25,4 +25,14 @@
  */
 - (CGRect)fry_frameInView;
 
+/**
+ *  Check to see if the view has any active CAAnimation objects.
+ */
+- (BOOL)fry_isAnimating;
+
+/**
+ * Check to see if the view is inside of the window bounds, and should be visible to the user
+ */
+- (BOOL)fry_isOnScreen;
+
 @end

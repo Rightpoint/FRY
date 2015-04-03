@@ -23,8 +23,8 @@
 - (NSArray *)fry_allWindows;
 
 /**
- * Return the first view that is a subview of fry_inputViewWindow matching klass.
+ * Return the first view that is a subview of fry_inputViewWindow matching cls.
  */
-- (UIView *)fry_inputViewOfClass:(Class)klass;
+- (UIView *)fry_inputViewOfClass:(Class)cls;
 
 @end

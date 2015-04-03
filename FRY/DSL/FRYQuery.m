@@ -13,6 +13,7 @@
 #import "NSPredicate+FRY.h"
 #import "UIScrollView+FRY.h"
 #import "UITextInput+FRY.h"
+#import "UIAccessibility+FRY.h"
 
 @interface NSObject(FRYTestStub)
 - (void) recordFailureWithDescription:(NSString *) description inFile:(NSString *) filename atLine:(NSUInteger) lineNumber expected:(BOOL) expected;
@@ -114,9 +115,9 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 {
     return ^(NSString *accessibilityLabel) {
         self.firstOnly = YES;
-        NSArray *subPredicates = @[[NSPredicate fry_matchAccessibilityLabel:accessibilityLabel],
-                                   [NSPredicate fry_isVisible],
-                                   [NSPredicate fry_isOnScreen]];
+        NSArray *subPredicates = @[FRY_accessibilityLabel(accessibilityLabel),
+                                   FRY_isAnimating(NO),
+                                   FRY_isOnScreen(YES)];
 
         NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:subPredicates];
         return [self actionByAddingPredicate:predicate];
@@ -208,7 +209,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 - (FRYSearchBlock)searchFor
 {
     return ^(FRYDirection direction, NSPredicate *scrollToVisible) {
-        FRYQuery *action = [self actionByAddingPredicate:[NSPredicate fry_matchClass:[UIScrollView class]]];
+        FRYQuery *action = [self actionByAddingPredicate:FRY_ofKind([UIScrollView class])];
         action.firstOnly = YES;
         BOOL success = action.check(@"Looking for the a UIScrollView subclass", ^(NSSet *results) {
             return (BOOL)(results.count == 1);
@@ -224,7 +225,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 - (FRYLookupBlock)scrollTo
 {
     return ^(NSPredicate *scrollToVisible) {
-        FRYQuery *action = [self actionByAddingPredicate:[NSPredicate fry_matchClass:[UIScrollView class]]];
+        FRYQuery *action = [self actionByAddingPredicate:FRY_ofKind([UIScrollView class])];
         action.firstOnly = YES;
         BOOL success = action.check(@"Looking for the a UIScrollView subclass", ^(NSSet *results) {
             return (BOOL)(results.count == 1);
@@ -240,8 +241,8 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 - (FRYCheckBlock)selectText
 {
     return ^() {
-        NSArray *subPredicates = @[[NSPredicate fry_matchClass:[UITextField class]],
-                                   [NSPredicate fry_matchClass:[UITextView class]]];
+        NSArray *subPredicates = @[FRY_ofKind([UITextField class]),
+                                   FRY_ofKind([UITextView class])];
         NSPredicate *textClass = [NSCompoundPredicate orPredicateWithSubpredicates:subPredicates];
         FRYQuery *action = [self actionByAddingPredicate:textClass];
         action.firstOnly = YES;

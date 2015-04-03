@@ -24,9 +24,9 @@
 
 @implementation AppDelegate
 
-- (UIViewController *)navigationControllerContaining:(Class)klass
+- (UIViewController *)navigationControllerContaining:(Class)cls
 {
-    UIViewController *vc = [[klass alloc] initWithNibName:nil bundle:nil];
+    UIViewController *vc = [[cls alloc] initWithNibName:nil bundle:nil];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:vc];
     return navigationController;
 }

@@ -14,6 +14,8 @@
 #import "NSPredicate+FRY.h"
 #import "UIApplication+FRY.h"
 #import "UIView+FRY.h"
+
+
 static FRYIdleCheck *systemIdleCheck = nil;
 
 @interface FRYIdleCheck () <FRYTouchDispatchDelegate>
@@ -117,13 +119,13 @@ static FRYIdleCheck *systemIdleCheck = nil;
 
 - (NSArray *)animatingViews
 {
-    NSSet *elements = [[UIApplication sharedApplication] fry_allChildrenMatching:[NSPredicate fry_animatingView]];
+    NSSet *elements = [[UIApplication sharedApplication] fry_allChildrenMatching:FRY_isAnimating(YES)];
     
     NSMutableArray *views = [[elements valueForKey:FRY_KEYPATH(UIView, fry_representingView)] mutableCopy];
     if ( self.delegate && [self.delegate respondsToSelector:@selector(viewsToIgnoreForAnimationComplete:)] ) {
         NSArray *ignoreViews = [self.delegate viewsToIgnoreForAnimationComplete:self];
         for ( UIView *v in [ignoreViews copy] ) {
-            NSSet *elements = [v fry_allChildrenMatching:[NSPredicate fry_animatingView]];
+            NSSet *elements = [v fry_allChildrenMatching:FRY_isAnimating(YES)];
             NSSet *subAnimatingViews = [elements valueForKey:FRY_KEYPATH(UIView, fry_representingView)];
             ignoreViews = [ignoreViews arrayByAddingObjectsFromArray:[subAnimatingViews allObjects]];
         }

@@ -13,6 +13,17 @@
 
 @class FRYTestContext;
 
+typedef FRYQuery *(^FRYChainPredicateBlock)(id predicateOrArrayOfPredicates);
+typedef FRYQuery *(^FRYChainStringBlock)(NSString *string);
+typedef FRYQuery *(^FRYChainBlock)();
+typedef BOOL(^FRYTouchBlock)(id touchOrArrayOfTouches);
+typedef BOOL(^FRYSearchBlock)(FRYDirection FRYDirection, NSPredicate *content);
+typedef BOOL(^FRYLookupBlock)(NSPredicate *content);
+typedef BOOL(^FRYIntCheckBlock)(NSUInteger count);
+
+typedef BOOL(^FRYBoolResultsBlock)(NSSet *);
+typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check);
+
 /**
  *  FRYQuery provides a consistent DSL to lookup and interact with UI components, as well
  *  as mechanisms to retry queries until they are satisfied, and report failures to test 
@@ -125,19 +136,3 @@
 @end
 
 
-// A few predicate helpers
-#ifdef FRY_SHORTHAND
-#define ofKind(c) [NSPredicate fry_matchClass:c]
-#define accessibilityLabel(v) [NSPredicate fry_matchAccessibilityLabel:v]
-#define accessibilityValue(v) [NSPredicate fry_matchAccessibilityValue:v]
-#define accessibilityTrait(v) [NSPredicate fry_matchAccessibilityTrait:v]
-#define atIndexPath(v) [NSPredicate fry_matchContainerIndexPath:indexPath]
-#define atSectionAndRow(s, r) [NSPredicate fry_matchContainerIndexPath:[NSIndexPath indexPathForRow:r inSection:s]]
-#else
-#define FRY_ofKind(c) [NSPredicate fry_matchClass:c]
-#define FRY_accessibilityLabel(v) [NSPredicate fry_matchAccessibilityLabel:v]
-#define FRY_accessibilityValue(v) [NSPredicate fry_matchAccessibilityValue:v]
-#define FRY_accessibilityTrait(v) [NSPredicate fry_matchAccessibilityTrait:v]
-#define FRY_atIndexPath(v) [NSPredicate fry_matchContainerIndexPath:v]
-#define FRY_atSectionAndRow(s, r) [NSPredicate fry_matchContainerIndexPath:[NSIndexPath indexPathForRow:r inSection:s]]
-#endif

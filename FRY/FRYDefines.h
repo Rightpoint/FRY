@@ -12,38 +12,87 @@ typedef BOOL(^FRYCheckBlock)();
 
 OBJC_EXTERN NSTimeInterval const kFRYEventDispatchInterval;
 
+/**
+ * Return a compile-checked keypath.
+ */
 #define FRY_KEYPATH(c, p) ({\
 c *object __unused; \
 typeof(object.p) property __unused; \
 @#p; \
 })
 
+/**
+ * Return a compiler-checked predicate that checks that the object is kind of
+ * class(cls) and that the keypath compares(cmp) to the value(v)
+ */
 #define FRY_PREDICATE_KEYPATH(cls, p, cmp, v) ({\
 [NSCompoundPredicate andPredicateWithSubpredicates:@[\
-[NSPredicate fry_matchClass:[cls class]],\
+FRY_PREDICATE_SELECTOR_ONLY(NSObject, isKindOfClass:, [cls class]),\
 FRY_PREDICATE_KEYPATH_ONLY(cls, p, cmp, v)\
 ]];\
 })
 
+/**
+ *  Return a compiler-checked predicate that checks that the value for the
+ *  keypath compares(cmp) to the value(v)
+ */
 #define FRY_PREDICATE_KEYPATH_ONLY(cls, p, cmp, v) ({\
 if ( 0 cmp 0 ) {}\
 NSString *format = [NSString stringWithFormat:@"%@ %@ %@", @"%K", @#cmp, @"%@"];\
 [NSPredicate predicateWithFormat:format, FRY_KEYPATH(cls, p), v];\
 })
 
-#define FRY_PREDICATE_SELECTOR(c, sel, v) ({\
+/**
+ *  Return a compiler-checked predicate that checks that the object is kind of
+ *  class(cls) and that the selector(sel) when invoked with the argument(v) returns true
+ */
+#define FRY_PREDICATE_SELECTOR(cls, sel, v) ({\
 [NSCompoundPredicate andPredicateWithSubpredicates:@[\
-[NSPredicate fry_matchClass:[c class]],\
-FRY_PREDICATE_SELECTOR_ONLY(c, sel, v)\
+FRY_PREDICATE_SELECTOR_ONLY(NSObject, isKindOfClass:, [cls class]),\
+FRY_PREDICATE_SELECTOR_ONLY(cls, sel, v)\
 ]];\
 })
 
-#define FRY_PREDICATE_SELECTOR_ONLY(c, sel, v) ({\
-c *obj;\
+/**
+ *  Return a compiler-checked predicate that checks that the selector(sel) when 
+ *  invoked with the argument(v) returns true
+ */
+#define FRY_PREDICATE_SELECTOR_ONLY(cls, sel, v) ({\
+cls *obj;\
 if ( 0 ) { [obj sel v]; }\
 NSString *format = [NSString stringWithFormat:@"SELF %@ %@", @#sel, @"%@"];\
 [NSPredicate predicateWithFormat:format, v];\
 })
+
+/**
+ * Return a compiler-checked predicate that checks that the the keypath(p) & value(v) == value(v)
+ */
+#define FRY_PREDICATE_KEYPATH_HAS_FLAG(cls, p, v) ({\
+[NSPredicate predicateWithFormat:@"(%K & %@) == %@", FRY_KEYPATH(cls, p), @(v), @(v)];\
+})
+
+/**
+ * Configure some shorthand macro's for common predicates
+ */
+#ifdef FRY_SHORTHAND
+#define ofKind(cls) FRY_PREDICATE_SELECTOR_ONLY(NSObject, isKindOfClass:, cls)
+#define isOnScreen(onScreen) FRY_PREDICATE_KEYPATH(NSObject, fry_isOnScreen, ==, @(onScreen))
+#define isAnimating(animating) FRY_PREDICATE_KEYPATH(NSObject, fry_isAnimating, ==, @(animating))
+#define accessibilityLabel(label) FRY_PREDICATE_KEYPATH(NSObject, fry_accessibilityLabel, ==, label)
+#define accessibilityValue(value) FRY_PREDICATE_KEYPATH(NSObject, fry_accessibilityValue, ==, value)
+#define accessibilityTrait(trait) FRY_PREDICATE_KEYPATH_HAS_FLAG(UIView, accessibilityTraits, trait)
+#define atIndexPath(indexPath) FRY_PREDICATE_KEYPATH(UIView, fry_indexPathInContainer, ==, indexPath)
+#define atSectionAndRow(s, r) FRY_PREDICATE_KEYPATH(UIView, fry_indexPathInContainer, ==, [NSIndexPath indexPathForRow:r inSection:s])
+#else
+#define FRY_ofKind(cls) FRY_PREDICATE_SELECTOR_ONLY(NSObject, isKindOfClass:, cls)
+#define FRY_isOnScreen(onScreen) FRY_PREDICATE_KEYPATH(NSObject, fry_isOnScreen, ==, @(onScreen))
+#define FRY_isAnimating(animating) FRY_PREDICATE_KEYPATH(NSObject, fry_isAnimating, ==, @(animating))
+#define FRY_accessibilityLabel(label) FRY_PREDICATE_KEYPATH(NSObject, fry_accessibilityLabel, ==, label)
+#define FRY_accessibilityValue(value) FRY_PREDICATE_KEYPATH(NSObject, fry_accessibilityValue, ==, value)
+#define FRY_accessibilityTrait(trait) FRY_PREDICATE_KEYPATH_HAS_FLAG(UIView, accessibilityTraits, trait)
+#define FRY_atIndexPath(indexPath) FRY_PREDICATE_KEYPATH(UIView, fry_indexPathInContainer, ==, indexPath)
+#define FRY_atSectionAndRow(s, r) FRY_PREDICATE_KEYPATH(UIView, fry_indexPathInContainer, ==, [NSIndexPath indexPathForRow:r inSection:s])
+#endif
 
 
 #define FRY_APP [UIApplication sharedApplication]
@@ -56,15 +105,3 @@ typedef NS_ENUM(NSInteger, FRYDirection) {
     FRYDirectionLeft
 };
 
-@class FRYQuery;
-
-typedef FRYQuery *(^FRYChainPredicateBlock)(id predicateOrArrayOfPredicates);
-typedef FRYQuery *(^FRYChainStringBlock)(NSString *string);
-typedef FRYQuery *(^FRYChainBlock)();
-typedef BOOL(^FRYTouchBlock)(id touchOrArrayOfTouches);
-typedef BOOL(^FRYSearchBlock)(FRYDirection FRYDirection, NSPredicate *content);
-typedef BOOL(^FRYLookupBlock)(NSPredicate *content);
-typedef BOOL(^FRYIntCheckBlock)(NSUInteger count);
-
-typedef BOOL(^FRYBoolResultsBlock)(NSSet *);
-typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check);
