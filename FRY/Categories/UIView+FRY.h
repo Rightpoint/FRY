@@ -18,13 +18,6 @@
 - (BOOL)fry_isVisible;
 
 /**
- *  Find the superview that has more interactability than this view.
- *  This is not needed for any reason, but often chooses a view that is
- *  more interesting in case of tapping private subviews.
- */
-- (UIView *)fry_interactableParent;
-
-/**
  *  Return all subviews in reverse order.
  */
 - (NSArray *)fry_reverseSubviews;

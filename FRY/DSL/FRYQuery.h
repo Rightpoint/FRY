@@ -28,6 +28,8 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
  *  FRYQuery provides a consistent DSL to lookup and interact with UI components, as well
  *  as mechanisms to retry queries until they are satisfied, and report failures to test 
  *  frameworks.
+ *
+ *  The most common usage involve using the macro `FRY`
  */
 @interface FRYQuery : NSObject
 
@@ -67,7 +69,7 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
 
 /**
  *  Find the first UIScrollView below the current lookup filter. Lookup the subview that matches
- *  the specified predicate and scroll such that it is visible.  The view must be installed
+ *  the specified predicate and scroll such that it is visible. The view must be installed
  *  in the view hierarchy to work.
  *
  *  This will modify the query to perform a shallow search.
@@ -76,7 +78,7 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
 
 /**
  *  Find the first UIScrollView below the current lookup filter, and look in the specified direction
- *  for a subview that matches the specified predicate.  This will scroll the scroll view and allow
+ *  for a subview that matches the specified predicate. This will scroll the scroll view and allow
  *  the view to load any cells that may be present.
  *
  *  This will modify the query to perform a shallow search.

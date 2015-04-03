@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 /**
- * Predicates to aide in looking up views / accessibility elements. It is a design goal to avoid
- * using block predicate for debug-ability reasons. -description on a block predicate is not helpful.
+ * Category to help debug lookup failures. It will print out the 
+ * actual values along side the predicate query.
  */
 @interface NSPredicate(FRY)
 

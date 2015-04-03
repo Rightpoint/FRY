@@ -14,16 +14,12 @@
 
 static NSArray *__fry_enableLookupDebugForObjects = nil;
 
-@implementation NSObject(FRYLookupDebug)
+@implementation NSObject(FRYLookup)
 
 + (void)fry_enableLookupDebugForObjects:(NSArray *)objects
 {
     __fry_enableLookupDebugForObjects = objects;
 }
-
-@end
-
-@implementation NSObject(FRYLookup)
 
 + (NSSet *)fry_childKeyPaths
 {
@@ -156,7 +152,6 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
 
 @end
 
-
 @implementation UIApplication(FRYLookup)
 
 + (NSSet *)fry_childKeyPaths
@@ -207,8 +202,6 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
 
 @end
 
-static NSMutableDictionary *FRYDisableAccessibilityLookupByClass = nil;
-
 @implementation UIView(FRYLookup)
 
 + (NSMutableDictionary *)fry_disabledAccessibilityLookupByClass
@@ -228,7 +221,8 @@ static NSMutableDictionary *FRYDisableAccessibilityLookupByClass = nil;
 
 + (BOOL)fry_lookupAccessibilityChildren
 {
-    return [self.fry_disabledAccessibilityLookupByClass[NSStringFromClass(self)] boolValue];
+    NSNumber *lookupNumber = self.fry_disabledAccessibilityLookupByClass[NSStringFromClass(self)];
+    return lookupNumber ? [lookupNumber boolValue] : YES;
 }
 
 + (NSSet *)fry_childKeyPaths

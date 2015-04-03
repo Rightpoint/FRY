@@ -21,7 +21,7 @@ typedef void(^FRYRunLoopObserverBlock)(CFRunLoopObserverRef observer, CFRunLoopA
 - (BOOL)fry_waitWithTimeout:(NSTimeInterval)timeout forCheck:(FRYCheckBlock)checkBlock;
 {
     // Spin the runloop for a tad, incase some action initiated a performSelector:withObject:afterDelay:
-    // which will cause some state change very soon.
+    // which might cause some state change very soon.
     [self runMode:self.currentMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.001]];
 
     NSTimeInterval start = [NSDate timeIntervalSinceReferenceDate];

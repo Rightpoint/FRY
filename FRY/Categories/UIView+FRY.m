@@ -43,17 +43,6 @@
     }
 }
 
-- (UIView *)fry_interactableParent
-{
-    UIView *testView = self;
-    while ( testView &&
-           [testView fry_accessibilityTraitsAreInteractable] == NO &&
-           [testView isUserInteractionEnabled] == NO ) {
-        testView = [testView superview];
-    }
-    return testView;
-}
-
 - (BOOL)fry_parentViewOfClass:(Class)cls
 {
     BOOL matchingParent = NO;

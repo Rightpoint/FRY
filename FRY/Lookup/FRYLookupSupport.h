@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ * This protocol defines all of the methods required to support
+ * lookup in FRY.
+ */
 @protocol FRYLookupSupport <NSObject>
 @optional
 /**

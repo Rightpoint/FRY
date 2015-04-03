@@ -11,19 +11,40 @@
 
 /**
  *  Since all of NSObject "supports" accessibility, FRYLookup is supported
- *  by every object too. It may not actually work on all objects.
+ *  by every object too. It may not actually work on all objects
  */
 @interface NSObject(FRYLookup) <FRYLookup>
-@end
 
-@interface NSObject(FRYLookupDebug)
-
+/**
+ * Enable debugging on the specified object. Once a query hits one of the objects, all sub-object
+ * predicate checks are logged to the console.
+ */
 + (void)fry_enableLookupDebugForObjects:(NSArray *)objects;
 
 @end
 
-@interface UIView(FRYLookup)
+/**
+ * Queries on UIApplication traverse all windows
+ */
+@interface UIApplication (FRYLookup) <FRYLookup>
+@end
 
+/**
+ * Queries on UIAccessibilityElement's traverse the accessibility tree
+ */
+@interface UIAccessibilityElement(FRYLookup) <FRYLookup>
+@end
+
+/**
+ * Queries on UIView traverse the accessibility tree and the subview tree.
+ */
+@interface UIView(FRYLookup) <FRYLookup>
+
+/**
+ * Disable the accessibility tree lookup by class. Some views (UITableView / UICollectionView)
+ * behave very differently with accessibility lookups. Call [UITableView fry_setLookupAccessibilityChildren:NO]
+ * to avoid this. Or fix your accessibility code
+ */
 + (void)fry_setLookupAccessibilityChildren:(BOOL)lookupAccessibilityChildren;
 
 @end
