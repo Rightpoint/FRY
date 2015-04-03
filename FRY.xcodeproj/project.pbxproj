@@ -19,6 +19,7 @@
 		AB35FCF019DFB49100228531 /* FRYActiveTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FCEB19DFB49100228531 /* FRYActiveTouch.m */; };
 		AB35FD7A19E58B5C00228531 /* FRYMethodSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = AB35FD6819E4ED6100228531 /* FRYMethodSwizzling.m */; };
 		AB5A891E1A07DEC400E44C89 /* NSPredicate+FRY.m in Sources */ = {isa = PBXBuildFile; fileRef = AB5A891D1A07DEC400E44C89 /* NSPredicate+FRY.m */; };
+		AB974F2A1ACF2C7900AD6D94 /* Query.md in Sources */ = {isa = PBXBuildFile; fileRef = AB974F291ACF2C7900AD6D94 /* Query.md */; };
 		ABA5782C19E65D1100D77CDA /* FRYDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA5782B19E65D1100D77CDA /* FRYDefines.m */; };
 		ABB5E4631AC0C4E100A37788 /* FRYQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB5E4611AC0C4E100A37788 /* FRYQuery.h */; };
 		ABB5E4641AC0C4E100A37788 /* FRYQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB5E4621AC0C4E100A37788 /* FRYQuery.m */; };
@@ -107,6 +108,7 @@
 		AB35FD6819E4ED6100228531 /* FRYMethodSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYMethodSwizzling.m; sourceTree = "<group>"; };
 		AB5A891C1A07DEC400E44C89 /* NSPredicate+FRY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPredicate+FRY.h"; sourceTree = "<group>"; };
 		AB5A891D1A07DEC400E44C89 /* NSPredicate+FRY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPredicate+FRY.m"; sourceTree = "<group>"; };
+		AB974F291ACF2C7900AD6D94 /* Query.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Query.md; sourceTree = "<group>"; };
 		ABA5782A19E65D1100D77CDA /* FRYDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYDefines.h; sourceTree = "<group>"; };
 		ABA5782B19E65D1100D77CDA /* FRYDefines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRYDefines.m; sourceTree = "<group>"; };
 		ABB5E4611AC0C4E100A37788 /* FRYQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRYQuery.h; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 		ABED6EA21A16FC9A0009D44A /* DSL */ = {
 			isa = PBXGroup;
 			children = (
+				AB974F291ACF2C7900AD6D94 /* Query.md */,
 				ABB5E4611AC0C4E100A37788 /* FRYQuery.h */,
 				ABB5E4621AC0C4E100A37788 /* FRYQuery.m */,
 				ABBEA39D1AC878B900290479 /* FRYTestContext.h */,
@@ -423,6 +426,7 @@
 				ABBEA3A01AC878B900290479 /* FRYTestContext.m in Sources */,
 				ABCFAC051A0E7B79003B91BC /* NSObject+FRYLookup.m in Sources */,
 				AB35FD7A19E58B5C00228531 /* FRYMethodSwizzling.m in Sources */,
+				AB974F2A1ACF2C7900AD6D94 /* Query.md in Sources */,
 				AB35FCE119DFA6F200228531 /* FRYEventProxy.m in Sources */,
 				AB26597D1A0FE7430074FF2E /* UITextInput+FRY.m in Sources */,
 				AB35FCF019DFB49100228531 /* FRYActiveTouch.m in Sources */,

@@ -21,7 +21,7 @@ typedef BOOL(^FRYSearchBlock)(FRYDirection FRYDirection, NSPredicate *content);
 typedef BOOL(^FRYLookupBlock)(NSPredicate *content);
 typedef BOOL(^FRYIntCheckBlock)(NSUInteger count);
 
-typedef BOOL(^FRYBoolResultsBlock)(NSSet *);
+typedef BOOL(^FRYBoolResultsBlock)(NSSet *results);
 typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check);
 
 /**
