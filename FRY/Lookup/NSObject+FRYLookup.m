@@ -109,7 +109,7 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
     return nil;
 }
 
-- (void)fry_enumerateAllChildrenMatching:(NSPredicate *)predicate results:(NSMutableSet *)results debug:(BOOL)debug
+- (void)fry_nonExhaustiveShallowSearchForChildrenMatching:(NSPredicate *)predicate results:(NSMutableSet *)results debug:(BOOL)debug
 {
     NSParameterAssert(predicate);
     NSParameterAssert(results);
@@ -127,9 +127,9 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
         NSArray *children = [self valueForKeyPath:childKeyPath];
         for ( NSObject *child in children) {
             BOOL childDebug = debug == NO ? [__fry_enableLookupDebugForObjects containsObject:child] : YES;
-            [child fry_enumerateAllChildrenMatching:predicate
-                                            results:results
-                                              debug:childDebug];
+            [child fry_nonExhaustiveShallowSearchForChildrenMatching:predicate
+                                                             results:results
+                                                               debug:childDebug];
         }
     }
 }
@@ -154,11 +154,11 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
     }
 }
 
-- (NSSet *)fry_allChildrenMatching:(NSPredicate *)predicate
+- (NSSet *)fry_nonExhaustiveShallowSearchForChildrenMatching:(NSPredicate *)predicate
 {
     NSMutableSet *results = [NSMutableSet set];
     
-    [self fry_enumerateAllChildrenMatching:predicate results:results debug:NO];
+    [self fry_nonExhaustiveShallowSearchForChildrenMatching:predicate results:results debug:NO];
     
     return [results copy];
 }

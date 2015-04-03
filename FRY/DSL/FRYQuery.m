@@ -66,7 +66,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
         }
     }
     else {
-        results = [self.lookupOrigin fry_allChildrenMatching:self.predicate];
+        results = [self.lookupOrigin fry_nonExhaustiveShallowSearchForChildrenMatching:self.predicate];
     }
     return results;
 }

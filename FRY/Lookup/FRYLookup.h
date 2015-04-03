@@ -13,6 +13,7 @@
  * This protocol will add support for performing an NSPredicate search over an arbitrary tree structure.
  */
 @protocol FRYLookup <FRYLookupSupport>
+
 @optional
 /**
  * A depth first traversal, similar to hitTest:event:, to return the deepest object in the tree matching the
@@ -26,8 +27,9 @@
 - (id<FRYLookup>)fry_firstDescendentMatching:(NSPredicate *)predicate;
 
 /**
- * Query all elements matching the predicate.
+ * Perform a non exhaustive shallow search for children matching the predicate.  This will not
+ * traverse children of a node that matches the predicate.
  */
-- (NSSet *)fry_allChildrenMatching:(NSPredicate *)predicate;
+- (NSSet *)fry_nonExhaustiveShallowSearchForChildrenMatching:(NSPredicate *)predicate;
 
 @end

@@ -15,11 +15,11 @@
 
 - (BOOL)fry_searchForViewsMatching:(NSPredicate *)predicate lookInDirection:(FRYDirection)direction
 {
-    NSSet *results = [self fry_allChildrenMatching:predicate];
+    NSSet *results = [self fry_nonExhaustiveShallowSearchForChildrenMatching:predicate];
     while ( results.count == 0 && [self fry_moreSpaceInSearchDirection:direction] ) {
         @autoreleasepool {
             [self fry_scrollInDirection:direction];
-            results = [self fry_allChildrenMatching:predicate];
+            results = [self fry_nonExhaustiveShallowSearchForChildrenMatching:predicate];
         }
     }
     
