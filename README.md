@@ -21,16 +21,16 @@ Two types of queries are supported, a shallow query, and a query that will retur
 
 ```obj-c
 // Tap the button "Share" in row 5
-FRY.lookup(FRY_atSectionAndRow(0, 5)).lookup(FRY_accessibilityLabel(@"Share")).tap();
+FRY.lookup(atSectionAndRow(0, 5)).lookup(accessibilityLabel(@"Share")).tap();
 
 // Return all the image views that are inside a UITableViewCell
-FRY.lookup(FRY_ofKind([UITableViewCell class])).lookup(FRY_ofKind([UIImageView class]));
+FRY.lookup(ofKind([UITableViewCell class])).lookup(ofKind([UIImageView class]));
 
 // Tap the OK button inside the alert view
-FRY.lookup(FRY_ofKind([UIAlertView class])).lookup(FRY_accessibilityLabel(@"OK")).tap();
+FRY.lookup(ofKind([UIAlertView class])).lookup(accessibilityLabel(@"OK")).tap();
 ```
 
-More Information on [Queries](FRY/Query/Query.md)
+More Information on [Queries](FRY/DSL/Query.md)
 
 For more information on the [Lookup Implementation](FRY/Lookup/Lookup.md)
 
