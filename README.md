@@ -16,20 +16,23 @@ FRY also includes a library, `FRYolator`, which helps create integration tests w
 - Touch
 - Network (Nocilla + OHHTTPStubs)
 
-In the future, I hope to include
-
-- Location
-- Bluetooth
-
 ### View Lookup
 Two types of queries are supported, a shallow query, and a query that will return all matching objects.
 
 ```obj-c
-FRY.lookup(FRY_accessibilityTraits(UIAccessibilityTraitButton)).count(14);
-FRY.lookupFirst(@"My Label").present();
+// Tap the button "Share" in row 5
+FRY.lookup(FRY_atSectionAndRow(0, 5)).lookup(FRY_accessibilityLabel(@"Share")).tap();
+
+// Return all the image views that are inside a UITableViewCell
+FRY.lookup(FRY_ofKind([UITableViewCell class])).lookup(FRY_ofKind([UIImageView class]));
+
+// Tap the OK button inside the alert view
+FRY.lookup(FRY_ofKind([UIAlertView class])).lookup(FRY_accessibilityLabel(@"OK")).tap();
 ```
 
-More Information on [Lookup Behavior](FRY/Lookup/Lookup.md)
+More Information on [Queries](FRY/Query/Query.md)
+
+For more information on the [Lookup Implementation](FRY/Lookup/Lookup.md)
 
 ### Touch Synthesis
 FRY uses strongly modeled touches to generate UIKit touch events.  This allows for simple arbitrary touch re-creation, and clear API's for creating common touch sequences.
