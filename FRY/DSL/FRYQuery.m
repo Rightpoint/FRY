@@ -41,6 +41,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 
 + (FRYQuery *)queryFrom:(id<FRYLookup>)lookupRoot context:(FRYTestContext *)context
 {
+    NSParameterAssert(lookupRoot);
     FRYQuery *action = [[FRYQuery alloc] init];
     action.lookupOrigin = lookupRoot;
     action.timeout = FRYQueryDefaultTimeout;
@@ -72,6 +73,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 
 - (FRYQuery *)actionByAddingPredicate:(NSPredicate *)predicate
 {
+    NSParameterAssert(predicate);
     FRYQuery *action = self;
     if ( action.predicate != nil ) {
         action = [FRYQuery queryFrom:self context:self.context];
@@ -82,6 +84,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 
 - (NSPredicate *)predicateFromPredicateOrArray:(id)predicateOrArray
 {
+    NSParameterAssert(predicateOrArray);
     NSPredicate *predicate = nil;
     if ( [predicateOrArray isKindOfClass:[NSArray class]] ) {
         predicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicateOrArray];
@@ -129,6 +132,8 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 - (FRYBoolCallbackBlock)check
 {
     return ^(NSString *message, FRYBoolResultsBlock check) {
+        NSParameterAssert(message);
+        NSParameterAssert(check);
         __block NSSet *results = nil;
         BOOL isOK = [[NSRunLoop currentRunLoop] fry_waitWithTimeout:self.timeout forCheck:^BOOL{
             results = [self results];
@@ -168,7 +173,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 
 - (NSArray *)views
 {
-    return [[self results] allObjects];
+    return [[self results] sortedArrayUsingDescriptors:@[[NSObject fry_sortDescriptorByOrigin]]];
 }
 
 - (NSArray *)view
@@ -186,6 +191,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 - (FRYTouchBlock)touch
 {
     return ^(id touchOrArrayOfTouches) {
+        NSParameterAssert(touchOrArrayOfTouches);
         self.firstOnly = YES;
         BOOL isOK = self.check(@"Looking up view to tap", ^(NSSet *results) {
             BOOL ok = results.count == 1;
@@ -209,6 +215,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 - (FRYSearchBlock)searchFor
 {
     return ^(FRYDirection direction, NSPredicate *scrollToVisible) {
+        NSParameterAssert(scrollToVisible);
         FRYQuery *action = [self actionByAddingPredicate:FRY_ofKind([UIScrollView class])];
         action.firstOnly = YES;
         BOOL success = action.check(@"Looking for the a UIScrollView subclass", ^(NSSet *results) {
@@ -225,6 +232,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 - (FRYLookupBlock)scrollTo
 {
     return ^(NSPredicate *scrollToVisible) {
+        NSParameterAssert(scrollToVisible);
         FRYQuery *action = [self actionByAddingPredicate:FRY_ofKind([UIScrollView class])];
         action.firstOnly = YES;
         BOOL success = action.check(@"Looking for the a UIScrollView subclass", ^(NSSet *results) {

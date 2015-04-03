@@ -34,35 +34,39 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
 @interface FRYQuery : NSObject
 
 /**
- *  Perform a new lookup with the specified predicate. This will query all views
- *  that match the specified predicate. If this method is called multiple times,
- *  a new query object will be returned that will restart the query starting with
- *  the results of the previous query.
+ *  Filter the lookup with the supplied predicate. This performs a non-exhaustive depth
+ *  first search of the object specified as the origin. It is non-exhaustive in that once a node
+ *  is encountered that matches the predicate, the children of that node will not also be queried.
+ *
+ *  When this method is called multiple times, subsequent queries will start their traversal from the
+ *  previous results.
  */
 @property (copy, nonatomic, readonly) FRYChainPredicateBlock lookup;
 
 /**
- *  Convert the query to a shallow search. This will cause only the first matching
- *  result to be returned. This is performed implicitly by all of the interaction
- *  functions (touch, scroll, select, etc)
+ *  Convert the query to a shallow search. This will cause the traversal to stop on the first
+ *  matching node.
+ *
+ *  This is performed internally by all of the interaction functions (touch, scroll, select, etc)
  */
 @property (copy, nonatomic, readonly) FRYChainBlock shallow;
 
 /**
  *  This will call `lookup` with the most common predicate settings: matching
- *  the specified accessibility label, that the element is on screen, and that the
- *  element is visible (All parent views have 'hidden != YES && alpha > 0.1').
+ *  the specified accessibility label, that the element is on the screen and
+ *  visible.
  */
 @property (copy, nonatomic, readonly) FRYChainStringBlock lookupByAccessibilityLabel;
 
 /**
- *  Find the first view that matches the current lookup filter and perform a tap on it.
+ *  Tap the first result of the query.
+ *
  *  This will modify the query to perform a shallow search.
  */
 @property (copy, nonatomic, readonly) FRYCheckBlock tap;
 
 /**
- *  Find the first view that matches the current lookup filter and perform the touches on it.
+ *  Perform the specified touches on the first result of the query.
  *  This will modify the query to perform a shallow search.
  */
 @property (copy, nonatomic, readonly) FRYTouchBlock touch;
@@ -70,7 +74,7 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
 /**
  *  Find the first UIScrollView below the current lookup filter. Lookup the subview that matches
  *  the specified predicate and scroll such that it is visible. The view must be installed
- *  in the view hierarchy to work.
+ *  in the view hierarchy to work, or must be returned by the accessiblity hierarchy.
  *
  *  This will modify the query to perform a shallow search.
  */
@@ -88,6 +92,7 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
 /**
  *  Find the first UITextField or UITextView below the current lookup filter, and select all of the
  *  entered text.
+ *
  *  This will modify the query to perform a shallow search.
  */
 @property (copy, nonatomic, readonly) FRYCheckBlock selectText;
@@ -115,7 +120,7 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
 @property (copy, nonatomic, readonly) FRYBoolCallbackBlock check;
 
 /**
- *  Return all current views specified by the query. This will not retry.
+ *  Return all current views specified by the query, sorted by origin.
  */
 @property (copy, nonatomic, readonly) NSArray *views;
 

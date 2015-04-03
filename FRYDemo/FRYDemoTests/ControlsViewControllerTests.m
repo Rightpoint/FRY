@@ -61,6 +61,31 @@
     }
 }
 
+- (void)testViews
+{
+    NSArray *views = FRY.lookup(FRY_PREDICATE_KEYPATH(UIView, accessibilityLabel, !=, nil)).views;
+    NSArray *accessibilityLabels = [views valueForKey:FRY_KEYPATH(NSObject, fry_accessibilityLabel)];
+    XCTAssertEqualObjects(accessibilityLabels, (@[@"No Action",
+                                                  @"First",
+                                                  @"Second",
+                                                  @"Action 1",
+                                                  @"Action 2",
+                                                  @"Action 3",
+                                                  @"Switch",
+                                                  @"Progress halted",
+                                                  @"Progress",
+                                                  @"Label",
+                                                  @"Slider",
+                                                  @"Stepper",
+                                                  @"TI",
+                                                  @"TB",
+                                                  @"T1",
+                                                  @"T2",
+                                                  @"toolbar switch"
+                                                  ]));
+
+}
+
 - (void)testAccessibilityTraits
 {
     FRY.lookup(FRY_accessibilityTrait(UIAccessibilityTraitButton)).count(14);

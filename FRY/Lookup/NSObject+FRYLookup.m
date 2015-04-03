@@ -16,6 +16,19 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
 
 @implementation NSObject(FRYLookup)
 
++ (NSSortDescriptor *)fry_sortDescriptorByOrigin;
+{
+    return [NSSortDescriptor sortDescriptorWithKey:FRY_KEYPATH(NSObject, fry_frameInWindow) ascending:YES comparator:^NSComparisonResult(NSValue *obj1, NSValue *obj2) {
+        CGRect frame1 = [obj1 CGRectValue];
+        CGRect frame2 = [obj2 CGRectValue];
+        NSComparisonResult result = [@(frame1.origin.y) compare:@(frame2.origin.y)];
+        if (result == NSOrderedSame) {
+            return [@(frame1.origin.x) compare:@(frame2.origin.x)];
+        }
+        return result;
+    }];
+}
+
 + (void)fry_enableLookupDebugForObjects:(NSArray *)objects
 {
     __fry_enableLookupDebugForObjects = objects;
@@ -107,6 +120,7 @@ static NSArray *__fry_enableLookupDebugForObjects = nil;
     }
     if ( match ) {
         [self fry_addNonDuplicateObject:self toResults:results];
+        return;
     }
     
     for ( NSString *childKeyPath in [self.class fry_childKeyPaths] ) {

@@ -16,6 +16,11 @@
 @interface NSObject(FRYLookup) <FRYLookup>
 
 /**
+ * Return a sort descriptor that will order an array of FRYLookup objects by origin
+ */
++ (NSSortDescriptor *)fry_sortDescriptorByOrigin;
+
+/**
  * Enable debugging on the specified object. Once a query hits one of the objects, all sub-object
  * predicate checks are logged to the console.
  */
