@@ -32,7 +32,7 @@ FRY.searchFor(FRYDirectionDown, FRY_atSectionAndRow(0, 9)).tap();
 More Information on [Queries](FRY/DSL/Query.md) or the [Lookup Implementation](FRY/Lookup/Lookup.md)
 
 ### Predicates
-FRY provides some helpful macros to create compiler-checked predicates. There is a keypath predicate helper `FRY_PREDICATE_KEYPATH`, and selector predicate helper `FRY_PREDICATE_SELECTOR`. These predicates will make sure that the keypath or selector is valid, and add a `isKindOf:` check for safety. There are also a number short-hand helpers in `FRYDefines.h` for more common lookups.
+FRY provides some helpful macros to create compiler-checked predicates. There is a keypath predicate helper `FRY_PREDICATE_KEYPATH`, and selector predicate helper `FRY_PREDICATE_SELECTOR`. These predicates will make sure that the keypath or selector is valid, and add a `isKindOf:` check for safety. There are also a number short-hand helpers in [FRYDefines.h](FRY/FRYDefines.h) for more common lookups.
 
 
 ### Touch Synthesis
@@ -47,7 +47,7 @@ FRY.lookup(@"My Label").touch([FRYTouch dragFromPoint:p1 toPoint:p2 forDuration:
 More Information on [Touch Synthesis](FRY/Touch/Touch.md)
 
 ### Idle Detection
-There is a helper `FRYIdleCheck` that will spin the runloop until all touches are finished and all UI animations have completed. This greatly simplifies flow control, and eliminiates the vast majority of `CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.5, false)`. If you find yourself wanting to add these to your tests, consider adding an animation to your UI instead, or providing additional application-specific checks to the delegate.  All `FRYQuery` actions will call `FRYIdleCheck` before and after the various actions.
+There is a helper [FRYIdleCheck](FRY/Idle/FRYIdleCheck.h) that will spin the runloop until all touches are finished and all UI animations have completed. This greatly simplifies flow control, and eliminiates the vast majority of `CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.5, false)`. If you find yourself wanting to add these to your tests, consider adding an animation to your UI instead, or providing additional application-specific checks to the delegate.  All [FRYQuery](FRY/DSL/FRYQuery.h) actions will call [FRYIdleCheck](FRY/Idle/FRYIdleCheck.h) before and after the various actions.
 
 ## FRYolator
 FRYolator will be enabled when a special tap sequence is performed. Once enabled, all touch and network activity will be recorded. When the app is backgrounded and put in the foreground, the event stream will be saved as a `.fry` file. Inside the `.fry` bundle are all of the touch events and network communication.
