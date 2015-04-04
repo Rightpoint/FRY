@@ -29,6 +29,9 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         shared = [[FRYTouchDispatch alloc] init];
+
+        // Dirty little hack to enable touch highlighting if FRYolator is linked in.
+        [(id)NSClassFromString(@"FRYTouchHighlightWindowLayer") valueForKeyPath:@"shared.enable"];
     });
     return shared;
 }

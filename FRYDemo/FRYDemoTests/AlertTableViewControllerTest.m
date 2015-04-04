@@ -23,11 +23,6 @@ typedef void(^Foo)(NSString *name, ...);
 
 @implementation AlertTableViewControllerTest
 
-+ (void)load
-{
-    [[FRYTouchHighlightWindowLayer shared] enable];
-}
-
 - (void)setUp
 {
     [super setUp];

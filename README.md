@@ -15,15 +15,24 @@ FRY.lookup(ofKind([UITableViewCell class])).lookup(ofKind([UIImageView class]));
 
 // Tap the OK button inside the alert view
 FRY.lookup(ofKind([UIAlertView class])).lookup(accessibilityLabel(@"OK")).tap();
+```
 
+Not all commands require a lookup, since they will implicitly look for the required subview before acting.  
+```obj-c
 // Select the text in the first UITextField
 FRY.selectText();
 
-// Select the '180' on the first picker view component and 'lbs' on the second
-FRY.selectPicker(@"180", 0).selectPicker(@"lbs", 1);
+// Scroll down to row 9 in section 0
+FRY.searchFor(FRYDirectionDown, atSectionAndRow(0, 9));
 
-// Scroll down to row 9 in section 0, and tap that cell
-FRY.searchFor(FRYDirectionDown, FRY_atSectionAndRow(0, 9)).tap();
+// Select the '200' on the first picker view component and 'lbs' on the second
+FRY.selectPicker(@"200", 0).selectPicker(@"lbs", 1);
+
+// Or if there were mutliple pickers on screen
+
+```
+// Select '200' and 'lbs' on the picker view inside of row 1
+FRY.lookup(atSectionAndRow(0, 1)).selectPicker(@"200", 0).selectPicker(@"lbs", 1);
 ```
 
 More Information on [Queries](FRY/DSL/Query.md) or the [Lookup Implementation](FRY/Lookup/Lookup.md)
@@ -65,6 +74,8 @@ FRYolator can also visualize touch events. This is used by FRYolator to indicate
 ```obj-c
 [[FRYTouchHighlightWindowLayer shared] enable];
 ```
+
+Touch visualization is automatically enabled by [FRYTouchDispatch](FRY/Touch/FRYTouchDispatch.h) if the FRYolator library is linked into the target.
 
 ## Installation
 Add FRY to your Podfile to install. If you want to use touch recording, add FRYolator to your application target. Only add it to the 'Debug' configuration to ensure it is not submitted to the app store, or add it to a debug target.
