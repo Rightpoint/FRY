@@ -1,18 +1,13 @@
 # Query API
-
-`FRYQuery` provides a consistent DSL to lookup and interact with UI components, as well as mechanisms to retry queries until they are satisfied, and report failures to test frameworks. The primary goal of `FRYQuery` is to simplify test writing as much as possible.
+[FRYQuery](FRYQuery.h) provides a consistent DSL to lookup and interact with UI components, as well as mechanisms to retry queries until they are satisfied, and report failures to test frameworks. The primary goal of [FRYQuery](FRYQuery.h) is to simplify test writing as much as possible.
 
 ## Query
-
-The primary function of the FRYQuery object is to traverse the application hierarchies, and return matching objects. `FRY` is a macro for setting up the default query object. This returns a new FRYQuery object that sets it's target to `[UIApplication sharedApplication]`. A query can be focused with `lookup(predicate)`, which will filter the results from the current target.
-
-*Query Examples*
-```obj-c
-```
+The primary function of the FRYQuery object is to traverse the application hierarchies, and return matching objects. `FRY` is a macro for setting up the default query object with the lookupRoot set to `[UIApplication sharedApplication]`. A query can be focused with `lookup(predicate)`, which will filter the results from the current target.
 
 ## Sub Query
-Sub-Queries are a way of starting a new query starting with the results from the previous query. For Example:
+Sub queries are a way of starting a new query starting with the results from the previous query. For Example:
 
+*Sub query Examples*
 ```obj-c
 // Tap the button view of row 5
 FRY.lookup(FRY_atSectionAndRow(0, 5)).lookup(FRY_accessibilityLabel(@"Button")).tap();
@@ -41,7 +36,7 @@ FRY.selectText();
 
 ```
 
-More details are included inline with the Query Action method declarations.
+More details are included inline with the Query method declarations.
 
 ## Check Actions
 The other use of a query is to perform checks on the view hierarchy. There are a few simple checks provided, to see if an element is present, absent, or in certain quantity. The method `check` is available for more advanced view interrogation. The use of `present` and `absent` are the best way to control the flow of your test.
