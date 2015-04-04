@@ -16,9 +16,10 @@
 typedef FRYQuery *(^FRYChainPredicateBlock)(id predicateOrArrayOfPredicates);
 typedef FRYQuery *(^FRYChainStringBlock)(NSString *string);
 typedef FRYQuery *(^FRYChainBlock)();
+typedef FRYQuery *(^FRYChainSelectBlock)(NSString *value, NSUInteger component);
 typedef BOOL(^FRYTouchBlock)(id touchOrArrayOfTouches);
-typedef BOOL(^FRYSearchBlock)(FRYDirection FRYDirection, NSPredicate *content);
-typedef BOOL(^FRYLookupBlock)(NSPredicate *content);
+typedef BOOL(^FRYSearchBlock)(FRYDirection FRYDirection, NSPredicate *contentPredicate);
+typedef BOOL(^FRYLookupBlock)(NSPredicate *contentPredicate);
 typedef BOOL(^FRYIntCheckBlock)(NSUInteger count);
 
 typedef BOOL(^FRYBoolResultsBlock)(NSSet *results);
@@ -28,55 +29,58 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
  *  FRYQuery provides a consistent DSL to lookup and interact with UI components, as well
  *  as mechanisms to retry queries until they are satisfied, and report failures to test 
  *  frameworks.
- *
- *  The most common usage involve using the macro `FRY`
  */
 @interface FRYQuery : NSObject
 
 /**
- *  Filter the lookup with the supplied predicate. This performs a non-exhaustive depth
- *  first search of the object specified as the origin. It is non-exhaustive in that once a node
- *  is encountered that matches the predicate, the children of that node will not also be queried.
+ *  Create a new query from the lookupRoot.
  *
- *  When this method is called multiple times, subsequent queries will start their traversal from the
- *  previous results.
+ *  The FRY macro will create a new instance of FRYQuery with [UIApplication sharedApplication] as
+ *  the lookupRoot, and FRY_TEST_CONTEXT as the context.
+ *
+ *  Direct usage of this query is probably not needed to do what you want.
+ */
++ (FRYQuery *)queryFrom:(id<FRYLookup>)lookupRoot context:(FRYTestContext *)context;
+
+/**
+ *  Filter the query with the supplied predicate. This performs a non-exhaustive search from the 
+ *  lookupOrigin. It is a non-exhaustive in that once a node is encountered that matches the predicate, 
+ *  the children of that node will not also be queried.
+ *
+ *  When this method is called multiple times, subsequent queries will create a new FRYQuery with the 
+ *  previous FRYQuery as the lookupRoot. This allows for powerful query chaining.
+ *
+ *  @param predicateOrArrayOfPredicates The predicate to filter with. If an array is specified, it is converted to an and predicate.
  */
 @property (copy, nonatomic, readonly) FRYChainPredicateBlock lookup;
 
 /**
- *  Convert the query to a shallow search. This will cause the traversal to stop on the first
- *  matching node.
+ *  This will call `lookup` with the most common predicate settings - matching
+ *  the specified accessibility label(FRY_accessibilityLabel) and that the element is
+ *  on the screen and visible(FRY_isOnScreen(YES)), and not animating (FRY_isAnimating(NO)).
  *
- *  This is performed internally by all of the interaction functions (touch, scroll, select, etc)
- */
-@property (copy, nonatomic, readonly) FRYChainBlock shallow;
-
-/**
- *  This will call `lookup` with the most common predicate settings: matching
- *  the specified accessibility label, that the element is on the screen and
- *  visible.
+ *  @param accessibilityLabel  The accessibility label to look for.
  */
 @property (copy, nonatomic, readonly) FRYChainStringBlock lookupByAccessibilityLabel;
 
 /**
  *  Tap the first result of the query.
- *
- *  This will modify the query to perform a shallow search.
  */
 @property (copy, nonatomic, readonly) FRYCheckBlock tap;
 
 /**
  *  Perform the specified touches on the first result of the query.
- *  This will modify the query to perform a shallow search.
+ *
+ *  @param  touchOrArrayOfTouches An array (for multi-touch) or singular touch object to dispatch
  */
 @property (copy, nonatomic, readonly) FRYTouchBlock touch;
 
 /**
- *  Find the first UIScrollView below the current lookup filter. Lookup the subview that matches
- *  the specified predicate and scroll such that it is visible. The view must be installed
- *  in the view hierarchy to work, or must be returned by the accessiblity hierarchy.
+ *  Find the first UIScrollView in the lookupRoot. Another query will find the subview that matches
+ *  the specified predicate and scroll such that it is visible. The view must be
+ *  in the application hierarchy to work, or must be returned by the accessiblity hierarchy.
  *
- *  This will modify the query to perform a shallow search.
+ *  @param contentPredicate The predicate to look for
  */
 @property (copy, nonatomic, readonly) FRYLookupBlock scrollTo;
 
@@ -85,17 +89,24 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
  *  for a subview that matches the specified predicate. This will scroll the scroll view and allow
  *  the view to load any cells that may be present.
  *
- *  This will modify the query to perform a shallow search.
+ *  @param  direction  The direction to look in
+ *  @param  contentPredicate  The predicate to look for
  */
 @property (copy, nonatomic, readonly) FRYSearchBlock searchFor;
 
 /**
  *  Find the first UITextField or UITextView below the current lookup filter, and select all of the
  *  entered text.
- *
- *  This will modify the query to perform a shallow search.
  */
 @property (copy, nonatomic, readonly) FRYCheckBlock selectText;
+
+/**
+ *  Find the first UIPickerView and select the label on the component
+ * 
+ *  @param  label  The label to select
+ *  @param  component  The component of the picker view to select
+ */
+@property (copy, nonatomic, readonly) FRYChainSelectBlock selectPicker;
 
 /**
  *  Block and retry the query until the current lookup filter returns a view.
@@ -125,8 +136,7 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
 @property (copy, nonatomic, readonly) NSArray *views;
 
 /**
- *  Return the first view specified by the query. This will not retry or modify the lookup type.
- *  If the query is returning all matching elements, the first of those elements will be returned.
+ *  Return the first view specified by the query.
  */
 @property (strong, nonatomic, readonly) UIView *view;
 
@@ -134,11 +144,6 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
  *  Specify the default timeout to use
  */
 + (void)setDefaultTimeout:(NSTimeInterval)timeout;
-
-/**
- *  This is the constructor for new queries, used by the FRY macro.
- */
-+ (FRYQuery *)queryFrom:(id<FRYLookup>)lookupRoot context:(FRYTestContext *)context;
 
 @end
 

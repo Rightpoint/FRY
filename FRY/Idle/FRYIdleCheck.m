@@ -157,7 +157,7 @@ static FRYIdleCheck *systemIdleCheck = nil;
     if ( isIdle == NO ) {
         NSLog(@"%@", [self busyDescription]);
     }
-    return NO;
+    return isIdle;
 }
 
 #pragma mark - Touch Dispatch Delegate

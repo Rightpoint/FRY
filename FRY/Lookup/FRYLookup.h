@@ -22,7 +22,7 @@
 - (id<FRYLookup>)fry_farthestDescendentMatching:(NSPredicate *)predicate;
 
 /**
- *  A shallow traversal, returns the first view that matches the predicate.
+ *  Return the first view that matches the predicate.
  */
 - (id<FRYLookup>)fry_firstDescendentMatching:(NSPredicate *)predicate;
 

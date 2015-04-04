@@ -94,10 +94,6 @@ NSString *format = [NSString stringWithFormat:@"SELF %@ %@", @#sel, @"%@"];\
 #define FRY_atSectionAndRow(s, r) FRY_PREDICATE_KEYPATH(UIView, fry_indexPathInContainer, ==, [NSIndexPath indexPathForRow:r inSection:s])
 #endif
 
-
-#define FRY_APP [UIApplication sharedApplication]
-#define FRY_KEY_WINDOW [[UIApplication sharedApplication] keyWindow]
-
 typedef NS_ENUM(NSInteger, FRYDirection) {
     FRYDirectionUp = 1,
     FRYDirectionDown,

@@ -36,7 +36,7 @@
         viewFrame.origin.y -= self.contentInset.top;
 
         [self setContentOffset:viewFrame.origin animated:YES];
-        ok = [[FRYIdleCheck system] waitForIdle] == NO;
+        ok = [[FRYIdleCheck system] waitForIdle];
     }
     return result != nil;
 }

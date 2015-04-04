@@ -11,9 +11,12 @@
 #import "FRYTouch.h"
 #import "FRYTouchDispatch.h"
 #import "NSPredicate+FRY.h"
+#import "FRYIdleCheck.h"
+
 #import "UIScrollView+FRY.h"
 #import "UITextInput+FRY.h"
 #import "UIAccessibility+FRY.h"
+#import "UIPickerView+FRY.h"
 
 @interface NSObject(FRYTestStub)
 - (void) recordFailureWithDescription:(NSString *) description inFile:(NSString *) filename atLine:(NSUInteger) lineNumber expected:(BOOL) expected;
@@ -103,14 +106,6 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
     return ^(id predicateOrArray) {
         self.firstOnly = NO;
         return [self actionByAddingPredicate:[self predicateFromPredicateOrArray:predicateOrArray]];
-    };
-}
-
-- (FRYChainBlock)shallow
-{
-    return ^() {
-        self.firstOnly = YES;
-        return self;
     };
 }
 
@@ -215,16 +210,18 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 - (FRYSearchBlock)searchFor
 {
     return ^(FRYDirection direction, NSPredicate *scrollToVisible) {
+        BOOL success = [[FRYIdleCheck system] waitForIdle];
         NSParameterAssert(scrollToVisible);
         FRYQuery *action = [self actionByAddingPredicate:FRY_ofKind([UIScrollView class])];
         action.firstOnly = YES;
-        BOOL success = action.check(@"Looking for the a UIScrollView subclass", ^(NSSet *results) {
-            return (BOOL)(results.count == 1);
-        });
+        success = success ? action.check(@"Looking for the a UIScrollView subclass", ^(NSSet *results) {
+                return (BOOL)(results.count == 1);
+        }) : success;
         if ( success ) {
             UIScrollView *scrollView = [[action results] anyObject];
             success = [scrollView fry_searchForViewsMatching:scrollToVisible lookInDirection:direction];
         }
+        success = success ? [[FRYIdleCheck system] waitForIdle] : success;
         return success;
     };
 }
@@ -232,16 +229,19 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 - (FRYLookupBlock)scrollTo
 {
     return ^(NSPredicate *scrollToVisible) {
+        BOOL success = [[FRYIdleCheck system] waitForIdle];
+
         NSParameterAssert(scrollToVisible);
         FRYQuery *action = [self actionByAddingPredicate:FRY_ofKind([UIScrollView class])];
         action.firstOnly = YES;
-        BOOL success = action.check(@"Looking for the a UIScrollView subclass", ^(NSSet *results) {
+        success = success ? action.check(@"Looking for the a UIScrollView subclass", ^(NSSet *results) {
             return (BOOL)(results.count == 1);
-        });
+        }) : success;
         if ( success ) {
             UIScrollView *scrollView = [[action results] anyObject];
             success = [scrollView fry_scrollToLookupResultMatching:scrollToVisible];
         }
+        success = success ? [[FRYIdleCheck system] waitForIdle] : success;
         return success;
     };
 }
@@ -261,7 +261,28 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
             UITextField *textInput = [[action results] anyObject];
             [textInput fry_selectAll];
         }
+        success = success ? [[FRYIdleCheck system] waitForIdle] : success;
         return success;
+    };
+}
+
+- (FRYChainSelectBlock)selectPicker
+{
+    return ^(NSString *label, NSUInteger component) {
+        BOOL success = [[FRYIdleCheck system] waitForIdle];
+
+        FRYQuery *action = [self actionByAddingPredicate:FRY_ofKind([UIPickerView class])];
+        action.firstOnly = YES;
+
+        success = success ? action.check(@"Looking for a UIPickerView", ^(NSSet *results) {
+            return (BOOL)(results.count == 1);
+        }) : success;
+        if ( success ) {
+            UIPickerView *pickerView = (id)action.view;
+            [pickerView fry_selectTitle:label inComponent:component animated:YES];
+        }
+        success = success ? [[FRYIdleCheck system] waitForIdle] : success;
+        return action;
     };
 }
 

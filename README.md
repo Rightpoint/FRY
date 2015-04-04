@@ -1,26 +1,16 @@
 # FRY: A UIKit Interaction Library
 
-FRY is an iOS Test Driver. The purpose of this library is to simplify iteractions with UIKit and make writing UI tests simple.
+FRY is an iOS Test Driver. The purpose of this library is to simplify iteractions with UIKit and make writing UI tests simple. FRY aims to provide view lookup, touch interaction and idle detection, to simplify writing UI tests.
+
+FRY also includes a library, `FRYolator`, which helps create integration tests when it is included in your target. The goal of FRYolator is to record all input to the target for later recreation. FRYolator will currently record and generate unit test commands to playback touch events, as well as Network Requests via OHHTTPStubs or Nocilla.
 
 NOTE: Everything is still in alpha, and is subject to change before the 1.0 release.
 
-## Overview
-FRY consists of three core features to implement touch driven integration tests:
-
-- View Lookup
-- Touch Modeling
-- Idle Detection
-
-FRY also includes a library, `FRYolator`, which helps create integration tests when it is included in your target. The goal of FRYolator is to record all input to the target for later recreation. FRYolator will currently record and generate unit test commands to playback the following:
-
-- Touch
-- Network (Nocilla + OHHTTPStubs)
-
-### View Lookup
-Two types of queries are supported, a shallow query, and a query that will return all matching objects.
+## Lookup and Perform 
+FRY commands usually consist of two parts, the lookup, which finds something on the screen to interact with, and the action - a touch, swipe, scroll, or type event.
 
 ```obj-c
-// Tap the button "Share" in row 5
+// Tap the button "Share" button on row 5
 FRY.lookup(atSectionAndRow(0, 5)).lookup(accessibilityLabel(@"Share")).tap();
 
 // Return all the image views that are inside a UITableViewCell
@@ -28,11 +18,18 @@ FRY.lookup(ofKind([UITableViewCell class])).lookup(ofKind([UIImageView class]));
 
 // Tap the OK button inside the alert view
 FRY.lookup(ofKind([UIAlertView class])).lookup(accessibilityLabel(@"OK")).tap();
+
+// Select the text in the first UITextField
+FRY.selectText();
+
+// Select the '180' on the first component and 'lbs' on the second
+FRY.selectPicker(@"180", 0).selectPicker(@"lbs", 1);
+
+// Scroll down to row 9 in section 0, and tap that cell
+FRY.searchFor(FRYDirectionDown, FRY_atSectionAndRow(0, 9)).tap();
 ```
 
-More Information on [Queries](FRY/DSL/Query.md)
-
-For more information on the [Lookup Implementation](FRY/Lookup/Lookup.md)
+More Information on [Queries](FRY/DSL/Query.md) or the [Lookup Implementation](FRY/Lookup/Lookup.md)
 
 ### Touch Synthesis
 FRY uses strongly modeled touches to generate UIKit touch events.  This allows for simple arbitrary touch re-creation, and clear API's for creating common touch sequences.
@@ -46,7 +43,7 @@ FRY.lookup(@"My Label").touch([FRYTouch dragFromPoint:p1 toPoint:p2 forDuration:
 More Information on [Touch Synthesis](FRY/Touch/Touch.md)
 
 ### Idle Detection
-There is a helper `FRYIdleCheck` that will spin the runloop until all touches are finished and all UI Animations have completed. This greatly simplifies flow-control, and eliminiates the vast majority of `CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.5, false)`. If you find yourself wanting to add these to your tests, consider adding an animation to your UI instead.  
+There is a helper `FRYIdleCheck` that will spin the runloop until all touches are finished and all UI Animations have completed. This greatly simplifies flow-control, and eliminiates the vast majority of `CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.5, false)`. If you find yourself wanting to add these to your tests, consider adding an animation to your UI instead, or providing additional application-specific checks to the delegate.  All FRYQuery will call `FRYIdleCheck` before and after the various actions.
 
 ## FRYolator
 FRYolator will be enabled when a special tap sequence is performed. Once enabled, all touch and network activity will be recorded. When the app is backgrounded and put in the foreground, the event stream will be saved as a `.fry` file. Inside the `.fry` bundle are all of the touch events and network communication.
@@ -85,13 +82,4 @@ end
 KIF is amazing framework that basically started UI testing on iOS. The core design difference with KIF that pushed me to write FRY without looking to maintain compatibility is that looking up a view can modify the view heirarchy to find it. This causes a lot of bizarre issues, and it is not usually what I want from a testing perspective.
 
 ### Robot
-Robot is a newer contender in the UI Testing world, and is very interesting, but it's primary goal is speed, not accuracy of environment.
-
-## Design Goals
-- Complete Code Coverage and UIKit functionality.
-- Clear separation of query and touching. UIView lookup will never modify the view heirarchy.
-- Use simple logic to implement behavior, and categories to hide complex UIKit implementation details.
-- Minimize knowledge of and checks against UIKit private classes.
-- Isolate runloop spinning.
-
-
+Robot is a newer contender in the UI Testing world, and is very interesting, with a primary goal of speed.

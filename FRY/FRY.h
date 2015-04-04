@@ -36,11 +36,7 @@
  *  // Find all views with non-nil accessibilityLabels
  *  views = FRY.lookup(FRY_PREDICATE_KEYPATH(UIView, accessibilityLabel, !=, nil)).views;
  *
- *  // Scroll down to row 9 in section 0, and tap that cell
- *  FRY.searchFor(FRYDirectionDown, FRY_atSectionAndRow(0, 9)).tap();
  *
- *  // Select the text in the first UITextField
- *  FRY.selectText();
  */
 #define FRY ({[FRYQuery queryFrom:[UIApplication sharedApplication] context:FRY_TEST_CONTEXT];})
 
