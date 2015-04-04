@@ -101,7 +101,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
     return predicate;
 }
 
-- (FRYChainPredicateBlock)lookup
+- (FRYQuery *(^)(id))lookup
 {
     return ^(id predicateOrArray) {
         self.firstOnly = NO;
@@ -109,7 +109,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
     };
 }
 
-- (FRYChainStringBlock)lookupByAccessibilityLabel
+- (FRYQuery *(^)(NSString *))lookupByAccessibilityLabel
 {
     return ^(NSString *accessibilityLabel) {
         self.firstOnly = YES;
@@ -124,15 +124,15 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 
 #pragma mark - Check
 
-- (FRYBoolCallbackBlock)check
+- (BOOL(^)(NSString *, FRYBoolResultsBlock))check
 {
-    return ^(NSString *message, FRYBoolResultsBlock check) {
+    return ^(NSString *message, FRYBoolResultsBlock block) {
         NSParameterAssert(message);
-        NSParameterAssert(check);
+        NSParameterAssert(block);
         __block NSSet *results = nil;
         BOOL isOK = [[NSRunLoop currentRunLoop] fry_waitWithTimeout:self.timeout forCheck:^BOOL{
             results = [self results];
-            return check(results);
+            return block(results);
         }];
         if ( isOK == NO ) {
             [self.context recordFailureWithMessage:message action:self results:results];
@@ -141,7 +141,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
     };
 }
 
-- (FRYIntCheckBlock)count
+- (BOOL(^)(NSUInteger))count
 {
     return ^(NSUInteger count) {
         NSString *message = [NSString stringWithFormat:@"Looking for %zd items", count];
@@ -183,7 +183,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
     };
 }
 
-- (FRYTouchBlock)touch
+- (BOOL(^)(id))touch
 {
     return ^(id touchOrArrayOfTouches) {
         NSParameterAssert(touchOrArrayOfTouches);
@@ -207,7 +207,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
     };
 }
 
-- (FRYSearchBlock)searchFor
+- (BOOL(^)(FRYDirection, NSPredicate *))searchFor
 {
     return ^(FRYDirection direction, NSPredicate *scrollToVisible) {
         BOOL success = [[FRYIdleCheck system] waitForIdle];
@@ -226,7 +226,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
     };
 }
 
-- (FRYLookupBlock)scrollTo
+- (BOOL(^)(NSPredicate *))scrollTo
 {
     return ^(NSPredicate *scrollToVisible) {
         BOOL success = [[FRYIdleCheck system] waitForIdle];
@@ -267,7 +267,7 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
     };
 }
 
-- (FRYChainSelectBlock)selectPicker
+- (FRYQuery *(^)(NSString *label, NSUInteger component))selectPicker
 {
     return ^(NSString *label, NSUInteger component) {
         BOOL success = [[FRYIdleCheck system] waitForIdle];

@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-typedef BOOL(^FRYCheckBlock)();
-
 OBJC_EXTERN NSTimeInterval const kFRYEventDispatchInterval;
 
 /**

@@ -13,17 +13,7 @@
 
 @class FRYTestContext;
 
-typedef FRYQuery *(^FRYChainPredicateBlock)(id predicateOrArrayOfPredicates);
-typedef FRYQuery *(^FRYChainStringBlock)(NSString *string);
-typedef FRYQuery *(^FRYChainBlock)();
-typedef FRYQuery *(^FRYChainSelectBlock)(NSString *value, NSUInteger component);
-typedef BOOL(^FRYTouchBlock)(id touchOrArrayOfTouches);
-typedef BOOL(^FRYSearchBlock)(FRYDirection FRYDirection, NSPredicate *contentPredicate);
-typedef BOOL(^FRYLookupBlock)(NSPredicate *contentPredicate);
-typedef BOOL(^FRYIntCheckBlock)(NSUInteger count);
-
 typedef BOOL(^FRYBoolResultsBlock)(NSSet *results);
-typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check);
 
 /**
  *  FRYQuery provides a consistent DSL to lookup and interact with UI components, as well
@@ -52,7 +42,7 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
  *
  *  @param predicateOrArrayOfPredicates The predicate to filter with. If an array is specified, it is converted to an and predicate.
  */
-@property (copy, nonatomic, readonly) FRYChainPredicateBlock lookup;
+@property (copy, nonatomic, readonly) FRYQuery *(^lookup)(id predicateOrArrayOfPredicates);
 
 /**
  *  This will call `lookup` with the most common predicate settings - matching
@@ -61,19 +51,19 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
  *
  *  @param accessibilityLabel  The accessibility label to look for.
  */
-@property (copy, nonatomic, readonly) FRYChainStringBlock lookupByAccessibilityLabel;
+@property (copy, nonatomic, readonly) FRYQuery *(^lookupByAccessibilityLabel)(NSString *string);
 
 /**
  *  Tap the first result of the query.
  */
-@property (copy, nonatomic, readonly) FRYCheckBlock tap;
+@property (copy, nonatomic, readonly) BOOL(^tap)();
 
 /**
  *  Perform the specified touches on the first result of the query.
  *
  *  @param  touchOrArrayOfTouches An array (for multi-touch) or singular touch object to dispatch
  */
-@property (copy, nonatomic, readonly) FRYTouchBlock touch;
+@property (copy, nonatomic, readonly) BOOL(^touch)(id touchOrArrayOfTouches);
 
 /**
  *  Find the first UIScrollView in the lookupRoot. Another query will find the subview that matches
@@ -82,7 +72,7 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
  *
  *  @param contentPredicate The predicate to look for
  */
-@property (copy, nonatomic, readonly) FRYLookupBlock scrollTo;
+@property (copy, nonatomic, readonly) BOOL(^scrollTo)(NSPredicate *contentPredicate);
 
 /**
  *  Find the first UIScrollView below the current lookup filter, and look in the specified direction
@@ -90,15 +80,15 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
  *  the view to load any cells that may be present.
  *
  *  @param  direction  The direction to look in
- *  @param  contentPredicate  The predicate to look for
+ *  @param  predicate  The predicate to look for
  */
-@property (copy, nonatomic, readonly) FRYSearchBlock searchFor;
+@property (copy, nonatomic, readonly) BOOL(^searchFor)(FRYDirection direction, NSPredicate *predicate);
 
 /**
  *  Find the first UITextField or UITextView below the current lookup filter, and select all of the
  *  entered text.
  */
-@property (copy, nonatomic, readonly) FRYCheckBlock selectText;
+@property (copy, nonatomic, readonly) BOOL(^selectText)();
 
 /**
  *  Find the first UIPickerView and select the label on the component
@@ -106,29 +96,29 @@ typedef BOOL(^FRYBoolCallbackBlock)(NSString *message, FRYBoolResultsBlock check
  *  @param  label  The label to select
  *  @param  component  The component of the picker view to select
  */
-@property (copy, nonatomic, readonly) FRYChainSelectBlock selectPicker;
+@property (copy, nonatomic, readonly) FRYQuery *(^selectPicker)(NSString *label, NSUInteger component);
 
 /**
  *  Block and retry the query until the current lookup filter returns a view.
  */
-@property (copy, nonatomic, readonly) FRYCheckBlock present;
+@property (copy, nonatomic, readonly) BOOL(^present)();
 
 /**
  *  Block and retry the query until the current lookup filter returns no views.
  */
-@property (copy, nonatomic, readonly) FRYCheckBlock absent;
+@property (copy, nonatomic, readonly) BOOL(^absent)();
 
 /**
  *  Block and retry the query until the current lookup filter returns the specified number of views.
  */
-@property (copy, nonatomic, readonly) FRYIntCheckBlock count;
+@property (copy, nonatomic, readonly) BOOL(^count)(NSUInteger count);
 
 /**
  *  Block and retry the query until the specified check block returns YES.
  *
  *  NOTE: If you are getting compile errors, cast the return excessively, ie: return (BOOL)(count == 1);
  */
-@property (copy, nonatomic, readonly) FRYBoolCallbackBlock check;
+@property (copy, nonatomic, readonly) BOOL(^check)(NSString *message, FRYBoolResultsBlock block);
 
 /**
  *  Return all current views specified by the query, sorted by origin.

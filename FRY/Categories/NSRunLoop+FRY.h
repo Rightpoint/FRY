@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FRYDefines.h"
+
+typedef BOOL(^FRYCheckBlock)();
 
 @interface NSRunLoop(FRY)
 

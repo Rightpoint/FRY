@@ -1,5 +1,4 @@
 # FRY: A UIKit Interaction Library
-
 FRY is an iOS Test Driver. The purpose of this library is to simplify iteractions with UIKit and make writing UI tests simple. FRY aims to provide view lookup, touch interaction and idle detection, to simplify writing UI tests.
 
 FRY also includes a library, `FRYolator`, which helps create integration tests when it is included in your target. The goal of FRYolator is to record all input to the target for later recreation. FRYolator will currently record and generate unit test commands to playback touch events, as well as Network Requests via OHHTTPStubs or Nocilla.
