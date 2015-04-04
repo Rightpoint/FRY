@@ -22,16 +22,16 @@ Not all commands require a lookup, since they will implicitly look for the requi
 // Select the text in the first UITextField
 FRY.selectText();
 
-// Scroll down to row 9 in section 0
+// Scroll down to row 9 in section 0 of the first UIScrollView
 FRY.searchFor(FRYDirectionDown, atSectionAndRow(0, 9));
 
-// Select the '200' on the first picker view component and 'lbs' on the second
+// Select the '200' and 'lbs' on the first UIPickerView
 FRY.selectPicker(@"200", 0).selectPicker(@"lbs", 1);
-
-// Or if there were mutliple pickers on screen
-
 ```
-// Select '200' and 'lbs' on the picker view inside of row 1
+
+Those commands can also be more specific if a lookup is specified
+```
+// Select '200' and 'lbs' on the picker view inside of row 1 (skipping the picker view in row 0)
 FRY.lookup(atSectionAndRow(0, 1)).selectPicker(@"200", 0).selectPicker(@"lbs", 1);
 ```
 
