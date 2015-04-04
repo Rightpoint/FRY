@@ -249,14 +249,15 @@ static NSTimeInterval FRYQueryDefaultTimeout = 1.0;
 - (FRYCheckBlock)selectText
 {
     return ^() {
+        BOOL success = [[FRYIdleCheck system] waitForIdle];
         NSArray *subPredicates = @[FRY_ofKind([UITextField class]),
                                    FRY_ofKind([UITextView class])];
         NSPredicate *textClass = [NSCompoundPredicate orPredicateWithSubpredicates:subPredicates];
         FRYQuery *action = [self actionByAddingPredicate:textClass];
         action.firstOnly = YES;
-        BOOL success = action.check(@"Looking for a text field", ^(NSSet *results) {
+        success = success ? action.check(@"Looking for a text field", ^(NSSet *results) {
             return (BOOL)(results.count == 1);
-        });
+        }) : success;
         if ( success ) {
             UITextField *textInput = [[action results] anyObject];
             [textInput fry_selectAll];

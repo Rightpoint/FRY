@@ -33,6 +33,8 @@ FRY.searchFor(FRYDirectionDown, FRY_atSectionAndRow(0, 9)).tap();
 
 // Find all views with non-nil accessibilityLabels
 views = FRY.lookup(FRY_PREDICATE_KEYPATH(UIView, accessibilityLabel, !=, nil)).views;
+labels = [views valueForKeyPath:FRY_KEYPATH(NSObject, accessibilityLabel)];
+XCTAssertEqualObjects(labels, (@[@"Username:", @"Password:"]));
 
 // Select the text in the first UITextField
 FRY.selectText();
