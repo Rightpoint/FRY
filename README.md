@@ -7,7 +7,7 @@ FRY also includes a library, `FRYolator`, which helps create integration tests w
 NOTE: Everything is still in alpha, and is subject to change before the 1.0 release.
 
 ## Lookup and Perform 
-FRY commands usually consist of two parts, the lookup, which finds something on the screen to interact with, and the action - a touch, swipe, scroll, or type event.
+FRY commands usually consist of two parts, the lookup, which finds something on the screen to interact with, and the action -- a touch, swipe, scroll, or type event.
 
 ```obj-c
 // Tap the button "Share" button on row 5
@@ -22,7 +22,7 @@ FRY.lookup(ofKind([UIAlertView class])).lookup(accessibilityLabel(@"OK")).tap();
 // Select the text in the first UITextField
 FRY.selectText();
 
-// Select the '180' on the first component and 'lbs' on the second
+// Select the '180' on the first picker view component and 'lbs' on the second
 FRY.selectPicker(@"180", 0).selectPicker(@"lbs", 1);
 
 // Scroll down to row 9 in section 0, and tap that cell
@@ -30,6 +30,10 @@ FRY.searchFor(FRYDirectionDown, FRY_atSectionAndRow(0, 9)).tap();
 ```
 
 More Information on [Queries](FRY/DSL/Query.md) or the [Lookup Implementation](FRY/Lookup/Lookup.md)
+
+### Predicates
+FRY provides some helpful predicates to create compiler-checked keypath predicates(`FRY_PREDICATE_KEYPATH`), and compiler checked selector predicates (`FRY_PREDICATE_SELECTOR`). These predicates will make sure that the keypath or selector is valid, and add a `isKindOf:` check for safety. There are also a number short-hand helpers in `FRYDefines.h` for more common lookups.
+
 
 ### Touch Synthesis
 FRY uses strongly modeled touches to generate UIKit touch events.  This allows for simple arbitrary touch re-creation, and clear API's for creating common touch sequences.
@@ -43,14 +47,16 @@ FRY.lookup(@"My Label").touch([FRYTouch dragFromPoint:p1 toPoint:p2 forDuration:
 More Information on [Touch Synthesis](FRY/Touch/Touch.md)
 
 ### Idle Detection
-There is a helper `FRYIdleCheck` that will spin the runloop until all touches are finished and all UI Animations have completed. This greatly simplifies flow-control, and eliminiates the vast majority of `CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.5, false)`. If you find yourself wanting to add these to your tests, consider adding an animation to your UI instead, or providing additional application-specific checks to the delegate.  All FRYQuery will call `FRYIdleCheck` before and after the various actions.
+There is a helper `FRYIdleCheck` that will spin the runloop until all touches are finished and all UI Animations have completed. This greatly simplifies flow-control, and eliminiates the vast majority of `CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.5, false)`. If you find yourself wanting to add these to your tests, consider adding an animation to your UI instead, or providing additional application-specific checks to the delegate.  All `FRYQuery` actions will call `FRYIdleCheck` before and after the various actions.
 
 ## FRYolator
 FRYolator will be enabled when a special tap sequence is performed. Once enabled, all touch and network activity will be recorded. When the app is backgrounded and put in the foreground, the event stream will be saved as a `.fry` file. Inside the `.fry` bundle are all of the touch events and network communication.
 
 *To Enable Monitoring*
 ```obj-c
+#ifdef DEBUG
 [[FRYolatorUI shared] registerGestureEnablingOnView:self.window];
+#endif
 ```
 
 FRY will attempt to use relative coordinates with accessibility lookup information for the view that was touched. This will maximize the reliability of these commands when UI changes occur. If no accessibility information can be found, absoulte screen coordinates will be used.
@@ -64,7 +70,6 @@ FRYolator can also visualize touch events. This is used by FRYolator to indicate
 ```
 
 ## Installation
-
 Add FRY to your Podfile to install. If you want to use touch recording, add FRYolator to your application target. Only add it to the 'Debug' configuration to ensure it is not submitted to the app store, or add it to a debug target.
 
 *Podfile with Debug configuration*
