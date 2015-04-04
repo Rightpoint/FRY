@@ -4,8 +4,6 @@ FRY is an iOS Test Driver. The purpose of this library is to simplify iteraction
 
 FRY also includes a library, `FRYolator`, which helps create integration tests when it is included in your target. The goal of FRYolator is to record all input to the target for later recreation. FRYolator will currently record and generate unit test commands to playback touch events, as well as Network Requests via OHHTTPStubs or Nocilla.
 
-NOTE: Everything is still in alpha, and is subject to change before the 1.0 release.
-
 ## Lookup and Perform 
 FRY commands usually consist of two parts, the lookup, which finds something on the screen to interact with, and the action -- a touch, swipe, scroll, or type event.
 
