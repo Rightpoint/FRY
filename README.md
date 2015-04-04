@@ -82,12 +82,17 @@ Add FRY to your Podfile to install. If you want to use touch recording, add FRYo
 
 *Podfile with Debug configuration*
 ```
-pod 'FRY'
+target :YourTests do
+  pod 'FRY'
+#  Un-comment for touch visualization
+#  pod 'FRY/FRYolator'
+end
 
 target :YourApplication do
   pod 'FRY/FRYolator', :configuration => "Debug"
 end
 ```
+This will cause your test target to link with FRY, and link your application with FRYolator on `Debug` configurations
 
 ## Influences
 
