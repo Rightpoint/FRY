@@ -1,5 +1,5 @@
 # FRY: A UIKit Interaction Library
-FRY is an iOS Test Driver. The purpose of this library is to simplify iteractions with UIKit and make writing UI tests simple. FRY aims to provide view lookup, touch interaction and idle detection, to simplify writing UI tests.
+FRY is an iOS Test Driver. The purpose of this library is to simplify iteractions with UIKit. FRY does this by providing a clear API to perform view lookup, touch interaction, typing, and idle detection.
 
 FRY also includes a library, `FRYolator`, which helps create integration tests when it is included in your target. The goal of FRYolator is to record all input to the target for later recreation. FRYolator will currently record and generate unit test commands to playback touch events, as well as Network Requests via OHHTTPStubs or Nocilla.
 
@@ -38,7 +38,7 @@ FRY.lookup(atSectionAndRow(0, 1)).selectPicker(@"200", 0).selectPicker(@"lbs", 1
 More Information on [Queries](FRY/DSL/Query.md) or the [Lookup Implementation](FRY/Lookup/Lookup.md)
 
 ### Predicates
-FRY provides some helpful macros to create compiler-checked predicates. There is a keypath predicate helper `FRY_PREDICATE_KEYPATH`, and selector predicate helper `FRY_PREDICATE_SELECTOR`. These predicates will make sure that the keypath or selector is valid, and add a `isKindOf:` check for safety. There are also a number short-hand helpers in [FRYDefines.h](FRY/FRYDefines.h) for more common lookups.
+FRY provides some helpful macros to create compiler-checked predicates. There is a keypath predicate helper `FRY_PREDICATE_KEYPATH`, and selector predicate helper `FRY_PREDICATE_SELECTOR`. These predicates will make sure that the keypath or selector is valid, and add a `isKindOf:` check for safety. There are also a number short-hand helpers in [FRYDefines.h](FRY/FRYDefines.h) for more common lookups like `ofKind()`, `atSectionAndRow()`, and `accessibilityLabel()`.
 
 
 ### Touch Synthesis
@@ -52,11 +52,19 @@ FRY.lookup(@"My Label").touch([FRYTouch dragFromPoint:p1 toPoint:p2 forDuration:
 
 More Information on [Touch Synthesis](FRY/Touch/Touch.md)
 
+### Typing
+Typing is a separate API from `FRYQuery`, since it doesn't actually lookup any views, it just directly interacts with private API's. 
+
+```obj-c
+[FRYTypist typeString:@"Fake Input"]
+```
+FRY will work with both the hardware and software keyboard, but the software keyboard is much slower.
+
 ### Idle Detection
 There is a helper [FRYIdleCheck](FRY/Idle/FRYIdleCheck.h) that will spin the runloop until all touches are finished and all UI animations have completed. This greatly simplifies flow control, and eliminiates the vast majority of `CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.5, false)`. If you find yourself wanting to add these to your tests, consider adding an animation to your UI instead, or providing additional application-specific checks to the delegate.  All [FRYQuery](FRY/DSL/FRYQuery.h) actions will call [FRYIdleCheck](FRY/Idle/FRYIdleCheck.h) before and after the various actions.
 
 ## FRYolator
-FRYolator will be enabled when a special tap sequence is performed. Once enabled, all touch and network activity will be recorded. When the app is backgrounded and put in the foreground, the event stream will be saved as a `.fry` file. Inside the `.fry` bundle are all of the touch events and network communication.
+FRYolator will be enabled when a special tap sequence is performed. Once enabled, all touch and network activity will be recorded until the tap sequence is performed again. This will save all input events that FRYolator can record into a `.fry` file. Inside the `.fry` bundle are all of the touch events and network communication.
 
 *To Enable Monitoring*
 ```obj-c
@@ -76,6 +84,9 @@ FRYolator can also visualize touch events. This is used by FRYolator to indicate
 ```
 
 Touch visualization is automatically enabled by [FRYTouchDispatch](FRY/Touch/FRYTouchDispatch.h) if the FRYolator library is linked into the target.
+
+## iOS Support
+iOS 8+ is being actively supported and tested. All of the touch dispatch code should work on any version of iOS, and the typing code should also work on earlier versions of iOS.
 
 ## Installation
 Add FRY to your Podfile to install. If you want to use touch recording, add FRYolator to your application target. Only add it to the 'Debug' configuration to ensure it is not submitted to the app store, or add it to a debug target.
