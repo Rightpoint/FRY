@@ -11,6 +11,7 @@
 #import "FRYTouch.h"
 #import "UIApplication+FRY.h"
 #import "UITouch+FRY.h"
+#import "NSObject+FRYLookup.h"
 
 @interface FRYTouchDispatch()
 
@@ -28,6 +29,9 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         shared = [[FRYTouchDispatch alloc] init];
+
+        // Dirty little hack to enable touch highlighting if FRYolator is linked in.
+        [(id)NSClassFromString(@"FRYTouchHighlightWindowLayer") valueForKeyPath:@"shared.enable"];
     });
     return shared;
 }
@@ -49,15 +53,14 @@
 
 - (void)asynchronouslySimulateTouches:(NSArray *)touches inView:(UIView *)view frame:(CGRect)frame
 {
-    CGRect touchFrameInWindow = [view.window convertRect:frame fromView:view];
     for ( __strong FRYTouch *touch in touches ) {
         if ( touch.pointsAreAbsolute == NO ) {
-            touch = [touch touchInFrame:touchFrameInWindow];
+            touch = [touch touchInFrame:frame];
         }
         NSTimeInterval startTime = [NSDate timeIntervalSinceReferenceDate];
         FRYActiveTouch *touchInteraction = [[FRYActiveTouch alloc] initWithSimulatedTouch:touch inView:view startTime:startTime];
         
-        NSLog(@"Performing Touch %@ on %@", touch, view);
+        NSLog(@"Dispatch %@ on %@", touch, view);
         [self.activeTouches addObject:touchInteraction];
     }
 }
@@ -75,7 +78,7 @@
 
 - (void)simulateTouches:(NSArray *)touches inView:(UIView *)view
 {
-    [self simulateTouches:touches inView:view frame:view.bounds];
+    [self simulateTouches:touches inView:view frame:[view fry_frameInWindow]];
 }
 
 - (void)pruneCompletedTouchInteractions
@@ -85,7 +88,6 @@
         if ( interaction.currentTouchPhase == UITouchPhaseEnded || interaction.currentTouchPhase == UITouchPhaseCancelled ) {
             [self.activeTouches removeObject:interaction];
             [completeTouches addObject:interaction.touchDefinition];
-            NSLog(@"Completing Touch %@", interaction.touchDefinition);
         }
     }
 }
@@ -124,7 +126,7 @@
 
     for ( FRYActiveTouch *interaction in self.activeTouches ) {
         UITouch *touch = [interaction touchAtTime:time];
-        // Some active touches are delayed.   Ignore those here.
+        // Some active touches are delayed. Ignore those here.
         if ( touch ) {
             [touches addObject:touch];
         }

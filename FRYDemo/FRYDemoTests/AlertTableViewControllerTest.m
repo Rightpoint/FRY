@@ -11,6 +11,8 @@
 #import <FRY/FRY.h>
 #import <FRY/FRYolator.h>
 
+typedef void(^Foo)(NSString *name, ...);
+
 #import "AlertTableViewController.h"
 
 @interface AlertTableViewControllerTest : XCTestCase
@@ -20,11 +22,6 @@
 @end
 
 @implementation AlertTableViewControllerTest
-
-+ (void)load
-{
-    [[FRYTouchHighlightWindowLayer shared] enable];
-}
 
 - (void)setUp
 {
@@ -38,17 +35,16 @@
 - (void)testBasic
 {
     for ( NSString *label in @[@"One", @"Two", @"Three"] ) {
-        FRY.accessibilityLabel(label).tap();
-        // The alertview is shown .5 seconds after tap, so wait a second for it to appear.
-        FRY.accessibilityLabel(@"OK").tap().absent();
+        FRY.lookupByAccessibilityLabel(label).tap();
+        FRY.lookupByAccessibilityLabel(@"OK").tap();
     }
 }
 
 - (void)testBasicActions
 {
     for ( NSString *response in @[@"Destructive", @"Other", @"OK"] ) {
-        FRY.accessibilityLabel(@"Action One").tap();
-        FRY.accessibilityLabel(response).tap().absent();
+        FRY.lookupByAccessibilityLabel(@"Action One").tap();
+        FRY.lookupByAccessibilityLabel(response).tap();
     }
 }
 

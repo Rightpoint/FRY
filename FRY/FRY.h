@@ -8,14 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-//! Project version number for FRY.
-FOUNDATION_EXPORT double FRYVersionNumber;
-
-//! Project version string for FRY.
-FOUNDATION_EXPORT const unsigned char FRYVersionString[];
-
 #import "FRYTouch.h"
 #import "FRYTouchDispatch.h"
+#import "FRYQuery.h"
+#import "FRYIdleCheck.h"
 
 #import "NSObject+FRYLookup.h"
 #import "NSRunLoop+FRY.h"
@@ -28,6 +24,21 @@ FOUNDATION_EXPORT const unsigned char FRYVersionString[];
 #import "NSPredicate+FRY.h"
 #import "UIScrollView+FRY.h"
 
-#import "FRYDSLQuery.h"
+/**
+ *  Main entry point for fry. All commands start from here.
+ *
+ *  // Tap a label
+ *  FRY.lookupByAccessibilityLabel(label).tap();
+ *
+ *  // Wait for the label to be absent
+ *  FRY.lookupByAccessibilityLabel(label).absent();
+ *
+ *  // Find all views with non-nil accessibilityLabels
+ *  views = FRY.lookup(FRY_PREDICATE_KEYPATH(UIView, accessibilityLabel, !=, nil)).views;
+ *
+ *
+ */
+#define FRY ({[FRYQuery queryFrom:[UIApplication sharedApplication] context:FRY_TEST_CONTEXT];})
 
-#import "FRYIdleCheck.h"
+FOUNDATION_EXPORT double FRYVersionNumber;
+FOUNDATION_EXPORT const unsigned char FRYVersionString[];

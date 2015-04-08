@@ -37,7 +37,7 @@ UIAccessibilityTraits FRYAccessibilityTraitContainer = 0x200000000000;
 
 - (NSArray *)fry_accessibilityElements
 {
-    // Do not call accessibilityElements, it is unreliable.   accessibilityElements return nil for
+    // Do not call accessibilityElements, it is unreliable. accessibilityElements return nil for
     // table views with accessibilityElementCount > 0, on iOS8 which is terrible.
     NSUInteger count = self.accessibilityElementCount == NSNotFound ? 0 : self.accessibilityElementCount;
     NSMutableArray *result = [NSMutableArray arrayWithCapacity:count];

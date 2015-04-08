@@ -31,12 +31,12 @@
  *  [[FRYTouchDispatch shared] hasActiveTouches] == NO
  *  ```
  *
- *  More idle checks can be if your application requires it.  A proper UI design, theoretically should not require any modifications, as a UI element should be animating at all times if the system is not idle.   Use the delegate pattern to add idle checks, like ensuring that a network NSOperationQueue.
+ *  More idle checks can be if your application requires it. A proper UI design, theoretically should not require any modifications, as a UI element should be animating at all times if the system is not idle. Use the delegate pattern to add idle checks, like ensuring that a network NSOperationQueue.
  *
  *
- *  Also, some times you do not want certain view animations to block your tests.   If that's the case, return the views you want to ignore via the delegate pattern.
+ *  Also, some times you do not want certain view animations to block your tests. If that's the case, return the views you want to ignore via the delegate pattern.
  *
- *  The delegate pattern also provides a method to return a description of why your application is not idle.  This can help provide robust error messages.
+ *  The delegate pattern also provides a method to return a description of why your application is not idle. This can help provide robust error messages.
  */
 @interface FRYIdleCheck : NSObject
 

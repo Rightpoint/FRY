@@ -65,10 +65,4 @@
     }
 }
 
-
-- (UIView *)fry_inputViewOfClass:(Class)klass
-{
-    return [[[self fry_inputViewWindow] fry_farthestDescendentMatching:[NSPredicate fry_matchClass:klass]] fry_representingView];
-}
-
 @end

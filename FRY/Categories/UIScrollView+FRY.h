@@ -18,8 +18,8 @@
 - (BOOL)fry_searchForViewsMatching:(NSPredicate *)predicate lookInDirection:(FRYDirection)direction;
 
 /**
- *  Scroll to the result of the depth-first search matching the predicate.  This will only work for
- *  UIScrollView subclasses that return UIAccessibilityElements out side of the visible bounds.  To be 
+ *  Scroll to the result of the depth-first search matching the predicate. This will only work for
+ *  UIScrollView subclasses that return UIAccessibilityElements out side of the visible bounds. To be 
  *  clear, this will not scroll and search like fry_searchForViewsMatching:lookInDirection:.
  */
 - (BOOL)fry_scrollToLookupResultMatching:(NSPredicate *)predicate;

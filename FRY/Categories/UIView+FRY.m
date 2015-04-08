@@ -13,31 +13,6 @@
 
 @implementation UIView (FRY)
 
-- (BOOL)fry_isAnimating
-{
-    NSTimeInterval uptime = [[NSProcessInfo processInfo] systemUptime];
-    BOOL isAnimating = NO;
-    
-    for (NSString *animationKey in self.layer.animationKeys ) {
-        CAAnimation *animation = [self.layer animationForKey:animationKey];
-        NSTimeInterval animationEnd = animation.beginTime + animation.duration + animation.timeOffset;
-        
-        if ( [animation.fillMode isEqualToString:kCAFillModeRemoved] ) {
-            isAnimating = YES;
-        }
-        else if ( animationEnd > uptime ) {
-            isAnimating = YES;
-        }
-    }
-    return isAnimating;
-}
-
-- (BOOL)fry_isOnScreen
-{
-    CGRect frameInWindow = [self.window convertRect:self.frame fromView:self.superview];
-    return self.window && CGRectIntersectsRect(self.window.bounds, frameInWindow);
-}
-
 - (BOOL)fry_isVisible
 {
     UIView *view = self;
@@ -68,23 +43,12 @@
     }
 }
 
-- (UIView *)fry_interactableParent
-{
-    UIView *testView = self;
-    while ( testView &&
-           [testView fry_accessibilityTraitsAreInteractable] == NO &&
-           [testView isUserInteractionEnabled] == NO ) {
-        testView = [testView superview];
-    }
-    return testView;
-}
-
-- (BOOL)fry_parentViewOfClass:(Class)klass
+- (BOOL)fry_parentViewOfClass:(Class)cls
 {
     BOOL matchingParent = NO;
     UIView *view = [self superview];
     while ( view ) {
-        if ( [view isKindOfClass:klass] ) {
+        if ( [view isKindOfClass:cls] ) {
             matchingParent = YES;
             break;
         }

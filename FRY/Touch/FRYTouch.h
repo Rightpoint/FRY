@@ -10,7 +10,7 @@
 #import "FRYDefines.h"
 
 /**
- * A simulated touch models the touch sequence of one finger.   This object
+ * A simulated touch models the touch sequence of one finger. This object
  * is then asked for where the finger is at any given point in time.
  *
  * There are two subclasses to help manage the creation of touches, FRYSyntheticTouch and FRYRecordedTouch.
@@ -35,13 +35,13 @@
 + (NSArray *)pinchInToCenterOfPoint:(CGPoint)finger1 point:(CGPoint)finger2 withDuration:(NSTimeInterval)duration;
 
 /**
- * Start with the two fingers in the center of the two specified points.   Then pinch outwards
+ * Start with the two fingers in the center of the two specified points. Then pinch outwards
  * until the fingers stop at the points specified.
  */
 + (NSArray *)pinchOutFromCenterToPoint:(CGPoint)finger1 point:(CGPoint)finger2 withDuration:(NSTimeInterval)duration;
 
 /**
- * The touch duration.  This is the time of the last point plus the startingOffset.
+ * The touch duration. This is the time of the last point plus the startingOffset.
  */
 - (NSTimeInterval)duration;
 
@@ -52,7 +52,7 @@
 
 /**
  *  A flag to mark the touch as containing absolute positions, not relative positions.
- *  This defaults to NO, and specified points *should* be relative.  If absolute points
+ *  This defaults to NO, and specified points *should* be relative. If absolute points
  * are used, be sure to set this to YES.
  */
 @property (assign, nonatomic) BOOL pointsAreAbsolute;

@@ -29,7 +29,6 @@
             found = YES;
         }
     }
-    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.7]];
 
     return found;
 }

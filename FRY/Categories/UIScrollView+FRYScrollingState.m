@@ -11,6 +11,7 @@
 #import <objc/runtime.h>
 #import "UIView+FRY.h"
 #import "UIKit+FRYExposePrivate.h"
+#import "NSObject+FRYLookup.h"
 
 static void *FRYScrollingStateScrollingKey = &FRYScrollingStateScrollingKey;
 

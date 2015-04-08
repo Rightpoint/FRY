@@ -7,11 +7,34 @@
 //
 
 #import "FRYTypist.h"
-#import "UIKit+FRYCastCompanions.h"
 #import "NSObject+FRYLookup.h"
 #import "FRYTouchDispatch.h"
 #import "FRYTouch.h"
 #import "UIKit+FRYExposePrivate.h"
+
+
+/**
+ * It's a pain to bring "type safety" to private classes. These are the private classes, with the FRY prefix instead of UI.
+ * These classes never actually exist, but we cast to them to get some help from the compiler.
+ */
+@interface FRYKBKeyTree : NSObject
+
+- (BOOL)isLetters;
+- (BOOL)isShiftKeyplane;
+- (id)keys;
+- (id)keyplaneForKey:(id)arg1;
+- (struct CGRect)frame;
+
+@end
+
+@interface FRYKeyboardLayoutStar : UIView
+
+@property(retain, nonatomic) FRYKBKeyTree *activeKey;
+@property(readonly, nonatomic) FRYKBKeyTree *keyplane;
+@property(readonly, nonatomic) FRYKBKeyTree *keyboard;
+- (FRYKBKeyTree *)baseKeyForString:(NSString *)arg1;
+
+@end
 
 @implementation FRYTypist
 
@@ -19,7 +42,7 @@
 {
     NSPredicate *privateKeyboardPredicate = [NSPredicate predicateWithFormat:@"class.description = %@", @"UIKeyboardLayoutStar"];   
     UIView *keyboard = [[[UIApplication sharedApplication] fry_farthestDescendentMatching:privateKeyboardPredicate] fry_representingView];
-    NSAssert(keyboard != nil, @"Could not find the keyboard.  Wait till it appears, or try command-k to reveal the keyboard.");
+    NSAssert(keyboard != nil, @"Could not find the keyboard. Wait till it appears, or try command-k to reveal the keyboard.");
     return (FRYKeyboardLayoutStar *)keyboard;
 }
 

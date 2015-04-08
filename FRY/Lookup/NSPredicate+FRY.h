@@ -9,25 +9,10 @@
 #import <UIKit/UIKit.h>
 
 /**
- * Predicates to aide in looking up views / accessibility elements.   It is a design goal to avoid
- * using block predicate for debug-ability reasons.   -description on a block predicate is not helpful.
+ * Category to help debug lookup failures. It will print out the 
+ * actual values along side the predicate query.
  */
 @interface NSPredicate(FRY)
-
-+ (NSPredicate *)fry_animatingView;
-+ (NSPredicate *)fry_isOnScreen;
-+ (NSPredicate *)fry_isVisible;
-+ (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel;
-+ (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel comparision:(NSString *)comparision;
-+ (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityValue:(NSString *)accessibilityValue;
-+ (NSPredicate *)fry_matchAccessibilityValue:(NSString *)accessibilityValue;
-+ (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityTrait:(UIAccessibilityTraits)traits;
-+ (NSPredicate *)fry_matchAccessibilityTrait:(UIAccessibilityTraits)traits;
-+ (NSPredicate *)fry_matchAccessibilityIdentifier:(NSString *)accessibilityIdentifier;
-+ (NSPredicate *)fry_matchContainerIndexPath:(NSIndexPath *)indexPath;
-+ (NSPredicate *)fry_matchClass:(Class)klass;
-+ (NSPredicate *)fry_parentViewOfClass:(Class)klass;
-
 
 - (NSString *)fry_descriptionOfEvaluationWithObject:(id)object;
 

@@ -1,4 +1,4 @@
-//
+ //
 //  PickerViewControllerTests.m
 //  FRY
 //
@@ -29,35 +29,36 @@
 
 - (void)testPickerOne
 {
-    FRY_KEY.accessibilityLabel(@"One").tap();
-    FRY_KEY.accessibilityLabel(@"Select = One").present();
+    FRY.lookupByAccessibilityLabel(@"One").tap();
+    FRY.lookupByAccessibilityLabel(@"Select = One").present();
 
-    UIPickerView *inputPicker = (id)[FRY_APP fry_inputViewOfClass:[UIPickerView class]];
-    XCTAssertNotNil(inputPicker);
-    
-    XCTAssertTrue([inputPicker fry_selectTitle:@"44" inComponent:0 animated:YES]);
-    
-    FRY_KEY.accessibilityLabel(@"Picker = 44 / 0").present();
+    FRY.selectPicker(@"44", 0);
+    FRY.lookupByAccessibilityLabel(@"Picker = 44 / 0").present();
 
-    XCTAssertTrue([inputPicker fry_selectTitle:@"99" inComponent:0 animated:YES]);
-    FRY_KEY.accessibilityLabel(@"Picker = 99 / 0").present();
+    FRY.selectPicker(@"99", 0);
+    FRY.lookupByAccessibilityLabel(@"Picker = 99 / 0").present();
 }
 
 - (void)testPickerTwo
 {
-    FRY_KEY.accessibilityLabel(@"Two").tap();
-    FRY_KEY.accessibilityLabel(@"Select = Two").present();
-   
-    UIPickerView *inputPicker = (id)[FRY_APP fry_inputViewOfClass:[UIPickerView class]];
-    XCTAssertNotNil(inputPicker);
-    
-    XCTAssertTrue([inputPicker fry_selectTitle:@"44" inComponent:0 animated:YES]);
-    
-    FRY_KEY.accessibilityLabel(@"Picker = 44 / 0").present();
+    FRY.lookupByAccessibilityLabel(@"Two").tap();
+    FRY.lookupByAccessibilityLabel(@"Select = Two").present();
 
-    XCTAssertTrue([inputPicker fry_selectTitle:@"99" inComponent:1 animated:YES]);
+    FRY.selectPicker(@"44", 0);
+    FRY.lookupByAccessibilityLabel(@"Picker = 44 / 0").present();
+
+    FRY.selectPicker(@"99", 1);
+    FRY.lookupByAccessibilityLabel(@"Picker = 99 / 1").present();
+}
+
+- (void)testChaining
+{
+    FRY.lookupByAccessibilityLabel(@"Two").tap();
+    FRY.lookupByAccessibilityLabel(@"Select = Two").present();
     
-    FRY_KEY.accessibilityLabel(@"Picker = 99 / 1").present();
+    FRY.selectPicker(@"44", 0).selectPicker(@"99", 1);
+
+    FRY.lookupByAccessibilityLabel(@"Picker = 99 / 1").present();
 }
 
 @end

@@ -7,109 +7,6 @@
 //
 
 #import "NSPredicate+FRY.h"
-#import "UIView+FRY.h"
-#import "UIAccessibility+FRY.h"
-
-@implementation NSPredicate(FRY)
-
-+ (NSPredicate *)fry_animatingView
-{
-    return [NSCompoundPredicate andPredicateWithSubpredicates:@[[NSPredicate fry_matchClass:[UIView class]],
-                                                                [NSPredicate predicateWithFormat:@"%K = YES", NSStringFromSelector(@selector(fry_isAnimating))]
-                                                                ]];
-}
-
-+ (NSPredicate *)fry_isOnScreen
-{
-    return [NSCompoundPredicate andPredicateWithSubpredicates:@[[NSPredicate fry_matchClass:[UIView class]],
-                                                                [NSPredicate predicateWithFormat:@"%K = YES", NSStringFromSelector(@selector(fry_isOnScreen))]
-                                                                ]];
-}
-
-+ (NSPredicate *)fry_isVisible
-{
-    return [NSCompoundPredicate andPredicateWithSubpredicates:@[[NSPredicate fry_matchClass:[UIView class]],
-                                                                [NSPredicate predicateWithFormat:@"%K = YES", NSStringFromSelector(@selector(fry_isVisible))]
-                                                                ]];
-}
-
-+ (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel
-{
-    NSParameterAssert(accessibilityLabel);
-    return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(fry_accessibilityLabel)), accessibilityLabel];
-}
-
-+ (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel comparision:(NSString *)comparision;
-{
-    NSParameterAssert(accessibilityLabel);
-    NSParameterAssert(comparision);
-    return [NSPredicate predicateWithFormat:@"%K %K %@", NSStringFromSelector(@selector(fry_accessibilityLabel)), comparision, accessibilityLabel];
-}
-
-+ (NSPredicate *)fry_matchAccessibilityLabelLike:(NSString *)accessibilityLabel;
-{
-    NSParameterAssert(accessibilityLabel);
-    return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(fry_accessibilityLabel)), accessibilityLabel];
-}
-
-+ (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityValue:(NSString *)accessibilityValue
-{
-    NSParameterAssert(accessibilityLabel);
-    NSParameterAssert(accessibilityValue);
-    return [NSPredicate predicateWithFormat:@"%K = %@ && %K = %@",
-            NSStringFromSelector(@selector(fry_accessibilityLabel)), accessibilityLabel,
-            NSStringFromSelector(@selector(fry_accessibilityValue)), accessibilityValue];
-}
-
-+ (NSPredicate *)fry_matchAccessibilityValue:(NSString *)accessibilityValue;
-{
-    NSParameterAssert(accessibilityValue);
-    return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(fry_accessibilityValue)), accessibilityValue];
-}
-
-+ (NSPredicate *)fry_matchAccessibilityLabel:(NSString *)accessibilityLabel accessibilityTrait:(UIAccessibilityTraits)traits
-{
-    return [NSPredicate predicateWithFormat:@"%K = %@ && (%K & %@) = %@",
-            NSStringFromSelector(@selector(fry_accessibilityLabel)), accessibilityLabel,
-            NSStringFromSelector(@selector(accessibilityTraits)), @(traits), @(traits)];
-}
-
-+ (NSPredicate *)fry_matchAccessibilityTrait:(UIAccessibilityTraits)traits
-{
-    return [NSPredicate predicateWithFormat:@"(%K & %@) = %@",
-            NSStringFromSelector(@selector(accessibilityTraits)), @(traits), @(traits)];
-}
-
-+ (NSPredicate *)fry_matchAccessibilityIdentifier:(NSString *)accessibilityIdentifier
-{
-    return [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(accessibilityIdentifier)), accessibilityIdentifier];
-}
-
-+ (NSPredicate *)fry_matchContainerIndexPath:(NSIndexPath *)indexPath
-{
-    return [NSCompoundPredicate andPredicateWithSubpredicates:@[[NSPredicate fry_matchClass:[UIView class]],
-                                                                [NSPredicate predicateWithFormat:@"%K = %@", NSStringFromSelector(@selector(fry_indexPathInContainer)), indexPath]
-                                                                ]];
-    
-}
-
-+ (NSPredicate *)fry_matchClass:(Class)klass
-{
-    return [NSPredicate predicateWithFormat:@"SELF isKindOfClass:%@", klass];
-}
-
-+ (NSPredicate *)fry_parentViewOfClass:(Class)klass
-{
-    return [NSCompoundPredicate andPredicateWithSubpredicates:@[[NSPredicate fry_matchClass:[UIView class]],
-                                                                [NSPredicate predicateWithFormat:@"SELF fry_parentViewOfClass:%@", klass]]];
-}
-
-- (NSString *)fry_descriptionOfEvaluationWithObject:(id)object
-{
-    return @"Unknown";
-}
-
-@end
 
 @implementation NSCompoundPredicate (FRY)
 
@@ -204,7 +101,7 @@ NSString *FRYStringFromPredicateOperatorType(NSPredicateOperatorType operator) {
             result = [self fry_descriptionOfDirectEvaluationWithObject:object];
             break;
         default:
-            result = @"Unsupported to-many description.  FIXME!";
+            result = @"Unsupported to-many description. FIXME!";
             break;
     }
     return result;

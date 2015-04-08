@@ -29,7 +29,7 @@
 
 - (void)testTapByPlaceholder
 {
-    FRY_KEY.accessibilityLabel(@"placeholder").tap();
+    FRY.lookupByAccessibilityLabel(@"placeholder").tap();
 
     
     NSArray *stringsToTest = @[
@@ -42,7 +42,7 @@
     for ( NSString *string in stringsToTest ) {
         [FRYTypist typeString:string];
 
-        FRY_KEY.accessibilityValue(string).present().selectText();
+        FRY.lookup(FRY_accessibilityValue(string)).selectText();
     }
 }
 

@@ -20,21 +20,21 @@ typedef void(^FRYRunLoopObserverBlock)(CFRunLoopObserverRef observer, CFRunLoopA
 
 - (BOOL)fry_waitWithTimeout:(NSTimeInterval)timeout forCheck:(FRYCheckBlock)checkBlock;
 {
-    // Spin the runloop for a tad, incase some action initiated a performSelector:withObject:afterDelay:
-    // which will cause some state change very soon.
-    [self runMode:self.currentMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.001]];
+    // Process any sources that have work pending, before checking the check block.
+    // Often UIKit will have layout work to do, and this minimizes the error cases.
+    while ( CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0, true) == kCFRunLoopRunHandledSource ) {}
 
-    NSTimeInterval start = [NSDate timeIntervalSinceReferenceDate];
-    BOOL checkOK = checkBlock();
-    while ( checkOK == NO && start + timeout > [NSDate timeIntervalSinceReferenceDate] )
-    {
-        NSDate *date = [NSDate dateWithTimeIntervalSinceNow:kFRYEventDispatchInterval];
-        [self runMode:self.currentMode beforeDate:date];
-
-        checkOK = checkBlock();
+    // Spin the runloop, checking the check block any time the runloop reports
+    // that something happened.
+    NSDate *endDate = [NSDate dateWithTimeIntervalSinceNow:timeout];
+    NSTimeInterval remainingTimeout = [endDate timeIntervalSinceNow];
+    BOOL ok = checkBlock();
+    while( ok == NO && remainingTimeout > 0 ) {
+        CFRunLoopRunInMode(kCFRunLoopDefaultMode, remainingTimeout, true);
+        ok = checkBlock();
+        remainingTimeout = [endDate timeIntervalSinceNow];
     }
-    
-    return checkOK;
+    return ok;
 }
 
 @end

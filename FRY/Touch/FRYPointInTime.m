@@ -22,7 +22,7 @@
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@:%p location=%@, offset=%f>", self.class, self, NSStringFromCGPoint(self.location), self.offset];
+    return [NSString stringWithFormat:@"<%@:%p location=%@, offset=%0.1f>", self.class, self, NSStringFromCGPoint(self.location), self.offset];
 }
 
 - (NSArray *)arrayRepresentation

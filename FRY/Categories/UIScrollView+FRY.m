@@ -15,11 +15,11 @@
 
 - (BOOL)fry_searchForViewsMatching:(NSPredicate *)predicate lookInDirection:(FRYDirection)direction
 {
-    NSSet *results = [self fry_allChildrenMatching:predicate];
+    NSSet *results = [self fry_nonExhaustiveShallowSearchForChildrenMatching:predicate];
     while ( results.count == 0 && [self fry_moreSpaceInSearchDirection:direction] ) {
         @autoreleasepool {
             [self fry_scrollInDirection:direction];
-            results = [self fry_allChildrenMatching:predicate];
+            results = [self fry_nonExhaustiveShallowSearchForChildrenMatching:predicate];
         }
     }
     
@@ -31,12 +31,12 @@
     id<FRYLookup> result = [self fry_farthestDescendentMatching:predicate];
     BOOL ok = result != nil;
     if ( result ) {
-        CGRect viewFrame = [self convertRect:[result fry_frameInView] fromView:[result fry_representingView]];
+        CGRect viewFrame = [self convertRect:[result fry_frameInWindow] fromView:[result fry_representingView].window];
         viewFrame.origin.x -= self.contentInset.left;
         viewFrame.origin.y -= self.contentInset.top;
 
         [self setContentOffset:viewFrame.origin animated:YES];
-        ok = [[FRYIdleCheck system] waitForIdle] == NO;
+        ok = [[FRYIdleCheck system] waitForIdle];
     }
     return result != nil;
 }
