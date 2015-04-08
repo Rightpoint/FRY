@@ -11,7 +11,7 @@
 #import "FRYTouchDispatch.h"
 #import "FRYTouch.h"
 #import "UIKit+FRYExposePrivate.h"
-
+#import "NSRunLoop+FRY.h"
 
 /**
  * It's a pain to bring "type safety" to private classes. These are the private classes, with the FRY prefix instead of UI.
@@ -60,12 +60,9 @@
             [self tapSoftwareKeyWithRepresentedString:representedString];
         }
     }
-    // Violating my own rule here, and adding a wait.
-    // There is probably some state I can check, but I'm not up for snooping
-    // around on private api's and it's fixed time for any sized string.
-    if ( [UIKeyboardImpl sharedInstance].isInHardwareKeyboardMode ) {
-        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
-    }
+    [[[UIKeyboardImpl sharedInstance] taskQueue] waitUntilAllTasksAreFinished];
+    // Give UIKit a chance to update the view so as to not confuse anyone.
+    [[NSRunLoop currentRunLoop] fry_handleSources];
 }
 
 + (void)tapHardwareKeyWithString:(NSString *)string
@@ -75,6 +72,7 @@
     } else {
         [[UIKeyboardImpl sharedInstance] addInputString:string];
     }
+
 }
 
 + (void)tapSoftwareKeyWithRepresentedString:(NSString *)representedString

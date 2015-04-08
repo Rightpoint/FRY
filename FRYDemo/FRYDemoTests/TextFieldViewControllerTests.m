@@ -36,7 +36,6 @@
                                @"Tt8/*",
                                @"Thissss is text",
                                @"8 * 8 /",
-// This is buggy.  issue #5
                                @"VERYLONGTEXTWITHMANYUPPERCASELETTERS",
                                ];
     for ( NSString *string in stringsToTest ) {
@@ -52,9 +51,7 @@
  */
 //- (void)testTypingEntirelyTooMuch
 //{
-//    FRY_KEY.accessibilityLabel(@"placeholder").depthFirst().tap();
-//    
-//    FRYTypist *typist = [[UIApplication sharedApplication] fry_typist];
+//    FRY.lookupByAccessibilityLabel(@"placeholder").tap();
 //
 //    NSArray *stringsToTest = @[
 //                               @"Tt8/*",
@@ -64,9 +61,9 @@
 //                               ];
 //    for ( NSUInteger i = 0; i < 50; i++ ) {
 //        for ( NSString *string in stringsToTest ) {
-//            [typist typeString:string];
-//            
-//            FRY_KEY.accessibilityValue(string).depthFirst().present().selectText();
+//            [FRYTypist typeString:string];
+//
+//            FRY.lookup(FRY_accessibilityValue(string)).selectText();
 //        }
 //    }
 //}

@@ -41,12 +41,19 @@ typedef struct __GSEvent * GSEventRef;
 
 @end
 
+@interface UIKeyboardTaskQueue : NSObject
+
+- (void)waitUntilAllTasksAreFinished;
+
+@end
+
 @interface UIKeyboardImpl : NSObject
 + (UIKeyboardImpl *)sharedInstance;
 - (void)addInputString:(NSString *)string;
 - (void)deleteFromInput;
 @property(getter=isInHardwareKeyboardMode) BOOL inHardwareKeyboardMode;
 @property(retain) UIResponder<UIKeyInput> * delegate;
+@property(readonly) UIKeyboardTaskQueue * taskQueue;
 @end
 
 @interface FRYPrivateSelectors : NSObject

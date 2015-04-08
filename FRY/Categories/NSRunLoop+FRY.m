@@ -22,8 +22,8 @@ typedef void(^FRYRunLoopObserverBlock)(CFRunLoopObserverRef observer, CFRunLoopA
 {
     // Process any sources that have work pending, before checking the check block.
     // Often UIKit will have layout work to do, and this minimizes the error cases.
-    while ( CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0, true) == kCFRunLoopRunHandledSource ) {}
-
+    [self fry_handleSources];
+    
     // Spin the runloop, checking the check block any time the runloop reports
     // that something happened.
     NSDate *endDate = [NSDate dateWithTimeIntervalSinceNow:timeout];
@@ -36,5 +36,11 @@ typedef void(^FRYRunLoopObserverBlock)(CFRunLoopObserverRef observer, CFRunLoopA
     }
     return ok;
 }
+
+- (void)fry_handleSources
+{
+    while ( CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0, true) == kCFRunLoopRunHandledSource ) {}
+}
+
 
 @end

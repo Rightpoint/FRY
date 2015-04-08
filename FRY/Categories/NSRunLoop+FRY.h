@@ -19,4 +19,6 @@ typedef BOOL(^FRYCheckBlock)();
  */
 - (BOOL)fry_waitWithTimeout:(NSTimeInterval)timeout forCheck:(FRYCheckBlock)checkBlock;
 
+- (void)fry_handleSources;
+
 @end
