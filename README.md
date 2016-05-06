@@ -1,3 +1,7 @@
+## Important Notice
+
+This repository is slated for deletion, perhaps as soon as June 1, 2016.  Please find other solutions.  
+
 # FRY: A UIKit Interaction Library
 FRY is an iOS Test Driver. The purpose of this library is to simplify iteractions with UIKit. FRY does this by providing a clear API to perform view lookup, touch interaction, typing, and idle detection.
 
